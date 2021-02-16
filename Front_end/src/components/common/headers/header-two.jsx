@@ -12,6 +12,7 @@ import TopBar from "./common/topbar";
 import LogoImage from "./common/logo";
 import {changeCurrency} from '../../../actions'
 import {connect} from "react-redux";
+import TopBarDark from './common/topbar-dark';
 
 class HeaderTwo extends Component {
 
@@ -82,11 +83,11 @@ class HeaderTwo extends Component {
 
         return (
             <div>
-                <header id="sticky" className="sticky">
+                <header id="sticky" className="sticky  ">
                     {this.state.isLoading ? <Pace color="#27ae60"/> : null}
                     <div className="mobile-fix-option"></div>
                     {/*Top Header Component*/}
-                    <TopBar/>
+                    <TopBar />
 
                     <div className="container">
                         <div className="row">

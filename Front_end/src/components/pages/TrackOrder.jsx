@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import Breadcrumb from "../common/breadcrumb";
 
-class Search extends Component {
+class TrackOrder  extends Component {
 
     constructor (props) {
         super (props)
@@ -14,7 +14,7 @@ class Search extends Component {
 
         return (
             <div>
-                <Breadcrumb title={'Search'}/>
+                <Breadcrumb title={'track your order'}/>
                 
                 
                 {/*Search section*/}
@@ -28,10 +28,10 @@ class Search extends Component {
                                             <div className="input-group">
                                                 <input type="text" className="form-control"
                                                        aria-label="Amount (to the nearest dollar)"
-                                                       placeholder="Search Products......" />
+                                                       placeholder="track your order......" />
                                                     <div className="input-group-append">
                                                         <button className="btn btn-solid"><i
-                                                            className="fa fa-search"></i>Search
+                                                            className="fa fa-search"></i>Track order
                                                         </button>
                                                     </div>
                                             </div>
@@ -48,4 +48,4 @@ class Search extends Component {
     }
 }
 
-export default Search
+export default TrackOrder

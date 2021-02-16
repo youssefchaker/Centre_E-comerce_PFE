@@ -88,7 +88,7 @@ class NavBar extends Component {
                             </li>
                             <li >
                                 <Link to={`${process.env.PUBLIC_URL}/features/portfolio-grid/3`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
-                                    {translate('shop')}
+                                    {translate('stores')}
                                 </Link>
                                 
                             </li>

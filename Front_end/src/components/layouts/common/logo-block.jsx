@@ -15,7 +15,8 @@ class LogoBlock extends Component {
                                 <div>
                                     <div className="logo-block">
                                         <a href={null}>
-                                            <img src={`${process.env.PUBLIC_URL}/assets/images/logos/1.png`} alt="" />
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/logos/1.png`} alt="" />
+
                                         </a>
                                     </div>
                                 </div>

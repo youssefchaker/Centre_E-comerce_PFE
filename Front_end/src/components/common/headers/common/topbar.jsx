@@ -7,7 +7,7 @@ class TopBar extends Component {
     render() {
         const {translate} = this.props;
         return (
-            <div className="top-header">
+            <div className="top-header ">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6">

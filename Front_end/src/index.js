@@ -13,28 +13,16 @@ import { getAllProducts } from './actions'
 
 
 // Layouts
-import Fashion from './components/layouts/fashion/main';
+import HomePage from './components/layouts/Homepage/main';
 
 
 
 //Collection Pages
 import CollectionLeftSidebar from "./components/collection/collection-left-sidebar";
-import CollectionNoSidebar from "./components/collection/collection-no-sidebar";
-import CollectionRightSidebar from "./components/collection/collection-right-sidebar";
-import CollectionFullWidth from "./components/collection/collection-full-width";
-import CollectionMetro from "./components/collection/collection-metro";
 
 // Product Pages
 import LeftSideBar from "./components/products/left-sidebar";
-import RightSideBar from "./components/products/right-sidebar";
-import NoSideBar from "./components/products/no-sidebar";
-import LeftImage from "./components/products/left-image";
-import RightImage from "./components/products/right-image";
-import Accordian from "./components/products/accordian";
-import ColumnLeft from "./components/products/column-left";
-import ColumnRight from "./components/products/column-right";
-import Column from "./components/products/column";
-import Vertical from "./components/products/vertical";
+
 
 // Features
 import Layout from './components/app'
@@ -50,7 +38,7 @@ import PageNotFound from './components/pages/404'
 import lookbook from './components/pages/lookbook'
 import Login from './components/pages/login'
 import Register from './components/pages/register'
-import Search from './components/pages/search'
+import TrackOrder from './components/pages/TrackOrder'
 import Collection from './components/pages/collection'
 import ForgetPassword from './components/pages/forget-password'
 import Contact from './components/pages/contact'
@@ -96,28 +84,17 @@ class Root extends React.Component {
                             
                             
                                <Layout>
-                               <Route exact path={`${process.env.PUBLIC_URL}/`} component={Fashion}/>
+                               <Route exact path={`${process.env.PUBLIC_URL}/`} component={HomePage}/>
 
                                 {/*Routes For Layouts*/}
                                 
 								{/*Routes For Features (Product Collection) */}
 								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection`} component={CollectionLeftSidebar}/>
-								<Route path={`${process.env.PUBLIC_URL}/no-sidebar/collection`} component={CollectionNoSidebar}/>
-								<Route path={`${process.env.PUBLIC_URL}/right-sidebar/collection`} component={CollectionRightSidebar}/>
-								<Route path={`${process.env.PUBLIC_URL}/full-width/collection`} component={CollectionFullWidth}/>
-								<Route path={`${process.env.PUBLIC_URL}/metro/collection`} component={CollectionMetro}/>
+								
 
 								{/*Routes For Single Product*/}
 								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/product/:id`} component={LeftSideBar}/>
-								<Route path={`${process.env.PUBLIC_URL}/right-sidebar/product/:id`} component={RightSideBar}/>
-								<Route path={`${process.env.PUBLIC_URL}/no-sidebar/product/:id`} component={NoSideBar}/>
-								<Route path={`${process.env.PUBLIC_URL}/col-left/product/:id`} component={ColumnLeft}/>
-								<Route path={`${process.env.PUBLIC_URL}/col-right/product/:id`} component={ColumnRight}/>
-								<Route path={`${process.env.PUBLIC_URL}/accordian/product/:id`} component={Accordian}/>
-								<Route path={`${process.env.PUBLIC_URL}/column/product/:id`} component={Column}/>
-								<Route path={`${process.env.PUBLIC_URL}/left-image/product/:id`} component={LeftImage}/>
-								<Route path={`${process.env.PUBLIC_URL}/right-image/product/:id`} component={RightImage}/>
-								<Route path={`${process.env.PUBLIC_URL}/vertical/product/:id`} component={Vertical}/>
+								
 								
 
 								{/*Routes For custom Features*/}
@@ -135,7 +112,7 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/search`} component={Search}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/search`} component={TrackOrder}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/collection`} component={Collection}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/forget-password`} component={ForgetPassword}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
@@ -179,4 +156,5 @@ class Root extends React.Component {
 }
 
 ReactDOM.render(<Root />, document.getElementById('root'));
+
 

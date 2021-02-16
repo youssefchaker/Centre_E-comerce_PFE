@@ -28,12 +28,12 @@ class CollectionLeftSidebar extends Component {
             <div>
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>MultiKart | Collection of Products</title>
-                    <meta name="description" content="Multikart – Multipurpose eCommerce React Template is a multi-use React template. It is designed to go well with multi-purpose websites. Multikart Bootstrap 4 Template will help you run multiple businesses." />
+                    <title>Marketplace</title>
+                    <meta name="description" content="marketplace stores." />
                 </Helmet>
                 {/*SEO Support End */}
 
-                <Breadcrumb title={'Collection'}/>
+                <Breadcrumb title={'store'}/>
 
                 <section className="section-b-space">
                     <div className="collection-wrapper">
