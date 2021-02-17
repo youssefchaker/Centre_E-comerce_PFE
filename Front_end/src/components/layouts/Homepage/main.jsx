@@ -24,6 +24,18 @@ class Fashion extends Component {
     }
 
 	render() {
+
+      //Slider settings
+      const settings = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 1000,
+        cssEase: "linear"
+      };
 		return (
 			<div>
                 <Helmet>
@@ -32,7 +44,7 @@ class Fashion extends Component {
                 </Helmet>
                 {/*Home Slider*/}
                 <section className="p-0">
-                    <Slider  className="slide-1 home-slider">
+                    <Slider  className="slide-1 home-slider" {...settings}>
                         <div>
                             <div className="home home1 text-center">
                                 <div className="container">

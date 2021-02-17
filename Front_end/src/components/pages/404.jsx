@@ -23,7 +23,7 @@ class PageNotFound extends Component {
                                 <div className="error-section">
                                     <h1>404</h1>
                                     <h2>page not found</h2>
-                                    <a href="index.html" className="btn btn-solid">back to home</a>
+                                    <a href={`${process.env.PUBLIC_URL}/`} className="btn btn-solid">back to home</a>
                                 </div>
                             </div>
                         </div>

@@ -9,7 +9,7 @@ import Breadcrumb from "../common/breadcrumb";
 import {removeFromWishlist} from '../../actions'
 import {getCartTotal} from "../../services";
 
-class checkOut extends Component {
+class Subscription extends Component {
 
     constructor (props) {
         super (props)
@@ -25,7 +25,8 @@ class checkOut extends Component {
             city:'',
             state:'',
             pincode:'',
-            create_account: ''
+            create_account: '',
+            domaine: ''
         }
         this.validator = new SimpleReactValidator();
     }
@@ -119,7 +120,7 @@ class checkOut extends Component {
                 </Helmet>
                 {/*SEO Support End */}
 
-                <Breadcrumb  title={'Checkout'}/>
+                <Breadcrumb  title={'seller  subscription'}/>
 
                 <section className="section-b-space">
                     <div className="container padding-cls">
@@ -129,7 +130,7 @@ class checkOut extends Component {
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                             <div className="checkout-title">
-                                                <h3>Billing Details</h3>
+                                                <h3>Subscription Details</h3>
                                             </div>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
@@ -152,6 +153,12 @@ class checkOut extends Component {
                                                     <input type="text" name="email" value={this.state.email} onChange={this.setStateFromInput} />
                                                     {this.validator.message('email', this.state.email, 'required|email')}
                                                 </div>
+                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <div className="field-label">business domain</div>
+                                                    <input type="text" name="email" value={this.state.domaine} onChange={this.setStateFromInput} />
+                                                    {this.validator.message('domain', this.state.email, 'required|alpha')}
+                                                </div>
+
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Country</div>
                                                     <select name="country" value={this.state.country} onChange={this.setStateFromInput}>
@@ -435,31 +442,14 @@ class checkOut extends Component {
                                             <div className="checkout-details">
                                                 <div className="order-box">
                                                     <div className="title-box">
-                                                        <div>Product <span> Total</span></div>
+                                                        <div>Subscription <span> Total</span></div>
                                                     </div>
                                                     <ul className="qty">
-                                                        {cartItems.map((item, index) => {
-                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {item.sum}</span></li> })
-                                                        }
+                                                        {
+                                                            <li >Per year <span>{symbol} 10 000</span></li> }
+                                                        
                                                     </ul>
-                                                    <ul className="sub-total">
-                                                        <li>Subtotal <span className="count">{symbol}{total}</span></li>
-                                                        <li>Shipping <div className="shipping">
-                                                            <div className="shopping-option">
-                                                                <input type="checkbox" name="free-shipping" id="free-shipping" />
-                                                                    <label htmlFor="free-shipping">Free Shipping</label>
-                                                            </div>
-                                                            <div className="shopping-option">
-                                                                <input type="checkbox" name="local-pickup" id="local-pickup" />
-                                                                    <label htmlFor="local-pickup">Local Pickup</label>
-                                                            </div>
-                                                        </div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <ul className="total">
-                                                        <li>Total <span className="count">{symbol}{total}</span></li>
-                                                    </ul>
+                                                    
                                                 </div>
 
                                                 <div className="payment-box">
@@ -483,7 +473,7 @@ class checkOut extends Component {
                                                     </div>
                                                     {(total !== 0)?
                                                     <div className="text-right">
-                                                        {(this.state.payment === 'stripe')? <button type="button" className="btn-solid btn" onClick={() => this.StripeClick()} >Place Order</button>:
+                                                        {(this.state.payment === 'stripe')? <button type="button" className="btn-solid btn" onClick={() => this.StripeClick()} >Activate</button>:
                                                          <PaypalExpressBtn env={'sandbox'} client={client} currency={'USD'} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />}
                                                     </div>
                                                     : ''}
@@ -491,56 +481,7 @@ class checkOut extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row section-t-space">
-                                        <div className="col-lg-6">
-                                            <div className="stripe-section">
-                                                <h5>stripe example</h5>
-                                                <div>
-                                                    <h5 className="checkout_class">first name last name</h5>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>cart number</td>
-                                                                <td>4242424242424242</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>mm/yy</td>
-                                                                <td>2/2020</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>cvc</td>
-                                                                <td>2222</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 m-sm-t-2">
-                                            <div className="stripe-section">
-                                                <h5>paypal example</h5>
-                                                <div>
-                                                    <h5 className="checkout_class">first name last name</h5>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>cart number</td>
-                                                                <td>4152521541244</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>mm/yy</td>
-                                                                <td>11/18</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>cvc</td>
-                                                                <td>521</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -559,4 +500,4 @@ const mapStateToProps = (state) => ({
 export default connect(
     mapStateToProps,
     {removeFromWishlist}
-)(checkOut)
+)(Subscription)

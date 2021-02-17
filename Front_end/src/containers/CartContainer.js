@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-
 import CartPage from '../components/common/headers/common/cart-header'
 import {removeFromCart} from '../actions'
 import {getCartTotal} from '../services'
 
+ 
+
 const CartContainer = ({cartList, total, symbol, removeFromCart}) => (
      <li  className="onhover-div mobile-cart"><div className="cart-qty-cls">{cartList.length}</div>
-        <Link to={`${process.env.PUBLIC_URL}/cart`}><img src={`${process.env.PUBLIC_URL}/assets/images/icon/cart.png`} className="img-fluid" alt=""/>
+        <Link to={`${process.env.PUBLIC_URL}/cart`}><img src={`${process.env.PUBLIC_URL}/assets/images/icon/cart2.png`} className="img-fluid" alt=""/>
             <i className="fa fa-shopping-cart"></i></Link>
         <ul className="show-div shopping-cart">
             { cartList.map((item,index) => (

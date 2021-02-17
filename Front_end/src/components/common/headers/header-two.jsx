@@ -125,9 +125,9 @@ class HeaderTwo extends Component {
                                                             <h6>currency</h6>
                                                             <ul className="list-inline">
                                                                 <li><a href={null} onClick={() => this.props.changeCurrency('€')}>euro</a> </li>
-                                                                <li><a href={null} onClick={() => this.props.changeCurrency('₹')}>rupees</a> </li>
+                                                                <li><a href={null} onClick={() => this.props.changeCurrency('DT')}>tunisian dinar</a> </li>
                                                                 <li><a href={null} onClick={() => this.props.changeCurrency('£')}>pound</a> </li>
-                                                                <li><a href={null} onClick={() => this.props.changeCurrency('$')}>doller</a> </li>
+                                                                <li><a href={null} onClick={() => this.props.changeCurrency('$')}>dollar</a> </li>
                                                             </ul>
                                                         </div>
                                                     </li>

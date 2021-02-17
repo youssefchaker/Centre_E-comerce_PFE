@@ -216,11 +216,13 @@ export const Slider5 = {
 }
 
 export const Slider6 = {
-    dots: false,
+    dots: true,
     infinite: true,
-    speed: 300,
+    speed: 1700,
     slidesToShow: 6,
     slidesToScroll: 6,
+    autoplay: true,
+    autoplaySpeed:1900,
     responsive: [
         {
             breakpoint: 1367,

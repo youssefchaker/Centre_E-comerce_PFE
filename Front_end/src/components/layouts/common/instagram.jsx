@@ -17,7 +17,7 @@ class Instagram extends Component {
 
     componentWillMount() {
         const instagram = ig({
-            accessToken: '8295761913.aa0cb6f.2914e9f04dd343b8a57d9dc9baca91cc',
+            accessToken: 'dd29d65bfd56221185c0106b09f523ae',
         });
 
         const users = instagram.media();

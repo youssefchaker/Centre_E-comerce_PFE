@@ -7,7 +7,7 @@ import FilterBar from "./common/filter-bar";
 import ProductListing from "./common/product-listing";
 import StickyBox from "react-sticky-box";
 
-class CollectionLeftSidebar extends Component {
+class Shop extends Component {
 
     state = {
         layoutColumns:3
@@ -107,4 +107,4 @@ class CollectionLeftSidebar extends Component {
     }
 }
 
-export default CollectionLeftSidebar;
+export default Shop;

@@ -17,8 +17,8 @@ import HomePage from './components/layouts/Homepage/main';
 
 
 
-//Collection Pages
-import CollectionLeftSidebar from "./components/collection/collection-left-sidebar";
+//Shop page
+import Shop from "./components/Shop/shop";
 
 // Product Pages
 import LeftSideBar from "./components/products/left-sidebar";
@@ -65,9 +65,11 @@ import ElementProductNoSlider from "./components/features/product/element-produc
 import ElementMultipleSlider from "./components/features/product/element-multiple-slider"
 import ElementProductTab from "./components/features/product/element-product-tab"
 
-// Portfolio Features
+// Stores page
 import GridCols from "./components/features/portfolio/grid-cols"
-import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
+
+// subscription page
+import  Subscription from './components/pages/subscription'
 
 
 class Root extends React.Component {
@@ -89,7 +91,7 @@ class Root extends React.Component {
                                 {/*Routes For Layouts*/}
                                 
 								{/*Routes For Features (Product Collection) */}
-								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection`} component={CollectionLeftSidebar}/>
+								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection`} component={Shop}/>
 								
 
 								{/*Routes For Single Product*/}
@@ -103,12 +105,11 @@ class Root extends React.Component {
 								<Route path={`${process.env.PUBLIC_URL}/compare`} component={Compare}/>
 								<Route path={`${process.env.PUBLIC_URL}/checkout`} component={checkOut}/>
 								<Route path={`${process.env.PUBLIC_URL}/order-success`} component={orderSuccess}/>
-
 								<Route path={`${process.env.PUBLIC_URL}/sales/orders`} component={aboutUs}/>
 
 								{/*Routes For Extra Pages*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/about-us`} component={aboutUs}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/404`} component={PageNotFound}/>
+
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>
@@ -118,6 +119,9 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/dashboard`} component={Dashboard}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/faq`} component={Faq}/>
+
+                                
+
 
 								{/*Features*/}
 								{/*Theme Elements*/}
@@ -135,16 +139,18 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/features/element-product-multiple-slider`} component={ElementMultipleSlider}/>
                                 <Route path={`${process.env.PUBLIC_URL}/features/element-product-tab`} component={ElementProductTab}/>
 
-								{/*Portfolios*/}
+								{/*Stores*/}
                                 <Route path={`${process.env.PUBLIC_URL}/features/portfolio-grid/:columns`} component={GridCols}/>
-                                <Route path={`${process.env.PUBLIC_URL}/features/portfolio-masonary/:columns`} component={MasonaryGridCols}/>
 
 								{/*Blog Pages*/}
                                 <Route path={`${process.env.PUBLIC_URL}/blog/right-sidebar`} component={RightSide}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/details`} component={Details}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/blog-page`} component={BlogPage}/>
 
-                                {/* <Route exact path="*" component={PageNotFound} /> */}
+                                {/*subscription*/}
+                                <Route path={`${process.env.PUBLIC_URL}/pages/subscription`} component={Subscription}/>
+
+                                 {/* <Route exact path="*" component={PageNotFound} /> */}
                                 </Layout>
                          </Switch>
 					  </ScrollContext>

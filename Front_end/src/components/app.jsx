@@ -11,6 +11,7 @@ import HeaderFive from './common/headers/header-five';
 import FooterOne from "./common/footers/footer-one";
 import FooterTwo from "./common/footers/footer-two";
 import FooterThree from "./common/footers/footer-three";
+import FooterFour from "./common/footers/footer-four";
 
 // ThemeSettings
 import ThemeSettings from "./common/theme-settings"
@@ -24,7 +25,7 @@ class App extends Component {
             <div>
                 <HeaderTwo logoName={'logo.png'}/>
                 {this.props.children}
-                <FooterOne logoName={'logo.png'}/>
+                <FooterTwo logoName={'logo.png'}/>
                 <ThemeSettings />
 
 
