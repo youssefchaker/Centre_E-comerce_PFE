@@ -62,27 +62,16 @@ class aboutUs extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="banner-section">
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/about%20us.jpg`} className="img-fluid" alt=""/>
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner.jpg`} className="img-fluid" alt=""/>
                                 </div>
                             </div>
                             <div className="col-sm-12">
-                                <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                    doloremque laudantium</h4>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium,</p>
-                                <p>On the other hand, we denounce with righteous indignation and dislike men who are so
-                                    beguiled and demoralized by the charms of pleasure of the moment, so blinded by
-                                    desire, that they cannot foresee the pain and trouble that are bound to ensue; and
-                                    equal blame belongs to those who fail in their duty through weakness of will, which
-                                    is the same as saying through shrinking from toil and pain. These cases are
-                                    perfectly simple and easy to distinguish. In a free hour, when our power of choice
-                                    is untrammelled and when nothing prevents our being able to do what we like best,
-                                    every pleasure is to be welcomed and every pain avoided. But in certain
-                                    circumstances and owing to the claims of duty or the obligations of business it will
-                                    frequently occur that pleasures have to be repudiated and annoyances accepted. The
-                                    wise man therefore always holds in these matters to this principle of selection: he
-                                    rejects pleasures to secure other greater pleasures, or else he endures pains to
-                                    avoid worse pains.</p>
+                                <h4>Welcome to our E-comerce Mall</h4>
+                                <p>
+It is an online shopping center that allows businesses and individuals to promote their products and services.<br/>
+The site will offer rental display spaces (payable yearly by subscription) for those who wish to promote and sell their products online.<br/>
+Consumers will then be able to directly purchase products of their choice via the site.<br/>
+Management and support services for entrepreneurship via flexible functionalities will also be offered in the platform for sellers (stock management, payment management, etc.) "</p>
                             </div>
                         </div>
                     </div>
@@ -97,87 +86,22 @@ class aboutUs extends Component {
                                     <div>
                                         <div className="media">
                                             <div className="text-center">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/avtar.jpg`} alt="#" />
-                                                    <h5>Mark Jecno</h5>
-                                                    <h6>Designer</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>you how all this mistaken idea of denouncing pleasure and praising
-                                                    pain was born and I will give you a complete account of the system,
-                                                    and expound the actual teachings.</p>
+                                                <img src={`${process.env.PUBLIC_URL}/assets/images/about/youssef.jpg`} alt="#" />
+                                                    <h5>Youssef Chaker</h5>
+                                                    <h6>Full Stack Web Developer</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
                                         <div className="media">
                                             <div className="text-center">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/2.jpg`} alt="#" />
-                                                    <h5>Mark Jecno</h5>
-                                                    <h6>Designer</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>you how all this mistaken idea of denouncing pleasure and praising
-                                                    pain was born and I will give you a complete account of the system,
-                                                    and expound the actual teachings.</p>
+                                                <img src={`${process.env.PUBLIC_URL}/assets/images/about/mouhib.jpg`} alt="#" />
+                                                    <h5>Mouhib Trabelsi</h5>
+                                                    <h6>Full Stack Web Developer</h6>
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div className="media">
-                                            <div className="text-center">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/avtar.jpg`} alt="#" />
-                                                    <h5>Mark Jecno</h5>
-                                                    <h6>Designer</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>you how all this mistaken idea of denouncing pleasure and praising
-                                                    pain was born and I will give you a complete account of the system,
-                                                    and expound the actual teachings.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="media">
-                                            <div className="text-center">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/avtar.jpg`} alt="#" />
-                                                    <h5>Mark Jecno</h5>
-                                                    <h6>Designer</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>you how all this mistaken idea of denouncing pleasure and praising
-                                                    pain was born and I will give you a complete account of the system,
-                                                    and expound the actual teachings.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="media">
-                                            <div className="text-center">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/avtar.jpg`} alt="#" />
-                                                    <h5>Mark Jecno</h5>
-                                                    <h6>Designer</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>you how all this mistaken idea of denouncing pleasure and praising
-                                                    pain was born and I will give you a complete account of the system,
-                                                    and expound the actual teachings.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="media">
-                                            <div className="text-center">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/avtar.jpg`} alt="#" />
-                                                    <h5>Mark Jecno</h5>
-                                                    <h6>Designer</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>you how all this mistaken idea of denouncing pleasure and praising
-                                                    pain was born and I will give you a complete account of the system,
-                                                    and expound the actual teachings.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </Slider>
                             </div>
                         </div>
@@ -192,29 +116,29 @@ class aboutUs extends Component {
                                 <h2>Our Team</h2>
                                 <Slider {...Team4} className="team-4">
                                     <div>
-                                        <img src={`${process.env.PUBLIC_URL}/assets/images/team/1.jpg`} className="img-fluid" alt=""/>
-                                        <h4>Hileri Keol</h4>
-                                        <h6>CEo & Founder At Company</h6>
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/about/youssef.jpg`} className="img-fluid" alt=""/>
+                                        <h4>Youssef Chaker</h4>
+                                        <h6>Co-Developer</h6>
                                     </div>
                                     <div>
-                                        <img src={`${process.env.PUBLIC_URL}/assets/images/team/2.jpg`} className="img-fluid" alt=""/>
-                                        <h4>Hileri Keol</h4>
-                                        <h6>CEo & Founder At Company</h6>
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/about/mouhib.jpg`} className="img-fluid" alt=""/>
+                                        <h4>Mouhib Trabelsi</h4>
+                                        <h6>Co-Developer</h6>
                                     </div>
                                     <div>
                                         <img src={`${process.env.PUBLIC_URL}/assets/images/team/3.jpg`} className="img-fluid" alt=""/>
-                                        <h4>Hileri Keol</h4>
-                                        <h6>CEo & Founder At Company</h6>
+                                        <h4>Foued Ouesleti</h4>
+                                        <h6>ISI project Officer</h6>
                                     </div>
                                     <div>
                                         <img src={`${process.env.PUBLIC_URL}/assets/images/team/4.jpg`} className="img-fluid" alt=""/>
-                                        <h4>Hileri Keol</h4>
-                                        <h6>CEo & Founder At Company</h6>
+                                        <h4>Marwen</h4>
+                                        <h6>Silver Digital project Officer</h6>
                                     </div>
                                     <div>
                                         <img src={`${process.env.PUBLIC_URL}/assets/images/team/1.jpg`} className="img-fluid" alt=""/>
-                                        <h4>Hileri Keol</h4>
-                                        <h6>CEo & Founder At Company</h6>
+                                        <h4>...</h4>
+                                        <h6>CEO of Silver Digital</h6>
                                     </div>
                                 </Slider>
                             </div>
@@ -240,7 +164,7 @@ class aboutUs extends Component {
                                     <div dangerouslySetInnerHTML={{ __html: svgservice }} />
                                     <div className="media-body">
                                         <h4>24 X 7 service</h4>
-                                        <p>online service for new customer</p>
+                                        <p>Open 24 X 7 for customers and sellers</p>
                                     </div>
                                 </div>
                             </div>
@@ -248,8 +172,8 @@ class aboutUs extends Component {
                                 <div className="media">
                                     <div dangerouslySetInnerHTML={{ __html: svgoffer }} />
                                     <div className="media-body">
-                                        <h4>festival offer</h4>
-                                        <p>new online special festival offer</p>
+                                        <h4>Regular Offers</h4>
+                                        <p>New offers Regularly concerning all types of products</p>
                                     </div>
                                 </div>
                             </div>

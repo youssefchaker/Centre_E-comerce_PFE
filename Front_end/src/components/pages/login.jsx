@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { Link} from 'react-router-dom';
 import Breadcrumb from "../common/breadcrumb";
 
 class Login extends Component {
@@ -35,7 +35,9 @@ class Login extends Component {
                                             <input type="password" className="form-control" id="review"
                                                    placeholder="Enter your password" required="" />
                                         </div>
-                                        <a href="#" className="btn btn-solid">Login</a>
+                                        
+                                        <a href="#" className="btn btn-solid" style={{marginRight:'100px'}}>Login</a>
+                                        <Link to="/pages/forget-password"><a className="btn btn-solid">Forget Password?</a></Link>
                                     </form>
                                 </div>
                             </div>

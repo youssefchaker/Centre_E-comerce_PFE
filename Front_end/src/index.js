@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { ScrollContext } from 'react-router-scroll-4';
 import { IntlReducer as Intl, IntlProvider } from 'react-redux-multilingual'
 import './index.scss';
@@ -68,6 +68,7 @@ import ElementProductTab from "./components/features/product/element-product-tab
 // Portfolio Features
 import GridCols from "./components/features/portfolio/grid-cols"
 import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
+import becomeaseller from './components/pages/becomeaseller';
 
 
 class Root extends React.Component {
@@ -84,6 +85,7 @@ class Root extends React.Component {
                             
                             
                                <Layout>
+                               <Switch>
                                <Route exact path={`${process.env.PUBLIC_URL}/`} component={HomePage}/>
 
                                 {/*Routes For Layouts*/}
@@ -108,7 +110,7 @@ class Root extends React.Component {
 
 								{/*Routes For Extra Pages*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/about-us`} component={aboutUs}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/404`} component={PageNotFound}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/becomeaseller`} component={becomeaseller}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>
@@ -118,7 +120,6 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/dashboard`} component={Dashboard}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/faq`} component={Faq}/>
-
 								{/*Features*/}
 								{/*Theme Elements*/}
                                 <Route path={`${process.env.PUBLIC_URL}/features/element-title`} component={ElementTitle}/>
@@ -143,10 +144,13 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/blog/right-sidebar`} component={RightSide}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/details`} component={Details}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/blog-page`} component={BlogPage}/>
-
-                                {/* <Route exact path="*" component={PageNotFound} /> */}
+                                <Route component={PageNotFound} />
+                                </Switch>
+                                
                                 </Layout>
+                                
                          </Switch>
+
 					  </ScrollContext>
 					</BrowserRouter>
                 </IntlProvider>
