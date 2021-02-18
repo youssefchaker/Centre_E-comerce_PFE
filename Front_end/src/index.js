@@ -68,7 +68,7 @@ import ElementProductTab from "./components/features/product/element-product-tab
 // Portfolio Features
 import GridCols from "./components/features/portfolio/grid-cols"
 import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
-import becomeaseller from './components/pages/becomeaseller';
+import Becomeaseller from './components/pages/becomeaseller';
 
 
 class Root extends React.Component {
@@ -110,7 +110,7 @@ class Root extends React.Component {
 
 								{/*Routes For Extra Pages*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/about-us`} component={aboutUs}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/becomeaseller`} component={becomeaseller}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/becomeaseller`} component={Becomeaseller}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>

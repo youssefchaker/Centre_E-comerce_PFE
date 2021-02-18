@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Breadcrumb from "../common/breadcrumb";
 import {Slider2, Team4} from "../../services/script"
 
-class becomeaseller extends Component {
+class Becomeaseller extends Component {
 
     constructor (props) {
         super (props)
@@ -77,10 +77,10 @@ class becomeaseller extends Component {
                         </div>
                     </div>
                 </section>
-                <div><Link to="/pages/abonnement"><a className="btn btn-solid">Become a Seller</a></Link></div>
+                <div><Link to="/pages/subscription"><a className="btn btn-solid">Become a Seller</a></Link></div>
             </div>
         )
     }
 }
 
-export default becomeaseller
+export default Becomeaseller
