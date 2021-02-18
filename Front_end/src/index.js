@@ -38,7 +38,7 @@ import PageNotFound from './components/pages/404'
 import lookbook from './components/pages/lookbook'
 import Login from './components/pages/login'
 import Register from './components/pages/register'
-import TrackOrder from './components/pages/TrackOrder'
+import TrackOrder from './components/pages/trackOrder'
 import Collection from './components/pages/collection'
 import ForgetPassword from './components/pages/forget-password'
 import Contact from './components/pages/contact'
@@ -149,6 +149,8 @@ class Root extends React.Component {
 
                                 {/*subscription*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/subscription`} component={Subscription}/>
+
+                               {/*} <Route path={`${process.env.PUBLIC_URL}/pages/becomeaseller`} component={Becomeaseller}/>
 
                                  {/* <Route exact path="*" component={PageNotFound} /> */}
                                 </Layout>

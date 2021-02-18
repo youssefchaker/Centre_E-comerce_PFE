@@ -28,8 +28,8 @@ class Shop extends Component {
             <div>
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>Marketplace</title>
-                    <meta name="description" content="marketplace stores." />
+                    <title>Mall</title>
+                    <meta name="description" content="online Mall" />
                 </Helmet>
                 {/*SEO Support End */}
 

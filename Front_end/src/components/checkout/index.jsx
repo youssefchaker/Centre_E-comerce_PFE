@@ -114,8 +114,8 @@ class checkOut extends Component {
 
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>Marketplace</title>
-                    <meta name="description" content="Marketplace online mall." />
+                    <title>Mall</title>
+                    <meta name="description" content=" online mall." />
                 </Helmet>
                 {/*SEO Support End */}
 

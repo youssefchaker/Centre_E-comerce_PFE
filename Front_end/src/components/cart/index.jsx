@@ -21,8 +21,8 @@ class cartComponent extends Component {
             <div>
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>Marketplace</title>
-                    <meta name="description" content="Marketplace online shopping mall." />
+                    <title>Mall</title>
+                    <meta name="description" content="online mall." />
                 </Helmet>
                 {/*SEO Support End */}
 

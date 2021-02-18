@@ -32,7 +32,7 @@ class FooterOne extends Component {
                                     <div className="subscribe">
                                         <div>
                                             <h4>KNOW IT ALL FIRST!</h4>
-                                            <p>Never Miss Anything From Marketplace By Signing Up To Our Newsletter. </p>
+                                            <p>Never Miss Anything From Mall By Signing Up To Our Newsletter. </p>
                                         </div>
                                     </div>
                                 </div>
@@ -121,12 +121,12 @@ class FooterOne extends Component {
                                     </div>
                                     <div className="footer-contant">
                                         <ul className="contact-list">
-                                            <li><i className="fa fa-map-marker"></i>Marketplace, Lac of tunis
+                                            <li><i className="fa fa-map-marker"></i>Mall, Tunis
                                                 Tunisia 1058
                                             </li>
                                             <li><i className="fa fa-phone"></i>Call Us: 95 231 587</li>
                                             <li><i className="fa fa-envelope-o"></i>Email Us: <a
-                                                href="#">Support@Marketplace.com</a></li>
+                                                href="#">support@Mall.com</a></li>
                                             <li><i className="fa fa-fax"></i>Fax: 123456</li>
                                         </ul>
                                     </div>
@@ -140,7 +140,7 @@ class FooterOne extends Component {
                         <div className="row">
                             <div className="col-xl-6 col-md-6 col-sm-12">
                                 <div className="footer-end">
-                                    <p><i className="fa fa-copyright" aria-hidden="true"></i> 2022-2021 Marketplace
+                                    <p><i className="fa fa-copyright" aria-hidden="true"></i> 2022-2021 Mall
                                         powered by Silver</p>
                                 </div>
                             </div>

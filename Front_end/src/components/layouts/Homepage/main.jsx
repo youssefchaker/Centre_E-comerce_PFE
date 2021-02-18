@@ -39,8 +39,8 @@ class Fashion extends Component {
 		return (
 			<div>
                 <Helmet>
-                    <title>Marketplace</title>
-                    <meta name="description" content="marketplace by mouhib and youssef" />
+                    <title>Mall</title>
+                    <meta name="description" content="mall by mouhib and youssef" />
                 </Helmet>
                 {/*Home Slider*/}
                 <section className="p-0">
@@ -52,7 +52,7 @@ class Fashion extends Component {
                                         <div className="col">
                                             <div className="slider-contain">
                                                 <div>
-                                                    <h4>welcome to Marketplace</h4>
+                                                    <h4>welcome to Mall</h4>
                                                     <h1>clothes store</h1>
                                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">shop now</Link>
                                                 </div>
@@ -69,7 +69,7 @@ class Fashion extends Component {
                                         <div className="col">
                                             <div className="slider-contain">
                                                 <div>
-                                                    <h4>welcome to marketplace</h4>
+                                                    <h4>welcome to Mall</h4>
                                                     <h1>makeup store</h1>
                                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">shop now</Link>
                                                 </div>

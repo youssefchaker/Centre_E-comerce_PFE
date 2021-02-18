@@ -16,8 +16,7 @@ class Subscription extends Component {
 
         this.state = {
             payment:'stripe',
-            first_name:'',
-            last_name:'',
+            company_name:'',
             phone:'',
             email:'',
             country:'',
@@ -115,8 +114,8 @@ class Subscription extends Component {
 
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>Marketplace</title>
-                    <meta name="description" content="Marketplace online mall." />
+                    <title>Mall</title>
+                    <meta name="description" content=" online mall." />
                 </Helmet>
                 {/*SEO Support End */}
 
@@ -134,15 +133,11 @@ class Subscription extends Component {
                                             </div>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">First Name</div>
-                                                    <input type="text" name="first_name" value={this.state.first_name} onChange={this.setStateFromInput} />
-                                                    {this.validator.message('first_name', this.state.first_name, 'required|alpha')}
+                                                    <div className="field-label">Company name</div>
+                                                    <input type="text" name="company_name" value={this.state.company_name} onChange={this.setStateFromInput} />
+                                                    {this.validator.message('company_name', this.state.company_name, 'required|alpha')}
                                                 </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Last Name</div>
-                                                    <input type="text" name="last_name" value={this.state.last_name} onChange={this.setStateFromInput} />
-                                                    {this.validator.message('last_name', this.state.last_name, 'required|alpha')}
-                                                </div>
+                                                
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Phone</div>
                                                     <input type="text" name="phone"  value={this.state.phone} onChange={this.setStateFromInput} />
@@ -155,8 +150,16 @@ class Subscription extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">business domain</div>
-                                                    <input type="text" name="email" value={this.state.domaine} onChange={this.setStateFromInput} />
-                                                    {this.validator.message('domain', this.state.email, 'required|alpha')}
+                                                    <select  name="domaine" value={this.state.domaine} onChange={this.setStateFromInput} >
+                                                    <option value="Afganistan">Tech</option>
+                                                    <option value="Albania">Fashion</option>
+                                                    <option value="Algeria">Accessoires</option>
+                                                    <option value="American Samoa">Bags</option>
+                                                    <option value="Andorra">Beauty</option>
+                                                    <option value="Angola">Food</option>
+                                                    <option value="Anguilla">Watchs</option>
+                                                    </select>
+                                                    {this.validator.message('domain', this.state.domaine, 'required|alpha')}
                                                 </div>
 
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
@@ -422,7 +425,7 @@ class Subscription extends Component {
                                                     {this.validator.message('city', this.state.city, 'required|alpha')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-6 col-xs-12">
-                                                    <div className="field-label">State / County</div>
+                                                    <div className="field-label">State / Country</div>
                                                     <input type="text" name="state" value={this.state.state} onChange={this.setStateFromInput} />
                                                     {this.validator.message('state', this.state.state, 'required|alpha')}
                                                 </div>
