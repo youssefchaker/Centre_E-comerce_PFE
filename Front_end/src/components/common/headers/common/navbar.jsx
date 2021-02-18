@@ -93,7 +93,8 @@ class NavBar extends Component {
                                 
                             </li>
                             <li >
-                                <Link to={`${process.env.PUBLIC_URL}/pages/subscription`}  className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
+
+                                <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`}   className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
                                     {translate('become_a_seller')}
                                 </Link>
                                 

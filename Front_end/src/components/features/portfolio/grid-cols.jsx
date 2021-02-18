@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 // import Custom Components
 import Breadcrumb from "../../common/breadcrumb";
@@ -41,12 +47,13 @@ class GridCols extends Component {
         this.setState({columns: result })
     }
 
-    selectImage = (index, type) => {
-        this.setState({ 
+    redirectshop = (index, type) => {
+        /*this.setState({ 
             photoIndex: index,
             isOpen: true,
             images: type === 'all'?photos:getFeatureImages(photos, type) 
-        })
+        })*/
+        
     }
 
     render (){
@@ -73,9 +80,9 @@ class GridCols extends Component {
                                         <div className={`isotopeSelector filter fashion ${columns}`} key={`all-${index}`}>
                                             <div className="overlay">
                                                 <div className="border-portfolio">
-                                                    <div className="overlay-background"  onClick={() => this.selectImage(index, 'all')}>
+                                                <Link to="/left-sidebar/collection"><div className="overlay-background"  onClick={() => this.redirectshop(index, 'all')}>
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
-                                                    </div>
+                                                    </div></Link>
                                                     <img src={img.src} className="img-fluid blur-up lazyload bg-img" />
                                                 </div>
                                             </div>
@@ -89,7 +96,7 @@ class GridCols extends Component {
                                         <div className={`isotopeSelector filter fashion ${columns}`} key={`fashion-${index}`}>
                                             <div className="overlay">
                                                 <div className="border-portfolio">
-                                                    <div className="overlay-background" onClick={() => this.selectImage(index, 'fashion')}>
+                                                    <div className="overlay-background" onClick={() => this.redirectshop(index, 'fashion')}>
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     <img src={img.src} className="img-fluid blur-up lazyload bg-img" />
@@ -105,7 +112,7 @@ class GridCols extends Component {
                                         <div className={`isotopeSelector filter fashion ${columns}`} key={`bags-${index}`}>
                                             <div className="overlay">
                                                 <div className="border-portfolio">
-                                                    <div className="overlay-background" onClick={() => this.selectImage(index, 'bags')}>
+                                                    <div className="overlay-background" onClick={() => this.redirectshop(index, 'bags')}>
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     <img src={img.src} className="img-fluid blur-up lazyload bg-img" />
@@ -121,7 +128,7 @@ class GridCols extends Component {
                                         <div className={`isotopeSelector filter fashion ${columns}`} key={`shoes-${index}`}>
                                             <div className="overlay">
                                                 <div className="border-portfolio">
-                                                    <div className="overlay-background" onClick={() => this.selectImage(index, 'shoes')}>
+                                                    <div className="overlay-background" onClick={() => this.redirectshop(index, 'shoes')}>
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     <img src={img.src} className="img-fluid blur-up lazyload bg-img" />
@@ -137,7 +144,7 @@ class GridCols extends Component {
                                         <div className={`isotopeSelector filter fashion ${columns}`} key={`watch-${index}`}>
                                             <div className="overlay">
                                                 <div className="border-portfolio">
-                                                    <div className="overlay-background" onClick={() => this.selectImage(index, 'watch')}>
+                                                    <div className="overlay-background" onClick={() => this.redirectshop(index, 'watch')}>
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     <img src={img.src} className="img-fluid blur-up lazyload bg-img" />
