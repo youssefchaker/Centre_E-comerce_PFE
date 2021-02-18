@@ -113,7 +113,7 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/search`} component={TrackOrder}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/trackOrder`} component={TrackOrder}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/collection`} component={Collection}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/forget-password`} component={ForgetPassword}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
@@ -150,7 +150,6 @@ class Root extends React.Component {
                                 {/*subscription*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/subscription`} component={Subscription}/>
 
-                               {/*} <Route path={`${process.env.PUBLIC_URL}/pages/becomeaseller`} component={Becomeaseller}/>
 
                                  {/* <Route exact path="*" component={PageNotFound} /> */}
                                 </Layout>
