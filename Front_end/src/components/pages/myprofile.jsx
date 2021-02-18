@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 
-class Dashboard extends Component {
+class MyProfile extends Component {
 
     constructor (props) {
         super (props)
@@ -12,7 +12,7 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <Breadcrumb title={'Dashboard'}/>
+                <Breadcrumb title={'MyProfile'}/>
                 
                 
                 {/*Dashboard section*/}
@@ -22,7 +22,7 @@ class Dashboard extends Component {
                             <div className="col-lg-3">
                                 <div className="account-sidebar">
                                     <a className="popup-btn">
-                                        my account
+                                        my Profile
                                     </a>
                                 </div>
                                 <div className="dashboard-left">
@@ -126,4 +126,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard
+export default MyProfile;

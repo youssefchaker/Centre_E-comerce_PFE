@@ -42,7 +42,7 @@ import TrackOrder from './components/pages/trackOrder'
 import Collection from './components/pages/collection'
 import ForgetPassword from './components/pages/forget-password'
 import Contact from './components/pages/contact'
-import Dashboard from './components/pages/dashboard'
+import MyProfile from './components/pages/myprofile'
 import Addproduct from './components/pages/addproduct'
 
 // Blog Pages
@@ -123,7 +123,7 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/collection`} component={Collection}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/forget-password`} component={ForgetPassword}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/dashboard`} component={Dashboard}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/myprofile`} component={MyProfile}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addproduct`} component={Addproduct}/>
 
 

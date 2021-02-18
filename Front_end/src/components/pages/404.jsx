@@ -15,7 +15,6 @@ class PageNotFound extends Component {
 
         return (
             <div>
-                <Breadcrumb title={'404 Page'}/>
 
                 <section className="p-0">
                     <div className="container">

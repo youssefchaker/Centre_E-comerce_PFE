@@ -62,7 +62,7 @@ class Becomeaseller extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="banner-section">
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner.jpg`} className="img-fluid" alt=""/>
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/coming-soon.jpg`} className="img-fluid" alt=""/>
                                 </div>
                             </div>
                             <div className="col-sm-12">
