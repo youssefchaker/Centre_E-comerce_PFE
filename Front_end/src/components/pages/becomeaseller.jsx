@@ -62,7 +62,7 @@ class Becomeaseller extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="banner-section">
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner.jpg`} className="img-fluid" alt=""/>
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner1.jpg`} className="img-fluid" alt=""/>
                                 </div>
                             </div>
                             <div className="col-sm-12">
@@ -71,13 +71,15 @@ class Becomeaseller extends Component {
                                 Using our site you can sell your products of any kind for a whole year.<br/>
                                 By buying our yearly subscription ,your varied products will be on display on our website for 1 year which customers can buy<br/>
                                 A full detailed overview of the transaction will reach your company along with the transaction money for that product<br/>
-                                We are looking forword to sell your products on our web site!!
+                                We are looking forword to sell your products on our web site.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </section>
-                <div><Link to="/pages/subscription"><a className="btn btn-solid">Become a Seller</a></Link></div>
+                <div style={{marginLeft:'108px',marginBottom:'25px'}}>
+                    <Link to="/pages/subscription"><a className="btn btn-solid">Become a Seller</a></Link>
+                </div>
             </div>
         )
     }

@@ -62,11 +62,11 @@ class aboutUs extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="banner-section">
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner.jpg`} className="img-fluid" alt=""/>
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner1.jpg`} className="img-fluid" alt=""/>
                                 </div>
                             </div>
                             <div className="col-sm-12">
-                                <h4>Welcome to our E-comerce Mall</h4>
+                                <h4>Welcome to our online Mall</h4>
                                 <p>
 It is an online shopping center that allows businesses and individuals to promote their products and services.<br/>
 The site will offer rental display spaces (payable yearly by subscription) for those who wish to promote and sell their products online.<br/>
@@ -154,8 +154,8 @@ Management and support services for entrepreneurship via flexible functionalitie
                                 <div className="media">
                                     <div dangerouslySetInnerHTML={{ __html: svgFreeShipping }} />
                                     <div className="media-body">
-                                        <h4>free shipping</h4>
-                                        <p>free shipping world wide</p>
+                                        <h4> shipping</h4>
+                                        <p> shipping world wide</p>
                                     </div>
                                 </div>
                             </div>

@@ -57,7 +57,7 @@ class Subscription extends Component {
     StripeClick = () => {
 
         if (this.validator.allValid()) {
-            alert('You submitted the form and stuff!');
+            alert('You submitted the form !');
 
             var handler = (window).StripeCheckout.configure({
                 key: 'pk_test_glxk17KhP7poKIawsaSgKtsL',
