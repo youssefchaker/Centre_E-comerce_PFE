@@ -34,6 +34,11 @@ class TopBarDark extends Component {
                                                 Register
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="#" data-lng="es">
+                                                Becomeaseller
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>

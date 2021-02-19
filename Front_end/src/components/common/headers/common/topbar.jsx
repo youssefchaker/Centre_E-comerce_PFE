@@ -31,6 +31,9 @@ class TopBar extends Component {
                                         <li>
                                             <Link to={`${process.env.PUBLIC_URL}/pages/register`} data-lng="en">Register</Link>
                                         </li>
+                                        <li>
+                                            <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} data-lng="en">Becomeaseller</Link>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
