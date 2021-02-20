@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import SimpleReactValidator from 'simple-react-validator';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class Addproduct extends Component {
     constructor(props){
     super(props);
     this.state = {
         ProductName:'',
-        ProductPrice:0,
+        ProductPrice:null,
         ProductImage:null,
         ProductDescription:'',
+        Productnumber:1
     }
     this.validator = new SimpleReactValidator();
     }
@@ -18,21 +21,24 @@ class Addproduct extends Component {
         this.setState(obj);
       }
       handlesubmit=(e)=>{
-
+        e.preventDefault(); 
           if(!this.validator.allValid()){
             this.validator.showMessages();
+            this.forceUpdate();
           }
-          e.preventDefault();  
+          else{
+            toast.success("product added !");
+          }
+ 
       }
-   handleduplicate=(e)=>{
-       this.productcount=this.productcount+1;
+  /* handleduplicate=(e)=>{
        e.preventDefault();
-       var original=document.getElementById("dup");
+       var original=document.getElementById("1");
+       this.setState({Productnumber:this.state.Productnumber+1});
        var clone = original.cloneNode(true); // "deep" clone
-    clone.id ="";
-    // or clone.id = ""; if the divs don't need an ID
+    clone.hidden=false;
     original.parentNode.appendChild(clone);
-   }
+   }*/
     render (){
         return (
             <div>
@@ -41,25 +47,22 @@ class Addproduct extends Component {
                     <div className="container padding-cls">
                         <div className="checkout-page">
                             <div className="checkout-form" >
-                                <form onSubmit={this.handlesubmit}>
+                                <form>
                                     <div className="checkout row">
-                                    <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                    <button type="submit" className="btn btn-solid" onClick={this.handleduplicate}>Add Product</button>
-                                                </div>
-                                        <div className="col-lg-6 col-sm-12 col-xs-12" id="dup">
+                                        <div className="col-lg-6 col-sm-12 col-xs-12" id="1">
                                             <div className="checkout-title">
-                                                <h3>Product</h3>
+                                                <h3>Product {this.state.Productnumber}</h3>
                                             </div>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">ProductName</div>
                                                     <input type="text" name="ProductName" onChange={this.setStateFromInput} value={this.state.ProductName} />
-                                                    {this.validator.message('ProductName', this.state.first_name, 'required|alpha')}
+                                                    {this.validator.message('ProductName', this.state.ProductName, 'required|alpha')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">ProductPrice</div>
-                                                    <input  type="number" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} />
-                                                    {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|number')}
+                                                    <input  type="text" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} />
+                                                    {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|integer')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">ProductImage</div>
@@ -75,7 +78,7 @@ class Addproduct extends Component {
                                         </div>
                 </div>
                 <div>
-                    <button type="submit" className="btn btn-solid" >Submit products</button>
+                    <button type="submit" className="btn btn-solid" onClick={this.handlesubmit}>Submit products</button>
                 </div>
                 </form>
             </div>

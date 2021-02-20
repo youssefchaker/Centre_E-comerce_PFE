@@ -83,7 +83,7 @@ class HeaderTwo extends Component {
 
         return (
             <div>
-                <header id="sticky" className="sticky  ">
+                <header >
                     {this.state.isLoading ? <Pace color="#27ae60"/> : null}
                     <div className="mobile-fix-option"></div>
                     {/*Top Header Component*/}
@@ -125,9 +125,6 @@ class HeaderTwo extends Component {
                                                             <h6>currency</h6>
                                                             <ul className="list-inline">
                                                                 <li><a href={null} onClick={() => this.props.changeCurrency('€')}>euro</a> </li>
-                                                                <li><a href={null} onClick={() => this.props.changeCurrency('DT')}>tunisian dinar</a> </li>
-                                                                <li><a href={null} onClick={() => this.props.changeCurrency('£')}>pound</a> </li>
-                                                                <li><a href={null} onClick={() => this.props.changeCurrency('$')}>dollar</a> </li>
                                                             </ul>
                                                         </div>
                                                     </li>
@@ -144,7 +141,7 @@ class HeaderTwo extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="main-nav-center">
+                                <div className="main-nav-center" id="sticky" className="sticky  " style={{textAlign:'center'}}>
                                     <NavBar/>
                                 </div>
                             </div>
