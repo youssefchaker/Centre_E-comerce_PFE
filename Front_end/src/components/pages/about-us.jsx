@@ -63,6 +63,8 @@ class aboutUs extends Component {
                             <div className="col-lg-12">
                                 <div className="banner-section">
                                     <img src={`${process.env.PUBLIC_URL}/assets/images/about/banner1.jpg`} className="img-fluid" alt=""/>
+
+                                    
                                 </div>
                             </div>
                             <div className="col-sm-12">

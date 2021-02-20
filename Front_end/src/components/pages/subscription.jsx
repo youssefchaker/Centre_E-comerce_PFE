@@ -484,7 +484,6 @@ class Subscription extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    
                                 </form>
                             </div>
                         </div>
