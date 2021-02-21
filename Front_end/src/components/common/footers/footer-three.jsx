@@ -35,9 +35,6 @@ class FooterThree extends Component {
                                     <div className="footer-logo">
                                         <LogoImage logo={this.props.logoName} />
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et.Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing</p>
                                 </div>
                             </div>
                             <div className="col-lg-6 subscribe-wrapper">
@@ -69,58 +66,12 @@ class FooterThree extends Component {
                     </section>
                 </div>
             </div>
-            <div className="dark-layout">
-                <div className="container">
-                    <section className="small-section">
-                        <div className="row footer-theme2">
-                            <div className="col p-set">
-                                <div className="footer-link">
-                                    <div className="footer-title">
-                                        <h4>my account</h4>
-                                    </div>
-                                    <div className="footer-contant">
-                                        <ul>
-                                            <li><Link
-                                                to={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>womens</Link>
-                                            </li>
-                                            <li><Link
-                                                to={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>clothing</Link>
-                                            </li>
-                                            <li><Link
-                                                to={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>accessories</Link>
-                                            </li>
-                                            <li><Link
-                                                to={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>featured</Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="footer-link-b">
-                                    <div className="footer-title">
-                                        <h4>why we choose</h4>
-                                    </div>
-                                    <div className="footer-contant">
-                                        <ul>
-                                            <li><a href="#">shipping & return</a></li>
-                                            <li><a href="#">secure shopping</a></li>
-                                            <li><a href="#">gallary</a></li>
-                                            <li><a href="#">affiliates</a></li>
-                                            <li><a href="#">contacts</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
             <div className="sub-footer darker-subfooter">
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-6 col-md-6 col-sm-12">
                             <div className="footer-end">
-                                <p><i className="fa fa-copyright" aria-hidden="true"></i> 2017-18 themeforest powered by
-                                    pixelstrap</p>
+                                <p><i className="fa fa-copyright" aria-hidden="true"></i> PFE 2021</p>
                             </div>
                         </div>
                         <div className="col-xl-6 col-md-6 col-sm-12">
