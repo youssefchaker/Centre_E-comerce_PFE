@@ -88,13 +88,7 @@ class ThemeSettings extends Component {
 
         return (
             <div>
-                <a href="javascript:void(0)" onClick={() => this.openSetting()}>
-                    <div className="setting-sidebar" id="setting-icon">
-                        <div>
-                            <i className="fa fa-cog" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </a>
+                
                 <div id="setting_box" className="setting-box">
                     <a href="javascript:void(0)" className="overlay" onClick={() => this.closeSetting()}></a>
                     <div className="setting_box_body">

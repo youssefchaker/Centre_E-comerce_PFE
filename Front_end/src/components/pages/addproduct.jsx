@@ -3,6 +3,7 @@ import Breadcrumb from "../common/breadcrumb";
 import SimpleReactValidator from 'simple-react-validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Link} from 'react-router-dom';
 class Addproduct extends Component {
     constructor(props){
     super(props);
@@ -78,12 +79,13 @@ class Addproduct extends Component {
                                         </div>
                 </div>
                 <div>
-                    <button type="submit" className="btn btn-solid" onClick={this.handlesubmit}>Submit products</button>
+                    <button type="submit" className="btn btn-solid" onClick={this.handlesubmit}>Submit product</button>
                 </div>
                 </form>
             </div>
             </div>
             </div>
+            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myprofile`} ><a><button type="submit" className="btn btn-solid" >Finish Adding Products</button></a></Link></div>
             </section>
             </div>
         )

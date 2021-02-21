@@ -15,6 +15,8 @@ import {
     svgservice,
     svgoffer
 } from "../../../services/script"
+import {useSpring, animated} from 'react-spring'
+
 
 
 class Fashion extends Component {
