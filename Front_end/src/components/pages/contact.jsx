@@ -20,9 +20,7 @@ class Contact extends Component {
                     <div className="container">
                         <div className="row section-b-space">
                             <div className="col-lg-7 map">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d50059.12775918716!2d72.78534673554945!3d21.16564923510817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1533793756956"
-                                    allowFullScreen></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d204351.2646185808!2d10.18440826311541!3d36.84275123732407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12e2cb4b0eb7c1d9%3A0x31dc6ea669baadcd!2z2KfZhNmF2LnZh9ivINin2YTYudin2YTZiiDZhNmE2KXYudmE2KfZhdmK2KnYjCBSdWUgQWJvdXJyYWloYW4gQWwgQmF5cm91bmksIEFyaWFuYQ!5e0!3m2!1sen!2stn!4v1613940816449!5m2!1sen!2stn" width={400} height={300} style={{border: 0}} allowFullScreen loading="lazy" />
                             </div>
                             <div className="col-lg-5">
                                 <div className="contact-right">

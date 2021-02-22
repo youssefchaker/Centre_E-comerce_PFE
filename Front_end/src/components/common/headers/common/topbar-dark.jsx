@@ -19,8 +19,6 @@ class TopBarDark extends Component {
                         </div>
                         <div className="col-lg-6 text-right">
                             <ul className="header-dropdown">
-                                <li className="mobile-wishlist"><a href="#"><i className="fa fa-heart"
-                                                                               aria-hidden="true"></i> wishlist</a></li>
                                 <li className="onhover-dropdown mobile-account">
                                     <i className="fa fa-user" aria-hidden="true"></i> My Account
                                     <ul className="onhover-show-div">

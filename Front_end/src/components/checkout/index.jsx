@@ -57,8 +57,6 @@ class checkOut extends Component {
     StripeClick = () => {
 
         if (this.validator.allValid()) {
-            alert('You submitted the form and stuff!');
-
             var handler = (window).StripeCheckout.configure({
                 key: 'pk_test_glxk17KhP7poKIawsaSgKtsL',
                 locale: 'auto',
@@ -472,12 +470,6 @@ class checkOut extends Component {
                                                                         <label htmlFor="payment-2">Stripe</label>
                                                                     </div>
                                                                 </li>
-                                                                <li>
-                                                                    <div className="radio-option paypal">
-                                                                        <input type="radio" name="payment-group" id="payment-1" onClick={() => this.checkhandle('paypal')} />
-                                                                            <label htmlFor="payment-1">PayPal<span className="image"><img src={`${process.env.PUBLIC_URL}/assets/images/paypal.png`} alt=""/></span></label>
-                                                                    </div>
-                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -487,56 +479,6 @@ class checkOut extends Component {
                                                          <PaypalExpressBtn env={'sandbox'} client={client} currency={'USD'} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />}
                                                     </div>
                                                     : ''}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row section-t-space">
-                                        <div className="col-lg-6">
-                                            <div className="stripe-section">
-                                                <h5>stripe example</h5>
-                                                <div>
-                                                    <h5 className="checkout_class">first name last name</h5>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>cart number</td>
-                                                                <td>4242424242424242</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>mm/yy</td>
-                                                                <td>2/2020</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>cvc</td>
-                                                                <td>2222</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 m-sm-t-2">
-                                            <div className="stripe-section">
-                                                <h5>paypal example</h5>
-                                                <div>
-                                                    <h5 className="checkout_class">first name last name</h5>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>cart number</td>
-                                                                <td>4152521541244</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>mm/yy</td>
-                                                                <td>11/18</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>cvc</td>
-                                                                <td>521</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
