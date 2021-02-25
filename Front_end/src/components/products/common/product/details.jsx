@@ -34,20 +34,6 @@ class Details extends Component {
                         </table>
                     </div>
                     <div className="border-product">
-                        <h6 className="product-title">share it</h6>
-                        <div className="product-icon">
-                            <ul className="product-social">
-                                <li><a href="https://www.facebook.com/" target="_blank"><i className="fa fa-facebook"></i></a></li>
-                                <li><a href="https://plus.google.com/discover" target="_blank"><i className="fa fa-google-plus"></i></a></li>
-                                <li><a href="https://twitter.com/" target="_blank"><i className="fa fa-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com/" target="_blank"><i className="fa fa-instagram"></i></a></li>
-                            </ul>
-                                <button className="wishlist-btn" onClick={() => addToWishlistClicked(item)}>
-                                    <i className="fa fa-heart"></i><span className="title-font">Add To WishList</span>
-                                </button>
-                        </div>
-                    </div>
-                    <div className="border-product">
                         <h6 className="product-title">100% SECURE PAYMENT</h6>
                         <div className="payment-card-bottom">
                             <ul>
