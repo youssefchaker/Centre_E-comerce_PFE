@@ -12,7 +12,7 @@ class TopBarDark extends Component {
                         <div className="col-lg-6">
                             <div className="header-contact">
                                 <ul>
-                                    <li>Welcome to Our Marketplace</li>
+                                    <li>Welcome to Our Mall</li>
                                     <li><i className="fa fa-phone" aria-hidden="true"></i>+216 95 456 201</li>
                                 </ul>
                             </div>
@@ -32,6 +32,11 @@ class TopBarDark extends Component {
                                         <li>
                                             <a href="#" data-lng="es">
                                                 Register
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-lng="es">
+                                                BecomeSeller
                                             </a>
                                         </li>
                                     </ul>

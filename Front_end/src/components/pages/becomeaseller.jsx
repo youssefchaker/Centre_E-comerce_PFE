@@ -79,9 +79,9 @@ class Becomeaseller extends Component {
                         </div>
                     </div>
                 </section>
-                <div style={{marginLeft:'108px',marginBottom:'25px'}}>
-                    <Link to="/pages/subscription"><a className="btn btn-solid">Become a Seller</a></Link>
-                </div>
+                
+
+                <div style={{textAlign:'center' , top:'50%'}}><Link to="/pages/subscription"><a className="btn btn-solid" >Become a Seller</a></Link></div>
             </div>
         )
     }

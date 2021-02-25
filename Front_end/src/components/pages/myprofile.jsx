@@ -15,14 +15,14 @@ class MyProfile extends Component {
                 <Breadcrumb title={'MyProfile'}/>
                 
                 
-                {/*Dashboard section*/}
+                {/*Myprofile section*/}
                 <section className="section-b-space">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="account-sidebar">
                                     <a className="popup-btn">
-                                        my Profile
+                                        My Profile
                                     </a>
                                 </div>
                                 <div className="dashboard-left">
@@ -49,7 +49,7 @@ class MyProfile extends Component {
                                 <div className="dashboard-right">
                                     <div className="dashboard">
                                         <div className="page-title">
-                                            <h2>My Dashboard</h2>
+                                            <h2>My Profile</h2>
                                         </div>
                                         <div className="welcome-msg">
                                             <p>Hello, MARK JECNO !</p>

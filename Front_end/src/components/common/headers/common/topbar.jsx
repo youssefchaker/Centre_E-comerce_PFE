@@ -13,7 +13,7 @@ class TopBar extends Component {
                         <div className="col-lg-6">
                             <div className="header-contact">
                                 <ul>
-                                    <li>{translate('topbar_title', { theme_name: ' Marketplace' })}</li>
+                                    <li>{translate('topbar_title', { theme_name: ' Mall' })}</li>
                                     <li><i className="fa fa-phone" aria-hidden="true"></i>{translate('call_us')}:  +216 95 456 201</li>
                                 </ul>
                             </div>
@@ -30,6 +30,9 @@ class TopBar extends Component {
                                         </li>
                                         <li>
                                             <Link to={`${process.env.PUBLIC_URL}/pages/register`} data-lng="en">Register</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} data-lng="en">BecomeSeller</Link>
                                         </li>
                                     </ul>
                                 </li>
