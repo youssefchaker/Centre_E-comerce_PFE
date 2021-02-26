@@ -36,7 +36,7 @@ import PageNotFound from './components/pages/404'
 import lookbook from './components/pages/lookbook'
 import Login from './components/pages/login'
 import Register from './components/pages/register'
-import TrackOrder from './components/pages/trackOrder'
+import TrackOrder from './components/pages/TrackOrder'
 import Collection from './components/pages/collection'
 import ForgetPassword from './components/pages/forget-password'
 import Contact from './components/pages/contact'
@@ -115,7 +115,7 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/trackOrder`} component={TrackOrder}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/TrackOrder`} component={TrackOrder}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/collection`} component={Collection}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/forget-password`} component={ForgetPassword}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
