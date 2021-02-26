@@ -52,7 +52,7 @@ class MyProfile extends Component {
                                             <h2>My Profile</h2>
                                         </div>
                                         <div className="welcome-msg">
-                                            <p>Hello, MARK JECNO !</p>
+                                            <p>Hello, Foulen ben Foulen !</p>
                                             <p>From your My Account Dashboard you have the ability to view a snapshot of
                                                 your recent account activity and update your account information. Select
                                                 a link below to view or edit information.</p>
@@ -69,8 +69,8 @@ class MyProfile extends Component {
                                                             <a href="#">Edit</a>
                                                         </div>
                                                         <div className="box-content">
-                                                            <h6>MARK JECNO</h6>
-                                                            <h6>MARk-JECNO@gmail.com</h6>
+                                                            <h6>Foulen ben Foulen</h6>
+                                                            <h6>Foulen@gmail.com</h6>
                                                             <h6><a href="#">Change Password</a></h6>
                                                         </div>
                                                     </div>

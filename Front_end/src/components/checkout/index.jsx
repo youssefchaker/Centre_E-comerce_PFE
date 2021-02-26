@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Helmet} from 'react-helmet'
 import { connect } from 'react-redux'
 import {Link, Redirect } from 'react-router-dom'
-import PaypalExpressBtn from 'react-paypal-express-checkout';
 import SimpleReactValidator from 'simple-react-validator';
 
 import Breadcrumb from "../common/breadcrumb";
@@ -85,15 +84,7 @@ class checkOut extends Component {
     render (){
         const {cartItems, symbol, total} = this.props;
 
-        // Paypal Integration
-        const onSuccess = (payment) => {
-            console.log("The payment was succeeded!", payment);
-            this.props.history.push({
-                pathname: '/order-success',
-                    state: { payment: payment, items: cartItems, orderTotal: total, symbol: symbol }
-            })
-
-        }
+        
 
         const onCancel = (data) => {
             console.log('The payment was cancelled!', data);
@@ -472,19 +463,14 @@ class checkOut extends Component {
                                                                         <label htmlFor="payment-2">Stripe</label>
                                                                     </div>
                                                                 </li>
-                                                                <li>
-                                                                    <div className="radio-option paypal">
-                                                                        <input type="radio" name="payment-group" id="payment-1" onClick={() => this.checkhandle('paypal')} />
-                                                                            <label htmlFor="payment-1">PayPal<span className="image"><img src={`${process.env.PUBLIC_URL}/assets/images/paypal.png`} alt=""/></span></label>
-                                                                    </div>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </div>
                                                     </div>
                                                     {(total !== 0)?
                                                     <div className="text-right">
                                                         {(this.state.payment === 'stripe')? <button type="button" className="btn-solid btn" onClick={() => this.StripeClick()} >Place Order</button>:
-                                                         <PaypalExpressBtn env={'sandbox'} client={client} currency={'USD'} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />}
+                                                         <div></div>}
                                                     </div>
                                                     : ''}
                                                 </div>
@@ -516,30 +502,7 @@ class checkOut extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6 m-sm-t-2">
-                                            <div className="stripe-section">
-                                                <h5>paypal example</h5>
-                                                <div>
-                                                    <h5 className="checkout_class">first name last name</h5>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>cart number</td>
-                                                                <td>4152521541244</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>mm/yy</td>
-                                                                <td>11/18</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>cvc</td>
-                                                                <td>521</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </form>
                             </div>
