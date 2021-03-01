@@ -22,7 +22,7 @@ const UserSchema=new Schema({
     password:{
         type:String,
         required:[true, 'Please enter your password'],
-        minlength: [6, 'Your password must be longer than 6 characters']
+        minlength: [8, 'Your password must be longer than 6 characters']
     },
     role:{
         type:String,
@@ -34,12 +34,10 @@ const UserSchema=new Schema({
         default:Date.now
     },
     resetpasswordtoken:{
-        type:String,
-        default:''
+        type:String
     },
     resetpasswordexpire:{
-        type:Boolean,
-        default:false
+        type:Date
     }
 });
 

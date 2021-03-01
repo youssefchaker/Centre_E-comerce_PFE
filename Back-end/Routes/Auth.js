@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 
 const {
@@ -58,6 +58,9 @@ router.route('/admin/users/:id')
 
 
 /*
+
+//update password and profile 
+
 router.route('/password/update').put(isAuthenticatedUser, updatePassword)
 router.route('/me/update').put(isAuthenticatedUser, updateProfile)*/
 
@@ -65,4 +68,4 @@ router.route('/me/update').put(isAuthenticatedUser, updateProfile)*/
 /*//user wants to reset password
 
 router.route('/password/reset/:token').put(resetPassword)*/
-module.exports = router;
+//module.exports = router;

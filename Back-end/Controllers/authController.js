@@ -6,12 +6,14 @@ const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
-
+/*
 // Register a user   => /api/mall/register
+
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
     const { firstname,lastname, email, password } = req.body;
     const role="client";
+    const register_date=Date.now();
     const user = await User.create({
         firstname,
         lastname,
@@ -23,16 +25,19 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     sendToken(user, 200, res)
 })
 
-// Login User  =>  /a[i/v1/login
+// Login User  =>  /api/mall/login
+
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { email, password } = req.body;
 
     // Checks if email and password is entered by user
+
     if (!email || !password) {
         return next(new ErrorHandler('Please enter email & password', 400))
     }
 
     // Finding user in database
+
     const user = await User.findOne({ email }).select('+password')
 
     if (!user) {
@@ -40,6 +45,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     }
 
     // Checks if password is correct or not
+
     const isPasswordMatched = await user.comparePassword(password);
 
     if (!isPasswordMatched) {
@@ -49,7 +55,8 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     sendToken(user, 200, res)
 })
 
-// Forgot Password   =>  /api/v1/password/forgot
+// Forgot Password   =>  /api/mall/password/forgot
+
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findOne({ email: req.body.email });
@@ -59,14 +66,18 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     }
 
     // Get reset token
+
     const resetToken = user.getResetPasswordToken();
 
     await user.save({ validateBeforeSave: false });
 
     // Create reset password url
+
     const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
 
     const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`
+
+    //send mail to the email owner
 
     try {
 
@@ -94,7 +105,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
 
 
-// Get currently logged in user details   =>   /api/v1/me
+// Get currently logged in user details   =>   /api/mall/myprofile
+
+
 exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id);
 
@@ -105,7 +118,7 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
 })
 
 
-// Logout user   =>   /api/v1/logout
+// Logout user   =>   /api/mall/logout
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
     res.cookie('token', null, {
@@ -122,6 +135,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 // Admin Routes
 
 // Get all users   =>   /api/mall/admin/users
+
 exports.allUsers = catchAsyncErrors(async (req, res, next) => {
     const users = await User.find();
 
@@ -132,7 +146,7 @@ exports.allUsers = catchAsyncErrors(async (req, res, next) => {
 })
 
 
-// Get user details   =>   /api/v1/admin/user/:id
+// Get user details   =>   /api/mall/admin/user/:id
 
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.params.id);
@@ -147,7 +161,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-// Delete user   =>   /api/v1/admin/user/:id
+// Delete user   =>   /api/mall/admin/users/:id
 
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.params.id);

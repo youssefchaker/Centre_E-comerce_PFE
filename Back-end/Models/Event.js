@@ -18,7 +18,7 @@ const EventSchema=new Schema({
     },
     eventimage:{
         type:String,
-        required:[false]
+        required:false
     }
 });
 
