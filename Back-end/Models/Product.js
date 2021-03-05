@@ -9,14 +9,9 @@ const productSchema = new Schema({
         type: String,
         required: [true, 'Please enter product description'],
     },
-    /*
-    Store: {
+    store: {
         type: mongoose.Schema.ObjectId,
         ref: 'Store'
-    },*/
-    store: {
-        type: String,
-        required:[true,"please enter a store"]
     },
     price: {
         type: Number,
@@ -28,7 +23,7 @@ const productSchema = new Schema({
     },
     nbreviews:{
         type:Number,
-        required:[true,'please specify the number of products added']
+        default:0
     },
     creationdate:{
         type:Date,
@@ -36,7 +31,7 @@ const productSchema = new Schema({
     },
     images: [
         {
-            public_id: {
+            image_id: {
                 type: String,
                 required: [true,'please specify the image public_id']
             },
@@ -50,40 +45,31 @@ const productSchema = new Schema({
         type:String,
         required:[true,'please specify the desired category'],
         enum: [
-                "Electronics",
-                "Cameras",
-                "Laptops",
-                "Accessories",
-                "Headphones",
-                "Food",
-                "Books",
-                "Clothes",
-                "Beauty",
-                "Sports",
-                "Outdoor",
-                "Home"
+            'Electronics',
+            'Cameras',
+            'Laptops',
+            'Accessories',
+            'Phones&Tablets',
+            'Food',
+            "Books",
+            'Fashion',
+            'Beauty&Health',
+            'Sports',
+            'Outdoor',
+            'Home'
             ]
     },
     reviews: [
         {
-            /* 
             user: {
                 type: mongoose.Schema.ObjectId,
                 ref: 'User',
-                required: true
-            },
-            */
-            user: {
-                type: String,
-                required: [true,'please specify the review user']
             },
             rating: {
-                type: Number,
-                required: [true,'please specify the review rating']
+                type: Number
             },
             comment: {
-                type: String,
-                required: [true,'please specify the review comment']
+                type: String
             }
         }
     ],
