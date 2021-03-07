@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 import {Slider3} from "../../../services/script"
 
-class BlogSection extends Component {
+class EventSection extends Component {
     render (){
 
         return (
@@ -102,4 +102,4 @@ class BlogSection extends Component {
     }
 }
 
-export default BlogSection;
+export default EventSection;

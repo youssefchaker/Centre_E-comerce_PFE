@@ -1,11 +1,31 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
-
+import SimpleReactValidator from 'simple-react-validator';
+import { ToastContainer, toast } from 'react-toastify';
 class Contact extends Component {
 
     constructor (props) {
         super (props)
+        this.state={
+            firstname:"",
+            lastname:"",
+            email:"",
+            messagetopic:"",
+            message:""
+        }
+        this.validator = new SimpleReactValidator();
     }
+    handlesubmit=(e)=>{
+        e.preventDefault(); 
+          if(!this.validator.allValid()){
+            this.validator.showMessages();
+            this.forceUpdate();
+          }
+          else{
+            toast.success("product added !");
+          }
+ 
+      }
 
     render (){
 
@@ -31,8 +51,8 @@ class Contact extends Component {
                                                     <h6>Contact Us</h6>
                                             </div>
                                             <div className="media-body">
-                                                <p>+91 123 - 456 - 7890</p>
-                                                <p>+86 163 - 451 - 7894</p>
+                                                <p>+216 22222222</p>
+                                                <p>+216 22222222</p>
                                             </div>
                                         </li>
                                         <li>
@@ -41,24 +61,13 @@ class Contact extends Component {
                                                 <h6>Address</h6>
                                             </div>
                                             <div className="media-body">
-                                                <p>ABC Complex,Near xyz, New York</p>
-                                                <p>USA 123456</p>
+                                                <p>Tunis,Ariana</p>
                                             </div>
                                         </li>
                                         <li>
                                             <div className="contact-icon">
                                                 <img src={`${process.env.PUBLIC_URL}/assets/images/icon/email.png`} alt="Generic placeholder image" />
-                                                    <h6>Address</h6>
-                                            </div>
-                                            <div className="media-body">
-                                                <p>Support@Shopcart.com</p>
-                                                <p>info@shopcart.com</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="contact-icon">
-                                                <i className="fa fa-fax" aria-hidden="true"></i>
-                                                <h6>Fax</h6>
+                                                    <h6>Email Address</h6>
                                             </div>
                                             <div className="media-body">
                                                 <p>Support@Shopcart.com</p>
@@ -75,31 +84,35 @@ class Contact extends Component {
                                     <div className="form-row">
                                         <div className="col-md-6">
                                             <label htmlFor="name">First Name</label>
-                                            <input type="text" className="form-control" id="name"
-                                                   placeholder="Enter Your name" required="" />
+                                            <input type="text" className="form-control" name="firstname"
+                                                   placeholder="Enter Your firstname" />
+                                            {this.validator.message('firstname', this.state.firstname, 'required')}
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="email">Last Name</label>
-                                            <input type="text" className="form-control" id="last-name"
-                                                   placeholder="Email" required="" />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="review">Phone number</label>
-                                            <input type="text" className="form-control" id="review"
-                                                   placeholder="Enter your number" required="" />
+                                            <label htmlFor="lastname">Last Name</label>
+                                            <input type="text" className="form-control" name="lastname"
+                                                   placeholder="Enter Your lastname"/>
+                                            {this.validator.message('lastname', this.state.lastname, 'required')}
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="email">Email</label>
-                                            <input type="text" className="form-control" id="email" placeholder="Email"
-                                                   required="" />
+                                            <input type="text" className="form-control" placeholder="Enter Your Email"
+                                              name="email"      />
+                                            {this.validator.message('email', this.state.email, 'required')}
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="lastname">Message Topic</label>
+                                            <input type="text" className="form-control" name="messagetopic"
+                                                   placeholder="Enter Your Message Topic"/>
+                                            {this.validator.message('messagetopic', this.state.messagetopic, 'required')}
                                         </div>
                                         <div className="col-md-12">
                                             <label htmlFor="review">Write Your Message</label>
-                                            <textarea className="form-control" placeholder="Write Your Message"
-                                                      id="exampleFormControlTextarea1" rows="6"></textarea>
+                                            <textarea className="form-control" placeholder="Write Your Message" name="message" rows="6"></textarea>
+                                            {this.validator.message('message', this.state.message, 'required')}
                                         </div>
                                         <div className="col-md-12">
-                                            <button className="btn btn-solid" type="submit">Send Your Message</button>
+                                            <button className="btn btn-solid" type="submit" onClick={this.handlesubmit}>Send Your Message</button>
                                         </div>
                                     </div>
                                 </form>

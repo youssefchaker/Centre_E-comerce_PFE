@@ -44,7 +44,7 @@ class FooterThree extends Component {
                                         <div className="form-group">
                                             <input type="text" className="form-control"
                                                    id="exampleFormControlInput3" placeholder="Enter your email"/>
-                                            <button type="submit" className="btn btn-solid">subscribe</button>
+                                            <button type="submit" className="btn btn-solid" /*insert mailing service */>subscribe</button>
                                         </div>
                                     </form>
                                 </div>

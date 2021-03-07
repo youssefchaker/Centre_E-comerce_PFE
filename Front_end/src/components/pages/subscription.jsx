@@ -25,7 +25,8 @@ class Subscription extends Component {
             state:'',
             pincode:'',
             create_account: '',
-            domaine: ''
+            domaine: '',
+            storeimage:''
         }
         this.validator = new SimpleReactValidator();
     }
@@ -36,7 +37,6 @@ class Subscription extends Component {
         this.setState(obj);
 
       }
-
       setStateFromCheckbox = (event) => {
           var obj = {};
           obj[event.target.name] = event.target.checked;
@@ -57,8 +57,6 @@ class Subscription extends Component {
     StripeClick = () => {
 
         if (this.validator.allValid()) {
-            alert('You submitted the form and stuff!');
-
             var handler = (window).StripeCheckout.configure({
                 key: 'pk_test_glxk17KhP7poKIawsaSgKtsL',
                 locale: 'auto',
@@ -165,6 +163,7 @@ class Subscription extends Component {
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Country</div>
                                                     <select name="country" value={this.state.country} onChange={this.setStateFromInput}>
+                                                    <option>----------</option>
                                                     <option value="Afganistan">Afghanistan</option>
                                                     <option value="Albania">Albania</option>
                                                     <option value="Algeria">Algeria</option>
@@ -412,7 +411,7 @@ class Subscription extends Component {
                                                     <option value="Zambia">Zambia</option>
                                                     <option value="Zimbabwe">Zimbabwe</option>
                                                     </select>
-                                                    {this.validator.message('country', this.state.country, 'required')}
+                                                    {this.validator.message('country', this.state.country, 'required|alpha')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Address</div>
@@ -432,12 +431,12 @@ class Subscription extends Component {
                                                 <div className="form-group col-md-12 col-sm-6 col-xs-12">
                                                     <div className="field-label">Postal Code</div>
                                                     <input type="text" name="pincode" value={this.state.spincode} onChange={this.setStateFromInput} />
-                                                    {this.validator.message('pincode', this.state.pincode, 'required|integer')}
+                                                    {this.validator.message('pincode', this.state.pincode, 'required|number')}
                                                 </div>
-                                                <div className="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <input type="checkbox" name="create_account" id="account-option"  checked={this.state.create_account} onChange={this.setStateFromCheckbox}/>
-                                                    &ensp; <label htmlFor="account-option">Create An Account?</label>
-                                                    {this.validator.message('checkbox', this.state.create_account, 'create_account')}
+                                                <div className="form-group col-md-12 col-sm-6 col-xs-12">
+                                                    <div className="field-label">Store Image</div>
+                                                    <input type="file" name="storeimage" value={this.state.storeimage} onChange={this.setStateFromInput} accept="image/*" />
+                                                    {this.validator.message('storeimage', this.state.storeimage, 'required')}
                                                 </div>
                                             </div>
                                         </div>
@@ -465,18 +464,12 @@ class Subscription extends Component {
                                                                         <label htmlFor="payment-2">Stripe</label>
                                                                     </div>
                                                                 </li>
-                                                                <li>
-                                                                    <div className="radio-option paypal">
-                                                                        <input type="radio" name="payment-group" id="payment-1" onClick={() => this.checkhandle('paypal')} />
-                                                                            <label htmlFor="payment-1">PayPal<span className="image"><img src={`${process.env.PUBLIC_URL}/assets/images/paypal.png`} alt=""/></span></label>
-                                                                    </div>
-                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                     {(total !== 0)?
                                                     <div className="text-right">
-                                                        {(this.state.payment === 'stripe')? <button type="button" className="btn-solid btn" onClick={() => this.StripeClick()} >Activate</button>:
+                                                        {(this.state.payment === 'stripe')? <button type="button" className="btn-solid btn" onClick={() => this.StripeClick()} >Buy Subscription</button>:
                                                          <PaypalExpressBtn env={'sandbox'} client={client} currency={'USD'} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />}
                                                     </div>
                                                     : ''}

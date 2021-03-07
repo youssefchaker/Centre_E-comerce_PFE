@@ -24,7 +24,6 @@ class TopCollection extends Component {
             <div>
                 {/*Paragraph*/}
                 <div className="title1  section-t-space">
-                    <h4>special offer</h4>
                     <h2 className="title-inner1">top products</h2>
                 </div>
                 {/*Paragraph End*/}

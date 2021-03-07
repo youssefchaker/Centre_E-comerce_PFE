@@ -58,7 +58,7 @@ class Addproduct extends Component {
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">ProductName</div>
                                                     <input type="text" name="ProductName" onChange={this.setStateFromInput} value={this.state.ProductName} />
-                                                    {this.validator.message('ProductName', this.state.ProductName, 'required|alpha')}
+                                                    {this.validator.message('ProductName', this.state.ProductName, 'required')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">ProductPrice</div>
@@ -73,7 +73,7 @@ class Addproduct extends Component {
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">ProductDescription</div>
                                                     <textarea name="ProductDescription" rows="15" cols="30" onChange={this.setStateFromInput} value={this.state.ProductDescription} ></textarea>
-                                                    {this.validator.message('ProductDescription', this.state.ProductDescription, 'required|alpha')}
+                                                    {this.validator.message('ProductDescription', this.state.ProductDescription, 'required')}
                                                 </div>                                        
                                             </div>
                                         </div>

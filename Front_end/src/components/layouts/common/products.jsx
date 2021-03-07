@@ -13,24 +13,19 @@ class SpecialProducts extends Component {
         return (
             <div>
                 <div className="title1 section-t-space">
-                    <h4>exclusive products</h4>
-                    <h2 className="title-inner1">special products</h2>
+                    <h2 className="title-inner1">New Products</h2>
                 </div>
                 <section className="section-b-space p-t-0">
                     <div className="container">
                         <Tabs className="theme-tab">
                             <TabList className="tabs tab-title">
-                                <Tab>New Products</Tab>
-                                <Tab>Mens Wear</Tab>
-                                <Tab>Womens Wear</Tab>
+                                <Tab></Tab>
                             </TabList>
 
                             <TabPanel>
                                 <div className="no-slider row">
                                     { bestSeller.map((product, index ) =>
                                         <ProductItem product={product} symbol={symbol}
-                                                     onAddToCompareClicked={() => addToCompare(product)}
-                                                     onAddToWishlistClicked={() => addToWishlist(product)}
                                                      onAddToCartClicked={() => addToCart(product, 1)} key={index} /> )
                                     }
                                 </div>
@@ -39,8 +34,6 @@ class SpecialProducts extends Component {
                                 <div className="no-slider row">
                                     { mensWear.map((product, index ) =>
                                         <ProductItem product={product} symbol={symbol}
-                                                     onAddToCompareClicked={() => addToCompare(product)}
-                                                     onAddToWishlistClicked={() => addToWishlist(product)}
                                                      onAddToCartClicked={() => addToCart(product, 1)} key={index} /> )
                                     }
                                 </div>
@@ -49,8 +42,6 @@ class SpecialProducts extends Component {
                                 <div className=" no-slider row">
                                     { womensWear.map((product, index ) =>
                                         <ProductItem product={product} symbol={symbol}
-                                                     onAddToCompareClicked={() => addToCompare(product)}
-                                                     onAddToWishlistClicked={() => addToWishlist(product)}
                                                      onAddToCartClicked={() => addToCart(product, 1)} key={index} /> )
                                     }
                                 </div>

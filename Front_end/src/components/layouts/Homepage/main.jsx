@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 // Import custom components
 import TopCollection from './top-collection';
 import SpecialProducts from "../common/products";
-import BlogSection from "../common/blogsection";
+import EventSection from "../common/eventssection";
 import Instagram from "../common/instagram";
 import LogoBlock from "../common/logo-block";
 import {
@@ -181,14 +181,13 @@ class Fashion extends Component {
                     <div className="row">
                         <div className="col">
                             <div className="title1 section-t-space">
-                                <h4>Recent events</h4>
-                                <h2 className="title-inner1">from events</h2>
+                                <h2 className="title-inner1">Ongoing Events</h2>
                             </div>
                         </div>
                     </div>
                 </div>
                 <section className="blog p-t-0">
-                    <BlogSection />
+                    <EventSection />
                 </section>
                 {/*Blog Section End*/}
 
