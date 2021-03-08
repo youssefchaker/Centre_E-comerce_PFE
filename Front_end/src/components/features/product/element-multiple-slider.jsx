@@ -73,8 +73,6 @@ class ElementMultipleSlider extends Component {
                                             { newWatches.slice(2, 5).map((product, index) =>
                                                 <div key={index}>
                                                     <ProductStyleTwo product={product} symbol={symbol}
-                                                         onAddToCompareClicked={() => addToCompare(product)}
-                                                         onAddToWishlistClicked={() => addToWishlist(product)}
                                                          onAddToCartClicked={addToCart} key={index}/>
                                                 </div>)}
                                         </Slider>
