@@ -1,22 +1,34 @@
 import React, {Component} from 'react';
 import { Link} from 'react-router-dom';
 import Breadcrumb from "../common/breadcrumb";
+import SimpleReactValidator from 'simple-react-validator';
 
 class Login extends Component {
 
     constructor (props) {
         super (props)
-
+        this.state={
+            email:"",
+            password:""
+        }
+        this.validator = new SimpleReactValidator();
     }
-
+    setStateFromInput = (event) => {
+        var obj = {};
+        obj[event.target.name] = event.target.value;
+        this.setState(obj);
+      }
+    handlesubmit=(e)=>{
+        e.preventDefault(); 
+          if(!this.validator.allValid()){
+            this.validator.showMessages();
+            this.forceUpdate();
+          }
+      }
     render (){
-
-
         return (
             <div>
-                <Breadcrumb title={'Login'}/>
-                
-                
+                <Breadcrumb title={'Login'}/>  
                 {/*Login section*/}
                 <section className="login-page section-b-space">
                     <div className="container">
@@ -27,16 +39,16 @@ class Login extends Component {
                                     <form className="theme-form">
                                         <div className="form-group">
                                             <label htmlFor="email">Email</label>
-                                            <input type="text" className="form-control" id="email" placeholder="Email"
-                                                   required="" />
+                                            <input type="text" className="form-control" name="email" placeholder="Enter Your Email" onChange={this.setStateFromInput} value={this.state.email}/>
+                                            {this.validator.message('email', this.state.email, 'required|email')}
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="review">Password</label>
-                                            <input type="password" className="form-control" id="review"
-                                                   placeholder="Enter your password" required="" />
+                                            <input type="password" className="form-control" name="password" onChange={this.setStateFromInput} value={this.state.password} placeholder="Enter your password"/>
+                                            {this.validator.message('password', this.state.password, 'required')}
                                         </div>
                                         
-                                        <a href="#" className="btn btn-solid" style={{marginRight:'100px'}}>Login</a>
+                                        <button onClick={this.handlesubmit} className="btn btn-solid" style={{marginRight:'100px'}}>Login</button>
                                         <Link to="/pages/forget-password"><a className="btn btn-solid">Forget Password?</a></Link>
                                     </form>
                                 </div>

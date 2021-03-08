@@ -15,6 +15,11 @@ class Contact extends Component {
         }
         this.validator = new SimpleReactValidator();
     }
+    setStateFromInput = (event) => {
+        var obj = {};
+        obj[event.target.name] = event.target.value;
+        this.setState(obj);
+      }
     handlesubmit=(e)=>{
         e.preventDefault(); 
           if(!this.validator.allValid()){
@@ -22,7 +27,7 @@ class Contact extends Component {
             this.forceUpdate();
           }
           else{
-            toast.success("product added !");
+            toast.success("Feedback Sent !");
           }
  
       }
@@ -84,31 +89,31 @@ class Contact extends Component {
                                     <div className="form-row">
                                         <div className="col-md-6">
                                             <label htmlFor="name">First Name</label>
-                                            <input type="text" className="form-control" name="firstname"
+                                            <input type="text" className="form-control" name="firstname" onChange={this.setStateFromInput} value={this.state.firstname}
                                                    placeholder="Enter Your firstname" />
                                             {this.validator.message('firstname', this.state.firstname, 'required')}
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="lastname">Last Name</label>
-                                            <input type="text" className="form-control" name="lastname"
+                                            <input type="text" className="form-control" name="lastname" onChange={this.setStateFromInput} value={this.state.lastname}
                                                    placeholder="Enter Your lastname"/>
                                             {this.validator.message('lastname', this.state.lastname, 'required')}
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="email">Email</label>
-                                            <input type="text" className="form-control" placeholder="Enter Your Email"
+                                            <input type="text" className="form-control" placeholder="Enter Your Email" onChange={this.setStateFromInput} value={this.state.email}
                                               name="email"      />
-                                            {this.validator.message('email', this.state.email, 'required')}
+                                            {this.validator.message('email', this.state.email, 'required|email')}
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="lastname">Message Topic</label>
-                                            <input type="text" className="form-control" name="messagetopic"
+                                            <input type="text" className="form-control" name="messagetopic" onChange={this.setStateFromInput} value={this.state.messagetopic}
                                                    placeholder="Enter Your Message Topic"/>
                                             {this.validator.message('messagetopic', this.state.messagetopic, 'required')}
                                         </div>
                                         <div className="col-md-12">
                                             <label htmlFor="review">Write Your Message</label>
-                                            <textarea className="form-control" placeholder="Write Your Message" name="message" rows="6"></textarea>
+                                            <textarea className="form-control" placeholder="Write Your Message" name="message" rows="6" onChange={this.setStateFromInput} value={this.state.message}></textarea>
                                             {this.validator.message('message', this.state.message, 'required')}
                                         </div>
                                         <div className="col-md-12">

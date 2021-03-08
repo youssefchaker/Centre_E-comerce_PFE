@@ -1,14 +1,31 @@
 import React, {Component} from 'react';
-
+import SimpleReactValidator from 'simple-react-validator';
 import Breadcrumb from "../common/breadcrumb";
-
+import { Link} from 'react-router-dom';
 class Register extends Component {
 
     constructor (props) {
         super (props)
-
+        this.state={
+            firstname:"",
+            lastname:"",
+            email:"",
+            password:""
+        }
+        this.validator = new SimpleReactValidator();
     }
-
+    setStateFromInput = (event) => {
+        var obj = {};
+        obj[event.target.name] = event.target.value;
+        this.setState(obj);
+      }
+    handlesubmit=(e)=>{
+        e.preventDefault(); 
+          if(!this.validator.allValid()){
+            this.validator.showMessages();
+            this.forceUpdate();
+          }
+      }
     render (){
 
 
@@ -28,27 +45,35 @@ class Register extends Component {
                                         <div className="form-row">
                                             <div className="col-md-6">
                                                 <label htmlFor="email">First Name</label>
-                                                <input type="text" className="form-control" id="fname"
-                                                       placeholder="First Name" required="" />
+                                                <input type="text" className="form-control" name="firstname" onChange={this.setStateFromInput} value={this.state.firstname}
+                                                       placeholder="First Name"  />
+                                                {this.validator.message('firstname', this.state.firstname, 'required')}
+
                                             </div>
                                             <div className="col-md-6">
                                                 <label htmlFor="review">Last Name</label>
-                                                <input type="password" className="form-control" id="lname"
-                                                       placeholder="Last Name" required="" />
+                                                <input type="password" className="form-control" name="lastname" onChange={this.setStateFromInput} value={this.state.lastname}
+                                                       placeholder="Last Name"/>
+                                                {this.validator.message('lastname', this.state.lastname, 'required')}
                                             </div>
                                         </div>
                                         <div className="form-row">
                                             <div className="col-md-6">
                                                 <label htmlFor="email">email</label>
-                                                <input type="text" className="form-control" id="email"
-                                                       placeholder="Email" required="" />
+                                                <input type="text" className="form-control" name="email" onChange={this.setStateFromInput} value={this.state.email}
+                                                       placeholder="Email" />
+                                                {this.validator.message('email', this.state.email, 'required|email')}
                                             </div>
                                             <div className="col-md-6">
                                                 <label htmlFor="review">Password</label>
-                                                <input type="password" className="form-control" id="review"
-                                                       placeholder="Enter your password" required="" />
+                                                <input type="password" id="password" className="form-control" name="password" onChange={this.setStateFromInput} value={this.state.password}
+                                                       placeholder="Enter your password" />
+                                                {this.validator.message('password', this.state.password, 'required|min:8')}
                                             </div>
-                                            <a href="#" className="btn btn-solid">create Account</a>
+                                            <div className="col-md-6">
+                                            <Link to="/pages/login"><a>Already have an account?</a></Link>
+                                            </div>
+                                            <button type="submit" onClick={this.handlesubmit} className="btn btn-solid">create Account</button>
                                         </div>
                                     </form>
                                 </div>
