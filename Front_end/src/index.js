@@ -42,6 +42,7 @@ import ForgetPassword from './components/pages/forget-password'
 import Contact from './components/pages/contact'
 import MyProfile from './components/pages/myprofile'
 import Addproduct from './components/pages/addproduct'
+import Addevent from './components/pages/addevent'
 
 // Blog Pages
 import RightSide from './components/blogs/right-sidebar'
@@ -121,7 +122,7 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/myprofile`} component={MyProfile}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addproduct`} component={Addproduct}/>
-
+                                <Route path={`${process.env.PUBLIC_URL}/pages/addevent`} component={Addevent}/>
 
                                 
 
