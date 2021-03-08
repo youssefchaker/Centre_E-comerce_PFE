@@ -12,7 +12,11 @@ class Addproduct extends Component {
         ProductPrice:null,
         ProductImage:null,
         ProductDescription:'',
-        Productnumber:1
+        Productnumber:1,
+        ProductStock:null,
+        ProductCategory:"",
+        ProductDetail:"",
+        ProductDetailValue:""
     }
     this.validator = new SimpleReactValidator();
     }
@@ -56,22 +60,48 @@ class Addproduct extends Component {
                                             </div>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">ProductName</div>
+                                                    <div className="field-label">Product Name</div>
                                                     <input type="text" name="ProductName" onChange={this.setStateFromInput} value={this.state.ProductName} />
                                                     {this.validator.message('ProductName', this.state.ProductName, 'required')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div  className="field-label">ProductPrice</div>
+                                                    <div  className="field-label">Product Price</div>
                                                     <input  type="text" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} />
-                                                    {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|integer')}
+                                                    {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|integer|min:0')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">ProductImage</div>
-                                                    <input type="file" name="ProductImage" accept="image/*" onChange={this.setStateFromInput} value={this.state.ProductImage}  />
+                                                    <div className="field-label">Product Stock</div>
+                                                    <input type="text" name="ProductStock" onChange={this.setStateFromInput} value={this.state.ProductStock}/>
+                                                    {this.validator.message('ProductStock', this.state.ProductStock, 'required|integer|min:0')}
+                                                </div>
+                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <div className="field-label">Product Category</div>
+                                                    <select name="ProductCategory" onChange={this.setStateFromInput} value={this.state.ProductStock}>
+                                                    <option>Tech</option>
+                                                    <option>Fashion</option>
+                                                    <option>Accessoires</option>
+                                                    <option>Bags</option>
+                                                    <option>Beauty</option>
+                                                    <option>Food</option>
+                                                    <option>Watchs</option>
+                                                    </select>
+                                                </div>
+                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <div className="field-label">Product Details</div>
+                                                    <label for="ProductDetail">Product Detail</label>
+                                                    <input type="text" name="ProductDetail" onChange={this.setStateFromInput} value={this.state.ProductDetail} />
+                                                    {this.validator.message('ProductDetail', this.state.ProductDetail, 'required')}
+                                                    <label for="ProductDetailValue">Product Detail Value</label>
+                                                    <input type="text" name="ProductDetailValue" onChange={this.setStateFromInput} value={this.state.ProductDetailValue} />
+                                                    {this.validator.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
+                                                </div>
+                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <div className="field-label">Product Image</div>
+                                                    <input type="file" name="ProductImage" accept="image/*" multiple onChange={this.setStateFromInput} value={this.state.ProductImage}  />
                                                     {this.validator.message('ProductImage', this.state.ProductImage, 'required')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                    <div className="field-label">ProductDescription</div>
+                                                    <div className="field-label">Product Description</div>
                                                     <textarea name="ProductDescription" rows="15" cols="30" onChange={this.setStateFromInput} value={this.state.ProductDescription} ></textarea>
                                                     {this.validator.message('ProductDescription', this.state.ProductDescription, 'required')}
                                                 </div>                                        
@@ -79,7 +109,7 @@ class Addproduct extends Component {
                                         </div>
                 </div>
                 <div>
-                    <button type="submit" className="btn btn-solid" onClick={this.handlesubmit}>Submit product</button>
+                    <button type="submit" className="btn btn-solid" style={{marginTop:"25px"}} onClick={this.handlesubmit}>Submit product</button>
                 </div>
                 </form>
             </div>

@@ -1,10 +1,41 @@
 import React, {Component} from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
-import {Link} from 'react-router-dom'
-
+import {Link} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import SimpleReactValidator from 'simple-react-validator';
+import ReactStars from "react-rating-stars-component";
 class DetailsTopTabs extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            Rating:3,
+            Comment:null
+        }
+        this.validator = new SimpleReactValidator();
+    }
+    setStateFromInput = (event) => {
+        var obj = {};
+        obj[event.target.name] = event.target.value;
+        this.setState(obj);
+      }
+      handlesubmit=(e)=>{
+        e.preventDefault(); 
+          if(!this.validator.allValid()){
+            this.validator.showMessages();
+            this.forceUpdate();
+          }
+          else{
+            toast.success("Review added !");
+          }
+          
+ 
+      }
+       ratingChanged = (newRating) => {
+        console.log(newRating);
+      };
     render (){
+        
 
         return (
             <section className="tab-product m-0">
@@ -96,36 +127,23 @@ class DetailsTopTabs extends Component {
                                     <div className="form-row">
                                         <div className="col-md-12 ">
                                             <div className="media m-0">
-                                                <label>Rating</label>
-                                                <div className="media-body ml-3">
-                                                    <div className="rating three-star">
-                                                        <i className="fa fa-star"></i>
-                                                        <i className="fa fa-star"></i>
-                                                        <i className="fa fa-star"></i>
-                                                        <i className="fa fa-star"></i>
-                                                        <i className="fa fa-star"></i>
-                                                    </div>
-                                                </div>
+                                            <div className="field-label" style={{marginTop:"7px"}}>Rating</div>
+                                                    <ReactStars
+                                                    name="rating"
+                                                    onChange={this.setStateFromInput} value={this.state.Rating}
+                                                        count={5}
+                                                        onChange={this.ratingChanged}
+                                                        size={24} 
+                                                        activeColor="#ffd700" />
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="name">Name</label>
-                                            <input type="text" className="form-control" id="name" placeholder="Enter Your name" required />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="email">Email</label>
-                                            <input type="text" className="form-control" id="email" placeholder="Email" required />
+                                        <div className="col-md-12">
+                                            <label htmlFor="review">Review Content</label>
+                                            <textarea className="form-control" name="Comment" placeholder="Wrire Your Review Here" rows="6" onChange={this.setStateFromInput} value={this.state.Comment}></textarea>
+                                            {this.validator.message('Comment', this.state.Comment, 'required')}
                                         </div>
                                         <div className="col-md-12">
-                                            <label htmlFor="review">Review Title</label>
-                                            <input type="text" className="form-control" id="review" placeholder="Enter your Review Subjects" required />
-                                        </div>
-                                        <div className="col-md-12">
-                                            <label htmlFor="review">Review Title</label>
-                                            <textarea className="form-control" placeholder="Wrire Your Testimonial Here" id="exampleFormControlTextarea1" rows="6"></textarea>
-                                        </div>
-                                        <div className="col-md-12">
-                                            <button className="btn btn-solid" type="submit">Submit YOur Review</button>
+                                            <button className="btn btn-solid" type="submit" onClick={this.handlesubmit}>Submit YOur Review</button>
                                         </div>
                                     </div>
                                 </form>

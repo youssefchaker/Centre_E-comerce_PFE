@@ -157,7 +157,6 @@ class Subscription extends Component {
                                                     <option value="Angola">Food</option>
                                                     <option value="Anguilla">Watchs</option>
                                                     </select>
-                                                    {this.validator.message('domain', this.state.domaine, 'required|alpha')}
                                                 </div>
 
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
@@ -411,7 +410,6 @@ class Subscription extends Component {
                                                     <option value="Zambia">Zambia</option>
                                                     <option value="Zimbabwe">Zimbabwe</option>
                                                     </select>
-                                                    {this.validator.message('country', this.state.country, 'required|alpha')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Address</div>
