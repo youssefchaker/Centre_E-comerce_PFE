@@ -57,6 +57,7 @@ class Register extends Component {
                                                 {this.validator.message('lastname', this.state.lastname, 'required')}
                                             </div>
                                         </div>
+                                        <hr></hr>
                                         <div className="form-row">
                                             <div className="col-md-6">
                                                 <label htmlFor="email">email</label>
@@ -70,10 +71,15 @@ class Register extends Component {
                                                        placeholder="Enter your password" />
                                                 {this.validator.message('password', this.state.password, 'required|min:8')}
                                             </div>
-                                            <div className="col-md-6">
+                                        </div>
+                                        <hr></hr>
+                                        <div className="form-row">
+                                        <div className="col-md-6">
                                             <Link to="/pages/login"><a>Already have an account?</a></Link>
                                             </div>
+                                            <div className="col-md-6">
                                             <button type="submit" onClick={this.handlesubmit} className="btn btn-solid">create Account</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

@@ -36,8 +36,6 @@ class TopCollection extends Component {
                                     { items.map((product, index ) =>
                                         <div key={index}>
                                         <ProductItem product={product} symbol={symbol}
-                                                     onAddToCompareClicked={() => addToCompare(product)}
-                                                     onAddToWishlistClicked={() => addToWishlist(product)}
                                                      onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }

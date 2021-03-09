@@ -43,7 +43,7 @@ class Instagram extends Component {
                 <div className={`container${(type === 'watch')?'':'-fluid'}`}>
                     <div className="row">
                         <div className="col-md-12 p-0">
-                            <h2 className="title-borderless"># instagram
+                            <h2 className="title-borderless">Featured Stores
                                 </h2>
                                 <Slider {...Sliders} className="slide-7 no-arrow slick-instagram">
                                     {InstaData.map((pic,i) =>

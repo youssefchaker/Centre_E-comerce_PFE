@@ -38,8 +38,6 @@ class ElementProductBox extends Component {
                                 { products.slice(0, 4).map((product, index) =>
                                     <div className="col-xl-3 col-md-6 col-grid-box">
                                     <ProductStyleOne product={product} symbol={symbol}
-                                                     onAddToCompareClicked={() => addToCompare(product)}
-                                                     onAddToWishlistClicked={() => addToWishlist(product)}
                                                      onAddToCartClicked={addToCart} key={index}/>
                                     </div>)}
                                 </Slider>

@@ -72,6 +72,8 @@ import  Subscription from './components/pages/subscription'
 
 import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
 import Becomeaseller from './components/pages/becomeaseller';
+import Mystore from './components/pages/mystore';
+import MyEvents from './components/pages/myevents';
 
 
 class Root extends React.Component {
@@ -123,8 +125,8 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/myprofile`} component={MyProfile}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addproduct`} component={Addproduct}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addevent`} component={Addevent}/>
-
-                                
+                                <Route path={`${process.env.PUBLIC_URL}/pages/mystore`} component={Mystore}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/myevents`} component={MyEvents}/>
 
 
 

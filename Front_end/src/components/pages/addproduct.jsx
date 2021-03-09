@@ -36,14 +36,6 @@ class Addproduct extends Component {
           }
  
       }
-  /* handleduplicate=(e)=>{
-       e.preventDefault();
-       var original=document.getElementById("1");
-       this.setState({Productnumber:this.state.Productnumber+1});
-       var clone = original.cloneNode(true); // "deep" clone
-    clone.hidden=false;
-    original.parentNode.appendChild(clone);
-   }*/
     render (){
         return (
             <div>

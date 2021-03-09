@@ -99,6 +99,9 @@ class Contact extends Component {
                                                    placeholder="Enter Your lastname"/>
                                             {this.validator.message('lastname', this.state.lastname, 'required')}
                                         </div>
+                                        </div>
+                                        <hr></hr>
+                                        <div className="form-row">                                    
                                         <div className="col-md-6">
                                             <label htmlFor="email">Email</label>
                                             <input type="text" className="form-control" placeholder="Enter Your Email" onChange={this.setStateFromInput} value={this.state.email}
@@ -111,15 +114,17 @@ class Contact extends Component {
                                                    placeholder="Enter Your Message Topic"/>
                                             {this.validator.message('messagetopic', this.state.messagetopic, 'required')}
                                         </div>
+                                        </div>
+                                        <hr></hr>
                                         <div className="col-md-12">
                                             <label htmlFor="review">Write Your Message</label>
                                             <textarea className="form-control" placeholder="Write Your Message" name="message" rows="6" onChange={this.setStateFromInput} value={this.state.message}></textarea>
                                             {this.validator.message('message', this.state.message, 'required')}
                                         </div>
+                                        <hr></hr>
                                         <div className="col-md-12">
                                             <button className="btn btn-solid" type="submit" onClick={this.handlesubmit}>Send Your Message</button>
                                         </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>

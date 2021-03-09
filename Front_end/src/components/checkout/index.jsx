@@ -400,32 +400,26 @@ class checkOut extends Component {
                                                     <option value="Zambia">Zambia</option>
                                                     <option value="Zimbabwe">Zimbabwe</option>
                                                     </select>
-                                                    {this.validator.message('country', this.state.country, 'required')}
+                                                </div>
+                                                <div className="form-group col-md-12 col-sm-6 col-xs-12">
+                                                    <div className="field-label">County</div>
+                                                    <input type="text" name="state" value={this.state.state} onChange={this.setStateFromInput} />
+                                                    {this.validator.message('state', this.state.state, 'required|alpha')}
+                                                </div>
+                                                <div className="form-group col-md-12 col-sm-12 col-xs-12">
+                                                    <div className="field-label">City</div>
+                                                    <input type="text" name="city" value={this.state.city} onChange={this.setStateFromInput} />
+                                                    {this.validator.message('city', this.state.city, 'required|alpha')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Address</div>
                                                     <input type="text" name="address" value={this.state.address} onChange={this.setStateFromInput} placeholder="Street address" />
                                                     {this.validator.message('address', this.state.address, 'required|min:20|max:120')}
                                                 </div>
-                                                <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                    <div className="field-label">Town/City</div>
-                                                    <input type="text" name="city" value={this.state.city} onChange={this.setStateFromInput} />
-                                                    {this.validator.message('city', this.state.city, 'required|alpha')}
-                                                </div>
-                                                <div className="form-group col-md-12 col-sm-6 col-xs-12">
-                                                    <div className="field-label">State / County</div>
-                                                    <input type="text" name="state" value={this.state.state} onChange={this.setStateFromInput} />
-                                                    {this.validator.message('state', this.state.state, 'required|alpha')}
-                                                </div>
                                                 <div className="form-group col-md-12 col-sm-6 col-xs-12">
                                                     <div className="field-label">Postal Code</div>
                                                     <input type="text" name="pincode" value={this.state.spincode} onChange={this.setStateFromInput} />
                                                     {this.validator.message('pincode', this.state.pincode, 'required|integer')}
-                                                </div>
-                                                <div className="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <input type="checkbox" name="create_account" id="account-option"  checked={this.state.create_account} onChange={this.setStateFromCheckbox}/>
-                                                    &ensp; <label htmlFor="account-option">Create An Account?</label>
-                                                    {this.validator.message('checkbox', this.state.create_account, 'create_account')}
                                                 </div>
                                             </div>
                                         </div>
@@ -439,9 +433,13 @@ class checkOut extends Component {
                                                         {cartItems.map((item, index) => {
                                                             return <li key={index}>{item.name} × {item.qty} <span>{symbol} {item.sum}</span></li> })
                                                         }
+
+                                                    </ul>
+                                                    <ul className="qty">
+                                                        <li>Shipping Price: <span>20€</span></li>
+                                                        <li>Tax Cost: <span>10€</span></li>
                                                     </ul>
                                                     <ul className="sub-total">
-                                                        <li>Subtotal <span className="count">{symbol}{total}</span></li>
                                                         <li>Shipping <div className="shipping">
                                                             <div className="shopping-option">
                                                                 <input type="checkbox" name="free-shipping" id="free-shipping" />

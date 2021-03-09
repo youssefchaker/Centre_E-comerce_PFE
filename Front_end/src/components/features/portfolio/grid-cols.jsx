@@ -69,10 +69,17 @@ class GridCols extends Component {
                         <Tabs className="theme-tab">
                             <TabList className="tabs tab-title">
                                 <Tab>All</Tab>
-                                <Tab>Fashion</Tab>
-                                <Tab>Bags</Tab>
-                                <Tab>Shoes</Tab>
-                                <Tab>Watch</Tab>
+                                <Tab>Electronics</Tab>
+                                <Tab>Cameras</Tab>
+                                <Tab>Laptops</Tab>
+                                <Tab>Accessories</Tab>
+                                <Tab>Headphones</Tab>
+                                <Tab>Food</Tab>
+                                <Tab>Books</Tab>
+                                <Tab>Clothes/Shoes</Tab>
+                                <Tab>Accessories</Tab>
+                                <Tab>Accessories</Tab>
+                                <Tab>Accessories</Tab>
                             </TabList>
                             <TabPanel>
                                 <div className="row zoom-gallery">

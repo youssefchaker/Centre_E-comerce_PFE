@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
-
+import {Link} from 'react-router-dom'
 class MyProfile extends Component {
 
     constructor (props) {
@@ -33,12 +33,11 @@ class MyProfile extends Component {
                                     </div>
                                     <div className="block-content">
                                         <ul>
-                                            <li className="active"><a href='#'>Account Info</a></li>
-                                            <li><a href="#">Address Book</a></li>
-                                            <li><a href="#">My Orders</a></li>
-                                            <li><a href="#">My Wishlist</a></li>
-                                            <li><a href="#">Newsletter</a></li>
-                                            <li><a href="#">My Account</a></li>
+                                            <li className="active"><a href='./pages/myprofile'>My Profile</a></li>
+                                            <li><a href="./pages/mystore">My Store</a></li>
+                                            <li><a href="./pages/myorders">My Orders</a></li>
+                                            <li><a href="./pages/myevents">My Events</a></li>
+                                            <li><a href="../cart">My Cart</a></li>
                                             <li><a href="#">Change Password</a></li>
                                             <li className="last"><a href="#">Log Out</a></li>
                                         </ul>
@@ -53,9 +52,7 @@ class MyProfile extends Component {
                                         </div>
                                         <div className="welcome-msg">
                                             <p>Hello, MARK JECNO !</p>
-                                            <p>From your My Account Dashboard you have the ability to view a snapshot of
-                                                your recent account activity and update your account information. Select
-                                                a link below to view or edit information.</p>
+                                            <p>From your your Account's Dashboard you have the ability to manage your profile</p>
                                         </div>
                                         <div className="box-account box-info">
                                             <div className="box-head">

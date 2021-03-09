@@ -87,7 +87,7 @@ class SideBar extends Component {
                     <ul id="sub-menu" className="sidebar-menu">
                         <li>
                             <Link to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                                clothing
+                            Electronics
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul className="mega-menu clothing-menu">
@@ -95,68 +95,65 @@ class SideBar extends Component {
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="link-section">
-                                                <h5>women's fashion</h5>
                                                 <ul>
                                                     <li>
-                                                        <Link to="#">dresses</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                    <Link to="#">skirts</Link>
+                                                    <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">westarn wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">ethic wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">sport wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                 </ul>
-                                                <h5>men's fashion</h5>
                                                 <ul>
                                                     <li>
-                                                        <Link to="#">sports wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">western wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">ethic wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div className="col-xl-4">
                                             <div className="link-section">
-                                                <h5>accessories</h5>
                                                 <ul>
                                                     <li>
-                                                        <Link to="#">fashion jewellery</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">caps and hats</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">precious jewellery</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">necklaces</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">earrings</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">wrist wear</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">ties</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">cufflinks</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#">pockets squares</Link>
+                                                        <Link to="#"></Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -172,36 +169,36 @@ class SideBar extends Component {
                         </li>
                         <li>
                             <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
-                                bags
+                            Cameras
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#">shopper bags</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">laptop bags</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">clutches</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
                                     <Link to="#" onClick={(e) => this.handleSubTwoMenu(e)} >
-                                        purses
+                                    
                                         <span className="sub-arrow"></span>
                                     </Link>
                                     <ul>
                                         <li>
-                                            <Link to="#">purses</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">wallets</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">leathers</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">satchels</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                     </ul>
                                 </li>
@@ -209,151 +206,159 @@ class SideBar extends Component {
                         </li>
                         <li>
                             <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
-                                footwear
+                            Laptops
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#">sport shoes</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">formal shoes</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">casual shoes</Link>
+                                    <Link to="#"></Link>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <Link to="#" >
-                                watches
+                            Accessories
                             </Link>
                         </li>
                         <li>
                             <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
-                                Accessories
+                            Headphones
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#">fashion jewellery</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">caps and hats</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">precious jewellery</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
                                     <Link to="#" onClick={(e) => this.handleSubTwoMenu(e)} >
-                                        more..
+                                    
                                         <span className="sub-arrow"></span>
                                     </Link>
                                     <ul>
                                         <li>
-                                            <Link to="#">necklaces</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">earrings</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">wrist wear</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
                                             <Link to="#" onClick={(e) => this.handleSubThreeMenu(e)} >
-                                                accessories
+                                            
                                                 <span className="sub-arrow"></span>
                                             </Link>
                                             <ul>
                                                 <li>
-                                                    <Link to="#">ties</Link>
+                                                    <Link to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#">cufflinks</Link>
+                                                    <Link to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#">pockets squares</Link>
+                                                    <Link to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#">helmets</Link>
+                                                    <Link to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#">scarves</Link>
+                                                    <Link to="#"></Link>
                                                 </li>
                                                 <li>
                                                     <Link to="#" onClick={(e) => this.handleSubFourMenu(e)} >
-                                                        more...
                                                         <span className="sub-arrow"></span>
                                                     </Link>
                                                     <ul>
                                                         <li>
-                                                            <Link to="#">accessory gift sets</Link>
+                                                            <Link to="#"></Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="#">travel accessories</Link>
+                                                            <Link to="#"></Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="#">phone cases</Link>
+                                                            <Link to="#"></Link>
                                                         </li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <Link to="#">belts & more</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">wearable</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" >house of design</Link>
+                            <Link to="#" >Food</Link>
                         </li>
                         <li>
                             <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
-                                beauty & personal care
+                            Books
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#">makeup</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">skincare</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#">premium beaty</Link>
+                                    <Link to="#"></Link>
                                 </li>
                                 <li>
                                     <Link to="#" onClick={(e) => this.handleSuTwobmenu(e)}>
-                                        more
+
                                         <span className="sub-arrow"></span>
                                     </Link>
                                     <ul>
                                         <li>
-                                            <Link to="#">fragrances</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">luxury beauty</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">hair care</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#">tools & brushes</Link>
+                                            <Link to="#"></Link>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" >home & decor</Link>
+                            <Link to="#" >Clothes/Shoes</Link>
                         </li>
                         <li>
-                            <Link to="#" >kitchen</Link>
+                            <Link to="#" >Beauty/Health</Link>
+                        </li>
+                        <li>
+                            <Link to="#" >Sports</Link>
+                        </li>
+                        <li>
+                            <Link to="#" >Outdoor</Link>
+                        </li>
+                        <li>
+                            <Link to="#" >Home</Link>
                         </li>
                     </ul>
                 </nav>
