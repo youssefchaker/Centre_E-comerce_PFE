@@ -68,18 +68,19 @@ class GridCols extends Component {
                     <div className="container">
                         <Tabs className="theme-tab">
                             <TabList className="tabs tab-title">
-                                <Tab>All</Tab>
-                                <Tab>Electronics</Tab>
-                                <Tab>Cameras</Tab>
-                                <Tab>Laptops</Tab>
-                                <Tab>Accessories</Tab>
-                                <Tab>Headphones</Tab>
-                                <Tab>Food</Tab>
-                                <Tab>Books</Tab>
-                                <Tab>Clothes/Shoes</Tab>
-                                <Tab>Accessories</Tab>
-                                <Tab>Accessories</Tab>
-                                <Tab>Accessories</Tab>
+                                <Tab style={{textDecoration:"underline"}}>All</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Electronics</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Cameras</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Laptops</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Accessories</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Headphones</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Food</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Books</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Clothes/Shoes</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Beauty/Health</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Sports</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Outdoor</Tab>
+                                <Tab style={{textDecoration:"underline"}}>Home</Tab>
                             </TabList>
                             <TabPanel>
                                 <div className="row zoom-gallery">

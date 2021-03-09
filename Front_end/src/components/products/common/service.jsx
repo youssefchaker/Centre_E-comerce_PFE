@@ -14,13 +14,6 @@ class Service extends Component {
             <div className="collection-filter-block ">
                 <div className="product-service">
                     <div className="media">
-                        <div dangerouslySetInnerHTML={{ __html: svgFreeShipping }} />
-                        <div className="media-body">
-                            <h4>free shipping</h4>
-                            <p>free shipping world wide</p>
-                        </div>
-                    </div>
-                    <div className="media">
                         <div dangerouslySetInnerHTML={{ __html: svgservice }} />
                         <div className="media-body">
                             <h4>24 X 7 service</h4>
@@ -30,8 +23,8 @@ class Service extends Component {
                     <div className="media">
                         <div dangerouslySetInnerHTML={{ __html: svgoffer }} />
                         <div className="media-body">
-                            <h4>festival offer</h4>
-                            <p>new online special festival offer</p>
+                            <h4>festival offers</h4>
+                            <p>new online special festival offers</p>
                         </div>
                     </div>
                     <div className="media border-0 m-0">

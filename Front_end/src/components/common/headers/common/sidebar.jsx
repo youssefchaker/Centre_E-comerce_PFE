@@ -86,7 +86,7 @@ class SideBar extends Component {
                     </a>
                     <ul id="sub-menu" className="sidebar-menu">
                         <li>
-                            <Link to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
                             Electronics
                                 <span className="sub-arrow"></span>
                             </Link>
@@ -94,66 +94,66 @@ class SideBar extends Component {
                                 <li>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
-                                            <div className="link-section">
+                                            <div className="Link-section">
                                                 <ul>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                    <Link to="#"></Link>
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                 </ul>
                                                 <ul>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div className="col-xl-4">
-                                            <div className="link-section">
+                                            <div className="Link-section">
                                                 <ul>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                     <li>
-                                                        <Link to="#"></Link>
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -168,197 +168,197 @@ class SideBar extends Component {
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubmenu(e)}>
                             Cameras
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#" onClick={(e) => this.handleSubTwoMenu(e)} >
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubTwoMenu(e)} >
                                     
                                         <span className="sub-arrow"></span>
                                     </Link>
                                     <ul>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubmenu(e)}>
                             Laptops
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" >
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >
                             Accessories
                             </Link>
                         </li>
                         <li>
-                            <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubmenu(e)}>
                             Headphones
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#" onClick={(e) => this.handleSubTwoMenu(e)} >
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubTwoMenu(e)} >
                                     
                                         <span className="sub-arrow"></span>
                                     </Link>
                                     <ul>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#" onClick={(e) => this.handleSubThreeMenu(e)} >
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubThreeMenu(e)} >
                                             
                                                 <span className="sub-arrow"></span>
                                             </Link>
                                             <ul>
                                                 <li>
-                                                    <Link to="#"></Link>
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#"></Link>
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#"></Link>
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#"></Link>
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#"></Link>
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="#" onClick={(e) => this.handleSubFourMenu(e)} >
+                                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubFourMenu(e)} >
                                                         <span className="sub-arrow"></span>
                                                     </Link>
                                                     <ul>
                                                         <li>
-                                                            <Link to="#"></Link>
+                                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="#"></Link>
+                                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="#"></Link>
+                                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                                         </li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" >Food</Link>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >Food</Link>
                         </li>
                         <li>
-                            <Link to="#" onClick={(e) => this.handleSubmenu(e)}>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSubmenu(e)}>
                             Books
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#"></Link>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                 </li>
                                 <li>
-                                    <Link to="#" onClick={(e) => this.handleSuTwobmenu(e)}>
+                                    <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleSuTwobmenu(e)}>
 
                                         <span className="sub-arrow"></span>
                                     </Link>
                                     <ul>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                         <li>
-                                            <Link to="#"></Link>
+                                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to="#" >Clothes/Shoes</Link>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >Clothes/Shoes</Link>
                         </li>
                         <li>
-                            <Link to="#" >Beauty/Health</Link>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >Beauty/Health</Link>
                         </li>
                         <li>
-                            <Link to="#" >Sports</Link>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >Sports</Link>
                         </li>
                         <li>
-                            <Link to="#" >Outdoor</Link>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >Outdoor</Link>
                         </li>
                         <li>
-                            <Link to="#" >Home</Link>
+                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" >Home</Link>
                         </li>
                     </ul>
                 </nav>

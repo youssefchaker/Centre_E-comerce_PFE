@@ -22,7 +22,7 @@ class TopBarWhite extends Component {
                             <div className="col-lg-6 text-right">
                                 <ul className="header-dropdown">
                                     <li className="onhover-dropdown mobile-account">
-                                        <i className="fa fa-user" aria-hidden="true"></i> {translate('my_account')}
+                                        <i className="fa fa-user" aria-hidden="true"><a href="../../pages/myprofile"></a></i> {translate('my_account')}
                                         <ul className="onhover-show-div">
                                             <li>
                                                 <Link to={`${process.env.PUBLIC_URL}/pages/login`} data-lng="en">Login</Link>

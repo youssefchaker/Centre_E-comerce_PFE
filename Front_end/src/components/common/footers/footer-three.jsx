@@ -39,7 +39,7 @@ class FooterThree extends Component {
                             </div>
                             <div className="col-lg-6 subscribe-wrapper">
                                 <div className="subscribe-block">
-                                    <h2>newsletter</h2>
+                                    <h2>Subscribe to our mailing news service</h2>
                                     <form>
                                         <div className="form-group">
                                             <input type="text" className="form-control"
@@ -55,10 +55,9 @@ class FooterThree extends Component {
                                 </div>
                                 <div className="footer-contant">
                                     <ul className="contact-details">
-                                        <li>Multikart Demo Store, Demo store India 345-659</li>
-                                        <li>Call Us: 123-456-7898</li>
-                                        <li>Email Us: <a href="#">Support@Fiot.com</a></li>
-                                        <li>Fax: 123456</li>
+                                        <li>E-comerce Mall tunisia</li>
+                                        <li>Call Us: +216 22222222</li>
+                                        <li>Email Us: <a href="#">Support@mall.com</a></li>
                                     </ul>
                                 </div>
                             </div>

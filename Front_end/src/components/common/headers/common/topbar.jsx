@@ -19,6 +19,7 @@ class TopBar extends Component {
                             </div>
                         </div>
                         <div className="col-lg-6 text-right">
+                        <a href="../../pages/myprofile">
                             <ul className="header-dropdown">
                                 <li className="onhover-dropdown mobile-account">
                                     <i className="fa fa-user" aria-hidden="true"></i> {translate('my_account')}
@@ -35,6 +36,7 @@ class TopBar extends Component {
                                     </ul>
                                 </li>
                             </ul>
+                            </a>
                         </div>
                     </div>
                 </div>

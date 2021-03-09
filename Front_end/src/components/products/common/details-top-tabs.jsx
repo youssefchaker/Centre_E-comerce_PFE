@@ -54,7 +54,7 @@ class DetailsTopTabs extends Component {
                                 </Tab>
                                 <Tab className="nav-item">
                                     <span className="nav-link" >
-                                        <i className="icofont icofont-contacts"></i>Video</span>
+                                        <i className="icofont icofont-contacts"></i>Reviews</span>
                                     <div className="material-border"></div>
                                 </Tab>
                                 <Tab className="nav-item">

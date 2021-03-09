@@ -132,32 +132,6 @@ class DetailsWithPrice extends Component {
                         <a className="btn btn-solid" onClick={() => addToCartClicked(item, this.state.quantity)}>add to cart</a>
                         <Link to={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid" onClick={() => BuynowClicked(item, this.state.quantity)} >buy now</Link>
                     </div>
-                    <div className="border-product">
-                        <h6 className="product-title">product details</h6>
-                        <p>{item.shortDetails}</p>
-                    </div>
-                    <div className="border-product">
-                        <h6 className="product-title">Time Reminder</h6>
-                        <div className="timer">
-                            <p id="demo">
-                                <span>25
-                                    <span className="padding-l">:</span>
-                                    <span className="timer-cal">Days</span>
-                                </span>
-                                <span>22
-                                    <span className="padding-l">:</span>
-                                    <span className="timer-cal">Hrs</span>
-                                </span>
-                                <span>13
-                                    <span className="padding-l">:</span>
-                                    <span className="timer-cal">Min</span>
-                                </span>
-                                <span>57
-                                    <span className="timer-cal">Sec</span>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 <Modal open={this.state.open} onClose={this.onCloseModal} center>
                     <div className="modal-dialog modal-dialog-centered" role="document">
