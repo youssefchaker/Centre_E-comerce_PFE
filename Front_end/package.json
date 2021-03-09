@@ -7,6 +7,7 @@
   "dependencies": {
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",
+    "axios": "^0.21.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
@@ -43,6 +44,7 @@
     "postcss-preset-env": "6.0.6",
     "postcss-safe-parser": "4.0.1",
     "react": "16.8.0",
+    "react-alert-template-basic": "^1.0.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-app-polyfill": "^0.1.3",
     "react-dev-utils": "^6.1.1",
@@ -76,6 +78,7 @@
     "react-toastify": "^4.5.2",
     "react-topbar-progress-indicator": "^2.0.0",
     "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.9",
     "redux-infinite-scroll": "^1.0.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",

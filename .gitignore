@@ -4,3 +4,18 @@ config.env
 logs
 *.log
 npm-debug.log*
+
+
+/node_modules/
+/Front_end/node_modules/
+
+
+# production
+/Front_end/build
+
+# misc
+/Front_end/.env.local
+/Front_end/.env.development.local
+/Front_end/.env.test.local
+/Front_end/.env.production.local
+
