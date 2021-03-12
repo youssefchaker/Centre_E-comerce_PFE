@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import {Link} from 'react-router-dom';
 
 import {Slider3} from "../../../services/script"
-
 class EventSection extends Component {
     render (){
 
@@ -92,6 +91,15 @@ class EventSection extends Component {
                                             <hr className="style1" />
                                                 <h6>by: John Dio , 2 Comment</h6>
                                         </div>
+                                        
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="col-md-12">
+                                    <div>
+                                    <a href="../pages/eventsdisplay">Checkout all the events</a>
+                                </div>
+  
                                     </div>
                                 </div>
                             </Slider>

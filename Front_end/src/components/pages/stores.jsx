@@ -10,12 +10,12 @@ import {
   } from "react-router-dom";
 
 // import Custom Components
-import Breadcrumb from "../../common/breadcrumb";
-import { getFeatureImages} from "../../../services";
-import {photos} from '../../../api/portfolio'
+import Breadcrumb from "../common/breadcrumb";
+import { getFeatureImages} from "../../services";
+import {photos} from '../../api/portfolio'
 
 
-class GridCols extends Component {
+class Stores extends Component {
     constructor(props) {
         super(props);
      
@@ -189,4 +189,4 @@ class GridCols extends Component {
     }
 }
 
-export default GridCols
+export default Stores

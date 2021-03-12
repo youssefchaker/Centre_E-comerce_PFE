@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {getTrendingCollection} from '../../../services/index'
 import {Product4, Product5} from '../../../services/script'
 import {addToCart, addToWishlist, addToCompare} from "../../../actions/index";
-import ProductItem from '../../features/product/common/product-style-five';
+import ProductItem from '../../features/product/common/product-style-two';
 
 class TopCollection extends Component {
 
