@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import Breadcrumb from "../../common/breadcrumb";
 import ProductStyleOne from "./common/product-style-one";
 import {getVisibleproducts} from "../../../services";
-import {addToCart, addToCompare, addToWishlist} from "../../../actions";
+import {addToCart} from "../../../actions";
 import {Product4} from "../../../services/script";
 
 class ElementProductNoSlider extends Component {
@@ -44,5 +44,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(
-    mapStateToProps, {addToCart, addToWishlist, addToCompare}
+    mapStateToProps, {addToCart}
 )(ElementProductNoSlider)

@@ -10,7 +10,7 @@ import {
     getNewProducts,
     getVisibleproducts
 } from "../../../services";
-import {addToCart, addToCompare, addToWishlist} from "../../../actions";
+import {addToCart} from "../../../actions";
 import ProductStyleTwo from "./common/product-style-two";
 
 
@@ -105,5 +105,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(
-    mapStateToProps, {addToCart, addToWishlist, addToCompare}
+    mapStateToProps, {addToCart}
 )(ElementMultipleSlider)

@@ -1,0 +1,41 @@
+//a store adds an event
+
+export const NEW_EVENT_REQUEST = 'NEW_EVENT_REQUEST'
+export const NEW_EVENT_SUCCESS = 'NEW_EVENT_SUCCESS'
+export const NEW_EVENT_FAIL = 'NEW_EVENT_FAIL'
+
+//the store can delete a specific event
+
+export const DELETE_EVENT_REQUEST = 'DELETE_EVENT_REQUEST'
+export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS'
+export const DELETE_EVENT_FAIL = 'DELETE_EVENT_FAIL'
+
+//a store gets an event
+
+export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST'
+export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS'
+export const GET_EVENT_FAIL = 'GET_EVENT_FAIL'
+
+//a store updates an event
+
+export const UPDATE_EVENT_REQUEST = 'UPDATE_EVENT_REQUEST'
+export const UPDATE_EVENT_SUCCESS = 'UPDATE_EVENT_SUCCESS'
+export const UPDATE_EVENT_FAIL = 'UPDATE_EVENT_FAIL'
+
+//the admin gets an event
+
+export const GET_ADMIN_EVENT_REQUEST = 'GET_ADMIN_EVENT_REQUEST'
+export const GET_ADMIN_EVENT_SUCCESS = 'GET_ADMIN_EVENT_SUCCESS'
+export const GET_ADMIN_EVENT_FAIL = 'GET_ADMIN_EVENT_FAIL'
+
+//the admin gets all the events
+
+export const GET_ADMIN_EVENTS_REQUEST = 'GET_ADMIN_EVENTS_REQUEST'
+export const GET_ADMIN_EVENTS_SUCCESS = 'GET_ADMIN_EVENTS_SUCCESS'
+export const GET_ADMIN_EVENTS_FAIL = 'GET_ADMIN_EVENTS_FAIL'
+
+//the admin can delete an event
+
+export const DELETE_ADMIN_EVENT_REQUEST = 'DELETE_ADMIN_EVENT_REQUEST'
+export const DELETE_ADMIN_EVENT_SUCCESS = 'DELETE_ADMIN_EVENT_SUCCESS'
+export const DELETE_ADMIN_EVENT_FAIL = 'DELETE_ADMIN_EVENT_FAIL'

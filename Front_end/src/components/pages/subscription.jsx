@@ -6,7 +6,6 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
 import SimpleReactValidator from 'simple-react-validator';
 
 import Breadcrumb from "../common/breadcrumb";
-import {removeFromWishlist} from '../../actions'
 import {getCartTotal} from "../../services";
 
 class Subscription extends Component {
@@ -497,5 +496,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    {removeFromWishlist}
 )(Subscription)

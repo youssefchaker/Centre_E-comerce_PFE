@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import {getTrendingCollection} from '../../../services/index'
 import {Product4, Product5} from '../../../services/script'
-import {addToCart, addToWishlist, addToCompare} from "../../../actions/index";
+import {addToCart} from "../../../actions/index";
 import ProductItem from '../common/product-item';
 
 class TopCollection extends Component {
@@ -55,4 +55,4 @@ const mapStateToProps = (state, ownProps) => ({
     symbol: state.data.symbol
 })
 
-export default connect(mapStateToProps, {addToCart, addToWishlist, addToCompare}) (TopCollection);
+export default connect(mapStateToProps, {addToCart}) (TopCollection);

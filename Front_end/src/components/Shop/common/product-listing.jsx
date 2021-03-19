@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 import { getTotal, getCartProducts } from '../../../reducers'
-import { addToCart, addToWishlist, addToCompare } from '../../../actions'
+import { addToCart } from '../../../actions'
 import {getVisibleproducts} from '../../../services';
 import ProductListItem from "./product-list-item";
 
@@ -87,5 +87,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(
-    mapStateToProps, {addToCart, addToWishlist, addToCompare}
+    mapStateToProps, {addToCart}
 )(ProductListing)

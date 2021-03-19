@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {connect} from 'react-redux'
 
 import {getBestSeller, getMensWear, getWomensWear} from '../../../services/index'
-import {addToCart, addToWishlist, addToCompare} from "../../../actions/index";
+import {addToCart} from "../../../actions/index";
 import ProductItem from './product-item';
 
 class SpecialProducts extends Component {
@@ -61,4 +61,4 @@ const mapStateToProps = (state) => ({
     symbol: state.data.symbol
 })
 
-export default connect(mapStateToProps, {addToCart, addToWishlist, addToCompare}) (SpecialProducts);
+export default connect(mapStateToProps, {addToCart}) (SpecialProducts);

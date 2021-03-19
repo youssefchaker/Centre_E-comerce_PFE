@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 import Breadcrumb from "../common/breadcrumb";
 import {getCartTotal} from "../../services";
-import {removeFromCart, incrementQty, decrementQty} from '../../actions'
+import {removeItemFromCart, incrementQty, decrementQty} from '../../actions/cartActions'
 
 class cartComponent extends Component {
 
@@ -70,7 +70,7 @@ class cartComponent extends Component {
                                                         </div>
                                                         <div className="col-xs-3">
                                                             <h2 className="td-color">
-                                                                <a href="#" className="icon" onClick={() => this.props.removeFromCart(item)}>
+                                                                <a href="#" className="icon" onClick={() => this.props.removeItemFromCart(item)}>
                                                                     <i className="icon-close"></i>
                                                                 </a>
                                                             </h2>
@@ -97,7 +97,7 @@ class cartComponent extends Component {
                                                     </div>{(item.qty >= item.stock)? 'out of Stock' : ''}
                                                 </td>
                                                 <td>
-                                                    <a  className="icon" onClick={() => this.props.removeFromCart(item)}>
+                                                    <a  className="icon" onClick={() => this.props.removeItemFromCart(item)}>
                                                         <i className="fa fa-times"></i>
                                                     </a>
                                                 </td>
@@ -157,5 +157,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    {removeFromCart, incrementQty, decrementQty}
+    {removeItemFromCart, incrementQty, decrementQty}
 )(cartComponent)
