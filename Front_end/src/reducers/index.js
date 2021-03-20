@@ -5,12 +5,14 @@ import { IntlReducer as Intl, IntlProvider } from 'react-redux-multilingual'
 import productReducer from './products';
 import cartReducer from './cart';
 import filtersReducer from './filters';
+import eventReducer from './events';
 
 
 const rootReducer = combineReducers({
-    data: productReducer,
+    products: productReducer,
     cartList: cartReducer,
     filters: filtersReducer,
+    events:eventReducer,
     Intl
 });
 

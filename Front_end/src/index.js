@@ -9,7 +9,6 @@ import './index.scss';
 // Import custom components
 import store from './store';
 import translations from './constants/translations'
-import { getAllProducts } from './actions'
 
 
 // Layouts
@@ -79,7 +78,7 @@ import MyEvents from './components/pages/myevents';
 class Root extends React.Component {
 
     render() {
-        store.dispatch(getAllProducts());
+       // store.dispatch(getAllProducts());
 
         return(
         	<Provider store={store}>

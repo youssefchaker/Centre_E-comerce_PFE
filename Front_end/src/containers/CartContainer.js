@@ -40,7 +40,7 @@ function mapStateToProps(state) {
     return {
         cartList: state.cartList.cart,
         total: getCartTotal(state.cartList.cart),
-        symbol: state.data.symbol,
+        symbol: state.products.symbol,
     }
 }
 

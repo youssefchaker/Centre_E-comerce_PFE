@@ -1,5 +1,6 @@
 // Get Unique Brands from Json Data
 export const getBrands = (products) => {
+    console.log(products);
     var uniqueBrands = [];
     products.map((product, index) => {
         if (product.tags) {
@@ -97,12 +98,12 @@ export const getTrendingTagCollection = (products, type, tag) => {
 }
 
 // Get Trending Collection
-export const getTrendingCollection = (products, type) => {
+/*export const getTrendingCollection = (products, type) => {
     const items = products.filter(product => {
         return product.category === type;
     })
     return items.slice(0,8)
-}
+}*/
 
 // Get Special 5 Collection
 export const getSpecialCollection = (products, type) => {
@@ -150,29 +151,29 @@ export const getBestSellerProducts = (products, type) => {
 
 // Get Best Seller
 export const getBestSeller = products => {
-    const items = products.filter(product => {
+    /*const items = products.filter(product => {
         return product.sale === true;
     })
 
-    return items.slice(0,8)
+    return items.slice(0,8)*/
 }
 
 // Get Mens Wear
 export const getMensWear = products => {
-    const items = products.filter(product => {
+   /* const items = products.filter(product => {
         return product.category === 'men';
     })
 
-    return items.slice(0,8)
+    return items.slice(0,8)*/
 }
 
 // Get Womens Wear
 export const getWomensWear = products => {
-    const items = products.filter(product => {
+    /*const items = products.filter(product => {
         return product.category === 'women';
     })
 
-    return items.slice(0,8)
+    return items.slice(0,8)*/
 }
 
 // Get Single Product

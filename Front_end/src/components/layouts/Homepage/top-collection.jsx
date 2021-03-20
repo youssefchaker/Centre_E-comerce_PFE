@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux'
 
-import {getTrendingCollection} from '../../../services/index'
 import {Product4, Product5} from '../../../services/script'
 import {addToCart} from "../../../actions/index";
 import ProductItem from '../common/product-item';
@@ -31,16 +30,14 @@ class TopCollection extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <Slider {...properties} className="product-4 product-m no-arrow">
+                                {/* <Slider {...properties} className="product-4 product-m no-arrow">
                                     { items.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem product={product} symbol={symbol}
-                                                         onAddToCompareClicked={() => addToCompare(product)}
-                                                         onAddToWishlistClicked={() => addToWishlist(product)}
                                                          onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }
-                                </Slider>
+                                </Slider> */}
                             </div>
                         </div>
                     </div>
@@ -51,8 +48,8 @@ class TopCollection extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    items: getTrendingCollection(state.data.products, ownProps.type),
-    symbol: state.data.symbol
+    //items: getTrendingCollection(state.data.products, ownProps.type),
+    symbol: state.products.symbol
 })
 
 export default connect(mapStateToProps, {addToCart}) (TopCollection);
