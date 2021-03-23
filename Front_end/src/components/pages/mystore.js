@@ -11,10 +11,19 @@ class Mystore extends Component {
     constructor(props){
     super(props);
       }
+      componentDidMount=()=>{
+        this.props.getStoreProducts("603a42db810c623de4f7dd04");
+      }
+
     handledelete=product=>{
         toast.warn("Product deleted !")
     }
     render (){
+        const {storeproducts}=this.props
+        var productsarray = [];
+        for(const i=0;i<storeproducts.lenght;i++){
+            productsarray.push(storeproducts[i]);
+        }
         return (
             <div>
                 <Breadcrumb title={'My Store'}/>
@@ -24,9 +33,7 @@ class Mystore extends Component {
                             <div className="checkout-form" >
                                     <div className="checkout row">
                                     <div className="account-sidebar">
-                                    <a className="popup-btn">
-                                        My Profile
-                                    </a>
+
                                 </div>
                                 <div className="dashboard-left">
                                     <div className="collection-mobile-back">
@@ -52,7 +59,7 @@ class Mystore extends Component {
                                     </div>
                                 </div>
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
-                                        {this.props.getStoreProducts("603a42db810c623de4f7dd04").forEach((product)=>(
+                                        {productsarray.map((product)=>(
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
@@ -122,10 +129,14 @@ class Mystore extends Component {
         )
     }
 }
-
+const mapStateToProps=state=>{
+    return {
+        storeproducts:state.storeproducts
+      }
+}
 const mapDispatchToProps = dispatch => {
     return {
         getStoreProducts: (id) => dispatch(getStoreProducts(id))
     }
 }
-export default connect(null,mapDispatchToProps) (Mystore)
+export default connect(mapStateToProps,mapDispatchToProps) (Mystore)
