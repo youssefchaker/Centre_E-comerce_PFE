@@ -317,6 +317,20 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
                 }
 })
 
+// Delete Product Review   =>   /admin/reviews/:id
+exports.deleteAdminReview = catchAsyncErrors(async (req, res, next) => {
+
+    const product =Product.findOneAndUpdate({"reviews._id":req.params.id},{$pull:{reviews:{_id:req.params.id}}})
+            if(!product){
+                return next(new ErrorHandler('Product or Review not found', 404));
+            }
+            else{
+                res.status(200).json({
+                    success: true,
+                    message:"review deleted"}) 
+                }
+})
+
 // the client updates a specific review   =>   /product/updatereview/:id
 
 exports.updateProductReview = catchAsyncErrors(async (request, res, next) => {

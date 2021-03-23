@@ -150,9 +150,16 @@ class Addproduct extends Component {
     }
     
 }
+
+const mapStateToProps=state=>{
+    return {
+        newproduct:state.newProduct
+      }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         newProduct: (productData) => dispatch(newProduct(productData))
     }
 }
-export default connect(null,mapDispatchToProps)(Addproduct)
+export default connect(mapStateToProps,mapDispatchToProps)(Addproduct)

@@ -16,6 +16,7 @@ const {
     createProductReview,
     getProductReviews,
     deleteReview,
+    deleteAdminReview,
     updateProductReview,
     getAllProductReviews,
     getSearchedProduct
@@ -28,7 +29,7 @@ router.route('/store/product/new').post(isAuthenticatedUser, authorizeRoles('Sel
 router.route('/store/products/:id').get(isAuthenticatedUser, authorizeRoles('Seller'),getStoreProducts);//
 router.route('/store/product/:id')
               .put(isAuthenticatedUser, authorizeRoles('Seller'),updateProduct)//
-              .delete(isAuthenticatedUser, authorizeRoles('Seller','Admin'),deleteProduct);//
+              .delete(isAuthenticatedUser, authorizeRoles('Seller'),deleteProduct);//
 
 
 router.route('/products').get(getProducts);//
@@ -40,6 +41,7 @@ router.route('/products/search').get(getSearchedProduct);//
 router.route('/review/:id').put(isAuthenticatedUser, createProductReview)//
 router.route('/reviews/:id').get(getProductReviews)//
 router.route('/reviews/:id').delete(isAuthenticatedUser, deleteReview)//
+router.route('/admin/reviews/:id').delete(isAuthenticatedUser, authorizeRoles('Admin'),deleteAdminReview)//
 router.route('/product/updatereview/:id').put(isAuthenticatedUser, updateProductReview)//
 router.route('/admin/reviews').get(isAuthenticatedUser,authorizeRoles('Admin'),getAllProductReviews)//
 

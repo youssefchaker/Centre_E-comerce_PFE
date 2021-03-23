@@ -10,18 +10,20 @@ import SideBar from "./common/sidebar";
 import CartContainer from "./../../../containers/CartContainer";
 import TopBar from "./common/topbar";
 import LogoImage from "./common/logo";
-import {changeCurrency} from '../../../actions'
 import {connect} from "react-redux";
 import TopBarDark from './common/topbar-dark';
-
+import SimpleReactValidator from 'simple-react-validator';
+import {getSearchedProducts} from '../../../actions/productActions'
 class HeaderTwo extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            isLoading:false
+            isLoading:false,
+            search:null
         }
+        this.validator=new SimpleReactValidator();
     }
 
     /*=====================
@@ -65,6 +67,7 @@ class HeaderTwo extends Component {
     }
     openSearch() {
         document.getElementById("search-overlay").style.display = "block";
+
     }
 
     closeSearch() {
@@ -78,6 +81,22 @@ class HeaderTwo extends Component {
             this.setState({isLoading: false})
         })
     };
+    handlesubmit=(e)=>{
+        e.preventDefault(); 
+          if(!this.validator.allValid()){
+            this.validator.showMessages();
+            this.forceUpdate();
+          }
+          else{
+              console.log(this.props.getSearchedProducts());
+
+          }
+      }
+    setStateFromInput = (event) => {
+        var obj = {};
+        obj[event.target.name] = event.target.value;
+        this.setState(obj);
+      }
 
     render() {
 
@@ -154,9 +173,10 @@ class HeaderTwo extends Component {
                                     <div className="col-xl-12">
                                         <form>
                                             <div className="form-group">
-                                                <input type="text" className="form-control" id="exampleInputPassword1" placeholder="Search a Product" />
+                                                <input type="text" name="search" className="form-control" placeholder="Search a Product" onChange={this.setStateFromInput} value={this.state.search} />
+                                                {this.validator.message('search', this.state.search, 'required')}
                                             </div>
-                                            <button type="submit" className="btn btn-primary"><i className="fa fa-search"></i></button>
+                                            <button type="submit" onClick={this.handlesubmit} className="btn btn-primary"><i className="fa fa-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -169,6 +189,15 @@ class HeaderTwo extends Component {
     }
 }
 
-export default connect(null,
-    { changeCurrency }
+const mapDispatchToProps = dispatch => {
+    return {
+        getSearchedProducts: () => dispatch(getSearchedProducts())
+    }
+}
+
+const mapStateToProps=state=>{
+    
+}
+
+export default connect(null,mapDispatchToProps
 )(HeaderTwo);

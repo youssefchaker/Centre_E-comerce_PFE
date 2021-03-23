@@ -82,11 +82,17 @@ export const GET_PRODUCT_REVIEWS_REQUEST = 'GET_ADMIN_PRODUCT_REVIEWS_REQUEST'
 export const GET_PRODUCT_REVIEWS_SUCCESS = 'GET_ADMIN_PRODUCT_REVIEWS_SUCCESS'
 export const GET_PRODUCT_REVIEWS_FAIL = 'GET_ADMIN_PRODUCT_REVIEWS_FAIL'
 
-//the user or admin can delete a specific review
+//the user can delete his review
 
 export const DELETE_REVIEW_REQUEST = 'DELETE_REVIEW_REQUEST'
 export const DELETE_REVIEW_SUCCESS = 'DELETE_REVIEW_SUCCESS'
 export const DELETE_REVIEW_FAIL = 'DELETE_REVIEW_FAIL'
+
+//the admin can delete a specific review
+
+export const DELETE_ADMIN_REVIEW_REQUEST = 'DELETE_ADMIN_REVIEW_REQUEST'
+export const DELETE_ADMIN_REVIEW_SUCCESS = 'DELETE_ADMIN_REVIEW_SUCCESS'
+export const DELETE_ADMIN_REVIEW_FAIL = 'DELETE_ADMIN_REVIEW_FAIL'
 
 //the user can update a specific review
 
