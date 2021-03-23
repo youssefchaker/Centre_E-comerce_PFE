@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
+import {connect} from 'react-redux'
 import SimpleReactValidator from 'simple-react-validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
+import { getStoreProducts } from '../../actions/productActions';
+import store from "../../store"
 class Mystore extends Component {
     constructor(props){
     super(props);
-    this.state={
-        productcount:1
-    }
       }
     handledelete=product=>{
-        toast.success("Product deleted !")
+        toast.warn("Product deleted !")
     }
     render (){
         return (
@@ -52,45 +52,64 @@ class Mystore extends Component {
                                     </div>
                                 </div>
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
-                                            <div className="checkout-title">
-                                                <h3>Product </h3>
-                                            </div>
+                                        {this.props.getStoreProducts("603a42db810c623de4f7dd04").forEach((product)=>(
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
+                                                    <div>{product.name}</div>
                                                     <button >Update Product Name</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">Product Price</div>
+                                                    <div>{product.price}</div>
                                                     <button >Update Product Price</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Stock</div>
+                                                    <div>{product.stock}</div>
                                                     <button >Update Product Stock</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Category</div>
+                                                    <div>{product.category}</div>
                                                     <button >Update Product Category</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Details</div>
-                                                    <label for="ProductDetail">Product Detail</label>
+                                                    {product.ProductDetails.forEach((detail)=>(
+                                                        <div>
+                                                        <label for="ProductDetail">Product Detail</label>
+                                                    <div name="ProductDetail">{detail}</div>
                                                     <button >Update Product Detail</button>
-                                                    <label for="ProductDetailValue">Product Detail Value</label>
+                                                    </div>
+                                                    ))}
+                                                    {product.ProductDetailsValues.forEach((detailvalue)=>(
+                                                        <div>
+                                                        <label for="ProductDetailValue">Product Detail Value</label>
+                                                    <div name="ProductDetailValue">{detailvalue}</div>
                                                     <button >Update Product Detail Value</button>
+                                                    </div>
+                                                    ))}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Product Image</div>
+                                                {product.ProductImages.forEach((image)=>(
+                                                        <div>
+                                                        <label for="ProductImage">Product Image</label>
+                                                    <img src={image} alt="product image"></img>
                                                     <button >Update Product Image</button>
+                                                    </div>
+                                                    ))}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                    <div className="field-label">Product Description</div>
+                                                <label for="ProductDescription">Product Description</label>
+                                                    <div className="field-label" name="ProductDescription">{product.ProductDescription}</div>
                                                     <button >Update Product Description</button>
                                                 </div>  
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <button type="submit" className="btn btn-solid" onClick={this.handledelete}>Delete Product</button>
                                                 </div>                                           
                                             </div>
+                                        ))} 
                                         </div>
                 </div>
                 <div>
@@ -103,4 +122,10 @@ class Mystore extends Component {
         )
     }
 }
-export default Mystore
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getStoreProducts: (id) => dispatch(getStoreProducts(id))
+    }
+}
+export default connect(null,mapDispatchToProps) (Mystore)

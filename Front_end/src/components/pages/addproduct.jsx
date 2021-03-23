@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import Breadcrumb from "../common/breadcrumb";
 import SimpleReactValidator from 'simple-react-validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
+import {newProduct} from '../../actions/productActions'
 class Addproduct extends Component {
     constructor(props){
     super(props);
@@ -16,15 +18,33 @@ class Addproduct extends Component {
         ProductStock:null,
         ProductCategory:"",
         ProductDetail:"",
-        ProductDetailValue:""
+        ProductDetailValue:"",
+        ProductDetails:[],
+        ProductDetailsValues:[]
     }
     this.validator = new SimpleReactValidator();
+    this.validator2 = new SimpleReactValidator();
     }
+
     setStateFromInput = (event) => {
         var obj = {};
         obj[event.target.name] = event.target.value;
         this.setState(obj);
       }
+    handleDetails=(e)=>{
+        e.preventDefault(); 
+        if(!this.validator2.allValid()){
+            this.validator2.showMessages();
+            this.forceUpdate();
+          }
+          else{
+            this.state.ProductDetails.push(this.state.ProductDetail);
+            this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
+            document.getElementById("1").value="";
+            document.getElementById("2").value="";
+            toast.success("New Product Detail Added!!");
+          }
+    }
       handlesubmit=(e)=>{
         e.preventDefault(); 
           if(!this.validator.allValid()){
@@ -32,9 +52,20 @@ class Addproduct extends Component {
             this.forceUpdate();
           }
           else{
-            toast.success("product added !");
+            const formData = new FormData();
+            formData.set('ProductName', this.state.ProductName);
+            formData.set('ProductPrice', this.state.ProductPrice);
+            formData.set('ProductImage', this.state.ProductImage);
+            formData.set('ProductDescription', this.state.ProductDescription);
+            formData.set('ProductStock', this.state.ProductStock);
+            formData.set('ProductCategory', this.state.ProductCategory);
+            this.state.ProductDetails.push(this.state.ProductDetail);
+            this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
+            formData.set('ProductDetails', this.state.ProductDetails);
+            formData.set('ProductDetailsValues', this.state.ProductDetailsValues);
+            this.props.newProduct(formData);
+            toast.success("New Product Added!!");
           }
- 
       }
     render (){
         return (
@@ -46,7 +77,7 @@ class Addproduct extends Component {
                             <div className="checkout-form" >
                                 <form>
                                     <div className="checkout row">
-                                        <div className="col-lg-6 col-sm-12 col-xs-12" id="1">
+                                        <div className="col-lg-6 col-sm-12 col-xs-12">
                                             <div className="checkout-title">
                                                 <h3>Product {this.state.Productnumber}</h3>
                                             </div>
@@ -79,13 +110,18 @@ class Addproduct extends Component {
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <form>
                                                     <div className="field-label">Product Details</div>
                                                     <label for="ProductDetail">Product Detail</label>
-                                                    <input type="text" name="ProductDetail" onChange={this.setStateFromInput} value={this.state.ProductDetail} />
+                                                    <input type="text" name="ProductDetail" onChange={this.setStateFromInput} value={this.state.ProductDetail} id="1" />
                                                     {this.validator.message('ProductDetail', this.state.ProductDetail, 'required')}
+                                                    {this.validator2.message('ProductDetail', this.state.ProductDetail, 'required')}
                                                     <label for="ProductDetailValue">Product Detail Value</label>
-                                                    <input type="text" name="ProductDetailValue" onChange={this.setStateFromInput} value={this.state.ProductDetailValue} />
+                                                    <input type="text" name="ProductDetailValue" onChange={this.setStateFromInput} value={this.state.ProductDetailValue} id="2" />
                                                     {this.validator.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
+                                                    {this.validator2.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
+                                                    <button type="submit" onClick={this.handleDetails}>submit and add Details</button>
+                                                    </form>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Image</div>
@@ -112,5 +148,11 @@ class Addproduct extends Component {
             </div>
         )
     }
+    
 }
-export default Addproduct
+const mapDispatchToProps = dispatch => {
+    return {
+        newProduct: (productData) => dispatch(newProduct(productData))
+    }
+}
+export default connect(null,mapDispatchToProps)(Addproduct)

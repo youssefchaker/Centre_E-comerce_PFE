@@ -27,7 +27,7 @@ import {NEW_EVENT_REQUEST,
     DELETE_ADMIN_EVENT_FAIL,
     CLEAR_ERRORS } from '../constants/eventConstants'
 
-    export const eventReducer = (state = { product: {} }, action) => {
+    export const eventReducer = (state = { events: {} }, action) => {
         switch (action.type) {
     
             case NEW_EVENT_REQUEST:

@@ -46,7 +46,7 @@ class ProductItem extends Component {
     }
 
     render() {
-        const {product, symbol, onAddToCartClicked, onAddToWishlistClicked, onAddToCompareClicked} = this.props;
+        const {product, onAddToCartClicked} = this.props;
 
         let RatingStars = []
         for(var i = 0; i < product.rating; i++) {
@@ -58,15 +58,10 @@ class ProductItem extends Component {
                         <div className="lable-block">
                             {(product.new == true)? <span className="lable3">new</span> : ''}
                             {(product.sale == true)? <span className="lable4">on sale</span> : ''}
-
                         </div>
                         <div className="front">
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
-                                src={`${
-                                    product.variants?
-                                        this.state.image?this.state.image:product.variants[0].images
-                                        :product.pictures[0]
-                                    }`}
+                                src={`${product.images[0]}`}
                                 className="img-fluid"
                                 alt="" /></Link>
                         </div>
@@ -98,8 +93,8 @@ class ProductItem extends Component {
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}>
                                 <h6>{product.name}</h6>
                             </Link>
-                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
-                                <del><span className="money">{symbol}{product.price}</span></del>
+                            <h4>€{product.price-(product.price*product.discount/100)}
+                                <del><span className="money">€{product.price}</span></del>
                             </h4>
                             {product.variants?
                             <ul className="color-variant">
@@ -127,7 +122,7 @@ class ProductItem extends Component {
                                         <div className="col-lg-6 rtl-text">
                                             <div className="product-right">
                                                 <h2> {product.name} </h2>
-                                                <h3>{symbol}{product.price}</h3>
+                                                <h3>€{product.price}</h3>
                                                 {product.variants?
                                                 <ul className="color-variant">
                                                     {product.variants.map((vari, i) =>

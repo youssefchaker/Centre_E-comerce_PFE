@@ -48,7 +48,7 @@ import {NEW_PRODUCT_REQUEST,
     UPDATE_REVIEW_FAIL,
     CLEAR_ERRORS } from "../constants/productConstants";
 
-export const productReducer = (state = { product: {} }, action) => {
+export const productReducer = (state = { products: {} }, action) => {
     switch (action.type) {
 
         case NEW_PRODUCT_REQUEST:
