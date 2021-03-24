@@ -25,7 +25,6 @@ class SpecialProducts extends Component{
             newproductsarray.push(product3);
             newproductsarray.push(product4);
             newproductsarray.push(product5);
-        console.log(newproductsarray);
         return (
             <div>
                 <div className="title1 section-t-space">

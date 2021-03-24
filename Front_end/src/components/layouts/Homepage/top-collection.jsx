@@ -25,7 +25,6 @@ class TopCollection extends Component {
         topproductsarray.push(product3);
         topproductsarray.push(product4);
         topproductsarray.push(product5);
-        console.log(topproductsarray);
         return (
             <div>
                 {/*Paragraph*/}

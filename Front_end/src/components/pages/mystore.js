@@ -18,14 +18,24 @@ class Mystore extends Component {
     handledelete=product=>{
         toast.warn("Product deleted !")
     }
+
+    handleupdate=field=>{
+    }
+
     render (){
         const {storeproducts}=this.props
         var productsarray = [];
-        for(const i=0;i<storeproducts.lenght;i++){
+        var productdetails=[]
+        for(const i=0;i<storeproducts.length;i++){
             productsarray.push(storeproducts[i]);
+            console.log(storeproducts[i]);
         }
+        for(const j=0;j<productsarray.length;j++){
+            productdetails[j]=productsarray[j].details;
+        }
+        
         return (
-            <div>
+            <div>0
                 <Breadcrumb title={'My Store'}/>
                 <section className="section-b-space">
                     <div className="container padding-cls">
@@ -59,12 +69,12 @@ class Mystore extends Component {
                                     </div>
                                 </div>
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
-                                        {productsarray.map((product)=>(
+                                        {productsarray.map((product,index)=>(
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
-                                                    <div>{product.name}</div>
-                                                    <button >Update Product Name</button>
+                                                    <button onClick={()=>this.handleupdate("name")} >Update Product Name</button>
+                                                    <input type="text" name="upprn" hidden></input>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">Product Price</div>
@@ -83,23 +93,19 @@ class Mystore extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Details</div>
-                                                    {product.ProductDetails.forEach((detail)=>(
+                                                    {productdetails[index].map((detail)=>(
                                                         <div>
                                                         <label for="ProductDetail">Product Detail</label>
-                                                    <div name="ProductDetail">{detail}</div>
+                                                    <div name="ProductDetail">{detail.detailname }</div>
                                                     <button >Update Product Detail</button>
-                                                    </div>
-                                                    ))}
-                                                    {product.ProductDetailsValues.forEach((detailvalue)=>(
-                                                        <div>
-                                                        <label for="ProductDetailValue">Product Detail Value</label>
-                                                    <div name="ProductDetailValue">{detailvalue}</div>
+                                                    <label for="ProductDetailValue">Product Detail Value</label>
+                                                    <div name="ProductDetailValue">{ detail.value }</div>
                                                     <button >Update Product Detail Value</button>
                                                     </div>
                                                     ))}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                {product.ProductImages.forEach((image)=>(
+                                                {product.images.map((image)=>(
                                                         <div>
                                                         <label for="ProductImage">Product Image</label>
                                                     <img src={image} alt="product image"></img>
@@ -109,7 +115,7 @@ class Mystore extends Component {
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label for="ProductDescription">Product Description</label>
-                                                    <div className="field-label" name="ProductDescription">{product.ProductDescription}</div>
+                                                    <div className="field-label" name="ProductDescription">{product.description}</div>
                                                     <button >Update Product Description</button>
                                                 </div>  
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
