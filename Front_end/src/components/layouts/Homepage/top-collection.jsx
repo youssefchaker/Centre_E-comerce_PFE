@@ -8,8 +8,24 @@ import ProductItem from '../common/product-item';
 import { getTopProducts } from '../../../actions/productActions';
 
 class TopCollection extends Component {
-
+    componentDidMount() {
+        this.props.getTopProducts();
+    }
     render (){
+        const {topproducts} = this.props;
+        var products=topproducts.products;
+        var topproductsarray = [];
+        const product1=products.product1;
+        const product2=products.product2;
+        const product3=products.product3;
+        const product4=products.product4;
+        const product5=products.product5;
+        topproductsarray.push(product1);
+        topproductsarray.push(product2);
+        topproductsarray.push(product3);
+        topproductsarray.push(product4);
+        topproductsarray.push(product5);
+        console.log(topproductsarray);
         return (
             <div>
                 {/*Paragraph*/}
@@ -22,12 +38,12 @@ class TopCollection extends Component {
                         <div className="row">
                             <div className="col">
                                 <Slider  className="product-4 product-m no-arrow">
-                                    {/* { this.props.topProducts.map((product, index ) =>
+                                    { topproductsarray.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem product={product} symbol={"€"}
                                                          onAddToCartClicked={() => addItemToCart(product, 1)} key={index} />
                                         </div>)
-                                    } */}
+                                    }
                                 </Slider>
                             </div>
                         </div>
@@ -40,14 +56,14 @@ class TopCollection extends Component {
 
 const mapDispatchToProps = dispatch => {
     return{
-        topProducts:()=>dispatch(getTopProducts()),
+        getTopProducts:()=>dispatch(getTopProducts()),
         addToCart:(id,stock)=>dispatch(addItemToCart(id,stock))
     }
 }
 
 const mapStateToProps = (state) => {
     return{
-        products:state.products,
+        topproducts:state.topproducts,
         cartList:state.cartlist
     }
 }

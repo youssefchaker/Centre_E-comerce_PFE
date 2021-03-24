@@ -153,7 +153,7 @@ class Addproduct extends Component {
 
 const mapStateToProps=state=>{
     return {
-        newproduct:state.newProduct
+        newproduct:state.newproduct
       }
 }
 

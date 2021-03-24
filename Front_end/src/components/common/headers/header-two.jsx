@@ -88,8 +88,7 @@ class HeaderTwo extends Component {
             this.forceUpdate();
           }
           else{
-              console.log(this.props.getSearchedProducts());
-
+              this.props.getSearchedProducts();
           }
       }
     setStateFromInput = (event) => {
@@ -196,8 +195,10 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps=state=>{
-    
+    return {
+        searchedproducts:state.searchedproducts
+      }
 }
 
-export default connect(null,mapDispatchToProps
+export default connect(mapStateToProps,mapDispatchToProps
 )(HeaderTwo);

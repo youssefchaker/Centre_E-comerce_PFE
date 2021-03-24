@@ -143,7 +143,7 @@ export const getTopProducts = () => async (dispatch) => {
 
         dispatch({ type: TOP_PRODUCTS_REQUEST })
 
-        const { data } = await axios.get(`api/mall/products/top`)
+        const { data } = await axios.get(`http://localhost:5000/api/mall/products/top`)
 
         dispatch({
             type: TOP_PRODUCTS_SUCCESS,
