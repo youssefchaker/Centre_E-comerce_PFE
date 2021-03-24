@@ -1,5 +1,4 @@
 import React, { Component,useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
 import {connect} from 'react-redux'
 import {addItemToCart} from "../../../actions/cartActions"
 import ProductItem from './product-item';
@@ -8,9 +7,25 @@ import { IntlActions } from 'react-redux-multilingual';
 import Slider from 'react-slick';
 import store from '../../../store'
 
-function SpecialProducts(){
-        const dispatch=useDispatch();
-        store.dispatch(getNewProducts());
+class SpecialProducts extends Component{
+    componentDidMount() {
+        this.props.getNewProducts();
+    }
+        render(){
+            const {newproducts} = this.props;
+            var products=newproducts.products;
+            var newproductsarray = [];
+            const product1=products.product1;
+            const product2=products.product2;
+            const product3=products.product3;
+            const product4=products.product4;
+            const product5=products.product5;
+            newproductsarray.push(product1);
+            newproductsarray.push(product2);
+            newproductsarray.push(product3);
+            newproductsarray.push(product4);
+            newproductsarray.push(product5);
+        console.log(newproductsarray);
         return (
             <div>
                 <div className="title1 section-t-space">
@@ -19,7 +34,7 @@ function SpecialProducts(){
                 <section className="section-b-space p-t-0">
                     <div className="container">
                     <Slider  className="product-4 product-m no-arrow">
-                                    { () => store.dispatch(getNewProducts()).map((product, index ) =>
+                                    { newproductsarray.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem product={product} symbol={"€"}
                                                          onAddToCartClicked={() => addItemToCart(product, 1)} key={index} />
@@ -31,18 +46,22 @@ function SpecialProducts(){
             </div>
         )
     }
-/**const mapDispatchToProps = dispatch => {
-    return{
-        newProducts:()=>dispatch({ type: 'NEW_PRODUCT_REQUEST' }),
-        addToCart:(id,stock)=>dispatch({ type: 'ADD_TO_CART' })
-    }
 }
 
 const mapStateToProps = (state) => {
     return{
-        products:state.products,
+        newproducts:state.newproducts,
         cartList:state.cartlist
     }
-}*/
+}
 
-export default connect(/*mapStateToProps,mapDispatchToProps*/)(SpecialProducts);
+const mapDispatchToProps = dispatch => {
+    return{
+        getNewProducts:()=>dispatch(getNewProducts()),
+        addItemToCart:(id,stock)=>dispatch(addItemToCart(id,stock))
+    }
+}
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(SpecialProducts);
