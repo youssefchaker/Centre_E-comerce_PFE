@@ -24,7 +24,17 @@ import {newProductReducer,
 } from './products';
 import cartReducer from './cart';
 import filtersReducer from './filters';
-import eventReducer from './events';
+import {
+    newEventReducer,
+    deleteEventReducer,
+    getLimitedEventsReducer,
+    getEventsReducer,
+    getEventReducer,
+    getStoreEventsReducer,
+    updateEventReducer,
+    getAdminEventsReducer,
+    deletrAdminEventReducer 
+} from './events';
 import {productReducer} from './products';
 
 const rootReducer = combineReducers({
@@ -46,10 +56,20 @@ const rootReducer = combineReducers({
     deleteproductreview:deleteProductReviewReducer,
     deleteadminproductreview:deleteAdminProductReviewReducer,
     updateproductreview:updateProductReviewReducer,
+    ///////////////////////////////////////////////////////////
+    newevent:newEventReducer,
+    delteevent:deleteEventReducer,
+    limitedevents:getLimitedEventsReducer,
+    events:getEventsReducer,
+    event:getEventReducer,
+    storeevents:getStoreEventsReducer,
+    updateevent:updateEventReducer,
+    adminevents:getAdminEventsReducer,
+    deleteadminevent:deletrAdminEventReducer, 
+    ///////////////////////////////////////////////////////////
     storename:getStoreNameReducer,
     cartList: cartReducer,
     filters: filtersReducer,
-    events:eventReducer,
     Intl
 });
 
