@@ -31,7 +31,6 @@ import {NEW_EVENT_REQUEST,
 
     export const newEvent = (eventData) => async (dispatch) => {
         try {
-            toast.success("New Event Added!!");
             dispatch({ type: NEW_EVENT_REQUEST })
     
             const config = {
@@ -40,7 +39,7 @@ import {NEW_EVENT_REQUEST,
                 }
             }
     
-            const { data } = await axios.post(`/api/mall/store/event/new`, eventData, config)
+            const { data } = await axios.post(`http://localhost:5000/api/mall/store/event/new`, eventData, config)
     
             dispatch({
                 type: NEW_EVENT_SUCCESS,
@@ -60,7 +59,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: DELETE_EVENT_REQUEST })
     
-            const { data } = await axios.delete(`/api/mall/store/event/${id}`)
+            const { data } = await axios.delete(`http://localhost:5000/api/mall/store/event/${id}`)
     
             dispatch({
                 type: DELETE_EVENT_SUCCESS,
