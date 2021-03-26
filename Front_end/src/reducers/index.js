@@ -18,15 +18,17 @@ import {newProductReducer,
     getProductReviewReducer,
     deleteProductReviewReducer,
     deleteAdminProductReviewReducer,
-    updateProductReviewReducer
+    updateProductReviewReducer,
+    getStoreNameReducer
 
 } from './products';
 import cartReducer from './cart';
 import filtersReducer from './filters';
 import eventReducer from './events';
-
+import {productReducer} from './products';
 
 const rootReducer = combineReducers({
+    data: productReducer,
     newproduct: newProductReducer,
     storeproducts:getStoreProductsReducer,
     product:getProductReducer,
@@ -44,6 +46,7 @@ const rootReducer = combineReducers({
     deleteproductreview:deleteProductReviewReducer,
     deleteadminproductreview:deleteAdminProductReviewReducer,
     updateproductreview:updateProductReviewReducer,
+    storename:getStoreNameReducer,
     cartList: cartReducer,
     filters: filtersReducer,
     events:eventReducer,

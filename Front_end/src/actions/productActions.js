@@ -51,6 +51,9 @@ import {NEW_PRODUCT_REQUEST,
     UPDATE_REVIEW_REQUEST,
     UPDATE_REVIEW_SUCCESS,
     UPDATE_REVIEW_FAIL,
+    GET_STORE_NAME_REQUEST,
+    GET_STORE_NAME_SUCCESS,
+    GET_STORE_NAME_FAIL,
     CLEAR_ERRORS } from '../constants/productConstants'
 
 export const newProduct = (productData) => async (dispatch) => {
@@ -153,7 +156,7 @@ export const getTopProducts = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: TOP_PRODUCTS_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }
@@ -179,18 +182,19 @@ export const getNewProducts = () => async (dispatch) => {
     }
 }
 
-export const getProducts = (keyword = '', currentPage = 1, price, category, rating = 0) => async (dispatch) => {
+export const getProducts = () => async (dispatch) => {
     try {
 
         dispatch({ type: GET_ALL_PRODUCTS_REQUEST })
-
-        let link = `/api/mall/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${rating}`
+/*
+        let link = `http://localhost:5000/api/mall/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${rating}`
 
         if (category) {
-            link = `/api/mall/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}&ratings[gte]=${rating}`
+            link = `http://localhost:5000/api/mall/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}&ratings[gte]=${rating}`
         }
+*/
 
-        const { data } = await axios.get(link)
+        const { data } = await axios.get(`http://localhost:5000/api/mall/products`)
 
         dispatch({
             type: GET_ALL_PRODUCTS_SUCCESS,
@@ -200,7 +204,7 @@ export const getProducts = (keyword = '', currentPage = 1, price, category, rati
     } catch (error) {
         dispatch({
             type: GET_ALL_PRODUCTS_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }
@@ -216,7 +220,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/mall/store/product/${id}`, productData, config)
+        const { data } = await axios.put(`http://localhost:5000/api/mall/store/product/${id}`, productData, config)
 
         dispatch({
             type: UPDATE_PRODUCT_SUCCESS,
@@ -236,7 +240,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         dispatch({ type: DELETE_PRODUCT_REQUEST })
 
-        const { data } = await axios.delete(`/api/mall/store/product/${id}`)
+        const { data } = await axios.delete(`http://localhost:5000/api/mall/store/product/${id}`)
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
@@ -421,6 +425,26 @@ export const updateReview = (id, productData) => async (dispatch) => {
         dispatch({
             type: UPDATE_REVIEW_FAIL,
             payload: error.response.data.message
+        })
+    }
+}
+
+export const getStoreName = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: GET_STORE_NAME_REQUEST })
+
+        const { data } = await axios.get(`http://localhost:5000/api/mall/storename/${id}`)
+
+        dispatch({
+            type: GET_STORE_NAME_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GET_STORE_NAME_FAIL,
+            payload: error
         })
     }
 }

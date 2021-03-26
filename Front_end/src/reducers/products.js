@@ -49,7 +49,17 @@ import {NEW_PRODUCT_REQUEST,
     UPDATE_REVIEW_REQUEST,
     UPDATE_REVIEW_SUCCESS,
     UPDATE_REVIEW_FAIL,
-    CLEAR_ERRORS } from "../constants/productConstants";
+    GET_STORE_NAME_REQUEST,
+    GET_STORE_NAME_SUCCESS,
+    GET_STORE_NAME_FAIL,
+    CLEAR_ERRORS,
+    FETCH_PRODUCTS_BEGIN,
+    RECEIVE_PRODUCTS,
+    FETCH_SINGLE_PRODUCT,
+    CHANGE_CURRENCY
+
+
+} from "../constants/productConstants";
 
 /* export const productReducer = (state = { products: {} }, action) => {
     switch (action.type) {
@@ -690,3 +700,59 @@ export const updateProductReviewReducer = (state = { updateproductreview: {} }, 
             return state
     }
 }
+
+export const getStoreNameReducer = (state = { storename: {} }, action) => {
+    switch (action.type) {
+
+        case GET_STORE_NAME_REQUEST:           
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_STORE_NAME_SUCCESS:
+            return{
+                loading: false,
+                storename: action.payload,
+            }
+        case GET_STORE_NAME_FAIL:
+            return {
+                ...state,
+                error: action.payload
+                }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+//zeydin
+const initialState = {
+    products: [],
+    symbol: '$',
+    product_details: []
+};
+export const productReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case RECEIVE_PRODUCTS:
+            return { ...state,
+                products: action.products };
+        case FETCH_SINGLE_PRODUCT:
+            if (state.products.findIndex(product => product.id === action.productId) !== -1) {
+                const singleItem = state.products.reduce((itemAcc, product) => {
+                    return product
+                }, [])
+                return { ...state,
+                    product_details: singleItem };
+            }
+
+        case CHANGE_CURRENCY:
+            return { ...state,
+                symbol: action.symbol };
+        default:
+            return state;
+    }
+};

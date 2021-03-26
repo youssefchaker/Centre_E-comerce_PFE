@@ -11,15 +11,15 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
     // console.log('Action Result');
     // console.log(action);
     switch (action.type) {
-        case types.FILTER_BRAND:
+        case types.FILTER_CATEGORY:
             return {
                 ...state,
                 brand: action.brand
             };
-        case types.FILTER_COLOR:
+        case types.FILTER_STORE:
             return {
                 ...state,
-                color: action.color
+                store: action.store
             };
         case types.FILTER_PRICE:
             return {

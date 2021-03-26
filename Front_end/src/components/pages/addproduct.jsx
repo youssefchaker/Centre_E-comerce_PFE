@@ -12,7 +12,7 @@ class Addproduct extends Component {
     this.state = {
         ProductName:'',
         ProductPrice:null,
-        ProductImage:null,
+        ProductImage:[],
         ProductDescription:'',
         Productnumber:1,
         ProductStock:null,
@@ -20,7 +20,8 @@ class Addproduct extends Component {
         ProductDetail:"",
         ProductDetailValue:"",
         ProductDetails:[],
-        ProductDetailsValues:[]
+        ProductDetailsValues:[],
+        details:[]
     }
     this.validator = new SimpleReactValidator();
     this.validator2 = new SimpleReactValidator();
@@ -42,6 +43,8 @@ class Addproduct extends Component {
             this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
             document.getElementById("1").value="";
             document.getElementById("2").value="";
+            this.state.ProductDetail="";
+            this.state.ProductDetailValue="";
             toast.success("New Product Detail Added!!");
           }
     }
@@ -53,16 +56,20 @@ class Addproduct extends Component {
           }
           else{
             const formData = new FormData();
-            formData.set('ProductName', this.state.ProductName);
-            formData.set('ProductPrice', this.state.ProductPrice);
-            formData.set('ProductImage', this.state.ProductImage);
-            formData.set('ProductDescription', this.state.ProductDescription);
-            formData.set('ProductStock', this.state.ProductStock);
-            formData.set('ProductCategory', this.state.ProductCategory);
+            var i=0;
+            formData.set('name', this.state.ProductName);
+            formData.set('price', this.state.ProductPrice);
+            formData.set('images', this.state.ProductImage);
+            formData.set('description', this.state.ProductDescription);
+            formData.set('stock', this.state.ProductStock);
+            formData.set('category', this.state.ProductCategory);
             this.state.ProductDetails.push(this.state.ProductDetail);
             this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
-            formData.set('ProductDetails', this.state.ProductDetails);
-            formData.set('ProductDetailsValues', this.state.ProductDetailsValues);
+            while(i<this.state.ProductDetails.length){
+                this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetails[i]});
+                i++;
+            }
+            formData.set('details', this.state.details);
             this.props.newProduct(formData);
             toast.success("New Product Added!!");
           }
@@ -125,7 +132,7 @@ class Addproduct extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Image</div>
-                                                    <input type="file" name="ProductImage" accept="image/*" multiple onChange={this.setStateFromInput} value={this.state.ProductImage}  />
+                                                    <input type="file" id="img" name="ProductImage" accept="image/*" multiple onChange={this.setStateFromInput} value={this.state.ProductImage}  />
                                                     {this.validator.message('ProductImage', this.state.ProductImage, 'required')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">

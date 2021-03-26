@@ -8,6 +8,7 @@ import { getTotal, getCartProducts } from '../../../reducers'
 import { addToCart } from '../../../actions'
 import {getVisibleproducts} from '../../../services';
 import ProductListItem from "./product-list-item";
+import { getProducts } from '../../../actions/productActions';
 
 class ProductListing extends Component {
 
@@ -17,6 +18,9 @@ class ProductListing extends Component {
         this.state = { limit: 5, hasMoreItems: true };
 
     }
+    componentDidMount=()=>{
+        this.props.getProducts();
+      }
 
     componentWillMount(){
         this.fetchMoreItems();
@@ -38,8 +42,7 @@ class ProductListing extends Component {
     }
 
     render (){
-        const {products, addToCart, symbol, addToWishlist, addToCompare} = this.props;
-        console.log(this.props.colSize)
+        const {products, addToCart} = this.props;
         return (
             <div>
                 <div className="product-wrapper-grid">
@@ -59,7 +62,7 @@ class ProductListing extends Component {
                                 <div className="row">
                                     { products.slice(0, this.state.limit).map((product, index) =>
                                         <div className={`${this.props.colSize===3?'col-xl-3 col-md-6 col-grid-box':'col-lg-'+this.props.colSize}`} key={index}>
-                                        <ProductListItem product={product} symbol={symbol}
+                                        <ProductListItem product={product} symbol={"€"}
                                                          onAddToCartClicked={addToCart} key={index}/>
                                         </div>)
                                     }
@@ -82,10 +85,15 @@ class ProductListing extends Component {
     }
 }
 const mapStateToProps = (state) => ({
+    allproducts:state.allproducts,
     products: getVisibleproducts(state.data, state.filters),
     symbol: state.data.symbol,
 })
-
+const mapDispatchToProps = dispatch => {
+    return {
+        getProducts: () => dispatch(getProducts())
+    }
+}
 export default connect(
-    mapStateToProps, {addToCart}
+    mapStateToProps,mapDispatchToProps,null, {addToCart}
 )(ProductListing)

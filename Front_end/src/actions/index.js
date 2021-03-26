@@ -42,13 +42,13 @@ export const decrementQty = productId => (dispatch) => {
 
 
 // Filters
-export const filterBrand = (brand) => ({
-    type: types.FILTER_BRAND,
-    brand
+export const filterCategory = (category) => ({
+    type: types.FILTER_CATEGORY,
+    category
 });
-export const filterColor = (color) => ({
-    type: types.FILTER_COLOR,
-    color
+export const filterStore = (store) => ({
+    type: types.FILTER_STORE,
+    store
 });
 export const filterPrice = (value) => ({
     type: types.FILTER_PRICE,

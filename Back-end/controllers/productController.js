@@ -364,3 +364,14 @@ exports.getAllProductReviews = catchAsyncErrors(async (req, res, next) => {
         })
     }
 })
+
+// Get store name from the id
+
+exports.getStorename = catchAsyncErrors(async (req, res, next) => {
+    Store.findById(req.params.id).exec(function(err,store){
+        res.status(200).json({
+            success:true,
+            storename:store.name
+        })
+    })
+})

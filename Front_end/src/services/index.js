@@ -1,39 +1,35 @@
-// Get Unique Brands from Json Data
-export const getBrands = (products) => {
-    console.log(products);
-    var uniqueBrands = [];
-    products.map((product, index) => {
-        if (product.tags) {
-            product.tags.map((tag) => {
-                if (uniqueBrands.indexOf(tag) === -1) {
-                    uniqueBrands.push(tag);
-                }
-            })
-        }
-    })
-    //console.log(uniqueBrands)
-    return uniqueBrands;
+
+// Get categories from products
+export const getCategories = (products) => {
+    var categories = [];
+    var i=0;
+    while(i<products.length){
+        categories.push(products[i].category);
+        i++;
+    }
+    let uniqueChars = categories.filter((c, index) => {
+        return categories.indexOf(c) === index;
+    });
+    return uniqueChars;
 }
 
-// Get Unique Colors from Json Data
-export const getColors = (products) => {
-    var uniqueColors = [];
-    products.map((product, index) => {
-        if(product.colors) {
-            product.colors.map((color) => {
-                if (uniqueColors.indexOf(color) === -1) {
-                    uniqueColors.push(color);
-                }
-            })
-        }
-    })
-    //console.log(uniqueBrands)
-    return uniqueColors;
+// Get stores from products
+export const getStores = (products) => {
+    var stores = [];
+    var i=0;
+    while(i<products.length){
+        stores.push(products[i].store);
+        i++;
+    }
+    let uniqueChars = stores.filter((c, index) => {
+        return stores.indexOf(c) === index;
+    });
+    return uniqueChars
 }
 
 // Get Minimum and Maximum Prices from Json Data
 export const getMinMaxPrice = (products) => {
-    let min = 100, max = 1000;
+    let min = 50, max = 1000;
 
     products.map((product, index) => {
         let v = product.price;
@@ -98,12 +94,12 @@ export const getTrendingTagCollection = (products, type, tag) => {
 }
 
 // Get Trending Collection
-/*export const getTrendingCollection = (products, type) => {
+export const getTrendingCollection = (products, type) => {
     const items = products.filter(product => {
         return product.category === type;
     })
     return items.slice(0,8)
-}*/
+}
 
 // Get Special 5 Collection
 export const getSpecialCollection = (products, type) => {
@@ -151,29 +147,29 @@ export const getBestSellerProducts = (products, type) => {
 
 // Get Best Seller
 export const getBestSeller = products => {
-    /*const items = products.filter(product => {
+    const items = products.filter(product => {
         return product.sale === true;
     })
 
-    return items.slice(0,8)*/
+    return items.slice(0,8)
 }
 
 // Get Mens Wear
 export const getMensWear = products => {
-   /* const items = products.filter(product => {
+    const items = products.filter(product => {
         return product.category === 'men';
     })
 
-    return items.slice(0,8)*/
+    return items.slice(0,8)
 }
 
 // Get Womens Wear
 export const getWomensWear = products => {
-    /*const items = products.filter(product => {
+    const items = products.filter(product => {
         return product.category === 'women';
     })
 
-    return items.slice(0,8)*/
+    return items.slice(0,8)
 }
 
 // Get Single Product
@@ -193,5 +189,3 @@ export const getFeatureImages = (products, type) => {
     })
     return items;
 }
-
-
