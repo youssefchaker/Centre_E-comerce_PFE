@@ -86,7 +86,7 @@ class ProductListing extends Component {
 }
 const mapStateToProps = (state) => ({
     allproducts:state.allproducts,
-    products: getVisibleproducts(state.data, state.filters),
+    products: getVisibleproducts(state.allproducts, state.filters),
     symbol: state.data.symbol,
 })
 const mapDispatchToProps = dispatch => {

@@ -29,7 +29,7 @@ export const getStores = (products) => {
 
 // Get Minimum and Maximum Prices from Json Data
 export const getMinMaxPrice = (products) => {
-    let min = 50, max = 1000;
+    let min = 9999, max = 0;
 
     products.map((product, index) => {
         let v = product.price;
@@ -40,26 +40,25 @@ export const getMinMaxPrice = (products) => {
     return {'min':min, 'max':max};
 }
 
-export const getVisibleproducts = (data, { brand, color, value, sortBy }) => {
+export const getVisibleproducts = (data, { category, store, value, sortBy }) => {
     return data.products.filter(product => {
 
-        let brandMatch;
-        if(product.tags)
-            brandMatch = product.tags.some(tag => brand.includes(tag))
+        let categoryMatch;
+        if(product.category)
+        categoryMatch = product.category.includes(category);
         else
-            brandMatch = true;
+        categoryMatch = true;
 
-        let colorMatch;
-        if(color && product.colors) {
-            colorMatch = product.colors.includes(color)
-        }else{
-            colorMatch = true;
-        }
+        let storeMatch;
+        if(product.store)
+        storeMatch = product.store.includes(store);
+        else
+        storeMatch = true;
 
         const startPriceMatch = typeof value.min !== 'number' || value.min <= product.price;
         const endPriceMatch = typeof value.max !== 'number' || product.price <= value.max;
 
-        return brandMatch && colorMatch && startPriceMatch && endPriceMatch;
+        return categoryMatch && storeMatch && startPriceMatch && endPriceMatch;
     }).sort((product1, product2) => {
         if (sortBy === 'HighToLow') {
             return product2.price < product1.price ? -1 : 1;

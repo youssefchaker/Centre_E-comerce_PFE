@@ -104,7 +104,7 @@ class FilterBar extends Component {
 }
 
 const mapStateToProps = state => ({
-    products: getVisibleproducts(state.data, state.filters),
+    products: getVisibleproducts(state.allproducts, state.filters),
     filters: state.filters
 })
 

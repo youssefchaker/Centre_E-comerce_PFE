@@ -7,7 +7,6 @@ import { SlideToggle } from 'react-slide-toggle';
 
 import {getCategories, getMinMaxPrice,getStores} from '../../../services';
 import {filterCategory, filterStore, filterPrice} from '../../../actions'
-import { getProducts, getStoreName } from '../../../actions/productActions';
 
 class Filter extends Component {
 
@@ -16,80 +15,33 @@ class Filter extends Component {
 
         this.state = {
             openFilter: false,
-            products:[],
-            productscategory:[],
-            productsstore:[],
-            productsprice:[],
         }
     }
-    componentDidMount=()=>{
-        this.props.getProducts();        
-      }
     closeFilter = () => {
         document.querySelector(".collection-filter").style = "left: -365px";
     }
 
-    clickCategoryHendle(event) {
-        var filteredproducts=[];
-        var unfilteredproducts=[];
-        this.props.allproducts.products.filter(product => product.category !== event.target.value).map(filteredproduct =>{
-            filteredproducts.push(filteredproduct);
-        })
-        this.props.allproducts.products.filter(product => product.category === event.target.value).map(unfilteredproduct =>{
-            unfilteredproducts.push(unfilteredproduct);
-        })
-        if(event.target.checked){
-            
+    clickCategoryHendle(event,categories,index) {
+        if (event.target.checked)
+        categories.push(event.target.value); // push in array checked value
+        else
+        categories.splice(index, 1); // removed in array unchecked value
 
-            this.setState({productscategory:unfilteredproducts}); 
-        }
-        else{
-            const uniq = [...new Set(this.state.productscategory.concat(filteredproducts.concat(unfilteredproducts)))];
-            
-            this.setState({productscategory:uniq}); 
-            //const unfilteredproducts=filteredproducts.filter(x => !this.state.productscategory.includes(x))
-            
-        }
-        this.combinefilters();
+        this.props.filterCategory(categories);
     }
 
-    storeHandle(event){
-        var filteredproducts=[];
-        var unfilteredproducts=[];
-        this.props.allproducts.products.filter(product => product.store !== event.target.value).map(filteredproduct =>{
-            filteredproducts.push(filteredproduct);
-        })
-        this.props.allproducts.products.filter(product => product.store === event.target.value).map(unfilteredproduct =>{
-            unfilteredproducts.push(unfilteredproduct);
-        })
-        if(event.target.checked){
-            this.setState({productsstore:unfilteredproducts}); 
-            
-        }
-        else{
-            const uniq = [...new Set(this.state.productsstore.concat(filteredproducts.concat(unfilteredproducts)))];
-            
-            this.setState({productsstore:uniq}); 
-        }
-        this.combinefilters();
-    }
-    priceHandle(e){
-        var filteredproducts=[];
-        var unfilteredproducts=[];
-        this.props.allproducts.products.filter(product => product.store < e.target.value).map(unfilteredproduct =>{
-            unfilteredproducts.push(unfilteredproduct);
-        })
-            
-            const uniq = [...new Set(unfilteredproducts)];
-            
-            this.setState({productsprice:uniq});
-            this.combinefilters(); 
-    }
-     combinefilters(){
-        this.setState({products:this.state.productsstore.concat(this.state.productsprice.concat(this.state.productscategory))});
-    }
+    storeHandle(event,stores){
+        var index = stores.indexOf(event.target.value);
+        if (event.target.checked)
+        stores.push(event.target.value); // push in array checked value
+        else
+        stores.splice(index, 1); // removed in array unchecked value
 
+        this.props.filterStore(stores);
+    }
     render (){
+        const filteredcategories = this.props.filters.category
+        const filteredstores = this.props.filters.store
         return (
                 <div className="collection-filter-block">
                     {/*category filter start*/}
@@ -107,7 +59,7 @@ class Filter extends Component {
                                         {this.props.categories.map((category, index) => {
                                             return (
                                                 <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
-                                                    <input type="checkbox" onClick={(e) => this.clickCategoryHendle(e)} value={category} className="custom-control-input" id={category} />
+                                                    <input type="checkbox" onClick={(e) => this.clickCategoryHendle(e,filteredcategories,index)} value={category} className="custom-control-input" id={category} /*defaultChecked={filteredcategories.includes(category)? true : false}*/ />
                                                     <label className="custom-control-label"
                                                            htmlFor={category}>{category}</label>
                                                 </div> )
@@ -128,7 +80,7 @@ class Filter extends Component {
                                         {this.props.stores.map((store, index) => {
                                             return (
                                                 <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
-                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e)} value={store} className="custom-control-input" id={store} />
+                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e,filteredstores)} value={store} className="custom-control-input" id={store} /*defaultChecked={filteredstores.includes(store)? true : false}*/ />
                                                     <label className="custom-control-label"
                                                            htmlFor={store}>{store}</label>
                                                 </div> )
@@ -147,9 +99,10 @@ class Filter extends Component {
                                     <div className="collection-brand-filter">
                                         <div className="custom-control custom-checkbox collection-filter-checkbox">
                                             <InputRange
-                                                maxValue={this.props.prices["max"]}
-                                                minValue={this.props.prices["min"]}
-                                                onChange={e => this.priceHandle(e)} />
+                                                maxValue={this.props.prices.max}
+                                                minValue={this.props.prices.min}
+                                                value={this.props.filters.value}
+                                                onChange={value => this.props.filterPrice({ value })} />
                                         </div>
                                     </div>
                                 </div>
@@ -167,16 +120,8 @@ const mapStateToProps = state => ({
     stores: getStores(state.allproducts.products),
     prices: getMinMaxPrice(state.allproducts.products),
     filters: state.filters,
-    allproducts:state.allproducts,
-    storename:state.storename
 })
-const mapDispatchToProps = dispatch => {
-    return {
-        getProducts: () => dispatch(getProducts()),
-        getStoreName:(id)=>dispatch(getStoreName(id))
-    }
-}
 export default connect(
-    mapStateToProps,mapDispatchToProps,null,
+    mapStateToProps,
     { filterCategory, filterStore, filterPrice }
 )(Filter);
