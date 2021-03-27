@@ -10,57 +10,30 @@ const APIFeatures = require('../utils/apiFeatures')
 // Create new product   =>   /api/mall/store/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
      
-    const store = await Store.findOne({name: req.body.store}).populate('store')
-
-        if(!store) {
-            return next(new ErrorHandler(`the store  ${store.name} does not exist`, 404)); 
+    const { name , description , storename , price , stock, images , category , details } = req.body;
+    Product.find({name:name}).exec(function(err,product){
+        if(!product)
+            return next(new ErrorHandler(`the product ${product.name} already exists`, 404));
+        else{
+            Store.findOne({name:storename}).populate('store').exec(function(err,store){
+                if(!store)
+                    return next(new ErrorHandler(`the store with the name ${storename} does not exist`, 404));    
+                Product.create({
+                    name,
+                    description,
+                    store,
+                    price,
+                    stock,
+                    images,
+                    category,
+                    details
+                });
+                res.status(201).json({
+                    success: true,
+                    message:"product has been added"
+                })
+            })
         }
-        console.log(store.user);
-        if(store.user != req.user.id) {
-            return next(new ErrorHandler(`you are not allowed to add product, this is for the store's user`, 404)); 
-            
-        }
-   /* let images = []
-    if (typeof req.body.images === 'string') {
-        images.push(req.body.images)
-    } else {
-        images = req.body.images
-    }
-
-    let imagesLinks = [];
-
-    for (let i = 0; i < images.length; i++) {
-        const result = await cloudinary.v2.uploader.upload(images[i], {
-            folder: 'products'
-        });
-
-        imagesLinks.push({
-            public_id: result.public_id,
-            url: result.secure_url
-        })
-    }
-    */
-    //req.body.images = imagesLinks
-    req.body.user = req.user.id;
-    const user = req.body.user;
-    const { name , description , price , stock, images , category , details, reviews } = req.body;
-
-    const product = await Product.create({
-        name,
-        description,
-        store,
-        price,
-        stock,
-        images,
-        category,
-        details,
-        reviews,
-        user
-    });
-
-    res.status(201).json({
-        success: true,
-        product
     })
 })
 

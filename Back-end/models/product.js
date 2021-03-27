@@ -1,11 +1,9 @@
 const mongoose = require('mongoose')
 const Schema=mongoose.Schema;
 const productSchema = new Schema({
-
     name: {
         type: String,
-        required: [true, 'Please enter product name'],
-        trim: true
+        required: [true, 'Please enter product name']
     },
     description: {
         type: String,
@@ -13,8 +11,7 @@ const productSchema = new Schema({
     },
     store: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Store',
-        required: [true, 'Please enter product store']
+        ref: 'Store'
     },
     price: {
         type: Number,
@@ -22,73 +19,36 @@ const productSchema = new Schema({
     },
     stock:{
         type:Number,
-        required:[true,'please specify the number of products added'],
-        default: 0
+        required:[true,'please specify the number of products added']
     },
     nbreviews:{
         type:Number,
         default:0
     },
-    ratings: {
-        type: Number,
-        default: 0
-    },
-    creationDate:{
+    creationdate:{
         type:Date,
-        default:Date.now()
+        default:Date.now(),
     },
     images: [
         {
-            public_id: {
-                type: String,
-                required: [true,'please specify the image public_id']
-            },
-            url: {
-                type: String,
-                required: [true,'please specify the image url']
-            },
+
         }
     ],
     category:{
         type:String,
-        required:[true,'please specify the desired category'],
-        enum: {
-            values: [
-            'Electronics',
-            'Cameras',
-            'Laptops',
-            'Accessories',
-            'Phones&Tablets',
-            'Food',
-            "Books",
-            'Fashion',
-            'Beauty&Health',
-            'Sports',
-            'Outdoor',
-            'Home'
-            ],
-            message: 'Please select correct category for product'
-
-        }
+        required:[true,'please specify the desired category']
     },
     reviews: [
         {
             user: {
                 type: mongoose.Schema.ObjectId,
                 ref: 'User',
-                required: true
-            },
-            name: {
-                type: String,
-                required: true
             },
             rating: {
-                type: Number,
-                required: true
+                type: Number
             },
             comment: {
-                type: String,
-                required: true
+                type: String
             }
         }
     ],
@@ -104,11 +64,6 @@ const productSchema = new Schema({
                 required:[true,'please enter the detail value']
             }
         }
-],
-user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: true
-}
+]
 });
 module.exports = mongoose.model('Product', productSchema);

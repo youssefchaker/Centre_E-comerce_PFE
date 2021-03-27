@@ -10,13 +10,15 @@ class Addproduct extends Component {
     constructor(props){
     super(props);
     this.state = {
+        StoreName:'',
         ProductName:'',
         ProductPrice:null,
-        ProductImage:[],
+        ProductImages:[],
+        ProductImage:null,
         ProductDescription:'',
         Productnumber:1,
         ProductStock:null,
-        ProductCategory:"",
+        ProductCategory:"Electronics",
         ProductDetail:"",
         ProductDetailValue:"",
         ProductDetails:[],
@@ -25,6 +27,7 @@ class Addproduct extends Component {
     }
     this.validator = new SimpleReactValidator();
     this.validator2 = new SimpleReactValidator();
+    this.validator3 = new SimpleReactValidator();
     }
 
     setStateFromInput = (event) => {
@@ -55,23 +58,33 @@ class Addproduct extends Component {
             this.forceUpdate();
           }
           else{
-            const formData = new FormData();
             var i=0;
-            formData.set('name', this.state.ProductName);
-            formData.set('price', this.state.ProductPrice);
-            formData.set('images', this.state.ProductImage);
-            formData.set('description', this.state.ProductDescription);
-            formData.set('stock', this.state.ProductStock);
-            formData.set('category', this.state.ProductCategory);
             this.state.ProductDetails.push(this.state.ProductDetail);
             this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
             while(i<this.state.ProductDetails.length){
                 this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetails[i]});
                 i++;
             }
-            formData.set('details', this.state.details);
-            this.props.newProduct(formData);
+            this.state.ProductImages.push(this.state.ProductImage);
+            this.props.newProduct({'storename':this.state.StoreName,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details});
             toast.success("New Product Added!!");
+            setTimeout("location.reload(true);",2000);
+          }
+      }
+      handlelist=(e)=>{
+        this.setState({ProductCategory:e.target.value});
+      }
+      handleimages=(e)=>{
+        e.preventDefault(); 
+        if(!this.validator3.allValid()){
+            this.validator3.showMessages();
+            this.forceUpdate();
+          }
+          else{
+            this.state.ProductImages.push(this.state.ProductImage);
+            document.getElementById("img").value="";
+            this.state.ProductImage="";
+            toast.success("New Product Image Added!!");
           }
       }
     render (){
@@ -86,9 +99,14 @@ class Addproduct extends Component {
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                             <div className="checkout-title">
-                                                <h3>Product {this.state.Productnumber}</h3>
+                                                <h3>Product</h3>
                                             </div>
                                             <div className="row check-out">
+                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <div className="field-label">Store Name</div>
+                                                    <input type="text" name="StoreName" onChange={this.setStateFromInput} value={this.state.Storename} />
+                                                    {this.validator.message('StoreName', this.state.StoreName, 'required')}
+                                                </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
                                                     <input type="text" name="ProductName" onChange={this.setStateFromInput} value={this.state.ProductName} />
@@ -106,14 +124,19 @@ class Addproduct extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Category</div>
-                                                    <select name="ProductCategory" onChange={this.setStateFromInput} value={this.state.ProductStock}>
-                                                    <option>Tech</option>
-                                                    <option>Fashion</option>
-                                                    <option>Accessoires</option>
-                                                    <option>Bags</option>
-                                                    <option>Beauty</option>
+                                                    <select name="ProductCategory" onChange={(e)=>this.handlelist(e)} value={this.state.ProductCategory}>
+                                                    <option selected>Electronics</option>
+                                                    <option>Cameras</option>
+                                                    <option>Laptops</option>
+                                                    <option>Accessories</option>
+                                                    <option>Phones&Tablets</option>
                                                     <option>Food</option>
-                                                    <option>Watchs</option>
+                                                    <option>Books</option>
+                                                    <option>Fashion</option>
+                                                    <option>Beauty&Health</option>
+                                                    <option>Sports</option>
+                                                    <option>Outdoor</option>
+                                                    <option>Home</option>
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
@@ -132,8 +155,11 @@ class Addproduct extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Image</div>
-                                                    <input type="file" id="img" name="ProductImage" accept="image/*" multiple onChange={this.setStateFromInput} value={this.state.ProductImage}  />
+                                                    <input type="file" id="img" name="ProductImage" accept="image/*" onChange={this.setStateFromInput} value={this.state.ProductImage}  />
                                                     {this.validator.message('ProductImage', this.state.ProductImage, 'required')}
+                                                    <button type="submit" onClick={this.handleimages}>submit and add images</button>
+                                                    {this.validator3.message('ProductImage', this.state.ProductImage, 'required')}
+
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Product Description</div>

@@ -34,6 +34,7 @@ class Mystore extends Component {
     handledelete=id=>{
         this.props.deleteProduct(id);
         toast.error("Product deleted !");
+        setTimeout("location.reload(true);",2000);
     }
 
     handlesubmit=(e)=>{
@@ -46,10 +47,13 @@ class Mystore extends Component {
               switch(this.state.updatefield){
                 case "name":
                     this.props.updateProduct(this.state.productid,{"name":this.state.updatevalue});
+                    setTimeout("location.reload(true);",2000);
                 case "price":
                     this.props.updateProduct(this.state.productid,{"price":this.state.updatevalue});
+                    setTimeout("location.reload(true);",2000);
                 case "stock":
                     this.props.updateProduct(this.state.productid,{"stock":this.state.updatevalue});
+                    setTimeout("location.reload(true);",2000);
               }
 
           }
