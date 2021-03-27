@@ -61,79 +61,17 @@ class Mystore extends Component {
       }
 
     render (){
-        const p={
-            "id":1,
-            "name": "computer",
-            "description": "a great computer",
-            "storename": "exist",
-            "price": 1111,
-            "stock": 55,
-            "images": [
-                {
-                    "image_id": "1",
-                    "url": "www.image.com/1"
-                },
-                {
-                    "image_id": "2",
-                    "url": "www.image.com/2"
-                }
-            ],
-            "category": "Home",
-            "details": [
-                {
-                    "detailname": "color",
-                    "value": "black"
-                },
-                {
-                    "detailname": "size",
-                    "value": "beeg"
-                }
-            ]
-        }
-        const p2={
-            "id":2,
-            "name": "computer",
-            "description": "a great computer",
-            "storename": "exist",
-            "price": 1111,
-            "stock": 55,
-            "images": [
-                {
-                    "image_id": "1",
-                    "url": "www.image.com/1"
-                },
-                {
-                    "image_id": "2",
-                    "url": "www.image.com/2"
-                }
-            ],
-            "category": "Home",
-            "details": [
-                {
-                    "detailname": "dd",
-                    "value": "dk"
-                },
-                {
-                    "detailname": "ff",
-                    "value": "ff"
-                }
-            ]
-        }
-        const {storeproducts}=this.props
+    
+        const {storeproducts}=this.props.storeproducts
         var productsarray = [];
         var productdetails=[]
-        /*for(const i=0;i<storeproducts.length;i++){
+        for(const i=0;i<storeproducts.length;i++){
             productsarray.push(storeproducts[i]);
-            console.log(storeproducts[i]);
         }
         for(const j=0;j<productsarray.length;j++){
             productdetails[j]=productsarray[j].details;
         }
-        */
-        productsarray[0]=p;
-        productdetails[0]=p.details;
-        productsarray[1]=p2;
-        productdetails[1]=p2.details;
+       
         return (
             <div>0
                 <Breadcrumb title={'My Store'}/>

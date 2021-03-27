@@ -139,7 +139,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: GET_STORE_EVENTS_REQUEST })
     
-            const { data } = await axios.get(`api/mall/event/${id}`)
+            const { data } = await axios.get(`http://localhost:5000/api/mall/store/events/${id}`)
     
             dispatch({
                 type: GET_STORE_EVENTS_SUCCESS,
@@ -165,7 +165,7 @@ import {NEW_EVENT_REQUEST,
                 }
             }
     
-            const { data } = await axios.put(`/api/mall/store/event/${id}`, eventData, config)
+            const { data } = await axios.put(`http://localhost:5000/api/mall/store/event/${id}`, eventData, config)
     
             dispatch({
                 type: UPDATE_EVENT_SUCCESS,

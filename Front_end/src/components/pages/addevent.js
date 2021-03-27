@@ -42,13 +42,14 @@ class Addevent extends Component {
                 toast.warn("the event start date must be lower then the finish date");
             }
             else{
-            const formData = new FormData();
+            var formData = new FormData();
             formData.set('storeName', this.state.StoreName);   
             formData.set('eventName', this.state.EventName);
             formData.set('eventImage', this.state.EventImage);
             formData.set('eventDateStart', this.state.EventDatestart);
             formData.set('eventDateFinish', this.state.EventDatefinish);
-            this.props.newEvent(formData);
+            this.props.newEvent({'storeName':this.state.StoreName,'eventName':this.state.EventName,'eventImage':this.state.EventImage,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
+
             toast.success("event added !");
             }
           }

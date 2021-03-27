@@ -7,7 +7,8 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
 exports.addEvent = catchAsyncErrors(async (req, res, next) => {
 
-    const {storeName,eventName , eventDateStart,eventDateFinish , eventImage } = req.body;    
+    const {storeName,eventName , eventDateStart,eventDateFinish , eventImage } = req.body;  
+    console.log(storeName);  
     const store = await Store.findOne({name:storeName}).populate('store')
 
         
@@ -93,16 +94,19 @@ exports.getEvents = catchAsyncErrors(async (req, res, next) => {
 
 exports.getStoreEvents = catchAsyncErrors(async (req, res, next) => {
 
-    const events = await Event.findById(req.query.id);
-    if (events.length==0) {
-        return next(new ErrorHandler('there are no events in the website at the moment', 404));
-    }
-    else{
-        res.status(200).json({
-            success: true,
-            events
-        })
-    }
+    Store.findById(req.params.id).exec(function(err,store){
+        Event.find({store:store._id}).exec(function(err,events){
+            if (events.length==0) {
+                return next(new ErrorHandler(`there are no events in ${store.name}`, 404));
+            }
+            else{
+                res.status(200).json({
+                    success: true,
+                    events
+                })
+            }
+        });
+    })
 })
 
 // the admin gets all the events  =>   api/mall/admin/events
@@ -124,6 +128,7 @@ exports.getAllEvents = catchAsyncErrors(async (req, res, next) => {
 //the store Updates an Event   =>   api/mall/store/event/:id
 
 exports.updateEvent = catchAsyncErrors(async (req, res, next) => {
+    console.log(req.body)
 
     const event = await Event.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true,useFindAndModify:false});
     if(!event)

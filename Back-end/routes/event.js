@@ -15,16 +15,16 @@ const {
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 
-router.route('/store/event/new').post(isAuthenticatedUser,authorizeRoles("Seller"),addEvent);
+router.route('/store/event/new').post(/* isAuthenticatedUser,authorizeRoles("Seller"), */addEvent);
 router.route('/events/limited').get(getEventsLimited);
 router.route('/events').get(getEvents);
 router.route('/event/:id').get(getEvent);
 
 router.route('/store/event/:id')
-               .delete(isAuthenticatedUser,authorizeRoles("Seller"),deleteEvent)
-               .put(isAuthenticatedUser,authorizeRoles("Seller"),updateEvent);
+               .delete(/* isAuthenticatedUser,authorizeRoles("Seller"), */deleteEvent)
+               .put(/* isAuthenticatedUser,authorizeRoles("Seller"), */updateEvent);
 
-router.route('/store/events').get(isAuthenticatedUser,authorizeRoles("Seller"),getStoreEvents);               
+router.route('/store/events/:id').get(/* isAuthenticatedUser,authorizeRoles("Seller"), */getStoreEvents);               
 
 router.route('/admin/event/:id').delete(isAuthenticatedUser,authorizeRoles("Admin"),deleteEvent);
 
