@@ -7,8 +7,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
 exports.addEvent = catchAsyncErrors(async (req, res, next) => {
 
-    const {storeName,eventName , eventDateStart,eventDateFinish , eventImage } = req.body;  
-    console.log(storeName);  
+    const {storeName,eventName , eventDateStart,eventDateFinish , eventImage } = req.body;    
     const store = await Store.findOne({name:storeName}).populate('store')
 
         

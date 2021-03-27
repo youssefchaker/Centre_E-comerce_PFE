@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import {connect} from 'react-redux'
 import SimpleReactValidator from 'simple-react-validator';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Link} from 'react-router-dom';
 import { getStoreProducts, updateProduct,deleteProduct } from '../../actions/productActions';
-import store from "../../store"
 class Mystore extends Component {
     constructor(props){
     super(props);
@@ -14,7 +12,8 @@ class Mystore extends Component {
         isLoading:false,
         updatefield:null,
         updatevalue:null,
-        productid:null
+        productid:null,
+        inputfield:null
     }
     this.validator=new SimpleReactValidator();
       }
@@ -23,8 +22,15 @@ class Mystore extends Component {
       }
       openSearch=(field,id,detail="")=> {
         document.getElementById("update-overlay").style.display = "block";
-        this.state.updatefield=field;
-        this.state.productid=id;
+        if(field=="name"||field=="desc"){
+            this.setState({inputtype:"text"});
+        }
+        else if(field=="price"||field=="stock"){
+            this.setState({inputtype:"number"}); 
+        }
+        this.setState({updatefield:field});
+        this.setState({productid:id});
+        console.log(this.state.inputtype)
     }
 
     closeSearch() {
@@ -44,18 +50,26 @@ class Mystore extends Component {
             this.forceUpdate();
           }
           else{
-              switch(this.state.updatefield){
-                case "name":
-                    this.props.updateProduct(this.state.productid,{"name":this.state.updatevalue});
-                    setTimeout("location.reload(true);",2000);
-                case "price":
-                    this.props.updateProduct(this.state.productid,{"price":this.state.updatevalue});
-                    setTimeout("location.reload(true);",2000);
-                case "stock":
-                    this.props.updateProduct(this.state.productid,{"stock":this.state.updatevalue});
-                    setTimeout("location.reload(true);",2000);
+              if(this.state.updatefield=="name"){
+                this.props.updateProduct(this.state.productid,{"name":this.state.updatevalue});
+                toast.success("product name updated!!");
+                setTimeout("location.reload(true);",2000);
               }
-
+              else if(this.state.updatefield=="price"){
+                this.props.updateProduct(this.state.productid,{"price":this.state.updatevalue});
+                toast.success("product price updated!!");
+                setTimeout("location.reload(true);",2000);
+              }
+              else if(this.state.updatefield=="stock"){
+                this.props.updateProduct(this.state.productid,{"stock":this.state.updatevalue});
+                toast.success("product stock updated!!");
+                setTimeout("location.reload(true);",2000);
+              }
+              else if(this.state.updatefield=="desc"){
+                this.props.updateProduct(this.state.productid,{"description":this.state.updatevalue});
+                toast.success("product description updated!!");
+                setTimeout("location.reload(true);",2000);
+              }     
           }
       }
     setStateFromInput = (event) => {
@@ -65,16 +79,14 @@ class Mystore extends Component {
       }
 
     render (){
-    
-        const {storeproducts}=this.props.storeproducts
         var productsarray = [];
         var productdetails=[]
-        for(const i=0;i<storeproducts.length;i++){
-            productsarray.push(storeproducts[i]);
-        }
-        for(const j=0;j<productsarray.length;j++){
-            productdetails[j]=productsarray[j].details;
-        }
+        this.props.storeproducts.products.products.map((pr)=>{
+            productsarray.push(pr);
+        })
+        productsarray.map((pr)=>{
+            productdetails.push(pr.details)
+        })
        
         return (
             <div>0
@@ -116,17 +128,17 @@ class Mystore extends Component {
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
                                                     <div>{product.name}</div>
-                                                    <button onClick={()=>this.openSearch("name",product.id)} >Update Product Name</button>
+                                                    <button onClick={()=>this.openSearch("name",product._id)} >Update Product Name</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">Product Price</div>
                                                     <div>{product.price}</div>
-                                                    <button onClick={()=>this.openSearch("price",product.id)} >Update Product Price</button>
+                                                    <button onClick={()=>this.openSearch("price",product._id)} >Update Product Price</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Stock</div>
                                                     <div>{product.stock}</div>
-                                                    <button onClick={()=>this.openSearch("stock",product.id)} >Update Product Stock</button>
+                                                    <button onClick={()=>this.openSearch("stock",product._id)} >Update Product Stock</button>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Category</div>
@@ -138,26 +150,27 @@ class Mystore extends Component {
                                                         <div>
                                                         <label for="ProductDetail">Product Detail</label>
                                                     <div name="ProductDetail">{detail.detailname }</div>
-                                                    <label for="ProductDetailValue">Product Detail Value</label>
+                                                    <label className="field-label" for="ProductDetailValue">Product Detail Value</label>
                                                     <div name="ProductDetailValue">{ detail.value }</div>
                                                     </div>
                                                     ))}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                <label className="field-label" for="ProductImage">Product Images</label>
                                                 {product.images.map((image)=>(
                                                         <div>
-                                                        <label for="ProductImage">Product Image</label>
+                                                        
                                                     <img src={image} alt="product image"></img>
                                                     </div>
                                                     ))}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                <label for="ProductDescription">Product Description</label>
-                                                    <div className="field-label" name="ProductDescription">{product.description}</div>
-                                                    <button >Update Product Description</button>
+                                                <label className="field-label" for="ProductDescription">Product Description</label>
+                                                    <div  name="ProductDescription">{product.description}</div>
+                                                    <button onClick={()=>this.openSearch("desc",product._id)} >Update Product Description</button>
                                                 </div>  
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                <button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(product.id)}>Delete Product</button>
+                                                <button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(product._id)}>Delete Product</button>
                                                 </div>                                          
                                                 </div>
                                             
@@ -171,10 +184,11 @@ class Mystore extends Component {
                                                 <div className="col-xl-12">
                                                 <form>
                                                     <div className="form-group">
-                                                    <input type="text" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
+                                                    {this.state.inputtype=="text"?<input type="text" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
+                                                    :<input type="number" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} min="0" />}
                                                     {this.validator.message('new value', this.state.updatevalue, 'required')}
                                                     </div>
-                                                <button type="submit" onClick={this.handlesubmit} className="btn btn-primary"><i className="fa fa-check"></i></button>
+                                                <button type="submit" onClick={this.handlesubmit} className="btn btn-primary" style={{marginRight:"-35px"}}><i className="fa fa-check"></i></button>
                                                 </form>
                                                 </div>
                                                 </div>

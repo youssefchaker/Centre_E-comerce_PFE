@@ -96,7 +96,7 @@ export const getStoreProducts = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_STORE_PRODUCTS_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }

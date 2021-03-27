@@ -52,26 +52,26 @@ class MyEvents extends Component {
           else{
               if(this.state.updatefield=="name"){  
                 this.props.updateEvent(this.state.eventid,{"eventName":this.state.updatevalue});
-                toast.success("event updated!!");
+                toast.success("event name updated!!");
                 setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="datestart"){
                 if(this.state.updatevalue>this.state.date){
-                    toast.warn("the event start date must lower then the event finish date!!");                 
+                    toast.warn("the event start date must lower then the event end date!!");                 
                 }
                 else{
                     this.props.updateEvent(this.state.eventid,{"eventDateStart":this.state.updatevalue});
-                    toast.success("event updated!!");
+                    toast.success("event start date updated!!");
                     setTimeout("location.reload(true);",2000);
                 } 
               }
               else if(this.state.updatefield=="datefinish"){
                 if(this.state.updatevalue<this.state.date){
-                    toast.warn("the event finish date must higher then the event start date!!");               
+                    toast.warn("the event end date must higher then the event start date!!");               
                 }
                 else{
                     this.props.updateEvent(this.state.eventid,{"eventDateFinish":this.state.updatevalue});
-                    toast.success("event updated!!"); 
+                    toast.success("event end date updated!!"); 
                     setTimeout("location.reload(true);",2000);
                 }           
               }
