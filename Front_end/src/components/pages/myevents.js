@@ -4,9 +4,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import {connect} from 'react-redux'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Link} from 'react-router-dom';
-import { getStoreEvents } from '../../actions/eventActions';
-import { deleteEvent, updateEvent } from '../../actions/eventActions';
+import { deleteEvent, updateEvent,getStoreEvents  } from '../../actions/eventActions';
 class MyEvents extends Component {
     constructor(props){
     super(props);
@@ -89,7 +87,6 @@ class MyEvents extends Component {
         this.props.storeevents.events.map((ev)=>{
             eventsarray.push(ev);
         })
-        //eventsarray.push(storeevents);
         return (
             <div>
                 <Breadcrumb title={'My Events'}/>

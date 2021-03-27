@@ -128,7 +128,6 @@ exports.getAllEvents = catchAsyncErrors(async (req, res, next) => {
 //the store Updates an Event   =>   api/mall/store/event/:id
 
 exports.updateEvent = catchAsyncErrors(async (req, res, next) => {
-    console.log(req.body)
 
     const event = await Event.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true,useFindAndModify:false});
     if(!event)

@@ -79,7 +79,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: GET_LIMITED_EVENT_REQUEST })
     
-            const { data } = await axios.get(`api/mall/events/limited`)
+            const { data } = await axios.get(`http://localhost:5000/api/mall/events/limited`)
     
             dispatch({
                 type: GET_LIMITED_EVENT_SUCCESS,
@@ -99,11 +99,11 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: GET_EVENTS_REQUEST })
     
-            const { data } = await axios.get(`api/mall/events`)
+            const { data } = await axios.get(`http://localhost:5000/api/mall/events`)
     
             dispatch({
                 type: GET_EVENTS_SUCCESS,
-                payload: data.events
+                payload: data
             })
     
         } catch (error) {

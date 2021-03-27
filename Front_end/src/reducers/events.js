@@ -189,7 +189,7 @@ import {NEW_EVENT_REQUEST,
             case GET_LIMITED_EVENT_SUCCESS:
                 return{
                     loading: false,
-                    events: action.payload.events,
+                    events: action.payload,
                 }
             case GET_LIMITED_EVENT_FAIL:
                 return {
@@ -217,7 +217,7 @@ import {NEW_EVENT_REQUEST,
             case GET_EVENTS_SUCCESS:
                 return{
                     loading: false,
-                    events: action.payload.events,
+                    events: action.payload,
                 }
             case GET_EVENTS_FAIL: 
                 return {

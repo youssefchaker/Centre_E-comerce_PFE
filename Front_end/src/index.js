@@ -42,6 +42,8 @@ import Contact from './components/pages/contact'
 import MyProfile from './components/pages/myprofile'
 import Addproduct from './components/pages/addproduct'
 import Addevent from './components/pages/addevent'
+import Eventsdisplay from './components/pages/eventsdisplay';
+
 
 // Blog Pages
 import RightSide from './components/blogs/right-sidebar'
@@ -126,6 +128,7 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addevent`} component={Addevent}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/mystore`} component={Mystore}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/myevents`} component={MyEvents}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} component={Eventsdisplay}/>
 
 
 
