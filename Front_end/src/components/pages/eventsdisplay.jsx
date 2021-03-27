@@ -17,8 +17,6 @@ class Eventsdisplay extends Component {
         this.props.events.events.events.map((ev)=>{
             eventsarray.push(ev);
         })
-
-
         return (
             <div>
                 <Breadcrumb title={'Events display'}/>
@@ -60,12 +58,12 @@ class Eventsdisplay extends Component {
 }
 const mapStateToProps=state=>{
     return {
-        events:state.events
+        events:state.events,
       }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getEvents:()=>dispatch(getEvents())
+        getEvents:()=>dispatch(getEvents()),
     }
 }
 

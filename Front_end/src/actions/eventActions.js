@@ -119,7 +119,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: GET_EVENT_REQUEST })
     
-            const { data } = await axios.get(`api/mall/event/${id}`)
+            const { data } = await axios.get(`http://localhost:5000/api/mall/event/${id}`)
     
             dispatch({
                 type: GET_EVENT_SUCCESS,
@@ -185,7 +185,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: GET_ADMIN_EVENTS_REQUEST })
     
-            const { data } = await axios.get(`api/mall/admin/events`)
+            const { data } = await axios.get(`http://localhost:5000/api/mall/admin/events`)
     
             dispatch({
                 type: GET_ADMIN_EVENTS_SUCCESS,
@@ -205,7 +205,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({ type: DELETE_ADMIN_EVENT_REQUEST })
     
-            const { data } = await axios.delete(`/api/mall/admin/event/${id}`)
+            const { data } = await axios.delete(`http://localhost:5000/api/mall/admin/event/${id}`)
     
             dispatch({
                 type: DELETE_ADMIN_EVENT_SUCCESS,
