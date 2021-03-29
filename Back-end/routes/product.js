@@ -41,7 +41,7 @@ router.route('/products/new').get(getNewProducts);//
 router.route('/products/search').get(getSearchedProduct);//
 router.route('/review/:id').put(/* isAuthenticatedUser, */ createProductReview)//
 router.route('/reviews/:id').get(getProductReviews)//
-router.route('/reviews/:id').delete(/* isAuthenticatedUser,  */deleteReview)//
+router.route('/reviews/:reviewid/:productid').delete(/* isAuthenticatedUser,  */deleteReview)//
 router.route('/admin/reviews/:id').delete(isAuthenticatedUser, authorizeRoles('Admin'),deleteAdminReview)//
 router.route('/product/updatereview/:id').put(/* isAuthenticatedUser, */ updateProductReview)//
 router.route('/admin/reviews').get(isAuthenticatedUser,authorizeRoles('Admin'),getAllProductReviews)//

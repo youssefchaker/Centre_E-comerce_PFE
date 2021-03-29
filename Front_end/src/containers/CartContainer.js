@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import CartPage from '../components/common/headers/common/cart-header'
-import {removeItemFromCart} from '../actions/cartActions'
+import {removeFromCart} from '../actions/cartActions'
 import {getCartTotal} from '../services'
 
  
@@ -13,7 +13,7 @@ const CartContainer = ({cartList, total, symbol, removeFromCart}) => (
             <i className="fa fa-shopping-cart"></i></Link>
         <ul className="show-div shopping-cart">
             { cartList.map((item,index) => (
-                <CartPage key={index} item={item} total={total} symbol={symbol} removeFromCart={() => removeItemFromCart(item)}  />
+                <CartPage key={index} item={item} total={total} symbol={"€"} removeFromCart={() => removeFromCart(item)}  />
             ))}
             {(cartList.length > 0) ?
                 <div>
@@ -39,9 +39,8 @@ const CartContainer = ({cartList, total, symbol, removeFromCart}) => (
 function mapStateToProps(state) {
     return {
         cartList: state.cartList.cart,
-        total: getCartTotal(state.cartList.cart),
-        symbol: state.allproducts.symbol,
+        total: getCartTotal(state.cartList.cart)
     }
 }
 
-export default connect(mapStateToProps, {removeItemFromCart})(CartContainer);
+export default connect(mapStateToProps, {removeFromCart})(CartContainer);

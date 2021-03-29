@@ -8,22 +8,27 @@ import {getBestSeller} from "../../services";
 
 class NewProduct extends Component {
     render (){
-        const {items, symbol} = this.props;
-
-        var arrays = [];
-        while (items.length > 0) {
-            arrays.push(items.splice(0, 3));
-        }
-
+        const {newproducts} = this.props;
+        var products=newproducts.products;
+        var newproductsarray = [];
+        const product1=products.product1;
+        const product2=products.product2;
+        const product3=products.product3;
+        const product4=products.product4;
+        const product5=products.product5;
+        newproductsarray.push(product1);
+        newproductsarray.push(product2);
+        newproductsarray.push(product3);
+        newproductsarray.push(product4);
+        newproductsarray.push(product5);
         return (
             <div className="theme-card">
                 <h5 className="title-border">new product</h5>
                 <Slider className="offer-slider slide-1">
-                    {arrays.map((products, index) =>
+                    {newproductsarray.map((product, index) =>
                         <div key={index}>
-                            {products.map((product, i) =>
-                                <div className="media" key={i}>
-                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><img className="img-fluid" src={`${product.variants[0].images}`} alt="" /></Link>
+                                <div className="media" key={index}>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
                                     <div className="media-body align-self-center">
                                         <div className="rating">
                                             <i className="fa fa-star"></i>
@@ -33,11 +38,10 @@ class NewProduct extends Component {
                                             <i className="fa fa-star"></i>
                                         </div>
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><h6>{product.name}</h6></Link>
-                                        <h4>{symbol}{(product.price*product.discount/100)}
-                                            <del><span className="money">{symbol}{product.price}</span></del></h4>
+                                        <h4>{"€"}{(product.price)}</h4>
+                                            {/* <del><span className="money">{"€"}{product.price}</span></del> */}
                                     </div>
                                 </div>
-                            )}
                         </div>
                     )}
                 </Slider>
@@ -48,8 +52,7 @@ class NewProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        items: getBestSeller(state.data.products),
-        symbol: state.data.symbol
+        newproducts:state.newproducts
     }
 }
 

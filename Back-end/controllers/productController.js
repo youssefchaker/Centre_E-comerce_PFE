@@ -168,8 +168,6 @@ exports.getSearchedProduct = catchAsyncErrors(async (req, res, next) => {
 
 // store and admin Update Product   =>   /api/mall/store/product/:id
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
-    console.log(req.params.id);
-    console.log(req.body);
     product = await Product.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true,useFindAndModify:false});
     if(!product){
         return next(new ErrorHandler('Product not found', 404));
@@ -209,10 +207,10 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 // Create new review   =>   /api/mall/review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
 
-    const {rating,comment}=req.body
+    const {userid,rating,comment}=req.body
     //get current loged in user
-    User.findById(req.user._id).populate("user").exec(function(err,user){
-        Product.findByIdAndUpdate(request.params.id,{ $push: { reviews:{user:user,rating:rating,comment:comment} },$inc: {nbreviews:1} },{useFindAndModify:false}).exec(function(err,product){
+    User.findById(userid).populate("user").exec(function(err,user){
+        Product.findByIdAndUpdate(req.params.id,{ $push: { reviews:{user:user,rating:rating,comment:comment} },$inc: {nbreviews:1} },{useFindAndModify:false}).exec(function(err,product){
             if(!product){
                 return next(new ErrorHandler('Product not found', 404));
             }
@@ -240,22 +238,27 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 
 // Delete Product Review   =>   /api/mall/reviews
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
-
-    const product =Product.findOneAndUpdate({"reviews._id":req.params.id},{$pull:{reviews:{_id:req.params.id}}})
-            if(!product){
-                return next(new ErrorHandler('Product or Review not found', 404));
-            }
-            else{
-                res.status(200).json({
-                    success: true,
-                    message:"review deleted"}) 
+    Product.findById(req.params.productid).exec(function(err,product){
+        var newreviewarray=product.reviews.filter(function(review){
+            return review._id == req.params.reviewid
+        });
+        Product.findByIdAndUpdate(req.params.productid,{$pull: {reviews:{_id:req.params.reviewid}},$inc: {nbreviews:-1}})
+                if(!product){
+                    return next(new ErrorHandler('Product not found', 404));
                 }
+                else{
+                    res.status(200).json({
+                        success: true,
+                        message:"review deleted"}) 
+                    }
+    })
+    
 })
 
 // Delete Product Review   =>   /admin/reviews/:id
 exports.deleteAdminReview = catchAsyncErrors(async (req, res, next) => {
 
-    const product =Product.findOneAndUpdate({"reviews._id":req.params.id},{$pull:{reviews:{_id:req.params.id}}})
+    const product =Product.findOneAndUpdate({"reviews._id":req.params.id},{$pull: {reviews:{_id:req.params.reviewid}},$inc: {nbreviews:-1}})
             if(!product){
                 return next(new ErrorHandler('Product or Review not found', 404));
             }
@@ -268,10 +271,9 @@ exports.deleteAdminReview = catchAsyncErrors(async (req, res, next) => {
 
 // the client updates a specific review   =>   /product/updatereview/:id
 
-exports.updateProductReview = catchAsyncErrors(async (request, res, next) => {
-
+exports.updateProductReview = catchAsyncErrors(async (req, res, next) => {
     const {rating,comment}=req.body;
-    const product =Product.findOneAndUpdate({"reviews._id":req.params.id},{"reviews":{$elemMatch:{_id:req.params.id}},$set:{rating:rating,comment:comment}})
+    const product =Product.findOneAndUpdate({"reviews._id":req.params.id},{reviews:  {$elemMatch:{_id:req.params.reviewid}},$set:{rating:rating,comment:comment}})
             if(!product){
                 return next(new ErrorHandler('Product or Review not found', 404));
             }

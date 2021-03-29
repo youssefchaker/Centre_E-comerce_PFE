@@ -50,6 +50,7 @@ const rootReducer = combineReducers({
     deleteproduct:deleteProductReducer,
     deleteadminproduct:deleteAdminProductReducer,
     adminproducts:getAdminProductsReducer,
+    ////////////////////////////////////////////////////////
     newreview:newReviewReducer,
     adminreviews:getAdminReviewsReducer,
     productreviews:getProductReviewReducer,

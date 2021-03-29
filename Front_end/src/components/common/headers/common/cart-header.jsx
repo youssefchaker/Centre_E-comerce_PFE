@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
-const CartHeader  = ({item, total, symbol, removeFromCart}) => (
+const CartHeader  = ({item, total, removeFromCart}) => (
             <li >
+            {console.log(item)}
                 <div className="media">
-                    <Link to={`${process.env.PUBLIC_URL}/product/${item.id}`}><img alt="" className="mr-3" src={`${item.pictures[0]}`} /></Link>
+                    <Link to={`${process.env.PUBLIC_URL}/product/${item.id}`}><img alt="" className="mr-3" src={`${item.images[0]}`} /></Link>
                     <div className="media-body">
                         <Link to={`${process.env.PUBLIC_URL}/product/${item.id}`}><h4>{item.name}</h4></Link>
-                        <h4><span>{item.qty} x {symbol} {(item.price*item.discount/100)}</span></h4>
+                        <h4><span>{item.qty} x {"€"} {(item.price)}{/* {(item.price*item.discount/100)} */}</span></h4>
                     </div>
                 </div>
                 {/*<span>{cart}</span>*/}

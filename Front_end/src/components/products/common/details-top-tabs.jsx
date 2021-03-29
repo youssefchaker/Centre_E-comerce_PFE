@@ -2,17 +2,42 @@ import React, {Component} from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import SimpleReactValidator from 'simple-react-validator';
 import ReactStars from "react-rating-stars-component";
+import { deleteReview,  newReview, updateReview } from '../../../actions/productActions';
 class DetailsTopTabs extends Component {
     constructor(props){
         super(props);
         this.state={
             Rating:3,
-            Comment:null
+            Comment:null,
+            updatevalue:null,
+            updatefield:null,
+            inputtype:null,
+            other:null,
+            reviewid:null
+
         }
         this.validator = new SimpleReactValidator();
+        this.validator2 = new SimpleReactValidator();
+    }
+    openSearch=(field,reviewid,other)=> {
+        document.getElementById("update-overlay").style.display = "block";
+        if(field=="comment"){
+            this.setState({inputtype:"text"});
+        }
+        else if(field=="rating"){
+            this.setState({inputtype:"number"}); 
+        }
+        this.setState({updatefield:field});
+        this.setState({reviewid:reviewid});
+        this.setState({other:other});
+
+    }
+    closeSearch() {
+        document.getElementById("update-overlay").style.display = "none";
     }
     setStateFromInput = (event) => {
         var obj = {};
@@ -26,18 +51,46 @@ class DetailsTopTabs extends Component {
             this.forceUpdate();
           }
           else{
+            this.props.newReview(this.props.product._id,{"userid":"60427c490a3e58277869d28b","rating":this.state.Rating,"comment":this.state.Comment});
             toast.success("Review added !");
+            setTimeout("location.reload(true);",2000);
           }
           
  
       }
        ratingChanged = (newRating) => {
-        console.log(newRating);
+        this.setState({Rating:newRating});
       };
+      handleupdate=(e)=>{
+        e.preventDefault(); 
+          if(!this.validator2.allValid()){
+            this.validator2.showMessages();
+            this.forceUpdate();
+          }
+          else{
+              console.log(this.state.updatevalue);
+              if(this.state.updatefield=="comment"){
+                this.props.updateReview(this.state.reviewid,{"rating":this.state.other,"comment":this.state.updatevalue});
+                toast.success("review comment updated!!");
+                setTimeout("location.reload(true);",2000);
+              }
+              else if(this.state.updatefield=="rating"){
+                this.props.updateReview(this.state.reviewid,{"rating":parseInt(this.state.updatevalue,10),"comment":this.state.other});
+                toast.success("review rating updated!!");
+                setTimeout("location.reload(true);",2000);
+              }    
+          }
+      }
+      handledelete=(reviewid,productid)=>{
+        this.props.deleteReview(reviewid,productid);
+        toast.error("Review deleted !");
+        setTimeout("location.reload(true);",2000);
+    }
     render (){
         
 
         return (
+            <div>
             <section className="tab-product m-0">
                 <div className="row">
                     <div className="col-sm-12 col-lg-12">
@@ -45,11 +98,11 @@ class DetailsTopTabs extends Component {
                             <TabList className="nav nav-tabs nav-material">
                                 <Tab className="nav-item">
                                     <span className="nav-link active">
-                                        <i className="icofont icofont-ui-home"></i>Description</span>
+                                        <i className="icofont icofont-ui-home"></i>Details</span>
                                     <div className="material-border"></div>
                                 </Tab>
                                 <Tab className="nav-item">
-                                    <span className="nav-link" ><i className="icofont icofont-man-in-glasses"></i>Details</span>
+                                    <span className="nav-link" ><i className="icofont icofont-man-in-glasses"></i>Description</span>
                                     <div className="material-border"></div>
                                 </Tab>
                                 <Tab className="nav-item">
@@ -65,62 +118,46 @@ class DetailsTopTabs extends Component {
                             </TabList>
                             <TabPanel className="tab-pane fade mt-4 show active">
                                 <table className="table table-striped mb-0">
+                                {this.props.product.details.map((detail)=>(
                                     <tbody>
                                     <tr>
-                                        <th>Ideal For :</th>
-                                        <td>Women's</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pattern :</th>
-                                        <td>Embroidered</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Dress Fabric :</th>
-                                        <td>Silk</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Type :</th>
-                                        <td>Ghagra, Choli, Dupatta Set</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Neck :</th>
-                                        <td>Round Neck</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Sleeve :</th>
-                                        <td>3/4 Sleeve</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Work :</th>
-                                        <td>N/A</td>
+                                        <th>{detail.detailname}</th>
+                                        <td>{detail.value}</td>
                                     </tr>
                                     </tbody>
+                                ))}      
                                 </table>
                             </TabPanel>
                             <TabPanel>
+                            
                                 <p className="mt-4 p-0">
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a
-                                    type specimen book. It has survived not only five centuries,
-                                    but also the leap into electronic typesetting, remaining
-                                    essentially unchanged. It was popularised in the 1960s with
-                                    the release of Letraset sheets containing Lorem Ipsum
-                                    passages, and more recently with desktop publishing software
-                                    like Aldus PageMaker including versions of Lorem Ipsum.
+                                    {this.props.product.description}
                                 </p>
                             </TabPanel>
                             <TabPanel>
-                                <div className="mt-4 text-center">
-                                    <div className="embed-responsive embed-responsive-16by9">
-                                        <iframe
-                                            src="https://www.youtube.com/embed/BUWzX78Ye_8"
-                                            allow="autoplay; encrypted-media"
-                                            allowFullScreen>
-                                        </iframe>
-                                    </div>
-                                </div>
+                            <table className="table table-striped mb-0">
+                                    <tr>
+                                        <th>delete review</th>
+                                        <th>Reviewer</th>
+                                        <td>updatecomment</td>
+                                        <th>Comment</th>
+                                        <td>update rating</td>
+                                        <th>Rating</th>
+                                    </tr>
+                                {this.props.product.reviews.map((review)=>(
+                                    
+                                    <tbody>
+                                    <tr>
+                                    <td><button  onClick={()=>this.handledelete(review._id,this.props.product._id)}><span>×</span></button></td>
+                                        <td>{review.user}</td>
+                                        <td ><button className="fa fa-edit" onClick={()=>this.openSearch("comment",review._id,review.rating)}></button></td>
+                                        <td>{review.comment}</td>
+                                        <td ><button className="fa fa-edit" onClick={()=>this.openSearch("rating",review._id,review.comment)}></button></td>
+                                        <td><b>{review.rating}/5</b></td>
+                                    </tr>
+                                    </tbody>
+                                ))}      
+                                </table>
                             </TabPanel>
                             <TabPanel>
                                 <form className="theme-form mt-4">
@@ -152,8 +189,47 @@ class DetailsTopTabs extends Component {
                     </div>
                 </div>
             </section>
+            <div id="update-overlay" className="search-overlay">
+                                        <div>
+                                        <span className="closebtn" onClick={this.closeSearch} title="Close Overlay">×</span>
+                                                <div className="overlay-content">
+                                                <div className="container">
+                                                <div className="row">
+                                                <div className="col-xl-12">
+                                                <form>
+                                                    <div className="form-group">
+                                                    {this.state.inputtype=="text"?<input type="text" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
+                                                     :<input type="number" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} min="0" max="5" />}  
+
+                                                    {this.state.inputtype=="text"?this.validator2.message('new value', this.state.updatevalue, 'required'):this.validator2.message('new value', this.state.updatevalue, 'required|between:0,5')}
+                                                    </div>
+                                                <button type="submit" onClick={this.handleupdate} style={{marginRight:"-35px"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
+                                                </form>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div> 
+                                        </div>
+                                        </div>
+                                        </div>
+            
         )
     }
 }
 
-export default DetailsTopTabs;
+const mapStateToProps=state=>{
+    return {
+        newreview:state.newreview,
+        deleteproductreview:state.deleteproductreview,
+        updateproductreview:state.updateproductreview
+      }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        newReview:(id,reviewData)=>dispatch(newReview(id,reviewData)),
+        deleteReview:(reviewid,productid)=>dispatch(deleteReview(reviewid,productid)),
+        updateReview:(id,reviewData)=>dispatch(updateReview(id,reviewData))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DetailsTopTabs);

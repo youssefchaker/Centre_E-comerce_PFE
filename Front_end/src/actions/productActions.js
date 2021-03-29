@@ -116,7 +116,7 @@ export const getStoreProduct = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_STORE_PRODUCT_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }
@@ -306,7 +306,7 @@ export const newReview = (id,reviewData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/mall/review/${id}`, reviewData, config)
+        const { data } = await axios.put(`http://localhost:5000/api/mall/review/${id}`, reviewData, config)
 
         dispatch({
             type: NEW_REVIEW_SUCCESS,
@@ -326,7 +326,7 @@ export const getProductReviews = (id) => async (dispatch) => {
 
         dispatch({ type: GET_PRODUCT_REVIEWS_REQUEST })
 
-        const { data } = await axios.get(`api/mall/reviews/${id}`)
+        const { data } = await axios.get(`http://localhost:5000/api/mall/reviews/${id}`)
 
         dispatch({
             type: GET_PRODUCT_REVIEWS_SUCCESS,
@@ -363,12 +363,12 @@ export const getAdminReviews = () => async (dispatch) => {
     }
 }
 
-export const deleteReview = (id) => async (dispatch) => {
+export const deleteReview = (reviewid,productid) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_REVIEW_REQUEST })
 
-        const { data } = await axios.delete(`/api/mall/reviews/${id}`)
+        const { data } = await axios.delete(`http://localhost:5000/api/mall/reviews/${reviewid}/${productid}`)
 
         dispatch({
             type: DELETE_REVIEW_SUCCESS,
@@ -378,7 +378,7 @@ export const deleteReview = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_REVIEW_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }
@@ -403,7 +403,7 @@ export const deleteAdminReview = (id) => async (dispatch) => {
     }
 }
 
-export const updateReview = (id, productData) => async (dispatch) => {
+export const updateReview = (id, reviewData) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_REVIEW_REQUEST })
@@ -414,7 +414,7 @@ export const updateReview = (id, productData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/mall/product/updatereview/${id}`, productData, config)
+        const { data } = await axios.put(`http://localhost:5000/api/mall/product/updatereview/${id}`, reviewData, config)
 
         dispatch({
             type: UPDATE_REVIEW_SUCCESS,

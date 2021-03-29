@@ -1,6 +1,6 @@
 import React, { Component,useState, useEffect } from 'react';
 import {connect} from 'react-redux'
-import {addItemToCart} from "../../../actions/cartActions"
+import {addToCart} from "../../../actions/cartActions"
 import ProductItem from './product-item';
 import { getNewProducts } from '../../../actions/productActions';
 import { IntlActions } from 'react-redux-multilingual';
@@ -36,7 +36,7 @@ class SpecialProducts extends Component{
                                     { newproductsarray.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem product={product} symbol={"€"}
-                                                         onAddToCartClicked={() => addItemToCart(product, 1)} key={index} />
+                                                         onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }
                                 </Slider>
@@ -57,7 +57,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return{
         getNewProducts:()=>dispatch(getNewProducts()),
-        addItemToCart:(id,stock)=>dispatch(addItemToCart(id,stock))
+        addToCart:(id,stock)=>dispatch(addToCart(id,stock))
     }
 }
 

@@ -14,6 +14,7 @@ import DetailsTopTabs from "./common/details-top-tabs";
 import { addToCart, addToCartUnsafe } from '../../actions'
 import ImageZoom from './common/product/image-zoom'
 import SmallImages from './common/product/small-image'
+import { getStoreProduct } from '../../actions/productActions';
 
 
 
@@ -36,6 +37,8 @@ class LeftSideBar extends Component {
             nav1: this.slider1,
             nav2: this.slider2
         });
+        this.props.getStoreProduct("605f68d3108a9212e053aa73");
+        
     }
     
     filterClick() {
@@ -46,7 +49,8 @@ class LeftSideBar extends Component {
     }
 
     render(){
-        const {symbol, item, addToCart, addToCartUnsafe, addToWishlist} = this.props
+        const { product} = this.props.product.product;
+        const {addToCart,addToCartUnsafe}=this.props;
         var products = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -66,15 +70,15 @@ class LeftSideBar extends Component {
             <div>
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>Mall | {item.category} | {item.name}</title>
+                    <title>Mall | {product.category} | {product.name}</title>
                     <meta name="description" content="online Mall" />
                 </Helmet>
                 {/*SEO Support End */}
 
-                <Breadcrumb  parent={'Product'} title={item.name} />
+                <Breadcrumb  parent={'Product'} title={product.name} />
 
                 {/*Section Start*/}
-                {(item)?
+                {(product)?
                 <section className="section-b-space">
                     <div className="collection-wrapper">
                         <div className="container">
@@ -106,24 +110,20 @@ class LeftSideBar extends Component {
                                         <div className="row">
                                             <div className="col-lg-6 product-thumbnail">
                                                 <Slider {...products} asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)} className="product-slick">
-                                                    {item.variants?
-                                                    item.variants.map((vari, index) =>
-                                                       <div key={index}>
-                                                           <ImageZoom image={vari.images} />
-                                                       </div>
-                                                    ):
-                                                    item.pictures.map((vari, index) =>
+                                                    {
+                                                    
+                                                    product.images.map((vari, index) =>
                                                         <div key={index}>
                                                             <ImageZoom image={vari} />
                                                         </div>
                                                     )}
                                                 </Slider>
-                                                <SmallImages item={item} settings={productsnav} navOne={this.state.nav1} />
+                                                <SmallImages product={product} settings={productsnav} navOne={this.state.nav1} />
                                             </div>
-                                            <DetailsWithPrice symbol={symbol} item={item} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} addToWishlistClicked={addToWishlist} />
+                                            <DetailsWithPrice symbol={"€"} product={product} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe}  />
                                         </div>
                                     </div>
-                                    <DetailsTopTabs item={item} />
+                                    <DetailsTopTabs product={product} />
                                 </div>
                             </div>
                         </div>
@@ -136,11 +136,20 @@ class LeftSideBar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let productId = ownProps.match.params.id;
+    /*let productId = ownProps.match.params.id;
     return {
-        item: state.data.products.find(el => el.id == productId),
-        symbol: state.data.symbol
+        product: state.data.products.find(el => el.id == productId),
+    }*/
+    return{
+        product:state.product
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        getStoreProduct:(id)=>dispatch(getStoreProduct(id)),
+        addToCart:(product,quantity)=>dispatch(addToCart(product,quantity)),
+        addToCartUnsafe:(product,quantity)=>dispatch(addToCartUnsafe(product,quantity))
     }
 }
 
-export default connect(mapStateToProps, {addToCart, addToCartUnsafe}) (LeftSideBar);
+export default connect(mapStateToProps,mapDispatchToProps) (LeftSideBar);
