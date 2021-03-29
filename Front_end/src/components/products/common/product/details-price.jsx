@@ -50,8 +50,6 @@ class DetailsWithPrice extends Component {
 
     render (){
         const {symbol, product, addToCartClicked, BuynowClicked} = this.props
-        console.log(addToCartClicked);
-        console.log(BuynowClicked);
         var colorsnav = {
             slidesToShow: 6,
             swipeToSlide:true,

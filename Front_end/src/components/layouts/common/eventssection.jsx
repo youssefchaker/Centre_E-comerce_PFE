@@ -17,6 +17,7 @@ class EventSection extends Component {
         this.props.limitedevents.events.map((ev)=>{
             eventsarray.push(ev);
         })
+        console.log(this.props.limitedevents);
         return (
                 <div className="container">
                     <div className="row">
@@ -36,7 +37,9 @@ class EventSection extends Component {
                                             <h4>Event Start Date</h4>
                                             <p>{event.eventDateStart.slice(0,10)}</p>
                                             <h4>Event End Date</h4>
-                                            <p>{event.eventDateFinish.slice(0,10)}</p>   
+                                            <p>{event.eventDateFinish.slice(0,10)}</p>
+                                            <h4>Event By</h4>
+                                            <p>{event.eventDateFinish.slice(0,10)}</p>    
                                             <hr className="style1" />
                                             <Link to="../../../pages/eventsdisplay" style={{textDecorationLine:'underline'}} ><h6>Check all events</h6></Link>
                                         </div>

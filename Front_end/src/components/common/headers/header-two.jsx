@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink} from 'react-router-dom';
 import { IntlActions } from 'react-redux-multilingual'
 import Pace from 'react-pace-progress'
+import { Redirect } from "react-router-dom";
 
 // Import custom components
 import store from '../../../store';
@@ -14,6 +15,7 @@ import {connect} from "react-redux";
 import TopBarDark from './common/topbar-dark';
 import SimpleReactValidator from 'simple-react-validator';
 import {getSearchedProducts} from '../../../actions/productActions'
+
 class HeaderTwo extends Component {
 
     constructor(props) {
@@ -88,7 +90,9 @@ class HeaderTwo extends Component {
             this.forceUpdate();
           }
           else{
-              this.props.getSearchedProducts();
+              this.props.getSearchedProducts(this.state.search);
+              document.getElementById("search-overlay").style.display = "none";
+              this.props.search(this.props.searchedproducts.products);
           }
       }
     setStateFromInput = (event) => {
@@ -190,7 +194,7 @@ class HeaderTwo extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getSearchedProducts: () => dispatch(getSearchedProducts())
+        getSearchedProducts: (keyword) => dispatch(getSearchedProducts(keyword))
     }
 }
 

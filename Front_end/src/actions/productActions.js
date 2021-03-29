@@ -121,12 +121,10 @@ export const getStoreProduct = (id) => async (dispatch) => {
     }
 }
 
-export const getSearchedProducts = () => async (dispatch) => {
+export const getSearchedProducts = (keyword) => async (dispatch) => {
     try {
-
         dispatch({ type: SEARCH_PRODUCT_REQUEST })
-
-        const { data } = await axios.get(`http://localhost:5000/api/mall/products/search`)
+        const { data } = await axios.get(`http://localhost:5000/api/mall/products/search/${keyword}`)
 
         dispatch({
             type: SEARCH_PRODUCT_SUCCESS,
@@ -136,7 +134,7 @@ export const getSearchedProducts = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: SEARCH_PRODUCT_FAIL,
-            payload: error.response.data.message
+            payload: error
         })
     }
 }

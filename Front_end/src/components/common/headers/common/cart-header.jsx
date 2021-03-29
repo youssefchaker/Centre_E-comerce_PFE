@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 const CartHeader  = ({item, total, removeFromCart}) => (
             <li >
-            {console.log(item)}
                 <div className="media">
                     <Link to={`${process.env.PUBLIC_URL}/product/${item.id}`}><img alt="" className="mr-3" src={`${item.images[0]}`} /></Link>
                     <div className="media-body">

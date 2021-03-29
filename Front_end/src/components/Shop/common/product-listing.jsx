@@ -91,9 +91,8 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = dispatch => {
     return {
-        getProducts: () => dispatch(getProducts())
+        getProducts: () => dispatch(getProducts()),
+        addToCart:(product,qty)=>dispatch(addToCart(product,qty))
     }
 }
-export default connect(
-    mapStateToProps,mapDispatchToProps,null, {addToCart}
-)(ProductListing)
+export default connect(mapStateToProps,mapDispatchToProps)(ProductListing)

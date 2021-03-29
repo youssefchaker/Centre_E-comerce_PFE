@@ -38,7 +38,7 @@ router.route('/admin/products').get(isAuthenticatedUser,authorizeRoles('Admin'),
 router.route('/product/:id').get(getSingleProduct);//
 router.route('/products/top').get(getTopProducts);//
 router.route('/products/new').get(getNewProducts);//
-router.route('/products/search').get(getSearchedProduct);//
+router.route('/products/search/:keyword').get(getSearchedProduct);//
 router.route('/review/:id').put(/* isAuthenticatedUser, */ createProductReview)//
 router.route('/reviews/:id').get(getProductReviews)//
 router.route('/reviews/:reviewid/:productid').delete(/* isAuthenticatedUser,  */deleteReview)//

@@ -10,7 +10,7 @@ import ProductItem from '../layouts/common/product-item';
 
 class RelatedProduct extends Component {
     render (){
-        const {items, symbol, addToCart, addToWishlist, addToCompare} = this.props;
+        const {items, addToCart} = this.props;
 
 
         return (
@@ -24,7 +24,7 @@ class RelatedProduct extends Component {
                     <div className="row search-product">
                         { items.slice(0, 6).map((product, index ) =>
                             <div key={index} className="col-xl-2 col-md-4 col-sm-6">
-                                <ProductItem product={product} symbol={symbol}
+                                <ProductItem product={product} symbol={"€"}
                                              onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                             </div>)
                         }
@@ -37,8 +37,7 @@ class RelatedProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        items: getBestSeller(state.data.products),
-        symbol: state.data.symbol
+        items: getBestSeller(state.allproducts.products),
     }
 }
 

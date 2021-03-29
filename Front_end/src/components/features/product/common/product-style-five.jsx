@@ -47,37 +47,32 @@ class ProductStyleFive extends Component {
     }
 
     render() {
-        const {product, symbol, onAddToCartClicked, onAddToWishlistClicked, onAddToCompareClicked} = this.props;
+        const {product,  onAddToCartClicked} = this.props;
+        const symbol="€";
         const {open} = this.state;
 
-        let RatingStars = []
+/*         let RatingStars = []
         for(var i = 0; i < product.rating; i++) {
             RatingStars.push(<i className="fa fa-star" key={i}></i>)
-        }
+        } */
 
         return (
 
             <div className="product-box product-wrap">
                 <div className="img-wrapper">
-                    <div className="lable-block">
+                   {/*  <div className="lable-block">
                         {(product.new == true)? <span className="lable3">new</span> : ''}
                         {(product.sale == true)? <span className="lable4">on sale</span> : ''}
-                    </div>
+                    </div> */}
                     <div className="front">
                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
-                            src={product.variants?
-                                this.state.image?this.state.image:product.variants[0].images
-                                :product.pictures[0]}
+                            src={product.pictures[0]}
                             className="img-fluid"
                             alt="" /></Link>
                     </div>
                     <div className="back">
                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
-                            src={
-                                product.variants?
-                                    this.state.image?this.state.image:product.variants[0].images
-                                    :product.pictures[0]
-                            }
+                            src={product.pictures[0]}
                             className="img-fluid"
                             alt="" /></Link>
                     </div>
@@ -89,20 +84,13 @@ class ProductStyleFive extends Component {
                 </div>
                 <div className="product-detail  text-center">
                     <div>
-                        <div className="rating">
+                        {/* <div className="rating">
                             {RatingStars}
-                        </div>
+                        </div> */}
                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}>
                             <h6>{product.name}</h6>
                         </Link>
-                        <h4>{symbol}{product.price-(product.price*product.discount/100)}</h4>
-                        {product.variants?
-                        <ul className="color-variant">
-                            {product.variants.map((vari, i) => {
-                                return (
-                                    <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
-                            })}
-                        </ul>:''}
+                        <h4>{symbol}{product.price}{/* {product.price-(product.price*product.discount/100)} */}</h4>
                     </div>
                 </div>
                 <Modal open={open} onClose={this.onCloseModal} center>
@@ -112,36 +100,28 @@ class ProductStyleFive extends Component {
                                 <div className="row">
                                     <div className="col-lg-6  col-xs-12">
                                         <div className="quick-view-img">
-                                            <img src={product.variants?
-                                                this.state.image?this.state.image:product.variants[0].images
-                                                :product.pictures[0]} alt="" className="img-fluid" />
+                                            <img src={product.pictures[0]} alt="" className="img-fluid" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6 rtl-text">
                                         <div className="product-right">
                                             <h2> {product.name} </h2>
-                                            <h3>{symbol}{product.price-(product.price*product.discount/100)}
-                                                <del><span className="money">{symbol}{product.price}</span></del>
+                                            <h3>{symbol}{product.price}{/* {product.price-(product.price*product.discount/100)} */}
+                                                {/* <del><span className="money">{symbol}{product.price}</span></del> */}
                                             </h3>
-                                            {product.variants?
-                                                <ul className="color-variant">
-                                                    {product.variants.map((vari, i) =>
-                                                        <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
-                                                    }
-                                                </ul>:''}
-                                            <div className="border-product">
+                                            {/* <div className="border-product">
                                                 <h6 className="product-title">product details</h6>
                                                 <p>{product.shortDetails}</p>
-                                            </div>
+                                            </div> */}
                                             <div className="product-description border-product">
-                                                {product.size?
+                                                {/* {product.size?
                                                     <div className="size-box">
                                                         <ul>
                                                             {product.size.map((size, i) => {
                                                                 return <li key={i}><a href="#">{size}</a></li>
                                                             })}
                                                         </ul>
-                                                    </div>:''}
+                                                    </div>:''} */}
                                                 <h6 className="product-title">quantity</h6>
                                                 <div className="qty-box">
                                                     <div className="input-group">

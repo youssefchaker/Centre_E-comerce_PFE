@@ -60,15 +60,23 @@ exports.getEvent = catchAsyncErrors(async (req, res, next) => {
 // get limited events for the home page  =>   api/mall/events/limited
 
 exports.getEventsLimited = catchAsyncErrors(async (req, res, next) => {
-
+    var storenames=[];
     const events = await Event.find().limit(5);
     if (events.length==0) {
         return next(new ErrorHandler('there are no events in the website at the moment', 404));
     }
     else{
+        events.map((event)=>{
+            Store.findById(event.store).exec(function(err,store){
+                
+                storenames.push(store.name);
+            })
+        })
+        console.log(storenames);
         res.status(200).json({
             success: true,
-            events
+            events,
+            storenames
         })
     }
 })
