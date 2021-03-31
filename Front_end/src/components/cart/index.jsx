@@ -48,13 +48,12 @@ class cartComponent extends Component {
                                         return (
                                         <tbody key={index}>
                                             <tr>
-                                            {console.log(item.price)}
                                                 <td>
-                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.id}`}>
+                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item._id}`}>
                                                         <img src={item.images[0]} alt="" />
                                                     </Link>
                                                 </td>
-                                                <td><Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.id}`}>{item.name}</Link>
+                                                <td><Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item._id}`}>{item.name}</Link>
                                                     <div className="mobile-cart-content row">
                                                         <div className="col-xs-3">
                                                             <div className="qty-box">
@@ -81,7 +80,7 @@ class cartComponent extends Component {
                                                     <div className="qty-box">
                                                         <div className="input-group">
                                                             <span className="input-group-prepend">
-                                                                <button type="button" className="btn quantity-left-minus" onClick={() => this.props.decrementQty(item.id)} data-type="minus" data-field="">
+                                                                <button type="button" className="btn quantity-left-minus" onClick={() => this.props.decrementQty(item._id)} data-type="minus" data-field="">
                                                                  <i className="fa fa-angle-left"></i>
                                                                 </button>
                                                             </span>
@@ -100,7 +99,7 @@ class cartComponent extends Component {
                                                         <i className="fa fa-times"></i>
                                                     </a>
                                                 </td>
-                                                <td><h2 className="td-color">{"€"}{item.sum}</h2></td>
+                                                <td><h2 className="td-color">{"€"}{item.price*item.qty}</h2></td>
                                             </tr>
                                         </tbody> )
                                     })}

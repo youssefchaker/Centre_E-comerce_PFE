@@ -15,6 +15,7 @@ import {connect} from "react-redux";
 import TopBarDark from './common/topbar-dark';
 import SimpleReactValidator from 'simple-react-validator';
 import {getSearchedProducts} from '../../../actions/productActions'
+import Searchresult from '../../pages/searchresult';
 
 class HeaderTwo extends Component {
 
@@ -23,7 +24,8 @@ class HeaderTwo extends Component {
 
         this.state = {
             isLoading:false,
-            search:null
+            search:null,
+            loadsearch:null
         }
         this.validator=new SimpleReactValidator();
     }
@@ -91,8 +93,7 @@ class HeaderTwo extends Component {
           }
           else{
               this.props.getSearchedProducts(this.state.search);
-              document.getElementById("search-overlay").style.display = "none";
-              this.props.search(this.props.searchedproducts.products);
+              this.setState({loadsearch:"load"})
           }
       }
     setStateFromInput = (event) => {
@@ -174,19 +175,22 @@ class HeaderTwo extends Component {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-xl-12">
-                                        <form>
+                                    {this.state.loadsearch=="load"?
+                                                <Searchresult products={this.props.searchedproducts} />
+                                            :<form>
                                             <div className="form-group">
                                                 <input type="text" name="search" className="form-control" placeholder="Search a Product" onChange={this.setStateFromInput} value={this.state.search} />
                                                 {this.validator.message('search', this.state.search, 'required')}
                                             </div>
                                             <button type="submit" onClick={this.handlesubmit} className="btn btn-primary"><i className="fa fa-search"></i></button>
-                                        </form>
+                                        </form>}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         )
     }

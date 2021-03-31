@@ -15,50 +15,22 @@ import FooterFour from "./common/footers/footer-four";
 
 // ThemeSettings
 import ThemeSettings from "./common/theme-settings"
-import Searchresult from './pages/searchresult';
 
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            search:''
-        }
-    }
     componentDidMount=()=>{
         {this.setState({search:''})}
       }
-handlesearch = (data) => {
-      this.setState({search: data})
-}
 
     render() {
-        if(this.state.search==''){
             return (
                 <div>
-                    <HeaderTwo logoName={'logo2.png'} search={this.handlesearch}/>
+                    <HeaderTwo logoName={'logo2.png'}/>
                     {this.props.children}
                     <FooterThree logoName={'logo2.png'}/>
                     <ThemeSettings />
-    
-    
                 </div>
             );
-            
-        }
-        else{
-            return(
-                <div>
-                <HeaderTwo logoName={'logo2.png'} search={this.handlesearch}/>
-                <Searchresult products={this.state.search}></Searchresult>
-                <FooterThree logoName={'logo2.png'}/>
-                <ThemeSettings />
-                </div>
-                
-            )
-        
-    }
     }
 }
 
