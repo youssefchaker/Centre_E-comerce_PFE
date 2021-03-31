@@ -83,13 +83,13 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({
                 type: GET_LIMITED_EVENT_SUCCESS,
-                payload: data.events
+                payload: data
             })
     
         } catch (error) {
             dispatch({
                 type: GET_LIMITED_EVENT_FAIL,
-                payload: error.response.data.message
+                payload: error
             })
         }
     }

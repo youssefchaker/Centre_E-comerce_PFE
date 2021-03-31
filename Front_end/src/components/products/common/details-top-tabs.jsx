@@ -68,7 +68,6 @@ class DetailsTopTabs extends Component {
             this.forceUpdate();
           }
           else{
-              console.log(this.state.updatevalue);
               if(this.state.updatefield=="comment"){
                 this.props.updateReview(this.state.reviewid,{"rating":this.state.other,"comment":this.state.updatevalue});
                 toast.success("review comment updated!!");
@@ -135,7 +134,8 @@ class DetailsTopTabs extends Component {
                                 </p>
                             </TabPanel>
                             <TabPanel>
-                            <table className="table table-striped mb-0">
+                            {this.props.product.reviews.length!==0?
+                                <table className="table table-striped mb-0">
                                     <tr>
                                         <th>delete review</th>
                                         <th>Reviewer</th>
@@ -158,6 +158,8 @@ class DetailsTopTabs extends Component {
                                     </tbody>
                                 ))}      
                                 </table>
+                            :<h3>No current Reviews for this product</h3>}
+                            
                             </TabPanel>
                             <TabPanel>
                                 <form className="theme-form mt-4">

@@ -6,8 +6,8 @@ import {Link} from 'react-router-dom'
 
 class ProductMultiSlider extends Component {
     render (){
-        const {items, symbol, NoOfProducts} = this.props;
-
+        const {items, NoOfProducts} = this.props;
+        const symbol="€"
         var arrays = [];
         while (items.length > 0) {
             arrays.push(items.splice(0, NoOfProducts));

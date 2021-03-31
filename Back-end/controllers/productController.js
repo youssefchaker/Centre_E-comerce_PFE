@@ -59,7 +59,7 @@ exports.getStoreProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Get all products   =>   /api/mall/products?keyword=laptop
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
-
+    const storenames=[];
     const productsCount = await Product.countDocuments();
 
     const apiFeatures = new APIFeatures(Product.find(), req.query)
@@ -68,15 +68,17 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 
     let products = await apiFeatures.query;
     let filteredProductsCount = products.length;
-    
-    
-
-
+    for(var i=0;i<products.length;i++){
+        const store= await Store.findById(products[i].store);
+        storenames.push(store);
+    }
+    console.log(storenames);
     res.status(200).json({
         success: true,
         productsCount,
         filteredProductsCount,
-        products
+        products,
+        storenames
     })
 
 })

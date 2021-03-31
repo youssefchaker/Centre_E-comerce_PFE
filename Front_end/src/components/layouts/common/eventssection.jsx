@@ -14,10 +14,9 @@ class EventSection extends Component {
       }
     render (){
         var eventsarray = [];
-        this.props.limitedevents.events.map((ev)=>{
+        this.props.limitedevents.events.events.map((ev)=>{
             eventsarray.push(ev);
         })
-        console.log(this.props.limitedevents);
         return (
                 <div className="container">
                     <div className="row">
@@ -26,7 +25,7 @@ class EventSection extends Component {
                             {eventsarray.map((event,index)=>(
                                 <div>
                                     <div className="col-md-12">
-                                        <Link to="../../../pages/eventsdisplay">
+                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection/${event.store}`}>
                                             <div className="classic-effect">
                                                 <img src={event.eventImage} className="img-fluid" alt="event image" />
                                                     <span></span>
@@ -39,7 +38,7 @@ class EventSection extends Component {
                                             <h4>Event End Date</h4>
                                             <p>{event.eventDateFinish.slice(0,10)}</p>
                                             <h4>Event By</h4>
-                                            <p>{event.eventDateFinish.slice(0,10)}</p>    
+                                            <p>{this.props.limitedevents.events.storenames[index]}</p>    
                                             <hr className="style1" />
                                             <Link to="../../../pages/eventsdisplay" style={{textDecorationLine:'underline'}} ><h6>Check all events</h6></Link>
                                         </div>

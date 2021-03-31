@@ -60,19 +60,16 @@ exports.getEvent = catchAsyncErrors(async (req, res, next) => {
 // get limited events for the home page  =>   api/mall/events/limited
 
 exports.getEventsLimited = catchAsyncErrors(async (req, res, next) => {
-    var storenames=[];
+    const storenames=[];
     const events = await Event.find().limit(5);
     if (events.length==0) {
         return next(new ErrorHandler('there are no events in the website at the moment', 404));
     }
     else{
-        events.map((event)=>{
-            Store.findById(event.store).exec(function(err,store){
-                
-                storenames.push(store.name);
-            })
-        })
-        console.log(storenames);
+        for(var i=0;i<events.length;i++){
+            const store= await Store.findById(events[i].store);
+            storenames.push(store.name);
+        }
         res.status(200).json({
             success: true,
             events,
@@ -84,15 +81,20 @@ exports.getEventsLimited = catchAsyncErrors(async (req, res, next) => {
 // get all events for the event page  =>   api/mall/events
 
 exports.getEvents = catchAsyncErrors(async (req, res, next) => {
-
+    const storenames=[];
     const events = await Event.find();
     if (events.length==0) {
         return next(new ErrorHandler('there are no events in the website at the moment', 404));
     }
     else{
+        for(var i=0;i<events.length;i++){
+            const store= await Store.findById(events[i].store)
+            storenames.push(store.name);
+        }
         res.status(200).json({
             success: true,
-            events
+            events,
+            storenames
         })
     }
 })

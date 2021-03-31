@@ -55,6 +55,7 @@ export const filterPrice = (value) => ({
     value
 });
 export const filterSort = (sort_by) => ({
+    
     type: types.SORT_BY,
     sort_by
 });

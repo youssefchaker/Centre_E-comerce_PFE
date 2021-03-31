@@ -17,8 +17,9 @@ export const getCategories = (products) => {
 export const getStores = (products) => {
     var stores = [];
     var i=0;
-    while(i<products.length){
-        stores.push(products[i].store);
+    const storenames=products.storenames
+    while(i<products.products.length){
+        stores.push(products.products[i].store);
         i++;
     }
     let uniqueChars = stores.filter((c, index) => {
@@ -29,7 +30,7 @@ export const getStores = (products) => {
 
 // Get Minimum and Maximum Prices from Json Data
 export const getMinMaxPrice = (products) => {
-    let min = 9999, max = 0;
+    let min = 50, max = 1000;
 
     products.map((product, index) => {
         let v = product.price;
@@ -40,7 +41,7 @@ export const getMinMaxPrice = (products) => {
     return {'min':min, 'max':max};
 }
 
-export const getVisibleproducts = (data, { category, store, value, sortBy }) => {
+export const getVisibleproducts = (data,  category, store, value, sortBy ) => {
     return data.products.filter(product => {
 
         let categoryMatch;

@@ -11,7 +11,7 @@ import NewProduct from "../common/new-product";
 import Breadcrumb from "../common/breadcrumb";
 import DetailsWithPrice from "./common/product/details-price";
 import DetailsTopTabs from "./common/details-top-tabs";
-import { addToCart, addToCartUnsafe } from '../../actions'
+import { addToCart, addToCartUnsafe } from '../../actions/cartActions'
 import ImageZoom from './common/product/image-zoom'
 import SmallImages from './common/product/small-image'
 import { getStoreProduct } from '../../actions/productActions';
@@ -20,8 +20,8 @@ import { getStoreProduct } from '../../actions/productActions';
 
 class LeftSideBar extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             open:false,
             nav1: null,
@@ -37,7 +37,8 @@ class LeftSideBar extends Component {
             nav1: this.slider1,
             nav2: this.slider2
         });
-        this.props.getStoreProduct("605f68d3108a9212e053aa73");
+        console.log(this.props);
+        this.props.getStoreProduct(this.props.match.params.id);
         
     }
     
@@ -136,10 +137,6 @@ class LeftSideBar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    /*let productId = ownProps.match.params.id;
-    return {
-        product: state.data.products.find(el => el.id == productId),
-    }*/
     return{
         product:state.product
     }

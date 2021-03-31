@@ -64,7 +64,7 @@ class ProductItem extends Component {
                             {/* {(product.sale == true)? <span className="lable4">on sale</span> : ''} */}
                         </div>
                         <div className="front">
-                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
+                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
                                 src={`${product.images[0]}`}
                                 className="img-fluid"
                                 alt="" /></Link>
@@ -91,7 +91,7 @@ class ProductItem extends Component {
                     </div>
                     <div className="product-detail">
                         <div>
-                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}>
+                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                 <h6>{product.name}</h6>
                             </Link>
                             <h4>€{product.price}
@@ -147,7 +147,7 @@ class ProductItem extends Component {
                                                 </div>
                                                 <div className="product-buttons">
                                                     <button  className="btn btn-solid" onClick={() => onAddToCartClicked(product, this.state.quantity)} >add to cart</button>
-                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} className="btn btn-solid">view detail</Link>
+                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} className="btn btn-solid">view detail</Link>
                                                 </div>
                                             </div>
                                         </div>

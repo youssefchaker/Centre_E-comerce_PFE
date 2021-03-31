@@ -18,12 +18,16 @@ import {newProductReducer,
     getProductReviewReducer,
     deleteProductReviewReducer,
     deleteAdminProductReviewReducer,
-    updateProductReviewReducer,
-    getStoreNameReducer
+    updateProductReviewReducer
 
 } from './products';
 import cartReducer from './cart';
-import filtersReducer from './filters';
+import {
+    categoryFiltersReducer,
+    storeFiltersReducer,
+    priceFiltersReducer,
+    sortbyFiltersReducer
+} from './filters';
 import {
     newEventReducer,
     deleteEventReducer,
@@ -68,9 +72,11 @@ const rootReducer = combineReducers({
     adminevents:getAdminEventsReducer,
     deleteadminevent:deletrAdminEventReducer, 
     ///////////////////////////////////////////////////////////
-    storename:getStoreNameReducer,
     cartList: cartReducer,
-    filters: filtersReducer,
+    category:categoryFiltersReducer,
+    store:storeFiltersReducer,
+    price:priceFiltersReducer,
+    sortby:sortbyFiltersReducer,
     Intl
 });
 

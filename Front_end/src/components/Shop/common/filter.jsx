@@ -30,8 +30,7 @@ class Filter extends Component {
         this.props.filterCategory(categories);
     }
 
-    storeHandle(event,stores){
-        var index = stores.indexOf(event.target.value);
+    storeHandle(event,stores,index){
         if (event.target.checked)
         stores.push(event.target.value); // push in array checked value
         else
@@ -40,8 +39,8 @@ class Filter extends Component {
         this.props.filterStore(stores);
     }
     render (){
-        const filteredcategories = this.props.filters.category
-        const filteredstores = this.props.filters.store
+        const filteredcategories = this.props.category
+        const filteredstores = this.props.store
         return (
                 <div className="collection-filter-block">
                     {/*category filter start*/}
@@ -80,7 +79,7 @@ class Filter extends Component {
                                         {this.props.stores.map((store, index) => {
                                             return (
                                                 <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
-                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e,filteredstores)} value={store} className="custom-control-input" id={store} /*defaultChecked={filteredstores.includes(store)? true : false}*/ />
+                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e,filteredstores,index)} value={store} className="custom-control-input" id={store} /*defaultChecked={filteredstores.includes(store)? true : false}*/ />
                                                     <label className="custom-control-label"
                                                            htmlFor={store}>{store}</label>
                                                 </div> )
@@ -101,7 +100,7 @@ class Filter extends Component {
                                             <InputRange
                                                 maxValue={this.props.prices.max}
                                                 minValue={this.props.prices.min}
-                                                value={this.props.filters.value}
+                                                value={this.props.price.value}
                                                 onChange={value => this.props.filterPrice({ value })} />
                                         </div>
                                     </div>
@@ -117,11 +116,17 @@ class Filter extends Component {
 
 const mapStateToProps = state => ({
     categories: getCategories(state.allproducts.products),
-    stores: getStores(state.allproducts.products),
+    stores: getStores(state.allproducts),
     prices: getMinMaxPrice(state.allproducts.products),
-    filters: state.filters,
+    category:state.category,
+    store:state.store,
+    price:state.price,
+    sortby:state.sortby
 })
-export default connect(
-    mapStateToProps,
-    { filterCategory, filterStore, filterPrice }
-)(Filter);
+
+const mapDispatchToProps=dispatch=>({
+    filterCategory:(category)=>dispatch(filterCategory(category)),
+    filterStore:(store)=>dispatch(filterStore(store)),
+    filterPrice:(price)=>dispatch(filterPrice(price))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Filter);

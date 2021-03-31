@@ -30,7 +30,6 @@ class Mystore extends Component {
         }
         this.setState({updatefield:field});
         this.setState({productid:id});
-        console.log(this.state.inputtype)
     }
 
     closeSearch() {

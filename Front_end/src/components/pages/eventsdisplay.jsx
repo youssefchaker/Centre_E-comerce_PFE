@@ -40,7 +40,7 @@ class Eventsdisplay extends Component {
                                             <div>
                                                 <h4>{event.eventName}</h4>
                                                 <h6>Active from {event.eventDateStart.slice(0,10)} To {event.eventDateFinish.slice(0,10)} </h6>
-                                                <Link to={`${process.env.PUBLIC_URL}/blog/details`} ><h5>Event By {event.store} </h5></Link>
+                                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection/${event.store}`} ><h5>Event By {this.props.events.events.storenames[index]} </h5></Link>
                                             </div>
                                         </div>
                                     </div>

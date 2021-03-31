@@ -56,8 +56,8 @@ class ProductListItem extends Component {
                     <div className="product-box">
                         <div className="img-wrapper">
                             <div className="front">
-                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
-                                    src={product.images[0].url}
+                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
+                                    src={product.images[0]}
                                     className="img-fluid"
                                     alt="" /></Link>
                             </div>
@@ -84,18 +84,18 @@ class ProductListItem extends Component {
                         </div>
                         <div className="product-detail">
                             <div>
-                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}>
+                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                     <h6>{product.name}</h6>
                                 </Link>
-                                <h4>{symbol}{product.price}
-                                    <del><span className="money">{symbol}{product.price}</span></del></h4>
-                                {product.details?
+                                <h4>{symbol}{product.price}</h4>
+                                    {/* <del><span className="money">{symbol}{product.price}</span></del> */}
+                                {/* {product.details?
                                 <ul className="color-variant">
                                     {product.details.map((vari, i) => {
                                         return (
                                             <li className={vari} key={i} title={vari} onClick={() => this.onClickHandle(vari)}></li>)
                                     })}
-                                </ul>:''}
+                                </ul>:''} */}
                             </div>
                         </div>
                     <Modal open={open} onClose={this.onCloseModal} center>
@@ -113,19 +113,20 @@ class ProductListItem extends Component {
                                             <div className="col-lg-6 rtl-text">
                                                 <div className="product-right">
                                                     <h2> {product.name} </h2>
-                                                    <h3>{symbol}{product.price-(product.price)}
+                                                    {/* <h3>{symbol}{product.price-(product.price)}
                                                         <del><span className="money">{symbol}{product.price}</span></del>
-                                                    </h3>
+                                                    </h3> */}
+                                                    <h3>{symbol}{product.price-(product.price)}</h3>
                                                     {/* {product.variants?
                                                     <ul className="color-variant">
                                                         {product.variants.map((vari, i) =>
                                                             <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
                                                         }
                                                     </ul>:''} */}
-                                                    <div className="border-product">
+                                                    {/* <div className="border-product">
                                                         <h6 className="product-title">product details</h6>
                                                         <p>{product.shortDetails}</p>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="product-description border-product">
                                                         {/* {product.size?
                                                         <div className="size-box">
@@ -154,7 +155,7 @@ class ProductListItem extends Component {
                                                     </div>
                                                     <div className="product-buttons">
                                                         <button  className="btn btn-solid" onClick={() => onAddToCartClicked(product, this.state.quantity)} >add to cart</button>
-                                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} className="btn btn-solid">view detail</Link>
+                                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} className="btn btn-solid">view detail</Link>
                                                     </div>
                                                 </div>
                                             </div>
