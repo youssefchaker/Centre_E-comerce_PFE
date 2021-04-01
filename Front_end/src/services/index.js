@@ -17,7 +17,6 @@ export const getCategories = (products) => {
 export const getStores = (products) => {
     var stores = [];
     var i=0;
-    const storenames=products.storenames
     while(i<products.products.length){
         stores.push(products.products[i].store);
         i++;
@@ -33,6 +32,7 @@ export const getMinMaxPrice = (products) => {
     let min = 50, max = 1000;
 
     products.map((product, index) => {
+        console.log(product);
         let v = product.price;
         min = (v < min) ? v : min;
         max = (v > max) ? v : max;

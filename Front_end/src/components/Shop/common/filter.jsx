@@ -39,8 +39,8 @@ class Filter extends Component {
         this.props.filterStore(stores);
     }
     render (){
-        const filteredcategories = this.props.category
-        const filteredstores = this.props.store
+        const filteredcategories = []
+        const filteredstores = []
         return (
                 <div className="collection-filter-block">
                     {/*category filter start*/}
@@ -102,6 +102,7 @@ class Filter extends Component {
                                                 minValue={this.props.prices.min}
                                                 value={this.props.price.value}
                                                 onChange={value => this.props.filterPrice({ value })} />
+                                                {console.log(this.props.prices)}
                                         </div>
                                     </div>
                                 </div>

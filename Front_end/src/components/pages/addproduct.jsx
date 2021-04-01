@@ -62,13 +62,14 @@ class Addproduct extends Component {
             this.state.ProductDetails.push(this.state.ProductDetail);
             this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
             while(i<this.state.ProductDetails.length){
-                this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetails[i]});
+                this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetailsValues[i]});
                 i++;
             }
             this.state.ProductImages.push(this.state.ProductImage);
             this.props.newProduct({'storename':this.state.StoreName,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details});
             toast.success("New Product Added!!");
             setTimeout("location.reload(true);",2000);
+
           }
       }
       handlelist=(e)=>{

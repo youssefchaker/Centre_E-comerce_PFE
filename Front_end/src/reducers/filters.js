@@ -56,7 +56,7 @@ export const priceFiltersReducer = (state = {price:{}}, action) => {
         case types.FILTER_PRICE:
             return {
                 ...state,
-                value: {min: action.value.value.min, max: action.value.value.max }
+                value: {min: action.value.min, max: action.value.max }
             };
         default:
             return state;

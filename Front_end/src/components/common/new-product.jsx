@@ -28,7 +28,7 @@ class NewProduct extends Component {
                     {newproductsarray.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
-                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
                                     <div className="media-body align-self-center">
                                         <div className="rating">
                                             <i className="fa fa-star"></i>
@@ -37,7 +37,7 @@ class NewProduct extends Component {
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
                                         </div>
-                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><h6>{product.name}</h6></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><h6>{product.name}</h6></Link>
                                         <h4>{"€"}{(product.price)}</h4>
                                             {/* <del><span className="money">{"€"}{product.price}</span></del> */}
                                     </div>
