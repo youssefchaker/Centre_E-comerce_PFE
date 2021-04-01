@@ -18,12 +18,11 @@ class ProductListing extends Component {
         this.state = { limit: 5, hasMoreItems: true };
 
     }
-    componentDidMount=()=>{
-        this.props.getProducts();
-      }
+
 
     componentWillMount(){
         this.fetchMoreItems();
+        this.props.getProducts();
     }
 
     fetchMoreItems = () => {

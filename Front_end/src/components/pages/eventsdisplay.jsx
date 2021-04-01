@@ -8,7 +8,7 @@ class Eventsdisplay extends Component {
     constructor (props) {
         super (props)
     }
-    componentDidMount=()=>{
+    componentWillMount=()=>{
         this.props.getEvents();
       }
 

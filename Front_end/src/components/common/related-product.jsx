@@ -4,12 +4,17 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 import {getBestSeller} from "../../services";
-import {addToCart, addToWishlist, addToCompare} from "../../actions";
+import {addToCart} from "../../actions";
 import ProductItem from '../layouts/common/product-item';
+import { getProducts } from '../../actions/productActions';
 
 
 class RelatedProduct extends Component {
+    componentWillMount() {
+        this.props.getProducts();
+    }
     render (){
+        
         const {items, addToCart} = this.props;
 
 
@@ -40,5 +45,10 @@ function mapStateToProps(state) {
         items: getBestSeller(state.allproducts.products),
     }
 }
-
-export default connect(mapStateToProps, {addToCart, addToWishlist, addToCompare})(RelatedProduct);
+const mapDispatchToProps = dispatch => {
+    return{
+        getProducts:()=>dispatch(getProducts()),
+        addToCart:(id,stock)=>dispatch(addToCart(id,stock))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RelatedProduct);

@@ -4,28 +4,22 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 import {getBestSeller} from "../../services";
+import { getNewProducts } from '../../actions/productActions';
 
 
 class NewProduct extends Component {
+    componentWillMount(){
+        this.props.getNewProducts();
+    }
+
     render (){
         const {newproducts} = this.props;
-        var products=newproducts.products;
-        var newproductsarray = [];
-        const product1=products.product1;
-        const product2=products.product2;
-        const product3=products.product3;
-        const product4=products.product4;
-        const product5=products.product5;
-        newproductsarray.push(product1);
-        newproductsarray.push(product2);
-        newproductsarray.push(product3);
-        newproductsarray.push(product4);
-        newproductsarray.push(product5);
+        const products=newproducts.products.products;
         return (
             <div className="theme-card">
                 <h5 className="title-border">new product</h5>
                 <Slider className="offer-slider slide-1">
-                    {newproductsarray.map((product, index) =>
+                    {products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
@@ -55,5 +49,10 @@ function mapStateToProps(state) {
         newproducts:state.newproducts
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        getNewProducts:()=>dispatch(getNewProducts())
 
-export default connect(mapStateToProps, null)(NewProduct);
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(NewProduct);

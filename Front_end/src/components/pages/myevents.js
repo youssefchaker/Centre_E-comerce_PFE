@@ -19,7 +19,7 @@ class MyEvents extends Component {
     }
     this.validator=new SimpleReactValidator();
       }
-      componentDidMount=()=>{
+      componentWillMount=()=>{
         this.props.getStoreEvents("603a42db810c623de4f7dd04");
       }
       openSearch=(field,id,date="")=> {

@@ -8,24 +8,13 @@ import ProductItem from '../common/product-item';
 import { getTopProducts } from '../../../actions/productActions';
 
 class TopCollection extends Component {
-    componentDidMount() {
+    componentWillMount() {
         this.props.getTopProducts();
     }
     render (){
         var properties = Product4;
         const {topproducts} = this.props;
-        var products=topproducts.products;
-        var topproductsarray = [];
-        const product1=products.product1;
-        const product2=products.product2;
-        const product3=products.product3;
-        const product4=products.product4;
-        const product5=products.product5;
-        topproductsarray.push(product1);
-        topproductsarray.push(product2);
-        topproductsarray.push(product3);
-        topproductsarray.push(product4);
-        topproductsarray.push(product5);
+        var products=topproducts.products.products;
         return (
             <div>
                 {/*Paragraph*/}
@@ -38,7 +27,7 @@ class TopCollection extends Component {
                         <div className="row">
                             <div className="col">
                                 <Slider  className="product-4 product-m no-arrow">
-                                    { topproductsarray.map((product, index ) =>
+                                    { products.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem {...properties} product={product} symbol={"€"}
                                                          onAddToCartClicked={() => addToCart(product, 1)} key={index} />

@@ -97,7 +97,6 @@ class Root extends React.Component {
                                 {/*Routes For Layouts*/}
                                 
 								{/*Routes For Features (Product Collection) */}
-								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection/:id`} component={Shop}/>
 								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection`} component={Shop}/>
 
 								{/*Routes For Single Product*/}

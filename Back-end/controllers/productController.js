@@ -113,40 +113,26 @@ else{
 // Get top products details   =>   /api/mall/products/top
 
 exports.getTopProducts = catchAsyncErrors(async (req, res, next) => {
-    const [product1,product2,product3,product4,product5]=await Product.find().sort({nbreviews:-1}).limit(5);
-    if (!product1 ||!product2 ||!product3 ||!product4 ||!product5) {
-        return next(new ErrorHandler('1 or more Products not found', 404));
-    }
-    else{
+    const products=await Product.find().sort({nbreviews:-1}).limit(5);
+
         res.status(200).json({
             success: true,
-            product1,
-            product2,
-            product3,
-            product4,
-            product5
+            products
         })
-    }
+
 })
 
 
 // Get new products details   =>   /api/mall/products/new
 
 exports.getNewProducts = catchAsyncErrors(async (req, res, next) => {
-    const [product1,product2,product3,product4,product5]=await Product.find().sort({creationdate:-1}).limit(5);
-    if (!product1 ||!product2 ||!product3 ||!product4 ||!product5) {
-        return next(new ErrorHandler('1 or more Products not found', 404));
-    }
-    else{
+    const products=await Product.find().sort({creationdate:-1}).limit(5);
+ 
         res.status(200).json({
             success: true,
-            product1,
-            product2,
-            product3,
-            product4,
-            product5
+            products
         })
-    }
+
 })
 
 // Get searched product details   =>   /products/search

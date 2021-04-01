@@ -37,9 +37,11 @@ class LeftSideBar extends Component {
             nav1: this.slider1,
             nav2: this.slider2
         });
-        console.log(this.props);
-        this.props.getStoreProduct(this.props.match.params.id);
         
+        
+    }
+    componentWillMount() {
+        this.props.getStoreProduct(this.props.match.params.id);
     }
     
     filterClick() {
