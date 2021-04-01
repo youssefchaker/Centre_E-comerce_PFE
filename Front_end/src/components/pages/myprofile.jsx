@@ -33,13 +33,13 @@ class MyProfile extends Component {
                                     </div>
                                     <div className="block-content">
                                         <ul>
-                                            <li className="active"><a href='./pages/myprofile'>My Profile</a></li>
-                                            <li><a href="./pages/mystore">My Store</a></li>
-                                            <li><a href="./pages/myorders">My Orders</a></li>
-                                            <li><a href="./pages/myevents">My Events</a></li>
-                                            <li><a href="../cart">My Cart</a></li>
-                                            <li><a href="#">Change Password</a></li>
-                                            <li className="last"><a href="#">Log Out</a></li>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`}><li className="active"><a>My Profile</a></li></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/pages/mystore`}><li><a>My Store</a></li></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/pages/myorders`}><li><a>My Orders</a></li></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/pages/myevents`}><li><a>My Events</a></li></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/pages/cart`}><li><a>My Cart</a></li></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/`}><li><a>Change Password</a></li></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/`}><li className="last"><a>Log Out</a></li></Link>
                                         </ul>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@ class MyProfile extends Component {
                                             <h2>My Profile</h2>
                                         </div>
                                         <div className="welcome-msg">
-                                            <p>Hello, MARK JECNO !</p>
+                                            <p>Hello {/* {user name} */}</p>
                                             <p>From your your Account's Dashboard you have the ability to manage your profile</p>
                                         </div>
                                         <div className="box-account box-info">
@@ -75,12 +75,12 @@ class MyProfile extends Component {
                                                 <div className="col-sm-6">
                                                     <div className="box">
                                                         <div className="box-title">
-                                                            <h3>Newsletters</h3>
+                                                            <h3>Mailing News Service</h3>
                                                             <a href="#">Edit</a>
                                                         </div>
                                                         <div className="box-content">
                                                             <p>
-                                                                You are currently not subscribed to any newsletter.
+                                                                You are currently not subscribed to the Mailing News Service.
                                                             </p>
                                                         </div>
                                                     </div>

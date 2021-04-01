@@ -5,6 +5,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getStoreProducts, updateProduct,deleteProduct } from '../../actions/productActions';
+import {Link} from 'react-router-dom'
 class Mystore extends Component {
     constructor(props){
     super(props);
@@ -88,7 +89,7 @@ class Mystore extends Component {
         })
        
         return (
-            <div>0
+            <div>
                 <Breadcrumb title={'My Store'}/>
                 <section className="section-b-space">
                     <div className="container padding-cls">
@@ -99,25 +100,20 @@ class Mystore extends Component {
 
                                 </div>
                                 <div className="dashboard-left">
-                                    <div className="collection-mobile-back">
-                                    <span className="filter-back">
-                                        <i className="fa fa-angle-left" aria-hidden="true"></i> back
-                                    </span>
-                                    </div>
                                     <div className="block-content">
                                         <ul>
-                                            <li><a href='./pages/myprofile'>My Profile</a></li>
-                                            <li className="active"><a href="./pages/mystore">My Store</a></li>
-                                            <li><a href="./pages/myorders">My Orders</a></li>
-                                            <li><a href="./pages/myevents">My Events</a></li>
-                                            <li><a href="../cart">My Cart</a></li>
-                                            <li><a href="#">Change Password</a></li>
-                                            <li className="last"><a href="#">Log Out</a></li>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`}><li><a>My Profile</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/mystore`}><li className="active"><a>My Store</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/myorders`}><li><a>My Orders</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/myevents`}><li><a>My Events</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/cart`}><li><a>My Cart</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/`}><li><a href="#">Change Password</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/`}><li className="last"><a href="#">Log Out</a></li></Link>
                                         </ul>
                                     </div>
                                     <div className="block-content">
                                         <ul>
-                                            <li><a href='./pages/addproduct'>Add Product</a></li>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/addproduct`}><li><a>Add Product</a></li></Link>
                                         </ul>
                                     </div>
                                 </div>
