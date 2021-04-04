@@ -31,9 +31,11 @@ class NewProduct extends Component {
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
                                         </div>
-                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><h6>{product.name}</h6></Link>
-                                        <h4>{"€"}{(product.price)}</h4>
-                                            {/* <del><span className="money">{"€"}{product.price}</span></del> */}
+                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
+                                        {(product.discount != 0)?
+                            <h4>€{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">€{product.price}</span></del> 
+                            </h4>:<h4>€{product.price}</h4>}
                                     </div>
                                 </div>
                         </div>

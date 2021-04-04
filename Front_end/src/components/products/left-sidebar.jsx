@@ -25,7 +25,8 @@ class LeftSideBar extends Component {
         this.state = {
             open:false,
             nav1: null,
-            nav2: null
+            nav2: null,
+            id:null
         };
     }
 
@@ -42,8 +43,13 @@ class LeftSideBar extends Component {
     }
     componentWillMount() {
         this.props.getStoreProduct(this.props.match.params.id);
+        this.setState({id:this.props.match.params.id});
     }
-    
+    componentDidUpdate() {
+        if(this.props.match.params.id!=this.state.id){
+            setTimeout("location.reload(true);",1);
+        }
+    }
     filterClick() {
         document.getElementById("filter").style.left = "-15px";
     }
@@ -52,6 +58,7 @@ class LeftSideBar extends Component {
     }
 
     render(){
+
         const { product} = this.props.product.product;
         const {addToCart,addToCartUnsafe}=this.props;
         var products = {

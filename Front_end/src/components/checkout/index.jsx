@@ -430,13 +430,13 @@ class checkOut extends Component {
                                                     </div>
                                                     <ul className="qty">
                                                         {cartItems.map((item, index) => {
-                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {item.price*item.qty}</span></li> })
+                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {item.price-(item.price*item.discount/100)*item.qty}</span></li> })
                                                         }
 
                                                     </ul>
                                                     <ul className="qty">
-                                                        <li>Shipping Price: <span>20€</span></li>
-                                                        <li>Tax Cost: <span>10€</span></li>
+                                                        <li>Shipping Price: <span>€ 20</span></li>
+                                                        <li>Tax Cost: <span>€ 10</span></li>
                                                     </ul>
                                                     <ul className="sub-total">
                                                         <li>Shipping <div className="shipping">

@@ -10,7 +10,7 @@ const cloudinary = require('cloudinary')
 // Create new product   =>   /api/mall/store/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
      
-    const { name , description , storename , price , stock, images , category , details } = req.body;
+    const { name , description , storename , price , stock, images , category , details, discount } = req.body;
     Product.find({name:name}).exec(function(err,product){
         if(!product)
             return next(new ErrorHandler(`the product ${product.name} already exists`, 404));
@@ -40,7 +40,8 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
                     stock,
                     images,
                     category,
-                    details
+                    details,
+                    discount
                 });
                 res.status(201).json({
                     success: true,

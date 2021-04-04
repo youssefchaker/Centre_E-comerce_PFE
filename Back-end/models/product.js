@@ -64,6 +64,9 @@ const productSchema = new Schema({
                 required:[true,'please enter the detail value']
             }
         }
-]
+],
+discount:{
+    type:Number
+},
 });
 module.exports = mongoose.model('Product', productSchema);

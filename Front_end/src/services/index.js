@@ -80,7 +80,7 @@ export const getVisibleproducts = (data,  category, store, value, sortBy ) => {
 export const getCartTotal = cartItems => {
     var total = 0;
     for(var i=0; i<cartItems.length; i++){
-        total += parseInt(cartItems[i].qty, 10)*parseInt((cartItems[i].price/* *cartItems[i].discount/100 */), 10);
+        total += parseInt(cartItems[i].qty, 10)*(cartItems[i].price-(cartItems[i].price*cartItems[i].discount/100));
     }
     return total;
 }

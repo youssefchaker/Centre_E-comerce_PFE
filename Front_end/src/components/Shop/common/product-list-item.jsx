@@ -87,8 +87,9 @@ class ProductListItem extends Component {
                                 <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                     <h6>{product.name}</h6>
                                 </Link>
-                                <h4>{symbol}{product.price}</h4>
-                                    {/* <del><span className="money">{symbol}{product.price}</span></del> */}
+                                
+                                    {product.discount==0?<h4>{symbol}{product.price}</h4>: <h4>€{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">€{product.price}</span></del> </h4> }
                                 {/* {product.details?
                                 <ul className="color-variant">
                                     {product.details.map((vari, i) => {

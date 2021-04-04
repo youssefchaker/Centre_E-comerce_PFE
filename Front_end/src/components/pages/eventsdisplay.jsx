@@ -31,7 +31,7 @@ class Eventsdisplay extends Component {
                                     <div className="col-xl-6">
                                     
                                         <div className="blog-left">
-                                            <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
+                                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection/${event.store}`} >
                                                 <img src={event.eventImage} className="img-fluid" alt="event image"/></Link>
                                         </div>
                                     </div>

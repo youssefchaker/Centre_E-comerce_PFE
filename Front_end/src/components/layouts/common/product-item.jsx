@@ -53,15 +53,16 @@ class ProductItem extends Component {
             RatingStars.push(<i className="fa fa-star" key={i}></i>)
         }
         const datenow = new Date();
-        const dateproduct = product.creationDate;
-        const diffTime = Math.abs(dateproduct - datenow);
+        const datep= product.creationdate.slice(0,10);
+        const dateproduct=new Date(datep);
+        const diffTime = datenow.getTime()-dateproduct.getTime();
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         return (
                 <div className="product-box">
                     <div className="img-wrapper">
                         <div className="lable-block">
                             {(diffDays <8)? <span className="lable3">new</span> : ''}
-                            {/* {(product.sale == true)? <span className="lable4">on sale</span> : ''} */}
+                            {(product.discount != 0)? <span className="lable4">on sale</span> : ''}
                         </div>
                         <div className="front">
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
@@ -94,9 +95,10 @@ class ProductItem extends Component {
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                 <h6>{product.name}</h6>
                             </Link>
-                            <h4>€{product.price}
-                                {/* <del><span className="money">€{product.price}</span></del> */}
-                            </h4>
+                            {(product.discount != 0)?
+                            <h4>€{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">€{product.price}</span></del> 
+                            </h4>:<h4>€{product.price}</h4>}
                         </div>
                     </div>
                     <Modal open={this.state.open} onClose={this.onCloseModal} center>
