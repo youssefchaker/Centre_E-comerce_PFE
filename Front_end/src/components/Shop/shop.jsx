@@ -6,6 +6,7 @@ import Filter from "./common/filter";
 import FilterBar from "./common/filter-bar";
 import ProductListing from "./common/product-listing";
 import StickyBox from "react-sticky-box";
+import TopProduct from '../common/top-product';
 
 class Shop extends Component {
     constructor(props){
@@ -48,11 +49,7 @@ class Shop extends Component {
                                         <div>
                                             <Filter/>
                                             <NewProduct/>
-                                            <div className="collection-sidebar-banner">
-                                                <a href="#">
-                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/side-banner.png`} className="img-fluid" alt="" />
-                                                </a>
-                                            </div>
+                                            <TopProduct/>
                                         </div>
                                     </StickyBox>
                                     {/*side-bar banner end here*/}

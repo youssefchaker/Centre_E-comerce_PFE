@@ -2,23 +2,21 @@ import React, {Component} from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-
-import {getBestSeller} from "../../services";
-import { getNewProducts } from '../../actions/productActions';
+import { getTopProducts } from '../../actions/productActions';
 
 
-class NewProduct extends Component {
+class TopProduct extends Component {
     componentWillMount(){
-        this.props.getNewProducts();
+        this.props.getTopProducts();
     }
 
     render (){
-        const {newproducts} = this.props;
-        const products=newproducts.products.products;
+        const {topproducts} = this.props;
+        const products=topproducts.products.products;
         var i=0;
         return (
             <div className="theme-card">
-                <h5 className="title-border">New Products</h5>
+                <h5 className="title-border">Top Products</h5>
                 <Slider className="offer-slider slide-1">
                     {products.map((product, index) =>
                         <div key={index}>
@@ -82,13 +80,13 @@ class NewProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        newproducts:state.newproducts
+        topproducts:state.topproducts
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getNewProducts:()=>dispatch(getNewProducts())
+        getTopProducts:()=>dispatch(getTopProducts())
 
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(NewProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(TopProduct);

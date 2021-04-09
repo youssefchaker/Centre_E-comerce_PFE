@@ -3,52 +3,93 @@ import Slider from 'react-slick';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 
-import {getBestSeller} from "../../services";
-import {addToCart} from "../../actions";
-import ProductItem from '../layouts/common/product-item';
+import {getRelatedItems} from "../../services";
 import { getProducts } from '../../actions/productActions';
 
 
 class RelatedProduct extends Component {
-    componentWillMount() {
+    constructor(props){
+        super(props)
+    }
+    componentWillMount(){
         this.props.getProducts();
     }
+
     render (){
-        
-        const {items, addToCart} = this.props;
-
-
+        const {relatedproducts} = this.props;
+        console.log(relatedproducts);
         return (
-            <section className="section-b-space">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 product-related">
-                            <h2>related products</h2>
+            <div className="theme-card">
+                <h5 className="title-border">Related Products</h5>
+                <Slider className="offer-slider slide-1">
+                    {relatedproducts.length!=0?relatedproducts.map((product, index) =>
+                        <div key={index}>
+                                <div className="media" key={index}>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
+                                    <div className="media-body align-self-center">
+                                    {product.nbreviews<10?
+                                            <div >
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>10 && product.nbreviews<20 ?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>20 && product.nbreviews<30?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>30 && product.nbreviews<40?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            </div>}
+                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
+                                        {(product.discount != 0)?
+                            <h4>€{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">€{product.price}</span></del> 
+                            </h4>:<h4>€{product.price}</h4>}
+                                    </div>
+                                </div>
                         </div>
-                    </div>
-                    <div className="row search-product">
-                        { items.slice(0, 6).map((product, index ) =>
-                            <div key={index} className="col-xl-2 col-md-4 col-sm-6">
-                                <ProductItem product={product} symbol={"€"}
-                                             onAddToCartClicked={() => addToCart(product, 1)} key={index} />
-                            </div>)
-                        }
-                    </div>
-                </div>
-            </section>
+                    ):<p>there are no related products</p>}
+                </Slider>
+            </div>
         )
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownProps) {
     return {
-        items: getBestSeller(state.allproducts.products),
+        relatedproducts:getRelatedItems(state.allproducts.products,ownProps.target,ownProps.own)
     }
 }
 const mapDispatchToProps = dispatch => {
-    return{
-        getProducts:()=>dispatch(getProducts()),
-        addToCart:(id,stock)=>dispatch(addToCart(id,stock))
+    return {
+        getProducts:()=>dispatch(getProducts())
+
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(RelatedProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(RelatedProduct);

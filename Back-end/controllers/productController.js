@@ -4,11 +4,16 @@ const Product = require('../models/product');
 const User=require('../models/user');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
-const APIFeatures = require('../utils/apiFeatures')
-const cloudinary = require('cloudinary')
+const APIFeatures = require('../utils/apiFeatures');
+const cloudinary = require('cloudinary').v2;
 
 // Create new product   =>   /api/mall/store/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+    cloudinary.config({
+        cloud_name:'pfe2021',
+        api_key:'Du7O1oHcffxoFfif_5mD-S64gRE',
+        api_secret:'Du7O1oHcffxoFfif_5mD-S64gRE'
+    })
      
     const { name , description , storename , price , stock, images , category , details, discount } = req.body;
     Product.find({name:name}).exec(function(err,product){
@@ -17,21 +22,18 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
         else{
             Store.findOne({name:storename}).populate('store').exec(function(err,store){
                 if(!store)
-                    return next(new ErrorHandler(`the store with the name ${storename} does not exist`, 404));
-                
-                   /*  let imagesLinks = [];
-                
-                    for (let i = 0; i < images.length; i++) {
-                        const result = await cloudinary.v2.uploader.upload(images[i], {
-                            folder: 'products'
-                        });
-                
-                        imagesLinks.push({
-                            public_id: result.public_id,
-                            url: result.secure_url
-                        })
-                    }
-                    images=imagesLinks; */    
+                    return next(new ErrorHandler(`the store with the name ${storename} does not exist`, 404)
+                    );
+                /* let imageLinks=[];
+                for(var i=0;i<images.length;i++){
+                    const result=cloudinary.uploader.upload(images[i],{
+                        folder:'products'
+                    });
+                    imageLinks.push({
+                        public_id:result.public_id,
+                        url:result.secure_url
+                    })
+                } */
                 Product.create({
                     name,
                     description,

@@ -63,10 +63,11 @@ class Addproduct extends Component {
             this.state.ProductDetails.push(this.state.ProductDetail);
             this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
             while(i<this.state.ProductDetails.length){
-                this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetails[i]});
+                this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetailsValues[i]});
                 i++;
             }
-            this.state.ProductImages.push(this.state.ProductImage);
+            this.state.ProductImages.push(document.getElementById("img").files[0]);
+            console.log(this.state.ProductImages);
             this.props.newProduct({'storename':this.state.StoreName,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
             setTimeout("location.reload(true);",2000);
@@ -77,15 +78,16 @@ class Addproduct extends Component {
       }
       handleimages=(e)=>{
         e.preventDefault(); 
-        if(!this.validator3.allValid()){
+        if(!this.validator3.allValid() ||this.state.ProductImage==null){
             this.validator3.showMessages();
             this.forceUpdate();
           }
           else{
-            this.state.ProductImages.push(this.state.ProductImage);
-            document.getElementById("img").value="";
-            this.state.ProductImage="";
-            toast.success("New Product Image Added!!");
+            this.setState({ProductImage:document.getElementById("img").files[0]});
+            this.state.ProductImages.push(document.getElementById("img").files[0]);
+            document.getElementById("img").value=null;
+            this.state.ProductImage=null;
+            toast.success("New Product Image Added!!"); 
           }
       }
     render (){
@@ -156,7 +158,7 @@ class Addproduct extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Image</div>
-                                                    <input type="file" id="img" name="ProductImage" accept="image/*" onChange={this.setStateFromInput} value={this.state.ProductImage}  />
+                                                    <input type="file" id="img" name="ProductImage" accept="image/*" onChange={this.setStateFromInput} />
                                                     {this.validator.message('ProductImage', this.state.ProductImage, 'required')}
                                                     <button type="submit" onClick={this.handleimages}>submit and add images</button>
                                                     {this.validator3.message('ProductImage', this.state.ProductImage, 'required')}

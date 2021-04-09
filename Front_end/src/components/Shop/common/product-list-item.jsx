@@ -113,11 +113,10 @@ class ProductListItem extends Component {
                                             </div>
                                             <div className="col-lg-6 rtl-text">
                                                 <div className="product-right">
-                                                    <h2> {product.name} </h2>
-                                                    {/* <h3>{symbol}{product.price-(product.price)}
+                                                <h2> {product.name} </h2>
+                                                {product.discount!=0?<h3>{symbol}{product.price-(product.price*product.discount/100)}
                                                         <del><span className="money">{symbol}{product.price}</span></del>
-                                                    </h3> */}
-                                                    <h3>{symbol}{product.price-(product.price)}</h3>
+                                                    </h3>:<h3>{symbol}{product.price}</h3>}
                                                     {/* {product.variants?
                                                     <ul className="color-variant">
                                                         {product.variants.map((vari, i) =>
@@ -154,10 +153,8 @@ class ProductListItem extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="product-buttons">
                                                         <button  className="btn btn-solid" onClick={() => onAddToCartClicked(product, this.state.quantity)} >add to cart</button>
-                                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} className="btn btn-solid">view detail</Link>
-                                                    </div>
+                                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} style={{margin:"2px"}} className="btn btn-solid">view detail </Link>
                                                 </div>
                                             </div>
                                         </div>

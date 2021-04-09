@@ -29,11 +29,16 @@ export const getStores = (products) => {
 
 // Get Minimum and Maximum Prices from Json Data
 export const getMinMaxPrice = (products) => {
-    let min = 50, max = 1000;
+    let min = 1000, max = 0;
 
     products.map((product, index) => {
-        console.log(product);
-        let v = product.price;
+        let v = 0;
+        if(product.discount==0){
+             v = product.price;
+        }
+        else{
+             v = product.price*product.discount/100; 
+        }
         min = (v < min) ? v : min;
         max = (v > max) ? v : max;
     })
@@ -127,9 +132,9 @@ export const getNewProducts = (products, type) => {
 }
 
 // Get Related Items
-export const getRelatedItems = (products, type) => {
+export const getRelatedItems = (products, target,id) => {
     const items = products.filter(product => {
-        return product.category === type;
+        return product.category === target && product._id!=id;
     })
 
     return items.slice(0,4)

@@ -99,7 +99,7 @@ class cartComponent extends Component {
                                                         <i className="fa fa-times"></i>
                                                     </a>
                                                 </td>
-                                                <td><h2 className="td-color">{"€"}{item.price-(item.price*item.discount/100)*item.qty}</h2></td>
+                                                <td><h2 className="td-color">{"€"}{(item.price-(item.price*item.discount/100))*item.qty}</h2></td>
                                             </tr>
                                         </tbody> )
                                     })}
