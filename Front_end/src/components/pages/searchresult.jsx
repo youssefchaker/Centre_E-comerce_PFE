@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 class Searchresult extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +12,8 @@ class Searchresult extends Component {
     }
         render(){
             const {products}=this.props.products.products
+            const {symbol}=this.props.symbol;
+            const currencydiff=this.props.currencydiff;
         return (
             <div>
                 <Breadcrumb title={'Search Result'}/>
@@ -33,7 +36,7 @@ class Searchresult extends Component {
                                             <div>
                                                 <h4>{product.name}</h4>
                                                 <h6>{product.description} </h6>
-                                                <h6>Price:{product.price} </h6>
+                                                {symbol=="DT"?product.discount?<h6>Price:{symbol}&nbsp;{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100} </h6>:<h6>Price:{symbol}&nbsp;{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100} </h6>:product.discount?<h6>Price:{symbol}&nbsp;{(product.price-(product.price*product.discount/100))} </h6>:<h6>Price:{symbol}&nbsp;{product.price} </h6>}
                                                 <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5 onClick={this.closeSearch}>Product By {product.store} </h5></Link>
                                             </div>
                                         </div>
@@ -50,6 +53,11 @@ class Searchresult extends Component {
         )
     }
 }
+const mapStateToProps=state=>{
+    return {
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
+      }
+}
 
-
-export default Searchresult
+export default connect(mapStateToProps)(Searchresult)

@@ -14,6 +14,8 @@ class SpecialProducts extends Component{
         render(){
             const {newproducts} = this.props;
             const products=newproducts.products.products;
+            const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 <div className="title1 section-t-space">
@@ -24,7 +26,7 @@ class SpecialProducts extends Component{
                     <Slider  className="product-4 product-m no-arrow">
                                     { products.map((product, index ) =>
                                         <div key={index}>
-                                            <ProductItem product={product} symbol={"€"}
+                                            <ProductItem product={product} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }
@@ -39,7 +41,9 @@ class SpecialProducts extends Component{
 const mapStateToProps = (state) => {
     return{
         newproducts:state.newproducts,
-        cartList:state.cartlist
+        cartList:state.cartlist,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
     }
 }
 

@@ -14,8 +14,9 @@ import LogoImage from "./common/logo";
 import {connect} from "react-redux";
 import TopBarDark from './common/topbar-dark';
 import SimpleReactValidator from 'simple-react-validator';
-import {getSearchedProducts} from '../../../actions/productActions'
+import {changeCurrency, getSearchedProducts} from '../../../actions/productActions'
 import Searchresult from '../../pages/searchresult';
+import { toast } from 'react-toastify';
 
 class HeaderTwo extends Component {
 
@@ -25,7 +26,10 @@ class HeaderTwo extends Component {
         this.state = {
             isLoading:false,
             search:null,
-            loadsearch:null
+            loadsearch:null,
+            lang:"en",
+            curr:'€',
+            test:null
         }
         this.validator=new SimpleReactValidator();
     }
@@ -60,8 +64,28 @@ class HeaderTwo extends Component {
     }
 
     changeLanguage(lang) {
+        this.handlelang(lang);
         store.dispatch(IntlActions.setLocale(lang))
     }
+    handlelang(lang){
+        if(lang=="en"){
+            this.state.lang="en";
+        }
+        else if(lang=="fn"){
+            this.state.lang="fr";
+        }
+    }
+    handleCurrency(curr){
+        if(curr=='€'){
+            this.setState({curr:'€'});
+            this.props.changeCurrency('€');
+        }
+        else{
+            this.setState({curr:'DT'});
+            this.props.changeCurrency('DT')
+        }
+    }
+    
 
     openNav() {
         var openmyslide = document.getElementById("mySidenav");
@@ -103,7 +127,6 @@ class HeaderTwo extends Component {
       }
 
     render() {
-
         return (
             <div>
                 <header >
@@ -142,10 +165,16 @@ class HeaderTwo extends Component {
                                                         <div className="show-div setting">
                                                             <h6>language</h6>
                                                             <ul>
-                                                                <li><a href={null} onClick={() => this.changeLanguage('en')}>English</a> </li>
-                                                                <li><a href={null} onClick={() => this.changeLanguage('fn')}>French</a> </li>
+                                                                <li>{this.state.lang=="en"?<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"red"}} >English</a>:<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"black"}} >English</a>} </li>
+                                                                <li>{this.state.lang=="fr"?<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"red"}} >French</a>:<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"black"}} >French</a>} </li>
+                                                            </ul>
+                                                            <h6>currency</h6>
+                                                            <ul className="list-inline">
+                                                                <li>{this.state.curr=='€'?<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"red"}} >euro</a>:<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"black"}} >euro</a>}</li>
+                                                                <li>{this.state.curr=='DT'?<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"red"}}>tunisian dinar</a>:<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"black"}}>tunisian dinar</a>}</li>
                                                             </ul>
                                                         </div>
+                                                        
                                                     </li>
                                                     {/*Header Cart Component */}
                                                     <CartContainer/>
@@ -198,13 +227,15 @@ class HeaderTwo extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getSearchedProducts: (keyword) => dispatch(getSearchedProducts(keyword))
+        getSearchedProducts: (keyword) => dispatch(getSearchedProducts(keyword)),
+        changeCurrency:(currency)=>dispatch(changeCurrency(currency))
     }
 }
 
 const mapStateToProps=state=>{
     return {
-        searchedproducts:state.searchedproducts
+        searchedproducts:state.searchedproducts,
+        symbol:state.symbol
       }
 }
 

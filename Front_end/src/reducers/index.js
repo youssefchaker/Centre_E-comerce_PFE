@@ -18,8 +18,9 @@ import {newProductReducer,
     getProductReviewReducer,
     deleteProductReviewReducer,
     deleteAdminProductReviewReducer,
-    updateProductReviewReducer
-
+    updateProductReviewReducer,
+    symbolReducer,
+    currencyDiffReducer
 } from './products';
 import cartReducer from './cart';
 import {
@@ -42,7 +43,6 @@ import {
 import {productReducer} from './products';
 
 const rootReducer = combineReducers({
-    data: productReducer,
     newproduct: newProductReducer,
     storeproducts:getStoreProductsReducer,
     product:getProductReducer,
@@ -77,6 +77,8 @@ const rootReducer = combineReducers({
     store:storeFiltersReducer,
     price:priceFiltersReducer,
     sortby:sortbyFiltersReducer,
+    symbol:symbolReducer,
+    currencydiff:currencyDiffReducer,
     Intl
 });
 

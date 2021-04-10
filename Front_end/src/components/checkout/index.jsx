@@ -80,7 +80,7 @@ class checkOut extends Component {
     }
 
     render (){
-        const {cartItems, symbol, total} = this.props;
+        const {cartItems, symbol, total,currencydiff} = this.props;
 
         // Paypal Integration
         const onSuccess = (payment) => {
@@ -430,13 +430,13 @@ class checkOut extends Component {
                                                     </div>
                                                     <ul className="qty">
                                                         {cartItems.map((item, index) => {
-                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {item.price-(item.price*item.discount/100)*item.qty}</span></li> })
+                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</span></li> })
                                                         }
 
                                                     </ul>
                                                     <ul className="qty">
-                                                        <li>Shipping Price: <span>€ 20</span></li>
-                                                        <li>Tax Cost: <span>€ 10</span></li>
+                                                        <li>Shipping Price: <span>{symbol}{symbol=="€"?20:20*currencydiff}</span></li>
+                                                        <li>Tax Cost: <span>{symbol}{symbol=="€"?10:10*currencydiff}</span></li>
                                                     </ul>
                                                     <ul className="sub-total">
                                                         <li>Shipping <div className="shipping">
@@ -453,7 +453,7 @@ class checkOut extends Component {
                                                     </ul>
 
                                                     <ul className="total">
-                                                        <li>Total <span className="count">{symbol}{total+30}</span></li>
+                                                        <li>Total <span className="count">{symbol}{symbol=="€"?total+30: Math.round((currencydiff*(total+30) + Number.EPSILON) * 100) / 100}</span></li>
                                                     </ul>
                                                 </div>
 
@@ -473,7 +473,7 @@ class checkOut extends Component {
                                                     {(total !== 0)?
                                                     <div className="text-right">
                                                         {(this.state.payment === 'stripe')? <button type="button" className="btn-solid btn" onClick={() => this.StripeClick()} >Place Order</button>:
-                                                         <PaypalExpressBtn env={'sandbox'} client={client} currency={'€'} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />}
+                                                         <PaypalExpressBtn env={'sandbox'} client={client} currency={symbol} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />}
                                                     </div>
                                                     : ''}
                                                 </div>
@@ -491,8 +491,9 @@ class checkOut extends Component {
 }
 const mapStateToProps = (state) => ({
     cartItems: state.cartList.cart,
-    symbol: "€",
-    total: getCartTotal(state.cartList.cart)
+    symbol: state.symbol.symbol,
+    total: getCartTotal(state.cartList.cart),
+    currencydiff:state.currencydiff
 })
 
 export default connect(

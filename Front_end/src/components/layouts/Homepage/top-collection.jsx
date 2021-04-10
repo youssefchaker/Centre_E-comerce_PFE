@@ -14,7 +14,9 @@ class TopCollection extends Component {
     render (){
         var properties = Product4;
         const {topproducts} = this.props;
-        var products=topproducts.products.products;
+        const products=topproducts.products.products;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 {/*Paragraph*/}
@@ -29,7 +31,7 @@ class TopCollection extends Component {
                                 <Slider  className="product-4 product-m no-arrow">
                                     { products.map((product, index ) =>
                                         <div key={index}>
-                                            <ProductItem {...properties} product={product} symbol={"€"}
+                                            <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }
@@ -53,7 +55,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = (state) => {
     return{
         topproducts:state.topproducts,
-        cartList:state.cartlist
+        cartList:state.cartlist,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
     }
 }
 

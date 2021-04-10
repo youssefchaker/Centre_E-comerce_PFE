@@ -13,7 +13,8 @@ class TopProduct extends Component {
     render (){
         const {topproducts} = this.props;
         const products=topproducts.products.products;
-        var i=0;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div className="theme-card">
                 <h5 className="title-border">Top Products</h5>
@@ -64,8 +65,13 @@ class TopProduct extends Component {
                                             <i className="fa fa-star"></i>
                                             </div>}
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
-                                        {(product.discount != 0)?
-                            <h4>€{product.price-(product.price*product.discount/100)}
+                                        {symbol=="DT"?
+                                        (product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>:
+                            (product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">€{product.price}</span></del> 
                             </h4>:<h4>€{product.price}</h4>}
                                     </div>
@@ -80,7 +86,9 @@ class TopProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        topproducts:state.topproducts
+        topproducts:state.topproducts,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
     }
 }
 const mapDispatchToProps = dispatch => {

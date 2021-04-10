@@ -17,6 +17,8 @@ class cartComponent extends Component {
     render (){
 
         const {cartItems, total} = this.props;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 {/*SEO Support*/}
@@ -64,7 +66,7 @@ class cartComponent extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-xs-3">
-                                                            <h2 className="td-color">{"€"}{item.price-(item.price*item.discount/100)}</h2>
+                                                            <h2 className="td-color">{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</h2>
                                                         </div>
                                                         <div className="col-xs-3">
                                                             <h2 className="td-color">
@@ -75,7 +77,7 @@ class cartComponent extends Component {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><h2>{"€"}{item.price-(item.price*item.discount/100)}</h2></td>
+                                                <td><h2>{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</h2></td>
                                                 <td>
                                                     <div className="qty-box">
                                                         <div className="input-group">
@@ -99,7 +101,7 @@ class cartComponent extends Component {
                                                         <i className="fa fa-times"></i>
                                                     </a>
                                                 </td>
-                                                <td><h2 className="td-color">{"€"}{(item.price-(item.price*item.discount/100))*item.qty}</h2></td>
+                                                <td><h2 className="td-color">{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</h2></td>
                                             </tr>
                                         </tbody> )
                                     })}
@@ -108,7 +110,7 @@ class cartComponent extends Component {
                                     <tfoot>
                                     <tr>
                                         <td>total price :</td>
-                                        <td><h2>{"€"} {total} </h2></td>
+                                        <td><h2>{symbol} {symbol=="€"?total: Math.round((currencydiff*total + Number.EPSILON) * 100) / 100} </h2></td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -149,7 +151,9 @@ class cartComponent extends Component {
 }
 const mapStateToProps = (state) => ({
     cartItems: state.cartList.cart,
-    total: getCartTotal(state.cartList.cart)
+    total: getCartTotal(state.cartList.cart),
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
 
 export default connect(

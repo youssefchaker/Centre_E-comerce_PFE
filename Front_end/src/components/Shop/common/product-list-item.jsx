@@ -48,9 +48,10 @@ class ProductListItem extends Component {
 
 
     render() {
-        const {product, symbol, onAddToCartClicked} = this.props;
+        const {product, onAddToCartClicked} = this.props;
         const {open} = this.state;
-
+        const symbol=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
 
                     <div className="product-box">
@@ -88,8 +89,14 @@ class ProductListItem extends Component {
                                     <h6>{product.name}</h6>
                                 </Link>
                                 
-                                    {product.discount==0?<h4>{symbol}{product.price}</h4>: <h4>€{product.price-(product.price*product.discount/100)}
-                                 <del><span className="money">€{product.price}</span></del> </h4> }
+                                {symbol=="€"?(product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                                 {/* {product.details?
                                 <ul className="color-variant">
                                     {product.details.map((vari, i) => {
@@ -114,9 +121,14 @@ class ProductListItem extends Component {
                                             <div className="col-lg-6 rtl-text">
                                                 <div className="product-right">
                                                 <h2> {product.name} </h2>
-                                                {product.discount!=0?<h3>{symbol}{product.price-(product.price*product.discount/100)}
-                                                        <del><span className="money">{symbol}{product.price}</span></del>
-                                                    </h3>:<h3>{symbol}{product.price}</h3>}
+                                                {symbol=="€"?(product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                                                     {/* {product.variants?
                                                     <ul className="color-variant">
                                                         {product.variants.map((vari, i) =>

@@ -54,7 +54,8 @@ import {NEW_PRODUCT_REQUEST,
     GET_STORE_NAME_REQUEST,
     GET_STORE_NAME_SUCCESS,
     GET_STORE_NAME_FAIL,
-    CLEAR_ERRORS } from '../constants/productConstants'
+    CLEAR_ERRORS,
+    CHANGE_CURRENCY } from '../constants/productConstants'
 
 export const newProduct = (productData) => async (dispatch) => {
     try {
@@ -453,3 +454,11 @@ export const clearErrors = () => async (dispatch) => {
         type: CLEAR_ERRORS
     })
 }
+
+// Currency
+export const changeCurrency = (symbol) =>async (dispatch)=> {
+    dispatch({
+        type: CHANGE_CURRENCY,
+        symbol
+    })
+};

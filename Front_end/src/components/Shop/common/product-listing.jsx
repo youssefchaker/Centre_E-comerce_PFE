@@ -43,6 +43,8 @@ class ProductListing extends Component {
     render (){
         const {allproducts, addToCart} = this.props;
         const products=allproducts.products;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 <div className="product-wrapper-grid">
@@ -62,7 +64,7 @@ class ProductListing extends Component {
                                 <div className="row">
                                     { products/*.slice(0, this.state.limit)*/.map((product, index) =>
                                         <div className={`${this.props.colSize===3?'col-xl-3 col-md-6 col-grid-box':'col-lg-'+this.props.colSize}`} key={index}>
-                                        <ProductListItem product={product} symbol={"€"}
+                                        <ProductListItem product={product} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={addToCart} key={index}/>
                                         </div>)
                                     }
@@ -87,11 +89,13 @@ class ProductListing extends Component {
 const mapStateToProps = (state) => ({
     allproducts:state.allproducts,
     products: getVisibleproducts(state.allproducts,state.category,state.store,state.price,state.sortby),
-    symbol: state.data.symbol,
+    symbol: state.symbol,
     category:state.category,
     store:state.store,
     price:state.price,
-    sortby:state.sortby
+    sortby:state.sortby,
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
 const mapDispatchToProps = dispatch => {
     return {

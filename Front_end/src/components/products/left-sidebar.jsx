@@ -61,6 +61,8 @@ class LeftSideBar extends Component {
 
         const { product} = this.props.product.product;
         const {addToCart,addToCartUnsafe}=this.props;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         var products = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -130,7 +132,7 @@ class LeftSideBar extends Component {
                                                 </Slider>
                                                 <SmallImages product={product} settings={productsnav} navOne={this.state.nav1} />
                                             </div>
-                                            <DetailsWithPrice symbol={"€"} product={product} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe}  />
+                                            <DetailsWithPrice symbol={symbol} product={product} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} currencydiff={currencydiff}  />
                                         </div>
                                     </div>
                                     <DetailsTopTabs product={product} />
@@ -147,7 +149,9 @@ class LeftSideBar extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return{
-        product:state.product
+        product:state.product,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
     }
 }
 const mapDispatchToProps = dispatch => {

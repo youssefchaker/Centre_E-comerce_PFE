@@ -15,6 +15,8 @@ class NewProduct extends Component {
     render (){
         const {newproducts} = this.props;
         const products=newproducts.products.products;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         var i=0;
         return (
             <div className="theme-card">
@@ -66,10 +68,15 @@ class NewProduct extends Component {
                                             <i className="fa fa-star"></i>
                                             </div>}
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
-                                        {(product.discount != 0)?
-                            <h4>€{product.price-(product.price*product.discount/100)}
-                                 <del><span className="money">€{product.price}</span></del> 
-                            </h4>:<h4>€{product.price}</h4>}
+                                        {symbol=="DT"?
+                                        (product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>:
+                            (product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>}
                                     </div>
                                 </div>
                         </div>
@@ -82,7 +89,9 @@ class NewProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        newproducts:state.newproducts
+        newproducts:state.newproducts,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
     }
 }
 const mapDispatchToProps = dispatch => {

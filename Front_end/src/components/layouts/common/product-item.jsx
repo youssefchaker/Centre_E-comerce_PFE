@@ -47,7 +47,8 @@ class ProductItem extends Component {
 
     render() {
         const {product, onAddToCartClicked} = this.props;
-
+        const symbol=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         let RatingStars = []
         for(var i = 0; i < product.nbreviews; i++) {
             RatingStars.push(<i className="fa fa-star" key={i}></i>)
@@ -95,10 +96,14 @@ class ProductItem extends Component {
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                 <h6>{product.name}</h6>
                             </Link>
-                            {(product.discount != 0)?
-                            <h4>€{product.price-(product.price*product.discount/100)}
-                                 <del><span className="money">€{product.price}</span></del> 
-                            </h4>:<h4>€{product.price}</h4>}
+                            {symbol=="€"?(product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{currencydiff*product.price}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                         </div>
                     </div>
                     <Modal open={this.state.open} onClose={this.onCloseModal} center>
@@ -118,7 +123,7 @@ class ProductItem extends Component {
                                         <div className="col-lg-6 rtl-text">
                                             <div className="product-right">
                                                 <h2> {product.name} </h2>
-                                                <h3>€{product.price}</h3>
+                                                <h3>{symbol}{product.price}</h3>
                                                 <div className="border-product">
                                                     <h6 className="product-title">product details</h6>
                                                      {product.details.map((detail)=>
