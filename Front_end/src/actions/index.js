@@ -44,22 +44,29 @@ export const decrementQty = productId => (dispatch) => {
 // Filters
 export const filterCategory = (category) => ({
     type: types.FILTER_CATEGORY,
-    category:category
+    category
 });
 export const filterStore = (store) => ({
     type: types.FILTER_STORE,
-    store:store
+    store
 });
 export const filterPrice = (value) => ({
     type: types.FILTER_PRICE,
-    value:value
+    value
+});
+export const filterPriceDT = (valueDT) => ({
+    type: types.FILTER_PRICE_DT,
+    valueDT
 });
 export const filterSort = (sort_by) => ({
     
     type: types.SORT_BY,
-    sort_by:sort_by
+    sort_by
 });
 
+export const emptyFilter=()=>({
+    type:types.EMPTY_FILTER
+})
 
 // Currency
 export const changeCurrency = (symbol) => ({

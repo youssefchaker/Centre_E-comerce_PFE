@@ -40,7 +40,7 @@ class ElementProductSlider extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    products: getVisibleproducts(state.data, state.filters),
+    /* products: getVisibleproducts(state.data, state.filters), */
     symbol: state.data.symbol,
 })
 

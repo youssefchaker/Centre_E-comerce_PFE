@@ -7,12 +7,18 @@ import FilterBar from "./common/filter-bar";
 import ProductListing from "./common/product-listing";
 import StickyBox from "react-sticky-box";
 import TopProduct from '../common/top-product';
+import { emptyFilter } from '../../actions';
+import { connect } from 'react-redux'
+import { getProducts } from '../../actions/productActions';
 
 class Shop extends Component {
     constructor(props){
         super(props)
     }
-
+    componentWillMount(){
+        this.props.getProducts();
+        this.props.emptyFilter();
+    }
     state = {
         layoutColumns:3
     }
@@ -81,8 +87,7 @@ class Shop extends Component {
                                                         </div>
 
                                                         {/*Products Listing Component*/}
-                                                        <ProductListing filter={this.props.match.params.id} colSize={this.state.layoutColumns}/>
-
+                                                        <ProductListing filterstore={this.props.match.params.id} colSize={this.state.layoutColumns}/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,5 +103,13 @@ class Shop extends Component {
         )
     }
 }
-
-export default Shop;
+const mapStateToProps = (state) => ({
+    allproducts:state.allproducts.products,
+})
+const mapDispatchToProps = dispatch => {
+    return {
+        getProducts: () => dispatch(getProducts()),
+        emptyFilter:()=>dispatch(emptyFilter())
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Shop) ;

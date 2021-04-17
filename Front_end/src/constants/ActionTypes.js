@@ -4,8 +4,9 @@
 export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 export const FILTER_STORE = 'FILTER_STORE'
 export const FILTER_PRICE = 'FILTER_PRICE'
+export const FILTER_PRICE_DT = 'FILTER_PRICE_DT'
 export const SORT_BY = 'SORT_BY'
-
+export const EMPTY_FILTER='EMPTY_FILTER'
 export const CHANGE_CURRENCY = 'CHANGE_CURRENCY'
 
 

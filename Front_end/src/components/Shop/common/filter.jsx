@@ -3,10 +3,8 @@ import { connect } from 'react-redux'
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 import { SlideToggle } from 'react-slide-toggle';
-
-
-import {getCategories, getMinMaxPrice,getStores} from '../../../services';
-import {filterCategory, filterStore, filterPrice} from '../../../actions'
+import {getCategories, getMinMaxPrice,getStores,getMinMaxPriceDT} from '../../../services';
+import {filterCategory, filterStore, filterPrice,filterPriceDT} from '../../../actions'
 
 class Filter extends Component {
 
@@ -21,26 +19,37 @@ class Filter extends Component {
         document.querySelector(".collection-filter").style = "left: -365px";
     }
 
-    clickCategoryHendle(event,categories,index) {
+    clickCategoryHendle(event,categories) {
+        var index = categories.indexOf(event.target.value);
         if (event.target.checked)
         categories.push(event.target.value); // push in array checked value
-        else
-        categories.splice(index, 1); // removed in array unchecked value
-
+        else{
+            if(categories.length==1)
+                categories=[];
+            else
+                categories.splice(index, 1); // removed in array unchecked value
+        }
         this.props.filterCategory(categories);
     }
 
     storeHandle(event,stores,index){
+        var index = stores.indexOf(event.target.value);
         if (event.target.checked)
         stores.push(event.target.value); // push in array checked value
-        else
-        stores.splice(index, 1); // removed in array unchecked value
-
+        else{
+            if(stores.length==1)
+                stores=[];
+            else
+            stores.splice(index, 1); // removed in array unchecked value
+        }
+    
         this.props.filterStore(stores);
     }
     render (){
-        const filteredcategories = []
-        const filteredstores = []
+        const filteredcategories = this.props.filters.category;
+        const filteredstores = this.props.filters.store;
+        const {currencydiff}=this.props;
+        const symbol=this.props.symbol.symbol;
         return (
                 <div className="collection-filter-block">
                     {/*category filter start*/}
@@ -58,7 +67,7 @@ class Filter extends Component {
                                         {this.props.categories.map((category, index) => {
                                             return (
                                                 <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
-                                                    <input type="checkbox" onClick={(e) => this.clickCategoryHendle(e,filteredcategories,index)} value={category} className="custom-control-input" id={category} /*defaultChecked={filteredcategories.includes(category)? true : false}*/ />
+                                                    <input type="checkbox" onClick={(e) => this.clickCategoryHendle(e,filteredcategories)} value={category} className="custom-control-input" id={category} defaultChecked={filteredcategories.includes(category)? true : false} />
                                                     <label className="custom-control-label"
                                                            htmlFor={category}>{category}</label>
                                                 </div> )
@@ -79,7 +88,7 @@ class Filter extends Component {
                                         {this.props.stores.map((store, index) => {
                                             return (
                                                 <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
-                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e,filteredstores,index)} value={store} className="custom-control-input" id={store} /*defaultChecked={filteredstores.includes(store)? true : false}*/ />
+                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e,filteredstores)} value={store} className="custom-control-input" id={store} defaultChecked={filteredstores.includes(store)? true : false} />
                                                     <label className="custom-control-label"
                                                            htmlFor={store}>{store}</label>
                                                 </div> )
@@ -93,17 +102,25 @@ class Filter extends Component {
                     <SlideToggle>
                         {({onToggle, setCollapsibleElement}) => (
                             <div className="collection-collapse-block open">
-                                <h3 className="collapse-block-title" onClick={onToggle}>price</h3>
+                                <h3 className="collapse-block-title" onClick={onToggle}>price({symbol})</h3>
                                 <div className="collection-collapse-block-content block-price-content" ref={setCollapsibleElement}>
                                     <div className="collection-brand-filter">
+                                    {symbol=="DT"?
+                                    <div className="custom-control custom-checkbox collection-filter-checkbox">
+                                            <InputRange
+                                                maxValue={this.props.pricesDT.max}
+                                                minValue={this.props.pricesDT.min}
+                                                value={this.props.filters.valueDT}
+                                                onChange={value => this.props.filterPriceDT({ value })} />
+                                        </div>:
                                         <div className="custom-control custom-checkbox collection-filter-checkbox">
                                             <InputRange
                                                 maxValue={this.props.prices.max}
                                                 minValue={this.props.prices.min}
-                                                value={this.props.price.value}
+                                                value={this.props.filters.value}
                                                 onChange={value => this.props.filterPrice({ value })} />
-                                                {console.log(this.props.prices)}
-                                        </div>
+                                        </div>}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -119,15 +136,10 @@ const mapStateToProps = state => ({
     categories: getCategories(state.allproducts.products),
     stores: getStores(state.allproducts),
     prices: getMinMaxPrice(state.allproducts.products),
-    category:state.category,
-    store:state.store,
-    price:state.price,
-    sortby:state.sortby
+    pricesDT: getMinMaxPriceDT(state.allproducts.products,state.currencydiff),
+    filters: state.filters,
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
 
-const mapDispatchToProps=dispatch=>({
-    filterCategory:(category)=>dispatch(filterCategory(category)),
-    filterStore:(store)=>dispatch(filterStore(store)),
-    filterPrice:(price)=>dispatch(filterPrice(price))
-})
-export default connect(mapStateToProps,mapDispatchToProps)(Filter);
+export default connect(mapStateToProps,{ filterCategory, filterStore, filterPrice, filterPriceDT })(Filter);

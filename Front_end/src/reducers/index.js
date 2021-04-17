@@ -24,10 +24,7 @@ import {newProductReducer,
 } from './products';
 import cartReducer from './cart';
 import {
-    categoryFiltersReducer,
-    storeFiltersReducer,
-    priceFiltersReducer,
-    sortbyFiltersReducer
+    filtersReducer
 } from './filters';
 import {
     newEventReducer,
@@ -73,10 +70,7 @@ const rootReducer = combineReducers({
     deleteadminevent:deletrAdminEventReducer, 
     ///////////////////////////////////////////////////////////
     cartList: cartReducer,
-    category:categoryFiltersReducer,
-    store:storeFiltersReducer,
-    price:priceFiltersReducer,
-    sortby:sortbyFiltersReducer,
+    filters: filtersReducer,
     symbol:symbolReducer,
     currencydiff:currencyDiffReducer,
     Intl

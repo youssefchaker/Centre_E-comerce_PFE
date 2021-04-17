@@ -32,54 +32,147 @@ export const getMinMaxPrice = (products) => {
     let min = 1000, max = 0;
 
     products.map((product, index) => {
-        let v = 0;
-        if(product.discount==0){
-             v = product.price;
-        }
-        else{
-             v = product.price*product.discount/100; 
-        }
-        min = (v < min) ? v : min;
-        max = (v > max) ? v : max;
+        min = (product.price-(product.price*product.discount/100) < min) ? (product.price-(product.price*product.discount/100)) : min;
+        max = (product.price-(product.price*product.discount/100) > max) ? (product.price-(product.price*product.discount/100)) : max;
     })
 
     return {'min':min, 'max':max};
 }
 
-export const getVisibleproducts = (data,  category, store, value, sortBy ) => {
-    return data.products.filter(product => {
+export const getMinMaxPriceDT = (products,diff) => {
+    let min = 1000, max = 0;
 
-        let categoryMatch;
-        if(product.category)
-        categoryMatch = product.category.includes(category);
-        else
-        categoryMatch = true;
+    products.map((product, index) => {
+        min = (diff*(product.price-(product.price*product.discount/100)) < min) ? diff*(product.price-(product.price*product.discount/100)) : min;
+        max = (diff*(product.price-(product.price*product.discount/100) > max)) ? diff*(product.price-(product.price*product.discount/100)) : max;
+    })
 
-        let storeMatch;
-        if(product.store)
-        storeMatch = product.store.includes(store);
-        else
-        storeMatch = true;
+    return {'min':min, 'max':max};
+}
 
-        const startPriceMatch = typeof value.min !== 'number' || value.min <= product.price;
-        const endPriceMatch = typeof value.max !== 'number' || product.price <= value.max;
-
-        return categoryMatch && storeMatch && startPriceMatch && endPriceMatch;
-    }).sort((product1, product2) => {
-        if (sortBy === 'HighToLow') {
-            return product2.price < product1.price ? -1 : 1;
-        } else if (sortBy === 'LowToHigh') {
-            return product2.price > product1.price ? -1 : 1;
-        } else if (sortBy === 'Newest') {
-            return product2.id < product1.id ? -1 : 1;
-        } else if (sortBy === 'AscOrder') {
-            return product1.name.localeCompare(product2.name);
-        } else if (sortBy === 'DescOrder') {
-            return product2.name.localeCompare(product1.name);
-        } else{
-            return product2.id > product1.id ? -1 : 1;
+export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,symbol,diff ) => {
+    if(symbol.symbol=="DT"){
+        if(category.length==0 && store.length==0 && valueDT==0){
+            return data.products.sort((product1, product2) => {
+                if (sortBy === 'HighToLow') {
+                    return product2.price < product1.price ? -1 : 1;
+                } else if (sortBy === 'LowToHigh') {
+                    return product2.price > product1.price ? -1 : 1;
+                } else if (sortBy === 'Newest') {
+                    return product2.id < product1.id ? -1 : 1;
+                } else if (sortBy === 'AscOrder') {
+                    return product1.name.localeCompare(product2.name);
+                } else if (sortBy === 'DescOrder') {
+                    return product2.name.localeCompare(product1.name);
+                } else{
+                    return product2.id > product1.id ? -1 : 1;
+                }
+            });
         }
-    });
+        else
+        return data.products.filter(product => {
+            let categoryMatch;
+            for(var i=0;i<category.length;i++){
+                if(product.category==category[i]){
+                    categoryMatch = true;
+                break;
+                }
+                else
+                categoryMatch = false;
+            }
+            let storeMatch;
+            for(var j=0;j<store.length;j++){
+                if(product.store==store[j]){
+                    storeMatch = true;
+                    break;
+                }
+                else
+                storeMatch = false;
+            }
+            let PriceMatch;
+            if(diff*(product.price-(product.price*product.discount/100))>=valueDT)
+                PriceMatch=true;
+            else
+                PriceMatch=false;
+            return categoryMatch || storeMatch || PriceMatch;
+        }).sort((product1, product2) => {
+            if (sortBy === 'HighToLow') {
+                return product2.price < product1.price ? -1 : 1;
+            } else if (sortBy === 'LowToHigh') {
+                return product2.price > product1.price ? -1 : 1;
+            } else if (sortBy === 'Newest') {
+                return product2.id < product1.id ? -1 : 1;
+            } else if (sortBy === 'AscOrder') {
+                return product1.name.localeCompare(product2.name);
+            } else if (sortBy === 'DescOrder') {
+                return product2.name.localeCompare(product1.name);
+            } else{
+                return product2.id > product1.id ? -1 : 1;
+            }
+        });
+    }
+
+    else {
+        if(category.length==0 && store.length==0 && value==0){
+            return data.products.sort((product1, product2) => {
+                if (sortBy === 'HighToLow') {
+                    return product2.price < product1.price ? -1 : 1;
+                } else if (sortBy === 'LowToHigh') {
+                    return product2.price > product1.price ? -1 : 1;
+                } else if (sortBy === 'Newest') {
+                    return product2.id < product1.id ? -1 : 1;
+                } else if (sortBy === 'AscOrder') {
+                    return product1.name.localeCompare(product2.name);
+                } else if (sortBy === 'DescOrder') {
+                    return product2.name.localeCompare(product1.name);
+                } else{
+                    return product2.id > product1.id ? -1 : 1;
+                }
+            });
+        }
+        else
+        return data.products.filter(product => {
+            let categoryMatch;
+            for(var i=0;i<category.length;i++){
+                if(product.category==category[i]){
+                    categoryMatch = true;
+                break;
+                }
+                else
+                categoryMatch = false;
+            }
+            let storeMatch;
+            for(var j=0;j<store.length;j++){
+                if(product.store==store[j]){
+                    storeMatch = true;
+                    break;
+                }
+                else
+                storeMatch = false;
+            }
+            let PriceMatch;
+            if(product.price-(product.price*product.discount/100)>=value)
+                PriceMatch=true;
+            else
+                PriceMatch=false;
+            return categoryMatch || storeMatch || PriceMatch;
+        }).sort((product1, product2) => {
+            if (sortBy === 'HighToLow') {
+                return product2.price < product1.price ? -1 : 1;
+            } else if (sortBy === 'LowToHigh') {
+                return product2.price > product1.price ? -1 : 1;
+            } else if (sortBy === 'Newest') {
+                return product2.id < product1.id ? -1 : 1;
+            } else if (sortBy === 'AscOrder') {
+                return product1.name.localeCompare(product2.name);
+            } else if (sortBy === 'DescOrder') {
+                return product2.name.localeCompare(product1.name);
+            } else{
+                return product2.id > product1.id ? -1 : 1;
+            }
+        });
+
+    }
 }
 
 export const getCartTotal = cartItems => {

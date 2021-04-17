@@ -6,7 +6,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { getTotal, getCartProducts } from '../../../reducers'
 import { addToCart } from '../../../actions'
-import {getVisibleproducts} from '../../../services';
+import {getMinMaxPrice, getVisibleproducts} from '../../../services';
 import ProductListItem from "./product-list-item";
 import { getProducts } from '../../../actions/productActions';
 
@@ -22,7 +22,6 @@ class ProductListing extends Component {
 
     componentWillMount(){
         this.fetchMoreItems();
-        this.props.getProducts();
     }
 
     fetchMoreItems = () => {
@@ -41,8 +40,8 @@ class ProductListing extends Component {
     }
 
     render (){
-        const {allproducts, addToCart} = this.props;
-        const products=allproducts.products;
+        const { addToCart} = this.props;
+        const products=this.props.products;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         return (
@@ -54,7 +53,7 @@ class ProductListing extends Component {
                                 dataLength={this.state.limit} //This is important field to render the next data
                                 next={this.fetchMoreItems}
                                 hasMore={this.state.hasMoreItems}
-                                loader={<div className="loading-cls"></div>}
+
                                 endMessage={
                                     <p className="seen-cls seen-it-cls">
                                         <b>Yay! You have seen it all</b>
@@ -88,18 +87,13 @@ class ProductListing extends Component {
 }
 const mapStateToProps = (state) => ({
     allproducts:state.allproducts,
-    products: getVisibleproducts(state.allproducts,state.category,state.store,state.price,state.sortby),
-    symbol: state.symbol,
-    category:state.category,
-    store:state.store,
-    price:state.price,
-    sortby:state.sortby,
+    products: getVisibleproducts(state.allproducts,state.filters.category,state.filters.store,state.filters.value,state.filters.valueDT,state.filters.sortBy,state.symbol,state.currencydiff),
+    filters:state.filters,
     symbol:state.symbol,
     currencydiff:state.currencydiff
 })
 const mapDispatchToProps = dispatch => {
     return {
-        getProducts: () => dispatch(getProducts()),
         addToCart:(product,qty)=>dispatch(addToCart(product,qty))
     }
 }

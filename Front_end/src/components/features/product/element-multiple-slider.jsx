@@ -96,10 +96,10 @@ class ElementMultipleSlider extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    newProducts: getVisibleproducts(state.data, state.filters),
+    /* newProducts: getVisibleproducts(state.data, state.filters),
     featureProducts: getVisibleproducts(state.data, state.filters),
     bestSeller: getVisibleproducts(state.data, state.filters),
-    onSell: getVisibleproducts(state.data, state.filters),
+    onSell: getVisibleproducts(state.data, state.filters), */
     newWatches:getNewProducts(state.data.products, 'watch'),
     bestSellerWatches:getBestSellerProducts(state.data.products, 'watch'),
 })
