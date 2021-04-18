@@ -59,7 +59,8 @@ class LeftSideBar extends Component {
 
     render(){
 
-        const { product} = this.props.product.product;
+        const { product} = this.props.product.product; 
+        const storename=this.props.product.product.storename;
         const {addToCart,addToCartUnsafe}=this.props;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
@@ -132,7 +133,7 @@ class LeftSideBar extends Component {
                                                 </Slider>
                                                 <SmallImages product={product} settings={productsnav} navOne={this.state.nav1} />
                                             </div>
-                                            <DetailsWithPrice symbol={symbol} product={product} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} currencydiff={currencydiff}  />
+                                            <DetailsWithPrice symbol={symbol} product={product} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} currencydiff={currencydiff} storename={storename}  />
                                         </div>
                                     </div>
                                     <DetailsTopTabs product={product} />

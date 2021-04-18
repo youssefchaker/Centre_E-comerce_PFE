@@ -10,14 +10,14 @@ import TopProduct from '../common/top-product';
 import { emptyFilter } from '../../actions';
 import { connect } from 'react-redux'
 import { getProducts } from '../../actions/productActions';
-
+import {getMinMaxPrice,getMinMaxPriceDT} from '../../services';
 class Shop extends Component {
     constructor(props){
         super(props)
     }
     componentWillMount(){
         this.props.getProducts();
-        this.props.emptyFilter();
+        this.props.emptyFilter({min:this.props.prices.min,minDT:this.props.pricesDT.min});
     }
     state = {
         layoutColumns:3
@@ -105,11 +105,14 @@ class Shop extends Component {
 }
 const mapStateToProps = (state) => ({
     allproducts:state.allproducts.products,
+    prices: getMinMaxPrice(state.allproducts.products),
+    pricesDT: getMinMaxPriceDT(state.allproducts.products,state.currencydiff),
+    currencydiff:state.currencydiff
 })
 const mapDispatchToProps = dispatch => {
     return {
         getProducts: () => dispatch(getProducts()),
-        emptyFilter:()=>dispatch(emptyFilter())
+        emptyFilter:(min)=>dispatch(emptyFilter(min))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Shop) ;

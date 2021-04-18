@@ -49,7 +49,7 @@ class DetailsWithPrice extends Component {
     }
 
     render (){
-        const {symbol, product, addToCartClicked, BuynowClicked,currencydiff} = this.props
+        const {symbol, product, addToCartClicked, BuynowClicked,currencydiff,storename} = this.props
         var colorsnav = {
             slidesToShow: 6,
             swipeToSlide:true,
@@ -62,13 +62,14 @@ class DetailsWithPrice extends Component {
             <div className="col-lg-6 rtl-text">
                 <div className="product-right">
                     <h2> {product.name} </h2>
+                    <h3>Product By: {storename}</h3>
                     {symbol=="€"?(product.discount != 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 
                             </h4>:<h4>{symbol}{product.price}</h4>
                             :(product.discount != 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
-                                 <del><span className="money">{symbol}{currencydiff*product.price}</span></del> 
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*product.price + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                         {/* <del></del> */}
                         {/* <span>{product.discount}% off</span> */}

@@ -18,7 +18,7 @@ export const getStores = (products) => {
     var stores = [];
     var i=0;
     while(i<products.products.length){
-        stores.push(products.products[i].store);
+        stores.push(products.storenames[i]);
         i++;
     }
     let uniqueChars = stores.filter((c, index) => {
@@ -52,7 +52,7 @@ export const getMinMaxPriceDT = (products,diff) => {
 
 export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,symbol,diff ) => {
     if(symbol.symbol=="DT"){
-        if(category.length==0 && store.length==0 && valueDT==0){
+        /* if(category.length==0 && store.length==0 && valueDT==0){
             return data.products.sort((product1, product2) => {
                 if (sortBy === 'HighToLow') {
                     return product2.price < product1.price ? -1 : 1;
@@ -69,8 +69,8 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
                 }
             });
         }
-        else
-        return data.products.filter(product => {
+        else */
+        return data.products.filter((product,index) => {
             let categoryMatch;
             for(var i=0;i<category.length;i++){
                 if(product.category==category[i]){
@@ -82,7 +82,7 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
             }
             let storeMatch;
             for(var j=0;j<store.length;j++){
-                if(product.store==store[j]){
+                if(data.storenames[index]==store[j]){
                     storeMatch = true;
                     break;
                 }
@@ -113,7 +113,7 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
     }
 
     else {
-        if(category.length==0 && store.length==0 && value==0){
+        /* if(category.length==0 && store.length==0 && value==0){
             return data.products.sort((product1, product2) => {
                 if (sortBy === 'HighToLow') {
                     return product2.price < product1.price ? -1 : 1;
@@ -130,7 +130,7 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
                 }
             });
         }
-        else
+        else */
         return data.products.filter(product => {
             let categoryMatch;
             for(var i=0;i<category.length;i++){

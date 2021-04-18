@@ -30,8 +30,8 @@ import * as types from '../constants/ActionTypes'
         case types.EMPTY_FILTER:
             return {
                 ...state,
-                value: 0,
-                valueDT:0
+                value: action.min.min,
+                valueDT:action.min.minDT
             };
         default:
             return state;

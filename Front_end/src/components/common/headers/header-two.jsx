@@ -79,10 +79,12 @@ class HeaderTwo extends Component {
         if(curr=='€'){
             this.setState({curr:'€'});
             this.props.changeCurrency('€');
+            toast.success("the currency has been changed to Euro!!");
         }
         else{
             this.setState({curr:'DT'});
-            this.props.changeCurrency('DT')
+            this.props.changeCurrency('DT');
+            toast.success("the currency has been changed to Tunisian Dinar!!");
         }
     }
     
@@ -117,7 +119,9 @@ class HeaderTwo extends Component {
           }
           else{
               this.props.getSearchedProducts(this.state.search);
-              this.setState({loadsearch:"load"})
+              this.setState({loadsearch:"load"});
+              this.closeSearch();
+              this.setState({search:""})
           }
       }
     setStateFromInput = (event) => {
@@ -165,13 +169,13 @@ class HeaderTwo extends Component {
                                                         <div className="show-div setting">
                                                             <h6>language</h6>
                                                             <ul>
-                                                                <li>{this.state.lang=="en"?<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"red"}} >English</a>:<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"black"}} >English</a>} </li>
-                                                                <li>{this.state.lang=="fr"?<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"red"}} >French</a>:<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"black"}} >French</a>} </li>
+                                                                <li>{this.state.lang=="en"?<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"black"}} >English</a>:<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"black"}} >English</a>} </li>
+                                                                <li>{this.state.lang=="fr"?<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"black"}} >French</a>:<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"black"}} >French</a>} </li>
                                                             </ul>
                                                             <h6>currency</h6>
                                                             <ul className="list-inline">
-                                                                <li>{this.state.curr=='€'?<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"red"}} >euro</a>:<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"black"}} >euro</a>}</li>
-                                                                <li>{this.state.curr=='DT'?<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"red"}}>tunisian dinar</a>:<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"black"}}>tunisian dinar</a>}</li>
+                                                                <li>{this.state.curr=='€'?<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"black"}} >euro</a>:<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"black"}} >euro</a>}</li>
+                                                                <li>{this.state.curr=='DT'?<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"black"}}>tunisian dinar</a>:<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"black"}}>tunisian dinar</a>}</li>
                                                             </ul>
                                                         </div>
                                                         
@@ -204,15 +208,15 @@ class HeaderTwo extends Component {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-xl-12">
-                                    {this.state.loadsearch=="load"?
-                                                <Searchresult products={this.props.searchedproducts} />
-                                            :<form>
+                                    {this.state.loadsearch=="load"?<Redirect to={{ pathname: `${process.env.PUBLIC_URL}/pages/searchresult` }} />:'' }
+                                    {this.state.loadsearch=""}
+                                            <form>
                                             <div className="form-group">
-                                                <input type="text" name="search" className="form-control" placeholder="Search a Product" onChange={this.setStateFromInput} value={this.state.search} />
+                                            <input type="text" name="search" className="form-control" placeholder="Search a Product" onChange={this.setStateFromInput} value={this.state.search} />
                                                 {this.validator.message('search', this.state.search, 'required')}
                                             </div>
-                                            <button type="submit" onClick={this.handlesubmit} className="btn btn-primary"><i className="fa fa-search"></i></button>
-                                        </form>}
+                                            <button type="submit" onClick={this.handlesubmit} className="btn btn-primary"><Link to={`${process.env.PUBLIC_URL}/pages/searchresult`}><i className="fa fa-search"></i></Link></button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

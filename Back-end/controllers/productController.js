@@ -88,7 +88,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     let filteredProductsCount = products.length;
     for(var i=0;i<products.length;i++){
         const store= await Store.findById(products[i].store);
-        storenames.push(store);
+        storenames.push(store.name);
     }
     res.status(200).json({
         success: true,
@@ -115,17 +115,18 @@ exports.adminGetProducts = catchAsyncErrors(async (req, res, next) => {
 // Get a single product from a specific store   =>   /product/:id
 
 exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
-    await Product.findById(req.params.id).exec(function(err,product){
-        if (!product) {
+    const product=await Product.findById(req.params.id)
+if (!product) {
     return next(new ErrorHandler('Product not found', 404));
 }
 else{
+    const store=await Store.findById(product.store);
     res.status(200).json({
         success: true,
-        product
+        product,
+        storename:store.name
     })
 }
-})
 })
 
 // Get top products details   =>   /api/mall/products/top
@@ -156,6 +157,7 @@ exports.getNewProducts = catchAsyncErrors(async (req, res, next) => {
 // Get searched product details   =>   /products/search
 
 exports.getSearchedProduct = catchAsyncErrors(async (req, res, next) => {
+    const storenames=[];
     const apiFeatures = new APIFeatures(Product.find(), req.params.keyword)
         .search()
     let products = await apiFeatures.query;
@@ -163,9 +165,14 @@ exports.getSearchedProduct = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Product not found', 404));
     }
     else{
+        for(var i=0;i<products.length;i++){
+            const store= await Store.findById(products[i].store);
+            storenames.push(store.name);
+        }
         res.status(200).json({
             success: true,
-            products
+            products,
+            storenames
         })
     }
         })

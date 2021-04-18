@@ -11,7 +11,8 @@ class Searchresult extends Component {
         setTimeout("location.reload(true);",1);
     }
         render(){
-            const {products}=this.props.products.products
+            const {products}=this.props.searchedproducts.products
+            const storenames=this.props.searchedproducts.products.storenames;
             const {symbol}=this.props.symbol;
             const currencydiff=this.props.currencydiff;
         return (
@@ -37,7 +38,7 @@ class Searchresult extends Component {
                                                 <h4>{product.name}</h4>
                                                 <h6>{product.description} </h6>
                                                 {symbol=="DT"?product.discount?<h6>Price:{symbol}&nbsp;{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100} </h6>:<h6>Price:{symbol}&nbsp;{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100} </h6>:product.discount?<h6>Price:{symbol}&nbsp;{(product.price-(product.price*product.discount/100))} </h6>:<h6>Price:{symbol}&nbsp;{product.price} </h6>}
-                                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5 onClick={this.closeSearch}>Product By {product.store} </h5></Link>
+                                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5 onClick={this.closeSearch}>Product By: {storenames[index]} </h5></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +57,8 @@ class Searchresult extends Component {
 const mapStateToProps=state=>{
     return {
         symbol:state.symbol,
-        currencydiff:state.currencydiff
+        currencydiff:state.currencydiff,
+        searchedproducts:state.searchedproducts
       }
 }
 
