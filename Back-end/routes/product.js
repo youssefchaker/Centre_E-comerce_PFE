@@ -20,7 +20,8 @@ const {
     updateProductReview,
     getAllProductReviews,
     getSearchedProduct,
-    getStorename
+    getStorename,
+    updateProductDetails
 } = require('../controllers/productController')
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
@@ -31,7 +32,7 @@ router.route('/store/products/:id').get(/* isAuthenticatedUser, authorizeRoles('
 router.route('/store/product/:id')
               .put(/* isAuthenticatedUser, authorizeRoles('Seller'), */updateProduct)//
               .delete(/* isAuthenticatedUser, authorizeRoles('Seller'), */deleteProduct);//
-
+router.route('/store/productdetail/:id').put(/* isAuthenticatedUser, authorizeRoles('Seller'), */updateProductDetails)//
 
 router.route('/products').get(getProducts);//
 router.route('/admin/products').get(isAuthenticatedUser,authorizeRoles('Admin'),adminGetProducts);//

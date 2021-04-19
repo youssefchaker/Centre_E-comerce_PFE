@@ -55,7 +55,10 @@ import {NEW_PRODUCT_REQUEST,
     GET_STORE_NAME_SUCCESS,
     GET_STORE_NAME_FAIL,
     CLEAR_ERRORS,
-    CHANGE_CURRENCY } from '../constants/productConstants'
+    CHANGE_CURRENCY,
+    UPDATE_PRODUCT_DETAIL_REQUEST,
+    UPDATE_PRODUCT_DETAIL_SUCCESS,
+    UPDATE_PRODUCT_DETAIL_FAIL } from '../constants/productConstants'
 
 export const newProduct = (productData) => async (dispatch) => {
     try {
@@ -229,7 +232,33 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: UPDATE_PRODUCT_FAIL,
-            payload: error.response.data.message
+            payload: error
+        })
+    }
+}
+
+export const updateProductDetails = (id, productData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: UPDATE_PRODUCT_DETAIL_REQUEST })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put(`http://localhost:5000/api/mall/store/productdetail/${id}`, productData, config)
+
+        dispatch({
+            type: UPDATE_PRODUCT_DETAIL_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_PRODUCT_DETAIL_FAIL,
+            payload: error
         })
     }
 }

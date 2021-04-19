@@ -67,7 +67,6 @@ class Addproduct extends Component {
                 i++;
             }
             this.state.ProductImages.push(document.getElementById("img").files[0]);
-            console.log(this.state.ProductImages);
             this.props.newProduct({'storename':this.state.StoreName,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
             setTimeout("location.reload(true);",2000);
@@ -140,6 +139,7 @@ class Addproduct extends Component {
                                                     <option>Sports</option>
                                                     <option>Outdoor</option>
                                                     <option>Home</option>
+                                                    <option>Other</option>
                                                     </select>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">

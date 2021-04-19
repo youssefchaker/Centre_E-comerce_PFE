@@ -20,7 +20,8 @@ import {newProductReducer,
     deleteAdminProductReviewReducer,
     updateProductReviewReducer,
     symbolReducer,
-    currencyDiffReducer
+    currencyDiffReducer,
+    updateProductDetailsReducer
 } from './products';
 import cartReducer from './cart';
 import {
@@ -51,6 +52,7 @@ const rootReducer = combineReducers({
     deleteproduct:deleteProductReducer,
     deleteadminproduct:deleteAdminProductReducer,
     adminproducts:getAdminProductsReducer,
+    updateproductdetail:updateProductDetailsReducer,
     ////////////////////////////////////////////////////////
     newreview:newReviewReducer,
     adminreviews:getAdminReviewsReducer,

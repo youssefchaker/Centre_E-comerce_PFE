@@ -186,7 +186,26 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     else{
         res.status(200).json({
             success: true,
-            product
+            "message":"product updated"
+        })
+    }
+
+})
+
+
+// store Updates Product Detail   =>   /api/mall/store/productdetail/:id
+exports.updateProductDetails = catchAsyncErrors(async (req, res, next) => {
+    console.log(req.body);
+    const {detailname,value}=req.body;
+    const product =await Product.findOneAndUpdate({"details._id":req.params.id},{$set:{"details.$[var].detailname":detailname,'details.$[var].value':value}},{"arrayFilters": [
+        { "var._id": req.params.id }]})
+            if(!product){
+                return next(new ErrorHandler('Product or Review not found', 404));
+            }
+    else{
+        res.status(200).json({
+            success: true,
+            "message":"product updated"
         })
     }
 

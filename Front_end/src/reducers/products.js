@@ -53,9 +53,10 @@ import {NEW_PRODUCT_REQUEST,
     GET_STORE_NAME_SUCCESS,
     GET_STORE_NAME_FAIL,
     CLEAR_ERRORS,
-    CHANGE_CURRENCY
-
-
+    CHANGE_CURRENCY,
+    UPDATE_PRODUCT_DETAIL_REQUEST,
+    UPDATE_PRODUCT_DETAIL_SUCCESS,
+    UPDATE_PRODUCT_DETAIL_FAIL
 } from "../constants/productConstants";
 
 /* export const productReducer = (state = { products: {} }, action) => {
@@ -427,6 +428,35 @@ export const updateProductReducer = (state = { updateproduct: {} }, action) => {
                 isUpdated: action.payload
             }
         case UPDATE_PRODUCT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+                }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+export const updateProductDetailsReducer = (state = { updateproductdetail: {} }, action) => {
+    switch (action.type) {
+
+        case UPDATE_PRODUCT_DETAIL_REQUEST:           
+            return {
+                ...state,
+                loading: true
+            }
+        case UPDATE_PRODUCT_DETAIL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload
+            }
+        case UPDATE_PRODUCT_DETAIL_FAIL:
             return {
                 ...state,
                 error: action.payload

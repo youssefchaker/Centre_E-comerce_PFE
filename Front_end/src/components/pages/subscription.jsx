@@ -160,6 +160,7 @@ class Subscription extends Component {
                                                     <option>Sports</option>
                                                     <option>Outdoor</option>
                                                     <option>Home</option>
+                                                    <option>Other</option>
                                                     </select>
                                                 </div>
 
