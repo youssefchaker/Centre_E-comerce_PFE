@@ -49,7 +49,7 @@ class Login extends Component {
                                         </div>
                                         
                                         <button onClick={this.handlesubmit} className="btn btn-solid" style={{marginRight:'100px'}}>Login</button>
-                                        <Link to="/pages/forget-password"><a className="btn btn-solid">Forget Password?</a></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/forget-password`}><a>Forget Password?</a></Link>
                                     </form>
                                 </div>
                             </div>

@@ -50,7 +50,7 @@ class HeaderTwo extends Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
 
-    handleScroll = () => {
+    /* handleScroll = () => {
         let number = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
         if (number >= 300) {
@@ -61,7 +61,7 @@ class HeaderTwo extends Component {
         } else {
             document.getElementById("sticky").classList.remove('fixed');
         }
-    }
+    } */
 
     changeLanguage(lang) {
         this.handlelang(lang);

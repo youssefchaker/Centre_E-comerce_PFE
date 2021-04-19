@@ -136,7 +136,7 @@ class Mystore extends Component {
                                         <Link to={`${process.env.PUBLIC_URL}/pages/mystore`}><li className="active"><a>My Store</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/pages/myorders`}><li><a>My Orders</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/pages/myevents`}><li><a>My Events</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/cart`}><li><a>My Cart</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/cart`}><li><a>My Cart</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/`}><li><a href="#">Change Password</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/`}><li className="last"><a href="#">Log Out</a></li></Link>
                                         </ul>
@@ -147,39 +147,36 @@ class Mystore extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                        <div className="col-lg-6 col-sm-12 col-xs-12">
+                                        <div className="col-lg-8 col-sm-12 col-xs-12">
+                                        <h5 style={{color:"#fe2b2a"}}>Click on the product's attribute to update it!</h5>
                                         {productsarray.map((product,index)=>(
+                                            <div>
+                                            <h3 style={{color:"black"}}>Product {index+1}</h3>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
-                                                    <div>{product.name}</div>
-                                                    <button onClick={()=>this.openSearch("name",product._id)} >Update Product Name</button>
+                                                    <div onClick={()=>this.openSearch("name",product._id)}>{product.name}</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">Product Price</div>
-                                                    <div>{product.price}</div>
-                                                    <button onClick={()=>this.openSearch("price",product._id)} >Update Product Price</button>
+                                                    <div onClick={()=>this.openSearch("price",product._id)}>{product.price}</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Stock</div>
-                                                    <div>{product.stock}</div>
-                                                    <button onClick={()=>this.openSearch("stock",product._id)} >Update Product Stock</button>
+                                                    <div onClick={()=>this.openSearch("stock",product._id)} >{product.stock}</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Category</div>
-                                                    <div>{product.category}</div>
-                                                    <button onClick={()=>this.openSearch("category",product._id)} >Update Product Category</button>
+                                                    <div onClick={()=>this.openSearch("category",product._id)}>{product.category}</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Details</div>
                                                     {productdetails[index].map((detail,ind)=>(
                                                         <div>
                                                         <label for="ProductDetail">Product Detail</label>
-                                                    <div name="ProductDetail">{detail.detailname }</div>
-                                                    <button onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)} >Update Product Detail Name</button>
+                                                    <div onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)} name="ProductDetail">{detail.detailname }</div>
                                                     <label  for="ProductDetailValue">Product Detail Value</label>
-                                                    <div name="ProductDetailValue">{ detail.value }</div>
-                                                    <button onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)} >Update Product Detail Value</button>
+                                                    <div onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)} name="ProductDetailValue">{ detail.value }</div>
                                                     </div>
                                                     ))}
                                                 </div>
@@ -194,19 +191,18 @@ class Mystore extends Component {
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <label className="field-label" for="ProductDescription">Product Description</label>
-                                                    <div  name="ProductDescription">{product.description}</div>
-                                                    <button onClick={()=>this.openSearch("desc",product._id)} >Update Product Description</button>
+                                                    <div onClick={()=>this.openSearch("desc",product._id)}  name="ProductDescription">{product.description}</div>
                                                 </div>  
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Discount</div>
-                                                    <div>{product.discount}</div>
-                                                    <button onClick={()=>this.openSearch("discount",product._id)} >Update Product Stock</button>
+                                                    <div onClick={()=>this.openSearch("discount",product._id)}>{product.discount}</div>
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(product._id)}>Delete Product</button>
+                                                <hr></hr>
                                                 </div>                                          
                                                 </div>
-                                            
+                                                </div>
                                         ))} 
                                         <div id="update-overlay" className="search-overlay">
                                         <div>

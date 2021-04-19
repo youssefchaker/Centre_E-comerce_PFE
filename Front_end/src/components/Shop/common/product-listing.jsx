@@ -56,7 +56,7 @@ class ProductListing extends Component {
 
                                 endMessage={
                                     <p className="seen-cls seen-it-cls">
-                                        <b>Yay! You have seen it all</b>
+                                        <b>End of Products!</b>
                                     </p>
                                 }
                             >

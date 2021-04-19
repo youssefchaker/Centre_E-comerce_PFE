@@ -108,7 +108,7 @@ class MyEvents extends Component {
                                         <Link to={`${process.env.PUBLIC_URL}/pages/mystore`}><li><a>My Store</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/pages/myorders`}><li><a>My Orders</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/pages/myevents`}><li className="active"><a>My Events</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/cart`}><li><a>My Cart</a></li></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/cart`}><li><a>My Cart</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/`}><li><a>Change Password</a></li></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/`}><li className="last"><a href="#">Log Out</a></li></Link>
                                         </ul>
@@ -120,32 +120,30 @@ class MyEvents extends Component {
                                     </div>
                                 </div>
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
-                                            <div className="checkout-title">
-                                                <h3>Event </h3>
-                                            </div>
+                                        <h5 style={{color:"#fe2b2a"}}>Click on the event's attribute to update it!</h5>
                                             {eventsarray.map((event,index)=>(
+                                                <div>
+                                                <h3 style={{color:"black"}}>Event {index+1}</h3>
                                                 <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Event Name</div>
-                                                    <div>{event.eventName}</div>
-                                                    <button onClick={()=>this.openSearch("name",event._id)} >Update Event Name</button>
+                                                    <div onClick={()=>this.openSearch("name",event._id)}>{event.eventName}</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">Event Image</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Event Date Start</div>
-                                                    <div>{event.eventDateStart.slice(0,10)}</div>
-                                                    <button onClick={()=>this.openSearch("datestart",event._id,event.eventDateFinish.slice(0,10))} >Update Event start date</button>
-                                                </div>
+                                                    <div onClick={()=>this.openSearch("datestart",event._id,event.eventDateFinish.slice(0,10))} >{event.eventDateStart.slice(0,10)}</div>                                                </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Event Date Finish</div>
-                                                    <div>{event.eventDateFinish.slice(0,10)}</div>
-                                                    <button onClick={()=>this.openSearch("datefinish",event._id,event.eventDateStart.slice(0,10))} >Update Event finish date</button>
+                                                    <div onClick={()=>this.openSearch("datefinish",event._id,event.eventDateStart.slice(0,10))}>{event.eventDateFinish.slice(0,10)}</div>
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(event._id)}>Delete Event</button>
+                                                <hr></hr>
                                                 </div>                                           
+                                            </div>
                                             </div>
                                             ))} 
                                             <div id="update-overlay" className="search-overlay">
