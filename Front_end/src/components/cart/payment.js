@@ -49,7 +49,7 @@ const Payment = ({ history }) => {
 
     const { user } = useSelector(state => state.auth)
     const { loading, error, success } = useSelector(state => state.newStore);
-    const { currency } = useSelector(state => state.data.symbol);
+    const { currency } = useSelector(state => state.symbol);
 
 
 

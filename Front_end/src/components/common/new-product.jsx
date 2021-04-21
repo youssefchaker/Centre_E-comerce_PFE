@@ -4,40 +4,81 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 import {getBestSeller} from "../../services";
+import { getNewProducts } from '../../actions/productActions';
 
 
 class NewProduct extends Component {
+    componentWillMount(){
+        this.props.getNewProducts();
+    }
+
     render (){
-        const {items, symbol} = this.props;
-
-        var arrays = [];
-        while (items.length > 0) {
-            arrays.push(items.splice(0, 3));
-        }
-
+        const {newproducts} = this.props;
+        const products=newproducts.products.products;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
+        var i=0;
         return (
             <div className="theme-card">
-                <h5 className="title-border">new product</h5>
+                <h5 className="title-border">New Products</h5>
                 <Slider className="offer-slider slide-1">
-                    {arrays.map((products, index) =>
+                    {products.map((product, index) =>
                         <div key={index}>
-                            {products.map((product, i) =>
-                                <div className="media" key={i}>
-                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><img className="img-fluid" src={`${product.variants[0].images}`} alt="" /></Link>
+                                <div className="media" key={index}>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
                                     <div className="media-body align-self-center">
-                                        <div className="rating">
+                                        
+                                        {product.nbreviews<10?
+                                            <div >
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>10 && product.nbreviews<20 ?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>20 && product.nbreviews<30?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>30 && product.nbreviews<40?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            <div>
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star"></i>
-                                        </div>
-                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><h6>{product.name}</h6></Link>
-                                        <h4>{symbol}{(product.price*product.discount/100)}
-                                            <del><span className="money">{symbol}{product.price}</span></del></h4>
+                                            </div>}
+                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
+                                        {symbol=="DT"?
+                                        (product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>:
+                            (product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>}
                                     </div>
                                 </div>
-                            )}
                         </div>
                     )}
                 </Slider>
@@ -48,9 +89,15 @@ class NewProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        items: getBestSeller(state.data.products),
-        symbol: state.data.symbol
+        newproducts:state.newproducts,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        getNewProducts:()=>dispatch(getNewProducts())
 
-export default connect(mapStateToProps, null)(NewProduct);
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(NewProduct);

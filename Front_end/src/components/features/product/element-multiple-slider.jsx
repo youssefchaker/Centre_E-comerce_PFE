@@ -18,7 +18,8 @@ class ElementMultipleSlider extends Component {
 
 
     render (){
-        const {newProducts, featureProducts, bestSeller, onSell, newWatches, bestSellerWatches, symbol} = this.props;
+        const {newProducts, featureProducts, bestSeller, onSell, newWatches, bestSellerWatches} = this.props;
+        const symbol="€";
 
         return (
             <div>
@@ -95,13 +96,12 @@ class ElementMultipleSlider extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    newProducts: getVisibleproducts(state.data, state.filters),
+    /* newProducts: getVisibleproducts(state.data, state.filters),
     featureProducts: getVisibleproducts(state.data, state.filters),
     bestSeller: getVisibleproducts(state.data, state.filters),
-    onSell: getVisibleproducts(state.data, state.filters),
+    onSell: getVisibleproducts(state.data, state.filters), */
     newWatches:getNewProducts(state.data.products, 'watch'),
     bestSellerWatches:getBestSellerProducts(state.data.products, 'watch'),
-    symbol: state.data.symbol,
 })
 
 export default connect(

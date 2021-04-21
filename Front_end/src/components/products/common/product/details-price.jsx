@@ -38,7 +38,7 @@ class DetailsWithPrice extends Component {
     }
 
     plusQty = () => {
-        if(this.props.item.stock >= this.state.quantity) {
+        if(this.props.product.stock >= this.state.quantity) {
             this.setState({quantity: this.state.quantity+1})
         }else{
             this.setState({stock: 'Out of Stock !'})
@@ -49,8 +49,7 @@ class DetailsWithPrice extends Component {
     }
 
     render (){
-        const {symbol, item, addToCartClicked, BuynowClicked, addToWishlistClicked} = this.props
-
+        const {symbol, product, addToCartClicked, BuynowClicked,currencydiff,storename} = this.props
         var colorsnav = {
             slidesToShow: 6,
             swipeToSlide:true,
@@ -62,21 +61,32 @@ class DetailsWithPrice extends Component {
         return (
             <div className="col-lg-6 rtl-text">
                 <div className="product-right">
-                    <h2> {item.name} </h2>
-                    <h4>
-                        <del>{symbol}{item.price}</del>
-                        <span>{item.discount}% off</span></h4>
-                    <h3>{symbol}{item.price-(item.price*item.discount/100)} </h3>
-                    {item.variants?
+                    <h2> {product.name} </h2>
+                    <h3>Product By: {storename}</h3>
+                    {symbol=="€"?(product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*product.price + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
+                        {/* <del></del> */}
+                        {/* <span>{product.discount}% off</span> */}
+                    {/* <h3>{symbol}{product.price-(product.price*product.discount/100)} </h3> */}
+                    {/* {product.details?
                     <ul >
                         <Slider {...colorsnav} asNavFor={this.props.navOne} ref={slider => (this.slider1 = slider)} className="color-variant">
-                            {item.variants.map((vari, i) => {
-                                return <li className={vari.color} key={i} title={vari.color}></li>
+                            {product.details.map((vari, i) => {
+                                return <ul>
+                                <li className={vari.detailname} key={i} title={vari.detailname}></li>
+                                <li className={vari.value} key={i} title={vari.value}></li>
+                                </ul> 
                             })}
                         </Slider>
-                    </ul>:''}
+                    </ul>:''} */}
                     <div className="product-description border-product">
-                        {item.size?
+                        {/* {product.size?
                             <div>
                                 <h6 className="product-title size-text">select size
                                     <span><a href="#" data-toggle="modal"
@@ -104,12 +114,12 @@ class DetailsWithPrice extends Component {
                                 </div>
                                 <div className="size-box">
                             <ul>
-                                {item.size.map((size, i) => {
+                                {product.size.map((size, i) => {
                                     return <li key={i}><a href="#">{size}</a></li>
                                 })}
                             </ul>
                         </div>
-                            </div>:''}
+                            </div>:''} */}
                         <span className="instock-cls">{this.state.stock}</span>
                         <h6 className="product-title">quantity</h6>
                         <div className="qty-box">
@@ -129,8 +139,8 @@ class DetailsWithPrice extends Component {
                         </div>
                     </div>
                     <div className="product-buttons" >
-                        <a className="btn btn-solid" onClick={() => addToCartClicked(item, this.state.quantity)}>add to cart</a>
-                        <Link to={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid" onClick={() => BuynowClicked(item, this.state.quantity)} >buy now</Link>
+                        <a className="btn btn-solid" onClick={() => addToCartClicked(product, this.state.quantity)}>add to cart</a>
+                        <Link to={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid" onClick={() => BuynowClicked(product, this.state.quantity)} >buy now</Link>
                     </div>
                 </div>
                 <Modal open={this.state.open} onClose={this.onCloseModal} center>

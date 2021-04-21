@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 import Breadcrumb from "../common/breadcrumb";
 import {getCartTotal} from "../../services";
-import {removeFromCart, incrementQty, decrementQty} from '../../actions'
+import {removeFromCart, incrementQty, decrementQty} from '../../actions/cartActions'
 
 class cartComponent extends Component {
 
@@ -16,7 +16,9 @@ class cartComponent extends Component {
 
     render (){
 
-        const {cartItems, symbol, total} = this.props;
+        const {cartItems, total} = this.props;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 {/*SEO Support*/}
@@ -49,13 +51,11 @@ class cartComponent extends Component {
                                         <tbody key={index}>
                                             <tr>
                                                 <td>
-                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.id}`}>
-                                                        <img src={item.variants?
-                                                                  item.variants[0].images
-                                                                  :item.pictures[0]} alt="" />
+                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item._id}`}>
+                                                        <img src={item.images[0]} alt="" />
                                                     </Link>
                                                 </td>
-                                                <td><Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.id}`}>{item.name}</Link>
+                                                <td><Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item._id}`}>{item.name}</Link>
                                                     <div className="mobile-cart-content row">
                                                         <div className="col-xs-3">
                                                             <div className="qty-box">
@@ -66,7 +66,7 @@ class cartComponent extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-xs-3">
-                                                            <h2 className="td-color">{symbol}{item.price-(item.price*item.discount/100)}</h2>
+                                                            <h2 className="td-color">{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</h2>
                                                         </div>
                                                         <div className="col-xs-3">
                                                             <h2 className="td-color">
@@ -77,12 +77,12 @@ class cartComponent extends Component {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><h2>{symbol}{item.price-(item.price*item.discount/100)}</h2></td>
+                                                <td><h2>{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</h2></td>
                                                 <td>
                                                     <div className="qty-box">
                                                         <div className="input-group">
                                                             <span className="input-group-prepend">
-                                                                <button type="button" className="btn quantity-left-minus" onClick={() => this.props.decrementQty(item.id)} data-type="minus" data-field="">
+                                                                <button type="button" className="btn quantity-left-minus" onClick={() => this.props.decrementQty(item._id)} data-type="minus" data-field="">
                                                                  <i className="fa fa-angle-left"></i>
                                                                 </button>
                                                             </span>
@@ -101,7 +101,7 @@ class cartComponent extends Component {
                                                         <i className="fa fa-times"></i>
                                                     </a>
                                                 </td>
-                                                <td><h2 className="td-color">{symbol}{item.sum}</h2></td>
+                                                <td><h2 className="td-color">{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</h2></td>
                                             </tr>
                                         </tbody> )
                                     })}
@@ -110,7 +110,7 @@ class cartComponent extends Component {
                                     <tfoot>
                                     <tr>
                                         <td>total price :</td>
-                                        <td><h2>{symbol} {total} </h2></td>
+                                        <td><h2>{symbol} {symbol=="€"?total: Math.round((currencydiff*total + Number.EPSILON) * 100) / 100} </h2></td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -151,8 +151,9 @@ class cartComponent extends Component {
 }
 const mapStateToProps = (state) => ({
     cartItems: state.cartList.cart,
-    symbol: state.data.symbol,
-    total: getCartTotal(state.cartList.cart)
+    total: getCartTotal(state.cartList.cart),
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
 
 export default connect(

@@ -116,12 +116,12 @@ via flexible functionalities will also be offered in the platform for sellers.</
                                 <h2>Our Team</h2>
                                 <Slider {...Team4} className="team-4">
                                     <div>
-                                        <img src={`${process.env.PUBLIC_URL}/assets/images/about/youssef.jpg`} className="img-fluid" alt=""/>
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/team/4.jpg`} className="img-fluid" alt=""/>
                                         <h4>Youssef Chaker</h4>
                                         <h6>Co-Developer</h6>
                                     </div>
                                     <div>
-                                        <img src={`${process.env.PUBLIC_URL}/assets/images/about/mouhib.jpg`} className="img-fluid" alt=""/>
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/team/3.jpg`} className="img-fluid" alt=""/>
                                         <h4>Mouhib Trabelsi</h4>
                                         <h6>Co-Developer</h6>
                                     </div>

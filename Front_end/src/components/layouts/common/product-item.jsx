@@ -46,27 +46,28 @@ class ProductItem extends Component {
     }
 
     render() {
-        const {product, symbol, onAddToCartClicked, onAddToWishlistClicked, onAddToCompareClicked} = this.props;
-
+        const {product, onAddToCartClicked} = this.props;
+        const symbol=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         let RatingStars = []
-        for(var i = 0; i < product.rating; i++) {
+        for(var i = 0; i < product.nbreviews; i++) {
             RatingStars.push(<i className="fa fa-star" key={i}></i>)
         }
+        const datenow = new Date();
+        const datep= product.creationdate.slice(0,10);
+        const dateproduct=new Date(datep);
+        const diffTime = datenow.getTime()-dateproduct.getTime();
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         return (
                 <div className="product-box">
                     <div className="img-wrapper">
                         <div className="lable-block">
-                            {(product.new == true)? <span className="lable3">new</span> : ''}
-                            {(product.sale == true)? <span className="lable4">on sale</span> : ''}
-
+                            {(diffDays <8)? <span className="lable3">new</span> : ''}
+                            {(product.discount != 0)? <span className="lable4">on sale</span> : ''}
                         </div>
                         <div className="front">
-                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
-                                src={`${
-                                    product.variants?
-                                        this.state.image?this.state.image:product.variants[0].images
-                                        :product.pictures[0]
-                                    }`}
+                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
+                                src={`${product.images[0]}`}
                                 className="img-fluid"
                                 alt="" /></Link>
                         </div>
@@ -79,35 +80,30 @@ class ProductItem extends Component {
                                title="Quick View"
                                onClick={this.onOpenModal}><i className="fa fa-search" aria-hidden="true"></i></a>
                         </div>
-                        {product.variants?
+                        { product.images?
                         <ul className="product-thumb-list">
-                            { product.variants.map((vari, i) =>
+                            { product.images.map((vari, i) =>
                                 <li className={`grid_thumb_img ${(vari.images === this.state.image)?'active':''}`} key={i}>
                                     <a href="javascript:void(0)" title="Add to Wishlist">
-                                        <img src={`${vari.images}`} onClick={() => this.onClickHandle(vari.images)} />
+                                        <img src={`${vari}`} onClick={() => this.onClickHandle(vari)} />
                                     </a>
                                 </li>)}
-                        </ul>:''}
+                        </ul>:'' }
 
                     </div>
                     <div className="product-detail">
                         <div>
-                            <div className="rating">
-                                {RatingStars}
-                            </div>
-                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}>
+                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                 <h6>{product.name}</h6>
                             </Link>
+                            {symbol=="€"?(product.discount != 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
-                                <del><span className="money">{symbol}{product.price}</span></del>
-                            </h4>
-                            {product.variants?
-                            <ul className="color-variant">
-                                {product.variants.map((vari, i) => {
-                                    return (
-                                        <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
-                                })}
-                            </ul>:''}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{currencydiff*product.price}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                         </div>
                     </div>
                     <Modal open={this.state.open} onClose={this.onCloseModal} center>
@@ -118,9 +114,9 @@ class ProductItem extends Component {
                                         <div className="col-lg-6  col-xs-12">
                                             <div className="quick-view-img">
                                                 <img src={`${
-                                                    product.variants?
-                                                        this.state.image?this.state.image:product.variants[0].images
-                                                        :product.pictures[0]
+                                                    product.images?
+                                                    product.images[0]
+                                                        :product.images[0]
                                                     }`} alt="" className="img-fluid" />
                                             </div>
                                         </div>
@@ -128,25 +124,17 @@ class ProductItem extends Component {
                                             <div className="product-right">
                                                 <h2> {product.name} </h2>
                                                 <h3>{symbol}{product.price}</h3>
-                                                {product.variants?
-                                                <ul className="color-variant">
-                                                    {product.variants.map((vari, i) =>
-                                                        <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
-                                                    }
-                                                </ul>:''}
                                                 <div className="border-product">
                                                     <h6 className="product-title">product details</h6>
-                                                    <p>{product.shortDetails}</p>
+                                                     {product.details.map((detail)=>
+                                                        <div>
+                                                    <p>{detail.detailname}</p>
+                                                    <p>{detail.value}</p>
+                                                    </div> 
+                                                     )}
+
                                                 </div>
                                                 <div className="product-description border-product">
-                                                    {product.size?
-                                                    <div className="size-box">
-                                                        <ul>
-                                                            {product.size.map((size, i) => {
-                                                                return <li key={i}><a href="#">{size}</a></li>
-                                                            })}
-                                                        </ul>
-                                                    </div>:''}
                                                     <h6 className="product-title">quantity</h6>
                                                     <div className="qty-box">
                                                         <div className="input-group">
@@ -166,7 +154,7 @@ class ProductItem extends Component {
                                                 </div>
                                                 <div className="product-buttons">
                                                     <button  className="btn btn-solid" onClick={() => onAddToCartClicked(product, this.state.quantity)} >add to cart</button>
-                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} className="btn btn-solid">view detail</Link>
+                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} className="btn btn-solid">view detail</Link>
                                                 </div>
                                             </div>
                                         </div>

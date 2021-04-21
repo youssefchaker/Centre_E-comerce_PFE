@@ -93,26 +93,31 @@ class NavBar extends Component {
                                 
                             </li>
                             <li >
+                                <Link to={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
+                                    {translate('events')}
+                                </Link>
+                                
+                            </li>
+                            <li >
                                 <Link to={`${process.env.PUBLIC_URL}/pages/about-us`} className="nav-link" >
                                 {translate('about_us')}
                                 </Link>
                                 
                             </li>
                             <li>
+                            <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
+                                    {translate('become_a_seller')}
+                            </Link>
+                            </li>
+                             <li>
+                            
                                 <Link to={`${process.env.PUBLIC_URL}/pages/contact`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
                                     {translate('contact')}
                                     
                                 </Link>
+                                </li>
                                 
-                            </li>
-                            <li>
-                                <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
-                                    {translate('become_a_seller')}
-                                    
-                                </Link>
-                                
-                            </li>
-
+                            
                             
                         </ul>
                     </div>

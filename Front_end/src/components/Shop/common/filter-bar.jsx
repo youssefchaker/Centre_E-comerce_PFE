@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import {filterSort} from '../../../actions'
-import {getVisibleproducts} from '../../../services';
+import {getMinMaxPrice, getVisibleproducts} from '../../../services';
 
 class FilterBar extends Component {
 
@@ -104,8 +104,11 @@ class FilterBar extends Component {
 }
 
 const mapStateToProps = state => ({
-    products: getVisibleproducts(state.data, state.filters),
-    filters: state.filters
+    allproducts:state.allproducts,
+    filters:state.filters,
+    products: getVisibleproducts(state.allproducts,state.filters.category,state.filters.store,state.filters.value,state.filters.valueDT,state.filters.sortBy,state.symbol,state.currencydiff),
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
 
 export default connect(mapStateToProps, {filterSort})(FilterBar);

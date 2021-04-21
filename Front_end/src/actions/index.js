@@ -1,4 +1,5 @@
 import shop from '../api/shop'
+import store from "../store";
 import * as types from '../constants/ActionTypes'
 import { toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -612,25 +613,33 @@ export const decrementQty = productId => (dispatch) => {
 
 
 
-
 // Filters
-export const filterBrand = (brand) => ({
-    type: types.FILTER_BRAND,
-    brand
+export const filterCategory = (category) => ({
+    type: types.FILTER_CATEGORY,
+    category
 });
-export const filterColor = (color) => ({
-    type: types.FILTER_COLOR,
-    color
+export const filterStore = (store) => ({
+    type: types.FILTER_STORE,
+    store
 });
 export const filterPrice = (value) => ({
     type: types.FILTER_PRICE,
     value
 });
+export const filterPriceDT = (valueDT) => ({
+    type: types.FILTER_PRICE_DT,
+    valueDT
+});
 export const filterSort = (sort_by) => ({
+    
     type: types.SORT_BY,
     sort_by
 });
 
+export const emptyFilter=(min)=>({
+    type:types.EMPTY_FILTER,
+    min
+})
 
 // Currency
 export const changeCurrency = (symbol) => ({

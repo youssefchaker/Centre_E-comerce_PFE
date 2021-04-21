@@ -3,10 +3,8 @@ import { connect } from 'react-redux'
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 import { SlideToggle } from 'react-slide-toggle';
-
-
-import {getBrands, getColors, getMinMaxPrice} from '../../../services';
-import {filterBrand, filterColor, filterPrice} from '../../../actions'
+import {getCategories, getMinMaxPrice,getStores,getMinMaxPriceDT} from '../../../services';
+import {filterCategory, filterStore, filterPrice,filterPriceDT} from '../../../actions'
 
 class Filter extends Component {
 
@@ -14,40 +12,50 @@ class Filter extends Component {
         super(props);
 
         this.state = {
-            openFilter: false
+            openFilter: false,
         }
     }
-
     closeFilter = () => {
         document.querySelector(".collection-filter").style = "left: -365px";
     }
 
-    clickBrandHendle(event, brands) {
-
-        var index = brands.indexOf(event.target.value);
+    clickCategoryHendle(event,categories) {
+        var index = categories.indexOf(event.target.value);
         if (event.target.checked)
-            brands.push(event.target.value); // push in array checked value
-        else
-            brands.splice(index, 1); // removed in array unchecked value
-
-        this.props.filterBrand(brands);
+        categories.push(event.target.value); // push in array checked value
+        else{
+            if(categories.length==1)
+                categories=[];
+            else
+                categories.splice(index, 1); // removed in array unchecked value
+        }
+        this.props.filterCategory(categories);
     }
 
-    colorHandle(event, color){
-        var elems = document.querySelectorAll(".color-selector ul li");
-        [].forEach.call(elems, function(el) {
-            el.classList.remove("active");
-        });
-        event.target.classList.add('active');
-        this.props.filterColor(color)
+    storeHandle(event,stores,index){
+        var index = stores.indexOf(event.target.value);
+        if (event.target.checked)
+        stores.push(event.target.value); // push in array checked value
+        else{
+            if(stores.length==1)
+                stores=[];
+            else
+            stores.splice(index, 1); // removed in array unchecked value
+        }
+    
+        this.props.filterStore(stores);
     }
-
     render (){
-        const filteredBrands = this.props.filters.brand;
-        //console.log(this.props.brands);
+        const filteredcategories = this.props.filters.category;
+        const filteredstores = this.props.filters.store;
+        
+
+
+        const {currencydiff}=this.props;
+        const symbol=this.props.symbol.symbol;
         return (
                 <div className="collection-filter-block">
-                    {/*brand filter start*/}
+                    {/*category filter start*/}
                     <div className="collection-mobile-back">
                         <span className="filter-back" onClick={(e) => this.closeFilter(e)} >
                             <i className="fa fa-angle-left" aria-hidden="true"></i> back
@@ -56,15 +64,15 @@ class Filter extends Component {
                     <SlideToggle>
                         {({onToggle, setCollapsibleElement}) => (
                             <div className="collection-collapse-block">
-                                <h3 className="collapse-block-title" onClick={onToggle}>brand</h3>
+                                <h3 className="collapse-block-title" onClick={onToggle}>category</h3>
                                 <div className="collection-collapse-block-content"  ref={setCollapsibleElement}>
                                     <div className="collection-brand-filter">
-                                        {this.props.brands.map((brand, index) => {
+                                        {this.props.categories.map((category, index) => {
                                             return (
                                                 <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
-                                                    <input type="checkbox" onClick={(e) => this.clickBrandHendle(e,filteredBrands)} value={brand} defaultChecked={filteredBrands.includes(brand)? true : false}  className="custom-control-input" id={brand} />
+                                                    <input type="checkbox" onClick={(e) => this.clickCategoryHendle(e,filteredcategories)} value={category} className="custom-control-input" id={category} defaultChecked={filteredcategories.includes(category)? true : false} />
                                                     <label className="custom-control-label"
-                                                           htmlFor={brand}>{brand}</label>
+                                                           htmlFor={category}>{category}</label>
                                                 </div> )
                                         })}
                                     </div>
@@ -73,19 +81,21 @@ class Filter extends Component {
                         )}
                     </SlideToggle>
 
-                    {/*color filter start here*/}
+                    {/*store filter start here*/}
                     <SlideToggle>
-                        {({onToggle, setCollapsibleElement}) => (
+                    {({onToggle, setCollapsibleElement}) => (
                             <div className="collection-collapse-block">
-                                <h3 className="collapse-block-title" onClick={onToggle}>colors</h3>
-                                <div className="collection-collapse-block-content" ref={setCollapsibleElement}>
-                                    <div className="color-selector">
-                                        <ul>
-                                            {this.props.colors.map((color, index) => {
-                                                return (
-                                                    <li className={color} title={color} onClick={(e) => this.colorHandle(e, color)} key={index}></li> )
-                                            })}
-                                        </ul>
+                                <h3 className="collapse-block-title" onClick={onToggle}>store</h3>
+                                <div className="collection-collapse-block-content"  ref={setCollapsibleElement}>
+                                    <div className="collection-brand-filter">
+                                        {this.props.stores.map((store, index) => {
+                                            return (
+                                                <div className="custom-control custom-checkbox collection-filter-checkbox" key={index}>
+                                                    <input type="checkbox" onClick={(e) => this.storeHandle(e,filteredstores)} value={store} className="custom-control-input" id={store} defaultChecked={filteredstores.includes(store)? true : false} />
+                                                    <label className="custom-control-label"
+                                                           htmlFor={store}>{store}</label>
+                                                </div> )
+                                        })}
                                     </div>
                                 </div>
                             </div>
@@ -95,16 +105,25 @@ class Filter extends Component {
                     <SlideToggle>
                         {({onToggle, setCollapsibleElement}) => (
                             <div className="collection-collapse-block open">
-                                <h3 className="collapse-block-title" onClick={onToggle}>price</h3>
+                                <h3 className="collapse-block-title" onClick={onToggle}>price({symbol})</h3>
                                 <div className="collection-collapse-block-content block-price-content" ref={setCollapsibleElement}>
                                     <div className="collection-brand-filter">
+                                    {symbol=="DT"?
+                                    <div className="custom-control custom-checkbox collection-filter-checkbox">
+                                            <InputRange
+                                                maxValue={this.props.pricesDT.max}
+                                                minValue={this.props.pricesDT.min}
+                                                value={this.props.filters.valueDT}
+                                                onChange={value => this.props.filterPriceDT({ value })} />
+                                        </div>:
                                         <div className="custom-control custom-checkbox collection-filter-checkbox">
                                             <InputRange
                                                 maxValue={this.props.prices.max}
                                                 minValue={this.props.prices.min}
                                                 value={this.props.filters.value}
                                                 onChange={value => this.props.filterPrice({ value })} />
-                                        </div>
+                                        </div>}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -117,13 +136,13 @@ class Filter extends Component {
 
 
 const mapStateToProps = state => ({
-    brands: getBrands(state.data.products),
-    colors: getColors(state.data.products),
-    prices: getMinMaxPrice(state.data.products),
-    filters: state.filters
+    categories: getCategories(state.allproducts.products),
+    stores: getStores(state.allproducts),
+    prices: getMinMaxPrice(state.allproducts.products),
+    pricesDT: getMinMaxPriceDT(state.allproducts.products,state.currencydiff),
+    filters: state.filters,
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
 
-export default connect(
-    mapStateToProps,
-    { filterBrand, filterColor, filterPrice }
-)(Filter);
+export default connect(mapStateToProps,{ filterCategory, filterStore, filterPrice, filterPriceDT })(Filter);

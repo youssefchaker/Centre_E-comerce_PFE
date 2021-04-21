@@ -212,7 +212,8 @@ export const forgotPasswordReducer = (state = {}, action) => {
             return {
                 ...state,
                 message: null,
-                success:false
+                success:false,
+                
             }
 
         default:

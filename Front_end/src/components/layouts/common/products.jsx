@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React, { Component,useState, useEffect } from 'react';
 import {connect} from 'react-redux'
-
-import {getBestSeller, getMensWear, getWomensWear} from '../../../services/index'
-import {addToCart} from "../../../actions/index";
+import {addToCart} from "../../../actions/cartActions"
 import ProductItem from './product-item';
+import { getNewProducts } from '../../../actions/productActions';
+import { IntlActions } from 'react-redux-multilingual';
+import Slider from 'react-slick';
+import store from '../../../store'
 
-class SpecialProducts extends Component {
-    render (){
-
-        const {bestSeller,mensWear,womensWear, symbol, addToCart} = this.props
+class SpecialProducts extends Component{
+    componentWillMount() {
+        this.props.getNewProducts();
+    }
+        render(){
+            const {newproducts} = this.props;
+            const products=newproducts.products.products;
+            const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 <div className="title1 section-t-space">
@@ -17,36 +23,14 @@ class SpecialProducts extends Component {
                 </div>
                 <section className="section-b-space p-t-0">
                     <div className="container">
-                        <Tabs className="theme-tab">
-                            <TabList className="tabs tab-title">
-                                <Tab></Tab>
-                            </TabList>
-
-                            <TabPanel>
-                                <div className="no-slider row">
-                                    { bestSeller.map((product, index ) =>
-                                        <ProductItem product={product} symbol={symbol}
-                                                     onAddToCartClicked={() => addToCart(product, 1)} key={index} /> )
+                    <Slider  className="product-4 product-m no-arrow">
+                                    { products.map((product, index ) =>
+                                        <div key={index}>
+                                            <ProductItem product={product} symbol={symbol} currencydiff={currencydiff}
+                                                         onAddToCartClicked={() => addToCart(product, 1)} key={index} />
+                                        </div>)
                                     }
-                                </div>
-                            </TabPanel>
-                            <TabPanel>
-                                <div className="no-slider row">
-                                    { mensWear.map((product, index ) =>
-                                        <ProductItem product={product} symbol={symbol}
-                                                     onAddToCartClicked={() => addToCart(product, 1)} key={index} /> )
-                                    }
-                                </div>
-                            </TabPanel>
-                            <TabPanel>
-                                <div className=" no-slider row">
-                                    { womensWear.map((product, index ) =>
-                                        <ProductItem product={product} symbol={symbol}
-                                                     onAddToCartClicked={() => addToCart(product, 1)} key={index} /> )
-                                    }
-                                </div>
-                            </TabPanel>
-                        </Tabs>
+                                </Slider>
                     </div>
                 </section>
             </div>
@@ -54,11 +38,22 @@ class SpecialProducts extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    bestSeller: getBestSeller(state.data.products),
-    mensWear: getMensWear(state.data.products),
-    womensWear: getWomensWear(state.data.products),
-    symbol: state.data.symbol
-})
+const mapStateToProps = (state) => {
+    return{
+        newproducts:state.newproducts,
+        cartList:state.cartlist,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
+    }
+}
 
-export default connect(mapStateToProps, {addToCart}) (SpecialProducts);
+const mapDispatchToProps = dispatch => {
+    return{
+        getNewProducts:()=>dispatch(getNewProducts()),
+        addToCart:(id,stock)=>dispatch(addToCart(id,stock))
+    }
+}
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(SpecialProducts);

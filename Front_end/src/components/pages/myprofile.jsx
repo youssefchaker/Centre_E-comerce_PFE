@@ -45,7 +45,8 @@ function MyProfile ()  {
                                             )}
                                             {user.role == 'Seller' && (
                                             <React.Fragment>
-                                            <li><Link to="/mystore">My Store</Link></li>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/pages/mystore`}>My Store</Link></li>
+                                            
                                             <li><Link to="/pages/myevents">My Events</Link></li>
                                             </React.Fragment>
                                             )}

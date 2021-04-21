@@ -26,7 +26,6 @@ app.use(fileUpload());
 
 
 
-
 //importing all routes
 const products = require('./routes/product');
 const stores = require('./routes/store');

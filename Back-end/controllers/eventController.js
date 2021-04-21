@@ -4,29 +4,28 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const cloudinary = require('cloudinary')
 
+
 // a store adds an event   =>   api/mall/store/event/new
 
 exports.addEvent = catchAsyncErrors(async (req, res, next) => {
 
-    const {storeName,eventName , eventDate } = req.body;    
+      
+
+    const {storeName,eventName , eventDateStart,eventDateFinish , eventImage } = req.body;    
+
     const store = await Store.findOne({name:storeName}).populate('store')
 
         
         if(!store){
             return next(new ErrorHandler('Store not found', 404));
-        }    
-
-        const result = await cloudinary.v2.uploader.upload(req.body.eventImage,{
-            folder: 'events'
-        }) 
+        
+        }     
         const event = await Event.create({
             eventName,
-            eventDate,
+            eventDateStart,
+            eventDateFinish,
             store,
-            eventImage: {
-                public_id: result.public_id,
-                url: result.secure_url
-            }
+            eventImage
         })
         res.status(201).json({
             success: true,
@@ -50,23 +49,86 @@ exports.deleteEvent = catchAsyncErrors(async (req, res, next) => {
             })
 })
 
-//a store or admin gets an event   =>   api/mall/store/event/:id   or   api/mall/admin/event/:id
-
-exports.getEvent = catchAsyncErrors(async (req, res, next) => {
-
-    const event = await Event.findById(req.params.id).limit(1);
-        if (!event)
-            return next(new ErrorHandler('Event not found', 404));
-        res.status(200).json({
-            success: true,
-            event
-        })
-})
 
 
 
 
     
+//go to the event's store => api/mall/event/:id
+
+exports.getEvent = catchAsyncErrors(async (req, res, next) => {
+
+    const event = await Event.findById(req.params.id);
+        if (!event)
+            return next(new ErrorHandler('Event not found', 404));
+        const eventstore=event.store;
+        res.status(200).json({
+            success: true,
+            eventstore
+        })
+})
+
+// get limited events for the home page  =>   api/mall/events/limited
+
+exports.getEventsLimited = catchAsyncErrors(async (req, res, next) => {
+    const storenames=[];
+    const events = await Event.find().limit(5);
+    if (events.length==0) {
+        return next(new ErrorHandler('there are no events in the website at the moment', 404));
+    }
+    else{
+        for(var i=0;i<events.length;i++){
+            const store= await Store.findById(events[i].store);
+            storenames.push(store.name);
+        }
+        res.status(200).json({
+            success: true,
+            events,
+            storenames
+        })
+    }
+})
+
+// get all events for the event page  =>   api/mall/events
+
+exports.getEvents = catchAsyncErrors(async (req, res, next) => {
+    const storenames=[];
+    const events = await Event.find();
+    if (events.length==0) {
+        return next(new ErrorHandler('there are no events in the website at the moment', 404));
+    }
+    else{
+        for(var i=0;i<events.length;i++){
+            const store= await Store.findById(events[i].store)
+            storenames.push(store.name);
+        }
+        res.status(200).json({
+            success: true,
+            events,
+            storenames
+        })
+    }
+})
+
+// get all events for a speicifc store  =>   api/mall/store/events
+
+exports.getStoreEvents = catchAsyncErrors(async (req, res, next) => {
+
+    Store.findById(req.params.id).exec(function(err,store){
+        Event.find({store:store._id}).exec(function(err,events){
+            if (events.length==0) {
+                return next(new ErrorHandler(`there are no events in ${store.name}`, 404));
+            }
+            else{
+                res.status(200).json({
+                    success: true,
+                    events
+                })
+            }
+        });
+    })
+})
+
 // the admin gets all the events  =>   api/mall/admin/events
 
 exports.getAllEvents = catchAsyncErrors(async (req, res, next) => {

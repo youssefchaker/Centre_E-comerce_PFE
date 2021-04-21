@@ -21,7 +21,6 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 router.route('/store/new').post( isAuthenticatedUser,newStore);
 router.route('/stores').get(getStores);
 router.route('/store/:id').get(getSingleStore);
-
 router.route('/user/store/:id').put(isAuthenticatedUser,authorizeRoles('Seller'),updateStore);
 router.route('/admin/stores').get(isAuthenticatedUser,authorizeRoles('Admin'),getStoresAdmin);
 router.route('/admin/store/:id').put(isAuthenticatedUser,authorizeRoles('Admin'),updateStore)

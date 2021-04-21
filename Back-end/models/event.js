@@ -5,9 +5,13 @@ const eventSchema = new mongoose.Schema({
         type:String,
         required:[true, 'Please enter the event name']
     },
-    eventDate:{
+    eventDateStart:{
         type:Date,
-        required:[true,'please enter a date for the event']
+        required:[true,'please enter a start date for the event']
+    },
+    eventDateFinish:{
+        type:Date,
+        required:[true,'please enter a finish date for the event']
     },
     store:{
         type:mongoose.Schema.ObjectId,
@@ -15,14 +19,8 @@ const eventSchema = new mongoose.Schema({
         required: true
     },
     eventImage:{
-        public_id: {
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }    }
+        type:String
+    }
     
 })
 

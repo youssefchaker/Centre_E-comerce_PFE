@@ -34,38 +34,34 @@ function  myStore () {
     }, [dispatch, alert, error])
 
 
-        return (
-            <div>
-                <Breadcrumb title={'My Store'}/>
-                <section className="section-b-space">
-                    <div className="container padding-cls">
-                        <div className="checkout-page">
-                            <div className="checkout-form" >
-                                    <div className="checkout row">
-                                    <div className="account-sidebar">
-                                    <a className="popup-btn">
-                                        My Profile
-                                    </a>
+    return (
+        <div>
+            <Breadcrumb title={'My Store'}/>
+            <section className="section-b-space">
+                <div className="container padding-cls">
+                    <div className="checkout-page">
+                        <div className="checkout-form" >
+                                <div className="checkout row">
+                                <div className="account-sidebar">
+
+                                <a className="popup-btn">
+                                    My Profile
+                                </a>
+                            </div>
+                            <div className="dashboard-left">
+                                <div className="collection-mobile-back">
+                                <span className="filter-back">
+                                    <i className="fa fa-angle-left" aria-hidden="true"></i> back
+                                </span>
                                 </div>
-                                <div className="dashboard-left">
-                                    <div className="collection-mobile-back">
-                                    <span className="filter-back">
-                                        <i className="fa fa-angle-left" aria-hidden="true"></i> back
-                                    </span>
-                                    </div>
-                                    <div className="block-content">
-                                        <ul>
-                                            <li><Link to='/pages/myprofile'>My Profile</Link></li>
-                                            <li className="active"><Link to="/mystore">My Store</Link></li>
-                                            <li><Link to="/pages/myevents">My Events</Link></li>
-                                            <li><Link to="/pages/myorders">My Orders</Link></li>
-                                            <li><Link to="/cart">My Cart</Link></li>
-                                            
-                                        </ul>
-                                    </div>
-                                    <div className="block-content">
-                                        <ul>
-                                            <li><Link to='/pages/addproduct'>Add Product</Link></li>
+                                <div className="block-content">
+                                    <ul>
+                                        <li><Link to='/pages/myprofile'>My Profile</Link></li>
+                                        <li className="active"><Link to="/mystore">My Store</Link></li>
+                                        <li><Link to="/pages/myevents">My Events</Link></li>
+                                        <li><Link to="/pages/myorders">My Orders</Link></li>
+                                        <li><Link to='/pages/myproducts'>My Products</Link></li>
+                                        <li><Link to="/cart">My Cart</Link></li>
                                         </ul>
                                     </div>
                                     </div>
@@ -84,12 +80,8 @@ function  myStore () {
                                                         </ul>
                                                         </div>
                                                         <Link to={`/update/store/${store._id}`}><button className="btn btn-solid" >Change</button></Link> 
-
                                                     </div>
-                                                    
-                                            
                                         </div>
-                                        
                                      </div>
                                         <div>
                                         </div>

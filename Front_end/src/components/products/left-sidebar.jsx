@@ -7,24 +7,26 @@ import {connect} from "react-redux";
 // import custom Components
 import Service from "./common/service";
 import BrandBlock from "./common/brand-block";
-import NewProduct from "../common/new-product";
+import RelatedProduct from "../common/related-product";
 import Breadcrumb from "../common/breadcrumb";
 import DetailsWithPrice from "./common/product/details-price";
 import DetailsTopTabs from "./common/details-top-tabs";
-import { addToCart, addToCartUnsafe, } from '../../actions'
+import { addToCart, addToCartUnsafe } from '../../actions/cartActions'
 import ImageZoom from './common/product/image-zoom'
 import SmallImages from './common/product/small-image'
+import { getStoreProduct } from '../../actions/productActions';
 
 
 
 class LeftSideBar extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             open:false,
             nav1: null,
-            nav2: null
+            nav2: null,
+            id:null
         };
     }
 
@@ -36,8 +38,18 @@ class LeftSideBar extends Component {
             nav1: this.slider1,
             nav2: this.slider2
         });
+        
+        
     }
-    
+    componentWillMount() {
+        this.props.getStoreProduct(this.props.match.params.id);
+        this.setState({id:this.props.match.params.id});
+    }
+    componentDidUpdate() {
+        if(this.props.match.params.id!=this.state.id){
+            setTimeout("location.reload(true);",1);
+        }
+    }
     filterClick() {
         document.getElementById("filter").style.left = "-15px";
     }
@@ -46,7 +58,12 @@ class LeftSideBar extends Component {
     }
 
     render(){
-        const {symbol, item, addToCart, addToCartUnsafe, addToWishlist} = this.props
+
+        const { product} = this.props.product.product; 
+        const storename=this.props.product.product.storename;
+        const {addToCart,addToCartUnsafe}=this.props;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         var products = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -66,15 +83,15 @@ class LeftSideBar extends Component {
             <div>
                 {/*SEO Support*/}
                 <Helmet>
-                    <title>Mall | {item.category} | {item.name}</title>
+                    <title>Mall | {product.category} | {product.name}</title>
                     <meta name="description" content="online Mall" />
                 </Helmet>
                 {/*SEO Support End */}
 
-                <Breadcrumb  parent={'Product'} title={item.name} />
+                <Breadcrumb  parent={'Product'} title={product.name} />
 
                 {/*Section Start*/}
-                {(item)?
+                {(product)?
                 <section className="section-b-space">
                     <div className="collection-wrapper">
                         <div className="container">
@@ -90,7 +107,7 @@ class LeftSideBar extends Component {
                                     {/* <BrandBlock/> */}
                                     <Service/>
                                     {/*side-bar single product slider start*/}
-                                    <NewProduct/>
+                                    <RelatedProduct target={product.category} own={product._id}/>
                                     {/*side-bar single product slider end*/}
                                 </div>
                                 <div className="col-lg-9 col-sm-12 col-xs-12">
@@ -106,24 +123,20 @@ class LeftSideBar extends Component {
                                         <div className="row">
                                             <div className="col-lg-6 product-thumbnail">
                                                 <Slider {...products} asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)} className="product-slick">
-                                                    {item.variants?
-                                                    item.variants.map((vari, index) =>
-                                                       <div key={index}>
-                                                           <ImageZoom image={vari.images} />
-                                                       </div>
-                                                    ):
-                                                    item.pictures.map((vari, index) =>
+                                                    {
+                                                    
+                                                    product.images.map((vari, index) =>
                                                         <div key={index}>
                                                             <ImageZoom image={vari} />
                                                         </div>
                                                     )}
                                                 </Slider>
-                                                <SmallImages item={item} settings={productsnav} navOne={this.state.nav1} />
+                                                <SmallImages product={product} settings={productsnav} navOne={this.state.nav1} />
                                             </div>
-                                            <DetailsWithPrice symbol={symbol} item={item} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} addToWishlistClicked={addToWishlist} />
+                                            <DetailsWithPrice symbol={symbol} product={product} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} currencydiff={currencydiff} storename={storename}  />
                                         </div>
                                     </div>
-                                    <DetailsTopTabs item={item} />
+                                    <DetailsTopTabs product={product} />
                                 </div>
                             </div>
                         </div>
@@ -136,11 +149,18 @@ class LeftSideBar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let productId = ownProps.match.params.id;
+    return{
+        product:state.product,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
+    }
+}
+const mapDispatchToProps = dispatch => {
     return {
-        item: state.data.products.find(el => el.id == productId),
-        symbol: state.data.symbol
+        getStoreProduct:(id)=>dispatch(getStoreProduct(id)),
+        addToCart:(product,quantity)=>dispatch(addToCart(product,quantity)),
+        addToCartUnsafe:(product,quantity)=>dispatch(addToCartUnsafe(product,quantity))
     }
 }
 
-export default connect(mapStateToProps, {addToCart, addToCartUnsafe}) (LeftSideBar);
+export default connect(mapStateToProps,mapDispatchToProps) (LeftSideBar);

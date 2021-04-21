@@ -2,24 +2,21 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux'
 
-import {getTrendingCollection} from '../../../services/index'
 import {Product4, Product5} from '../../../services/script'
-import {addToCart} from "../../../actions/index";
+import {addToCart} from "../../../actions/cartActions";
 import ProductItem from '../common/product-item';
+import { getTopProducts } from '../../../actions/productActions';
 
 class TopCollection extends Component {
-
+    componentWillMount() {
+        this.props.getTopProducts();
+    }
     render (){
-
-        const {items, symbol, addToCart, type} = this.props;
-
-        var properties;
-        if(type === 'kids'){
-            properties = Product5
-        }else{
-            properties = Product4
-        }
-
+        var properties = Product4;
+        const {topproducts} = this.props;
+        const products=topproducts.products.products;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 {/*Paragraph*/}
@@ -31,10 +28,10 @@ class TopCollection extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <Slider {...properties} className="product-4 product-m no-arrow">
-                                    { items.map((product, index ) =>
+                                <Slider  className="product-4 product-m no-arrow">
+                                    { products.map((product, index ) =>
                                         <div key={index}>
-                                            <ProductItem product={product} symbol={symbol}
+                                            <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }
@@ -48,9 +45,20 @@ class TopCollection extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    items: getTrendingCollection(state.data.products, ownProps.type),
-    symbol: state.data.symbol
-})
+const mapDispatchToProps = dispatch => {
+    return{
+        getTopProducts:()=>dispatch(getTopProducts()),
+        addToCart:(id,stock)=>dispatch(addToCart(id,stock))
+    }
+}
 
-export default connect(mapStateToProps, {addToCart}) (TopCollection);
+const mapStateToProps = (state) => {
+    return{
+        topproducts:state.topproducts,
+        cartList:state.cartlist,
+        symbol:state.symbol,
+        currencydiff:state.currencydiff
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (TopCollection);

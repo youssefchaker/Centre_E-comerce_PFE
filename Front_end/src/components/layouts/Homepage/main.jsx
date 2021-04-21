@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+
 import {Helmet} from 'react-helmet'
 import '../../common/index.scss';
 import Slider from 'react-slick';
 import {Link} from 'react-router-dom';
+import { getProducts } from '../../../actions/productActions';
+
+
+
 
 // Import custom components
 
@@ -25,10 +31,23 @@ function  Fashion()  {
 
 
 
+    const dispatch = useDispatch();
+
+
+
     useEffect(() => {
         document.getElementById("color").setAttribute("href", `#` );
+
+
+        dispatch(getProducts());
+
            
+
+            
         
+        
+       
+
 
       },[]);
 

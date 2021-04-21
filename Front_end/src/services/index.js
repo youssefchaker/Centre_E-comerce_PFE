@@ -1,89 +1,184 @@
-// Get Unique Brands from Json Data
-export const getBrands = (products) => {
-    var uniqueBrands = [];
-    products.map((product, index) => {
-        if (product.tags) {
-            product.tags.map((tag) => {
-                if (uniqueBrands.indexOf(tag) === -1) {
-                    uniqueBrands.push(tag);
-                }
-            })
-        }
-    })
-    //console.log(uniqueBrands)
-    return uniqueBrands;
+
+// Get categories from products
+export const getCategories = (products) => {
+    var categories = [];
+    var i=0;
+    while(i<products.length){
+        categories.push(products[i].category);
+        i++;
+    }
+    let uniqueChars = categories.filter((c, index) => {
+        return categories.indexOf(c) === index;
+    });
+    return uniqueChars;
 }
 
-// Get Unique Colors from Json Data
-export const getColors = (products) => {
-    var uniqueColors = [];
-    products.map((product, index) => {
-        if(product.colors) {
-            product.colors.map((color) => {
-                if (uniqueColors.indexOf(color) === -1) {
-                    uniqueColors.push(color);
-                }
-            })
-        }
-    })
-    //console.log(uniqueBrands)
-    return uniqueColors;
+// Get stores from products
+export const getStores = (products) => {
+    var stores = [];
+    var i=0;
+    while(i<products.products.length){
+        stores.push(products.storenames[i]);
+        i++;
+    }
+    let uniqueChars = stores.filter((c, index) => {
+        return stores.indexOf(c) === index;
+    });
+    return uniqueChars
 }
 
 // Get Minimum and Maximum Prices from Json Data
 export const getMinMaxPrice = (products) => {
-    let min = 100, max = 1000;
+    let min = 1000, max = 0;
 
     products.map((product, index) => {
-        let v = product.price;
-        min = (v < min) ? v : min;
-        max = (v > max) ? v : max;
+        min = (product.price-(product.price*product.discount/100) < min) ? (product.price-(product.price*product.discount/100)) : min;
+        max = (product.price-(product.price*product.discount/100) > max) ? (product.price-(product.price*product.discount/100)) : max;
     })
 
     return {'min':min, 'max':max};
 }
 
-export const getVisibleproducts = (data, { brand, color, value, sortBy }) => {
-    return data.products.filter(product => {
+export const getMinMaxPriceDT = (products,diff) => {
+    let min = 1000, max = 0;
 
-        let brandMatch;
-        if(product.tags)
-            brandMatch = product.tags.some(tag => brand.includes(tag))
-        else
-            brandMatch = true;
+    products.map((product, index) => {
+        min = (diff*(product.price-(product.price*product.discount/100)) < min) ? diff*(product.price-(product.price*product.discount/100)) : min;
+        max = (diff*(product.price-(product.price*product.discount/100) > max)) ? diff*(product.price-(product.price*product.discount/100)) : max;
+    })
 
-        let colorMatch;
-        if(color && product.colors) {
-            colorMatch = product.colors.includes(color)
-        }else{
-            colorMatch = true;
+    return {'min':min, 'max':max};
+}
+
+export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,symbol,diff ) => {
+    if(symbol.symbol=="DT"){
+        /* if(category.length==0 && store.length==0 && valueDT==0){
+            return data.products.sort((product1, product2) => {
+                if (sortBy === 'HighToLow') {
+                    return product2.price < product1.price ? -1 : 1;
+                } else if (sortBy === 'LowToHigh') {
+                    return product2.price > product1.price ? -1 : 1;
+                } else if (sortBy === 'Newest') {
+                    return product2.id < product1.id ? -1 : 1;
+                } else if (sortBy === 'AscOrder') {
+                    return product1.name.localeCompare(product2.name);
+                } else if (sortBy === 'DescOrder') {
+                    return product2.name.localeCompare(product1.name);
+                } else{
+                    return product2.id > product1.id ? -1 : 1;
+                }
+            });
         }
+        else */
+        return data.products.filter((product,index) => {
+            let categoryMatch;
+            for(var i=0;i<category.length;i++){
+                if(product.category==category[i]){
+                    categoryMatch = true;
+                break;
+                }
+                else
+                categoryMatch = false;
+            }
+            let storeMatch;
+            for(var j=0;j<store.length;j++){
+                if(data.storenames[index]==store[j]){
+                    storeMatch = true;
+                    break;
+                }
+                else
+                storeMatch = false;
+            }
+            let PriceMatch;
+            if(diff*(product.price-(product.price*product.discount/100))>=valueDT)
+                PriceMatch=true;
+            else
+                PriceMatch=false;
+            return categoryMatch || storeMatch || PriceMatch;
+        }).sort((product1, product2) => {
+            if (sortBy === 'HighToLow') {
+                return product2.price < product1.price ? -1 : 1;
+            } else if (sortBy === 'LowToHigh') {
+                return product2.price > product1.price ? -1 : 1;
+            } else if (sortBy === 'Newest') {
+                return product2.id < product1.id ? -1 : 1;
+            } else if (sortBy === 'AscOrder') {
+                return product1.name.localeCompare(product2.name);
+            } else if (sortBy === 'DescOrder') {
+                return product2.name.localeCompare(product1.name);
+            } else{
+                return product2.id > product1.id ? -1 : 1;
+            }
+        });
+    }
 
-        const startPriceMatch = typeof value.min !== 'number' || value.min <= product.price;
-        const endPriceMatch = typeof value.max !== 'number' || product.price <= value.max;
-
-        return brandMatch && colorMatch && startPriceMatch && endPriceMatch;
-    }).sort((product1, product2) => {
-        if (sortBy === 'HighToLow') {
-            return product2.price < product1.price ? -1 : 1;
-        } else if (sortBy === 'LowToHigh') {
-            return product2.price > product1.price ? -1 : 1;
-        } else if (sortBy === 'Newest') {
-            return product2.id < product1.id ? -1 : 1;
-        } else if (sortBy === 'AscOrder') {
-            return product1.name.localeCompare(product2.name);
-        } else if (sortBy === 'DescOrder') {
-            return product2.name.localeCompare(product1.name);
-        } else{
-            return product2.id > product1.id ? -1 : 1;
+    else {
+        /* if(category.length==0 && store.length==0 && value==0){
+            return data.products.sort((product1, product2) => {
+                if (sortBy === 'HighToLow') {
+                    return product2.price < product1.price ? -1 : 1;
+                } else if (sortBy === 'LowToHigh') {
+                    return product2.price > product1.price ? -1 : 1;
+                } else if (sortBy === 'Newest') {
+                    return product2.id < product1.id ? -1 : 1;
+                } else if (sortBy === 'AscOrder') {
+                    return product1.name.localeCompare(product2.name);
+                } else if (sortBy === 'DescOrder') {
+                    return product2.name.localeCompare(product1.name);
+                } else{
+                    return product2.id > product1.id ? -1 : 1;
+                }
+            });
         }
-    });
+        else */
+        return data.products.filter(product => {
+            let categoryMatch;
+            for(var i=0;i<category.length;i++){
+                if(product.category==category[i]){
+                    categoryMatch = true;
+                break;
+                }
+                else
+                categoryMatch = false;
+            }
+            let storeMatch;
+            for(var j=0;j<store.length;j++){
+                if(product.store==store[j]){
+                    storeMatch = true;
+                    break;
+                }
+                else
+                storeMatch = false;
+            }
+            let PriceMatch;
+            if(product.price-(product.price*product.discount/100)>=value)
+                PriceMatch=true;
+            else
+                PriceMatch=false;
+            return categoryMatch || storeMatch || PriceMatch;
+        }).sort((product1, product2) => {
+            if (sortBy === 'HighToLow') {
+                return product2.price < product1.price ? -1 : 1;
+            } else if (sortBy === 'LowToHigh') {
+                return product2.price > product1.price ? -1 : 1;
+            } else if (sortBy === 'Newest') {
+                return product2.id < product1.id ? -1 : 1;
+            } else if (sortBy === 'AscOrder') {
+                return product1.name.localeCompare(product2.name);
+            } else if (sortBy === 'DescOrder') {
+                return product2.name.localeCompare(product1.name);
+            } else{
+                return product2.id > product1.id ? -1 : 1;
+            }
+        });
+
+    }
 }
 
 export const getCartTotal = cartItems => {
     var total = 0;
     for(var i=0; i<cartItems.length; i++){
-        total += parseInt(cartItems[i].qty, 10)*parseInt((cartItems[i].price*cartItems[i].discount/100), 10);
+        total += parseInt(cartItems[i].qty, 10)*(cartItems[i].price-(cartItems[i].price*cartItems[i].discount/100));
     }
     return total;
 }
@@ -130,9 +225,9 @@ export const getNewProducts = (products, type) => {
 }
 
 // Get Related Items
-export const getRelatedItems = (products, type) => {
+export const getRelatedItems = (products, target,id) => {
     const items = products.filter(product => {
-        return product.category === type;
+        return product.category === target && product._id!=id;
     })
 
     return items.slice(0,4)

@@ -6,8 +6,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { getTotal, getCartProducts } from '../../../reducers'
 import { addToCart } from '../../../actions'
-import {getVisibleproducts} from '../../../services';
+import {getMinMaxPrice, getVisibleproducts} from '../../../services';
 import ProductListItem from "./product-list-item";
+import { getProducts } from '../../../actions/productActions';
 
 class ProductListing extends Component {
 
@@ -38,8 +39,10 @@ class ProductListing extends Component {
     }
 
     render (){
-        const {products, addToCart, symbol} = this.props;
-        //console.log(this.props.colSize)
+        const { addToCart} = this.props;
+        const products=this.props.products;
+        const {symbol}=this.props.symbol;
+        const currencydiff=this.props.currencydiff;
         return (
             <div>
                 <div className="product-wrapper-grid">
@@ -49,17 +52,17 @@ class ProductListing extends Component {
                                 dataLength={this.state.limit} //This is important field to render the next data
                                 next={this.fetchMoreItems}
                                 hasMore={this.state.hasMoreItems}
-                                loader={<div className="loading-cls"></div>}
+
                                 endMessage={
                                     <p className="seen-cls seen-it-cls">
-                                        <b>Yay! You have seen it all</b>
+                                        <b>End of Products!</b>
                                     </p>
                                 }
                             >
                                 <div className="row">
-                                    { products.slice(0, this.state.limit).map((product, index) =>
+                                    { products/*.slice(0, this.state.limit)*/.map((product, index) =>
                                         <div className={`${this.props.colSize===3?'col-xl-3 col-md-6 col-grid-box':'col-lg-'+this.props.colSize}`} key={index}>
-                                        <ProductListItem product={product} symbol={symbol}
+                                        <ProductListItem product={product} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={addToCart} key={index}/>
                                         </div>)
                                     }
@@ -82,10 +85,15 @@ class ProductListing extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    products: getVisibleproducts(state.data, state.filters),
-    symbol: state.data.symbol,
+    allproducts:state.allproducts,
+    products: getVisibleproducts(state.allproducts,state.filters.category,state.filters.store,state.filters.value,state.filters.valueDT,state.filters.sortBy,state.symbol,state.currencydiff),
+    filters:state.filters,
+    symbol:state.symbol,
+    currencydiff:state.currencydiff
 })
-
-export default connect(
-    mapStateToProps, {addToCart}
-)(ProductListing)
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart:(product,qty)=>dispatch(addToCart(product,qty))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ProductListing)

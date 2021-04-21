@@ -2,33 +2,30 @@ import React, {Component} from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-
-import {getRelatedItems} from "../../services";
-import { getProducts } from '../../actions/productActions';
+import { getTopProducts } from '../../actions/productActions';
 
 
-class RelatedProduct extends Component {
-    constructor(props){
-        super(props)
-    }
+class TopProduct extends Component {
     componentWillMount(){
-        this.props.getProducts();
+        this.props.getTopProducts();
     }
 
     render (){
-        const {relatedproducts} = this.props;
+        const {topproducts} = this.props;
+        const products=topproducts.products.products;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         return (
             <div className="theme-card">
-                <h5 className="title-border">Related Products</h5>
+                <h5 className="title-border">Top Products</h5>
                 <Slider className="offer-slider slide-1">
-                    {relatedproducts.length!=0?relatedproducts.map((product, index) =>
+                    {products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
                                     <div className="media-body align-self-center">
-                                    {product.nbreviews<10?
+                                        
+                                        {product.nbreviews<10?
                                             <div >
                                             <i className="fa fa-star"></i>
                                             <i className="fa fa-star-o"></i>
@@ -80,24 +77,24 @@ class RelatedProduct extends Component {
                                     </div>
                                 </div>
                         </div>
-                    ):<p>there are no related products</p>}
+                    )}
                 </Slider>
             </div>
         )
     }
 }
 
-function mapStateToProps(state,ownProps) {
+function mapStateToProps(state) {
     return {
-        relatedproducts:getRelatedItems(state.allproducts.products,ownProps.target,ownProps.own),
+        topproducts:state.topproducts,
         symbol:state.symbol,
         currencydiff:state.currencydiff
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getProducts:()=>dispatch(getProducts())
+        getTopProducts:()=>dispatch(getTopProducts())
 
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(RelatedProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(TopProduct);

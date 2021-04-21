@@ -92,8 +92,12 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // Create reset password url
+
     //const resetUrl = `${req.protocol}://${req.get('host')}/api/mall/password/reset/${resetToken}`;
     const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+
+   // const resetUrl = `${req.protocol}://${req.get('host')}/api/mall/password/reset/${resetToken}`;
+
 
     const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`
 
@@ -175,7 +179,11 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Old password is incorrect',400));
     }
 
+
     user.password = req.body.password;
+
+    user.password = req.body.newPassword;
+
     await user.save();
 
     sendToken(user, 200, res);
@@ -266,6 +274,7 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
             })
         }
 })
+
 
 
 //User contact formulaire   =>   api/mall/contact

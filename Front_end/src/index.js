@@ -53,7 +53,8 @@ import Addevent from './components/pages/addevent'
 import UpdateProfile from './components/pages/updateProfile'
 import UpdatePassword from './components/pages/updatePassword'
 import NewPassword from './components/pages/newPassword'
-
+import Eventsdisplay from './components/pages/eventsdisplay';
+import Searchresult from './components/pages/searchresult';
 
 // Blog Pages
 import RightSide from './components/blogs/right-sidebar'
@@ -83,9 +84,12 @@ import  Subscription from './components/pages/subscription'
 
 import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
 import Becomeaseller from './components/pages/becomeaseller';
-import myStore from './components/pages/mystore';
+import MyProducts from './components/pages/myProducts';
 import MyEvents from './components/pages/myevents';
 import UpdateStore from './components/pages/updateStore'
+import BrowseProducts from "./components/Shop/browseProducts";
+import MyStoreProfile from './components/pages/myStoreProfile';
+
 
 
 function Root() {
@@ -124,6 +128,7 @@ function Root() {
 								{/*Routes For Features (Product Collection) */}
 								<Route path={`${process.env.PUBLIC_URL}/store/:id`} component={Shop}/>
 								
+								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection`} component={BrowseProducts}/>
 
 								{/*Routes For Single Product*/}
 								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/product/:id`} component={LeftSideBar}/>
@@ -157,9 +162,12 @@ function Root() {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/password/update`} component={UpdatePassword}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addproduct`} component={Addproduct}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/addevent`} component={Addevent}/>
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/mystore`} component={myStore}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/mystore`} component={MyStoreProfile}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/update/store/:id`} component={UpdateStore}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/myproducts`} component={MyProducts}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/myevents`} component={MyEvents}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} component={Eventsdisplay}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/searchresult`} component={Searchresult}/>
 
 
 

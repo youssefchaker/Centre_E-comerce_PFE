@@ -1,99 +1,48 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import {Link} from 'react-router-dom';
-
+import {connect} from 'react-redux'
 import {Slider3} from "../../../services/script"
+import { getEventsLimited } from '../../../actions/eventActions';
 
 class EventSection extends Component {
+    constructor(props){
+        super(props);
+    }
+    componentWillMount=()=>{
+        this.props.getEventsLimited();
+      }
     render (){
-
+        var eventsarray = [];
+        this.props.limitedevents.events.events.map((ev)=>{
+            eventsarray.push(ev);
+        })
         return (
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <Slider {...Slider3} className="slide-3 no-arrow ">
+                            {eventsarray.map((event,index)=>(
                                 <div>
                                     <div className="col-md-12">
-                                        <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
+                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection/${event.store}`}>
                                             <div className="classic-effect">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/blog/1.jpg`} className="img-fluid" alt="" />
+                                                <img src={event.eventImage} className="img-fluid" alt="event image" />
                                                     <span></span>
                                             </div>
                                         </Link>
                                         <div className="blog-details">
-                                            <h4>25 January 2018</h4>
-                                            <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
-                                                <p>Lorem ipsum dolor sit consectetur adipiscing elit, </p></Link>
+                                            <h4>{event.eventDateStart.slice(0,10)}</h4>
+                                            <p>{event.eventName} by {this.props.limitedevents.events.storenames[index]} ends in {event.eventDateFinish.slice(0,10)} </p>
                                             <hr className="style1" />
-                                                <h6>by: John Dio , 2 Comment</h6>
+                                            <Link to="../../../pages/eventsdisplay" style={{textDecorationLine:'underline'}} >
+                                                <h6>Check All Events</h6></Link>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div className="col-md-12">
-                                        <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
-                                            <div className="classic-effect">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/blog/2.jpg`} className="img-fluid" alt="" />
-                                                    <span></span>
-                                            </div>
-                                        </Link>
-                                        <div className="blog-details">
-                                            <h4>25 January 2018</h4>
-                                            <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
-                                                <p>Lorem ipsum dolor sit consectetur adipiscing elit, </p></Link>
-                                            <hr className="style1"/>
-                                                <h6>by: John Dio , 2 Comment</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="col-md-12">
-                                        <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
-                                            <div className="classic-effect">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/blog/3.jpg`} className="img-fluid" alt="" />
-                                                    <span></span>
-                                            </div>
-                                        </Link>
-                                        <div className="blog-details">
-                                            <h4>25 January 2018</h4>
-                                            <Link to={`${process.env.PUBLIC_URL}/blog/details`} ><p>Lorem ipsum dolor sit consectetur adipiscing elit, </p></Link>
-                                            <hr className="style1"/>
-                                                <h6>by: John Dio , 2 Comment</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="col-md-12">
-                                    <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
-                                        <div className="classic-effect">
-                                            <img src={`${process.env.PUBLIC_URL}/assets/images/blog/4.jpg`} className="img-fluid" alt="" />
-                                                <span></span>
-                                        </div>
-                                    </Link>
-                                    <div className="blog-details">
-                                        <h4>25 January 2018</h4>
-                                        <Link to={`${process.env.PUBLIC_URL}/blog/details`} ><p>Lorem ipsum dolor sit consectetur adipiscing elit, </p></Link>
-                                        <hr className="style1"/>
-                                            <h6>by: John Dio , 2 Comment</h6>
-                                    </div>
-                                </div>
-                                </div>
-                                <div>
-                                    <div className="col-md-12">
-                                        <Link to={`${process.env.PUBLIC_URL}/blog/details`} >
-                                            <div className="classic-effect">
-                                                <img src={`${process.env.PUBLIC_URL}/assets/images/blog/5.jpg`} className="img-fluid" alt="" />
-                                                    <span></span>
-                                            </div>
-                                        </Link>
-                                        <div className="blog-details">
-                                            <h4>25 January 2018</h4>
-                                            <Link to={`${process.env.PUBLIC_URL}/blog/details`} ><p>Lorem ipsum dolor sit consectetur adipiscing elit, </p></Link>
-                                            <hr className="style1" />
-                                                <h6>by: John Dio , 2 Comment</h6>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            ))}
+                                
                             </Slider>
                         </div>
                     </div>
@@ -102,4 +51,15 @@ class EventSection extends Component {
     }
 }
 
-export default EventSection;
+const mapStateToProps=state=>{
+    return {
+        limitedevents:state.limitedevents
+      }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        getEventsLimited:()=>dispatch(getEventsLimited())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (EventSection);

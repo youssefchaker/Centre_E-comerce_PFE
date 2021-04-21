@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import TopProduct from '../common/top-product';
+import { emptyFilter } from '../../actions';
+import { getProducts } from '../../actions/productActions';
+import {getMinMaxPrice,getMinMaxPriceDT} from '../../services';
+
 import {Helmet} from 'react-helmet'
 import Breadcrumb from "../common/breadcrumb";
 import NewProduct from "../common/new-product";
@@ -7,13 +11,10 @@ import Filter from "./common/filter";
 import FilterBar from "./common/filter-bar";
 import ProductListing from "./common/product-listing";
 import StickyBox from "react-sticky-box";
-import TopProduct from '../common/top-product';
+import { useDispatch, useSelector } from 'react-redux'
 import { getStoreDetails, clearErrors } from '../../actions/index'
-import { getProducts } from '../../actions/productActions';
-import { emptyFilter } from '../../actions';
-import {getMinMaxPrice,getMinMaxPriceDT} from '../../services';
 
-function Shop ({ match }) {
+function BrowseProducts ({ match }) {
 
     const [layoutColumns, setLayoutColumns] = useState(3);
 
@@ -27,7 +28,8 @@ function Shop ({ match }) {
     const {products } = useSelector(state => state.allproducts)
     const {currencydiff } = useSelector(state => state.currencydiff)
 
-    
+    const prices = getMinMaxPrice(products);
+    const pricesDT=  getMinMaxPriceDT(products, currencydiff);
     
 
 
@@ -35,11 +37,6 @@ function Shop ({ match }) {
 
 
     useEffect(() => {
-        
-        const prices = getMinMaxPrice(products);
-        const pricesDT=  getMinMaxPriceDT(products, currencydiff);
-
-
         dispatch(getStoreDetails(match.params.id));
 
         dispatch(getProducts());
@@ -121,6 +118,9 @@ function Shop ({ match }) {
                                                         </ul>
                                                         </div>
                                                     </div>
+                                                    
+                                                     
+                                                   
                                                     <div className="collection-product-wrapper">
                                                         <div className="product-top-filter">
                                                             <div className="container-fluid p-0">
@@ -160,4 +160,4 @@ function Shop ({ match }) {
     
         }
 
-export default Shop 
+export default BrowseProducts 

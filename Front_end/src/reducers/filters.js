@@ -1,39 +1,39 @@
 import * as types from '../constants/ActionTypes'
 
-
-const filtersReducerDefaultState = {
-    brand: ["nike", "caprese", "lifestyle"],
-    value: { min: 250, max: 950 },
-    sortBy: ""
-};
-
-const filtersReducer = (state = filtersReducerDefaultState, action) => {
-    // console.log('Action Result');
-    // console.log(action);
+ export const filtersReducer = (state = {filters:{},category:[],store:[],value:{},valueDT:{},sortBy:""}, action) => {
     switch (action.type) {
-        case types.FILTER_BRAND:
+        case types.FILTER_CATEGORY:
             return {
                 ...state,
-                brand: action.brand
+                category: action.category
             };
-        case types.FILTER_COLOR:
+        case types.FILTER_STORE:
             return {
                 ...state,
-                color: action.color
+                store: action.store
             };
         case types.FILTER_PRICE:
             return {
                 ...state,
-                value: {min: action.value.value.min, max: action.value.value.max }
+                value: action.value.value
             };
+        case types.FILTER_PRICE_DT:
+            return {
+                ...state,
+                valueDT: action.valueDT.value
+                };
         case types.SORT_BY:
             return {
                 ...state,
                 sortBy: action.sort_by
             };
+        case types.EMPTY_FILTER:
+            return {
+                ...state,
+                value: action.min,
+                valueDT:action.minDT
+            };
         default:
             return state;
     }
-}
-
-export default filtersReducer;
+} 
