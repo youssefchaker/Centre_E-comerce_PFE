@@ -308,7 +308,7 @@ export const getAdminProducts = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_PRODUCTS_REQUEST })
 
-        const { data } = await axios.get("api/mall/admin/products")
+        const { data } = await axios.get("/api/mall/admin/products")
 
         dispatch({
             type: GET_ADMIN_PRODUCTS_SUCCESS,
@@ -375,7 +375,7 @@ export const getAdminReviews = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_REVIEWS_REQUEST })
 
-        const { data } = await axios.get(`api/mall/admin/reviews`)
+        const { data } = await axios.get(`/api/mall/admin/reviews`)
 
         dispatch({
             type: GET_ADMIN_REVIEWS_SUCCESS,

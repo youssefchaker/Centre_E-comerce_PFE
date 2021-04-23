@@ -14,7 +14,8 @@ class Addevent extends Component {
         EventName:"",
         EventImage:null,
         EventDatestart:null,
-        EventDatefinish:null
+        EventDatefinish:null,
+        EventImg:null
     }
     this.validator = new SimpleReactValidator();
     }
@@ -34,6 +35,7 @@ class Addevent extends Component {
             this.validator.showMessages();
             this.forceUpdate();
           }
+        
           else{
             if(Date(this.state.EventDatestart)<Date(newdate)  || Date(this.state.EventDatefinish)<Date(newdate)){
                 toast.warn("the event start and finish dates must not be a past date");
@@ -42,12 +44,26 @@ class Addevent extends Component {
                 toast.warn("the event start date must be lower then the finish date");
             }
             else {
-            this.props.newEvent({'storeName':this.state.StoreName,'eventName':this.state.EventName,'eventImage':this.state.EventImage,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
+                console.log(this.state.EventImg);
+            this.props.newEvent({'storeName':this.state.StoreName,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
             toast.success("event added !");
             setTimeout("location.reload(true);",2000);
             }
           }
       }
+      handleimages=(e)=>{
+        var obj = {};
+        obj[e.target.name] = e.target.value;
+        this.setState(obj);
+        const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {  
+                    this.setState({EventImg:reader.result});
+                }
+            }
+            reader.readAsDataURL(file)
+    }
     render (){
         return (
             <div>
@@ -88,7 +104,7 @@ class Addevent extends Component {
                                                 </div>  
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Event Image</div>
-                                                    <input type="file" name="EventImage" accept="image/*"  onChange={this.setStateFromInput} value={this.state.EventImage}  />
+                                                    <input type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
                                                     {this.validator.message('EventImage', this.state.EventImage, 'required')}
                                                 </div>                                  
                                             </div>
@@ -101,7 +117,7 @@ class Addevent extends Component {
             </div>
             </div>
             </div>
-            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myprofile`} ><a><button type="submit" className="btn btn-solid" >Finish Adding events</button></a></Link></div>
+            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myevents`} ><a><button type="submit" className="btn btn-solid" >Finish Adding events</button></a></Link></div>
             </section>
             </div>
         )

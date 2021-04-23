@@ -10,8 +10,18 @@ const cloudinary = require('cloudinary')
 exports.addEvent = catchAsyncErrors(async (req, res, next) => {
 
       
+    const {storeName,eventName , eventDateStart,eventDateFinish } = req.body;
+    let eventImage=req.body.eventImage   
+    const result = await cloudinary.v2.uploader.upload(eventImage, {
+        folder: 'events'
+    });
 
-    const {storeName,eventName , eventDateStart,eventDateFinish , eventImage } = req.body;    
+    const imagesLinks = {
+        public_id: result.public_id,
+        url: result.secure_url
+    };
+
+    eventImage = imagesLinks 
 
     const store = await Store.findOne({name:storeName}).populate('store')
 
@@ -29,8 +39,7 @@ exports.addEvent = catchAsyncErrors(async (req, res, next) => {
         })
         res.status(201).json({
             success: true,
-            message:"event created!",
-            event
+            message:"event created!"
         })
     
 })
@@ -38,8 +47,8 @@ exports.addEvent = catchAsyncErrors(async (req, res, next) => {
 //a store or admin deletes an Event   =>   api/mall/store/event/:id   or   api/mall/admin/event/:id
 
 exports.deleteEvent = catchAsyncErrors(async (req, res, next) => {
-
         const event = await Event.findById(req.params.id);
+        const result = await cloudinary.v2.uploader.destroy(event.eventImage.public_id)
             if (!event)
                 return next(new ErrorHandler('Event not found', 404));
             event.remove();
@@ -148,7 +157,20 @@ exports.getAllEvents = catchAsyncErrors(async (req, res, next) => {
 //the store Updates an Event   =>   api/mall/store/event/:id
 
 exports.updateEvent = catchAsyncErrors(async (req, res, next) => {
+    if(req.body.eventImage!=undefined){
+        let event = await Event.findById(req.params.id);
+            const res = await cloudinary.v2.uploader.destroy(event.eventImage.public_id)
 
+            const result = await cloudinary.v2.uploader.upload(req.body.eventImage, {
+                folder: 'events'
+            });
+        
+            const imageLinks = {
+                public_id: result.public_id,
+                url: result.secure_url
+            };
+            req.body.eventImage=imageLinks;
+    }
     const event = await Event.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true,useFindAndModify:false});
     if(!event)
         return next(new ErrorHandler('Event not found', 404));

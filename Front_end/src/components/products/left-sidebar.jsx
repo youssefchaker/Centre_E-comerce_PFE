@@ -127,7 +127,7 @@ class LeftSideBar extends Component {
                                                     
                                                     product.images.map((vari, index) =>
                                                         <div key={index}>
-                                                            <ImageZoom image={vari} />
+                                                            <ImageZoom image={vari.url} />
                                                         </div>
                                                     )}
                                                 </Slider>

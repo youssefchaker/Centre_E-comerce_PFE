@@ -52,7 +52,7 @@ class cartComponent extends Component {
                                             <tr>
                                                 <td>
                                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item._id}`}>
-                                                        <img src={item.images[0]} alt="" />
+                                                        <img src={item.images[0].url} alt="" style={{width:'80px',height:'80px'}} />
                                                     </Link>
                                                 </td>
                                                 <td><Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item._id}`}>{item.name}</Link>

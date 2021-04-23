@@ -27,7 +27,7 @@ class EventSection extends Component {
                                     <div className="col-md-12">
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection/${event.store}`}>
                                             <div className="classic-effect">
-                                                <img src={event.eventImage} className="img-fluid" alt="event image" />
+                                                <img src={event.eventImage.url} style={{width:'150px',height:'150px'}} className="img-fluid" alt="event image" />
                                                     <span></span>
                                             </div>
                                         </Link>

@@ -16,13 +16,14 @@ class MyEvents extends Component {
         eventid:null,
         inputtype:null,
         datestart:null,
-        datefinish:null
+        datefinish:null,
+        EventImg:null
     }
     this.validator=new SimpleReactValidator();
       }
       componentWillMount=()=>{
           //get store's id from state
-        this.props.getStoreEvents("603a42db810c623de4f7dd04");
+        this.props.getStoreEvents("6044f782f862412b942e121e");
       }
       openSearch=(field,id,date="")=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -32,6 +33,9 @@ class MyEvents extends Component {
         else if(field=="datestart"||field=="datefinish"){
             this.setState({inputtype:"date"}); 
             this.setState({date:date}); 
+        }
+        else if(field=="image"){
+            this.setState({inputtype:"image"}); 
         }
         this.setState({updatefield:field});
         this.setState({eventid:id});
@@ -77,6 +81,11 @@ class MyEvents extends Component {
                     setTimeout("location.reload(true);",2000);
                 }           
               }
+              else if(this.state.updatefield=="image"){ 
+                this.props.updateEvent(this.state.eventid,{"eventImage":this.state.EventImg});
+                toast.success("The event's image has been updated!!");
+                setTimeout("location.reload(true);",2000);
+              }
           }
       }
     setStateFromInput = (event) => {
@@ -84,6 +93,19 @@ class MyEvents extends Component {
         obj[event.target.name] = event.target.value;
         this.setState(obj);
       }
+      handleimages=(e)=>{
+        var obj = {};
+        obj[e.target.name] = e.target.value;
+        this.setState(obj);
+        const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {  
+                    this.setState({EventImg:reader.result});
+                }
+            }
+            reader.readAsDataURL(file)
+    }
     render (){
         var eventsarray = [];
         this.props.storeevents.events.map((ev)=>{
@@ -120,23 +142,24 @@ class MyEvents extends Component {
                                 </div>
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                         <h5 style={{color:"#fe2b2a"}}>Click on the event's attribute to update it!</h5>
-                                            {eventsarray.map((event,index)=>(
+                                            {this.props.storeevents.loading==false?eventsarray.map((event,index)=>(
                                                 <div>
                                                 <h3 style={{color:"black"}}>Event {index+1}</h3>
                                                 <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Name</div>
-                                                    <div onClick={()=>this.openSearch("name",event._id)}>{event.eventName}</div>
+                                                    <label onClick={()=>this.openSearch("name",event._id)} className="field-label">Event Name</label>
+                                                    <div>{event.eventName}</div>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div  className="field-label">Event Image</div>
+                                                    <img onClick={()=>this.openSearch("image",event._id)} src={event.eventImage.url} alt="event image" style={{width:'150px',height:'75px'}}></img>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Date Start</div>
-                                                    <div onClick={()=>this.openSearch("datestart",event._id,event.eventDateFinish.slice(0,10))} >{event.eventDateStart.slice(0,10)}</div>                                                </div>
+                                                    <label onClick={()=>this.openSearch("datestart",event._id,event.eventDateFinish.slice(0,10))} className="field-label">Event Date Start</label>
+                                                    <div >{event.eventDateStart.slice(0,10)}</div>                                                </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Date Finish</div>
-                                                    <div onClick={()=>this.openSearch("datefinish",event._id,event.eventDateStart.slice(0,10))}>{event.eventDateFinish.slice(0,10)}</div>
+                                                    <label onClick={()=>this.openSearch("datefinish",event._id,event.eventDateStart.slice(0,10))} className="field-label">Event Date Finish</label>
+                                                    <div>{event.eventDateFinish.slice(0,10)}</div>
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                 <button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(event._id)}>Delete Event</button>
@@ -144,7 +167,8 @@ class MyEvents extends Component {
                                                 </div>                                           
                                             </div>
                                             </div>
-                                            ))} 
+                                            )):
+                                            'This Store Contains no Events'} 
                                             <div id="update-overlay" className="search-overlay">
                                         <div>
                                         <span className="closebtn" onClick={this.closeSearch} title="Close Overlay">×</span>
@@ -155,7 +179,8 @@ class MyEvents extends Component {
                                                 <form>
                                                     <div className="form-group">
                                                     {this.state.inputtype=="text"?<input type="text" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
-                                                     :<input type="date" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} /> }                                                    
+                                                     :this.state.inputtype=="date"?<input type="date" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
+                                                     :<input id="img" onChange={this.handleimages} type="file" name="updatevalue" accept="image/*" value={this.state.updatevalue} />}                                                    
                                                     {this.validator.message('new value', this.state.updatevalue, 'required')}
                                                     </div>
                                                 <button type="submit" onClick={this.handlesubmit} style={{marginRight:"-35px"}} className="btn btn-primary"><i className="fa fa-check"></i></button>

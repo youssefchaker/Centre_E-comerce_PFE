@@ -66,7 +66,6 @@ class Addproduct extends Component {
                 this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetailsValues[i]});
                 i++;
             }
-            this.state.ProductImages.push(document.getElementById("img").files[0]);
             this.props.newProduct({'storename':this.state.StoreName,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
             setTimeout("location.reload(true);",2000);
@@ -76,8 +75,19 @@ class Addproduct extends Component {
         this.setState({ProductCategory:e.target.value});
       }
       handleimages=(e)=>{
-        e.preventDefault(); 
-        if(!this.validator3.allValid() ||this.state.ProductImage==null){
+        const files = Array.from(e.target.files)
+        this.setState({ProductImages:[]})
+        files.forEach(file => {
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    this.state.ProductImages.push(reader.result)
+                }
+            }
+            reader.readAsDataURL(file)
+        })
+        /* if(!this.validator3.allValid() ||this.state.ProductImage==null){
             this.validator3.showMessages();
             this.forceUpdate();
           }
@@ -87,7 +97,7 @@ class Addproduct extends Component {
             document.getElementById("img").value=null;
             this.state.ProductImage=null;
             toast.success("New Product Image Added!!"); 
-          }
+          } */
       }
     render (){
         return (
@@ -158,10 +168,10 @@ class Addproduct extends Component {
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Image</div>
-                                                    <input type="file" id="img" name="ProductImage" accept="image/*" onChange={this.setStateFromInput} />
-                                                    {this.validator.message('ProductImage', this.state.ProductImage, 'required')}
-                                                    <button type="submit" onClick={this.handleimages}>submit and add images</button>
-                                                    {this.validator3.message('ProductImage', this.state.ProductImage, 'required')}
+                                                    <input type="file" id="img" name="ProductImages" accept="image/*" onChange={this.handleimages} multiple />
+                                                    {this.validator.message('ProductImages', this.state.ProductImages, 'required')}
+                                                    {/* <button type="submit" onClick={this.handleimages}>submit and add images</button>
+                                                    {this.validator3.message('ProductImage', this.state.ProductImage, 'required')} */}
 
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
@@ -172,7 +182,7 @@ class Addproduct extends Component {
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <div className="field-label">Product Description</div>
-                                                    <textarea name="ProductDescription" rows="15" cols="30" onChange={this.setStateFromInput} value={this.state.ProductDescription} ></textarea>
+                                                    <textarea name="ProductDescription" rows="4" cols="50" onChange={this.setStateFromInput} value={this.state.ProductDescription} ></textarea>
                                                     {this.validator.message('ProductDescription', this.state.ProductDescription, 'required')}
                                                 </div>
                                                 
@@ -187,7 +197,7 @@ class Addproduct extends Component {
             </div>
             </div>
             </div>
-            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myprofile`} ><a><button type="submit" className="btn btn-solid" >Finish Adding Products</button></a></Link></div>
+            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myProducts`} ><a><button type="submit" className="btn btn-solid" >Finish Adding Products</button></a></Link></div>
             </section>
             </div>
         )

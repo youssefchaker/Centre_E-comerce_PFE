@@ -636,9 +636,10 @@ export const filterSort = (sort_by) => ({
     sort_by
 });
 
-export const emptyFilter=(min)=>({
+export const emptyFilter=(min,minDT)=>({
     type:types.EMPTY_FILTER,
-    min
+    min,
+    minDT
 })
 
 // Currency
