@@ -23,7 +23,7 @@ class MyEvents extends Component {
       }
       componentWillMount=()=>{
           //get store's id from state
-        this.props.getStoreEvents("6044f782f862412b942e121e");
+        this.props.getStoreEvents(this.props.userStore.store._id);
       }
       openSearch=(field,id,date="")=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -208,7 +208,8 @@ const mapStateToProps=state=>{
     return {
         storeevents:state.storeevents,
         updateevent:state.updateevent,
-        deleteevent:state.deleteevent
+        deleteevent:state.deleteevent,
+        userStore:state.userStore
       }
 }
 const mapDispatchToProps = dispatch => {

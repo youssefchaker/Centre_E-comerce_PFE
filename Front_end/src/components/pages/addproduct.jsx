@@ -66,7 +66,7 @@ class Addproduct extends Component {
                 this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetailsValues[i]});
                 i++;
             }
-            this.props.newProduct({'storename':this.state.StoreName,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
+            this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
             setTimeout("location.reload(true);",2000);
           }
@@ -111,14 +111,9 @@ class Addproduct extends Component {
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                             <div className="checkout-title">
-                                                <h3>Product</h3>
+                                                <h3>Product Information</h3>
                                             </div>
                                             <div className="row check-out">
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Store Name</div>
-                                                    <input type="text" name="StoreName" onChange={this.setStateFromInput} value={this.state.Storename} />
-                                                    {this.validator.message('StoreName', this.state.StoreName, 'required')}
-                                                </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
                                                     <input type="text" name="ProductName" onChange={this.setStateFromInput} value={this.state.ProductName} />
@@ -207,7 +202,8 @@ class Addproduct extends Component {
 
 const mapStateToProps=state=>{
     return {
-        newproduct:state.newproduct
+        newproduct:state.newproduct,
+        userStore:state.userStore
       }
 }
 

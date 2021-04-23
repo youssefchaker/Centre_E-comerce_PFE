@@ -45,7 +45,7 @@ class Addevent extends Component {
             }
             else {
                 console.log(this.state.EventImg);
-            this.props.newEvent({'storeName':this.state.StoreName,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
+            this.props.newEvent({'storeName':this.props.userStore.store.name,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
             toast.success("event added !");
             setTimeout("location.reload(true);",2000);
             }
@@ -80,11 +80,6 @@ class Addevent extends Component {
                                             </div>
                                             
                                             <div className="row check-out">
-                                            <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Store Name</div>
-                                                    <input type="text" name="StoreName" onChange={this.setStateFromInput} value={this.state.StoreName} />
-                                                    {this.validator.message('StoreName', this.state.StoreName, 'required')}
-                                                </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                 
                                                     <div className="field-label">Event Name</div>
@@ -127,7 +122,7 @@ class Addevent extends Component {
 const mapStateToProps=state=>{
     return {
         newevent:state.newevent,
-
+        userStore:state.userStore
       }
 }
 

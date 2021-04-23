@@ -26,52 +26,22 @@ function Shop ({ match }) {
     const { loading, error, store } = useSelector(state => state.storeDetails)
     const {products } = useSelector(state => state.allproducts)
     const {currencydiff } = useSelector(state => state.currencydiff)
-
-    
-    
-
-
-
-
-
     useEffect(() => {
-        
-        const prices = getMinMaxPrice(products);
-        const pricesDT=  getMinMaxPriceDT(products, currencydiff);
-
-
-        dispatch(getStoreDetails(match.params.id));
-
-        dispatch(getProducts());
-        dispatch(emptyFilter(prices.min, pricesDT.min));
-
+        console.log("a");
         if (error) {
             alert(error);
             dispatch(clearErrors())
         }
-
-        
-
-        
-
+        const prices = getMinMaxPrice(products);
+        const pricesDT=  getMinMaxPriceDT(products, currencydiff);
+        dispatch(getStoreDetails(match.params.id));
+        dispatch(emptyFilter(prices.min, pricesDT.min));
     }, [dispatch, alert, error, match.params.id])
-
-
-
-
-
-
-
-
      function LayoutViewClicked(colums) {
         setLayoutColumns({
             layoutColumns:colums
         })
     }
-
-    
-    
-  
         return (
             <div>
                 {/*SEO Support*/}
@@ -92,7 +62,9 @@ function Shop ({ match }) {
                                     <StickyBox offsetTop={20} offsetBottom={20}>
                                         <div>
                                             <Filter/>
+                                            <hr></hr>
                                             <NewProduct/>
+                                            <hr></hr>
                                             <TopProduct/>
                                             <div className="collection-sidebar-banner">
                                                 <a href="#">
@@ -141,9 +113,6 @@ function Shop ({ match }) {
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        {/*Products Listing Component*/}
-                                                        <ProductListing filterstore={match.params.id} colSize={layoutColumns}/>
                                                     </div>
                                                 </div>
                                             </div>

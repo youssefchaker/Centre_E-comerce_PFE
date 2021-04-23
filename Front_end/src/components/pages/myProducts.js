@@ -23,7 +23,7 @@ class MyProducts extends Component {
       }
       componentWillMount=()=>{
           // get store's id from state
-        this.props.getStoreProducts("6044f782f862412b942e121e");
+        this.props.getStoreProducts(this.props.userStore.store._id);
       }
       openSearch=(field,id,detail="",detailid="")=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -291,7 +291,8 @@ const mapStateToProps=state=>{
         storeproducts:state.storeproducts,
         updateproduct:state.updateproduct,
         deleteproduct:state.deleteproduct,
-        updateproductdetail:state.updateproductdetail
+        updateproductdetail:state.updateproductdetail,
+        userStore:state.userStore
       }
 }
 const mapDispatchToProps = dispatch => {

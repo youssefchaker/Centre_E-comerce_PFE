@@ -53,11 +53,16 @@ class BrowseProducts extends Component {
 
                                     <StickyBox offsetTop={20} offsetBottom={20}>
                                         <div>
-                                        <hr></hr>
                                             <Filter/>
+                                            <hr></hr>
                                             <NewProduct/>
                                             <hr></hr>
                                             <TopProduct/>
+                                            <div className="collection-sidebar-banner">
+                                                <a href="#">
+                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/promotion-banner.png`} className="img-fluid" alt="" />
+                                                </a>
+                                            </div>
                                         </div>
                                     </StickyBox>
                                     {/*side-bar banner end here*/}

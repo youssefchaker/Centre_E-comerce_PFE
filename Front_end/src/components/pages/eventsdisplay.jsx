@@ -27,7 +27,7 @@ class Eventsdisplay extends Component {
 
                             <div className="col-xl-9 col-lg-8 col-md-7 ">
                             {this.props.events.loading==false?eventsarray.map((event,index)=>(
-                                <div className="row blog-media">
+                                <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`} ><div className="row blog-media">
                                     <div className="col-xl-6">
                                     
                                         <div className="blog-left">
@@ -48,6 +48,7 @@ class Eventsdisplay extends Component {
                                     </div>
                                     
                                 </div>
+                                </Link>
                                 
                             )):'There are no events at the moment!!'}
                                 
