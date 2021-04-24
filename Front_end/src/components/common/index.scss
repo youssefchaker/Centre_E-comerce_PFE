@@ -3,3 +3,8 @@
 @import "../../../public/assets/scss/animate.scss";
 @import "../../../public/assets/scss/themify.scss";
 @import "../../../public/assets/scss/color7.scss";
+.sname{
+    &:hover{
+        color: black;
+    }
+}

@@ -123,10 +123,15 @@ else{
 
 exports.getTopProducts = catchAsyncErrors(async (req, res, next) => {
     const products=await Product.find().sort({nbreviews:-1}).limit(5);
-
+    let storenames=[];
+    for(var i=0;i<products.length;i++){
+        const store= await Store.findById(products[i].store);
+        storenames.push(store.name);
+    }
         res.status(200).json({
             success: true,
-            products
+            products,
+            storenames
         })
 
 })
@@ -135,11 +140,16 @@ exports.getTopProducts = catchAsyncErrors(async (req, res, next) => {
 // Get new products details   =>   /api/mall/products/new
 
 exports.getNewProducts = catchAsyncErrors(async (req, res, next) => {
+    let storenames=[];
     const products=await Product.find().sort({creationdate:-1}).limit(5);
- 
+    for(var i=0;i<products.length;i++){
+        const store= await Store.findById(products[i].store);
+        storenames.push(store.name);
+    }
         res.status(200).json({
             success: true,
-            products
+            products,
+            storenames
         })
 
 })

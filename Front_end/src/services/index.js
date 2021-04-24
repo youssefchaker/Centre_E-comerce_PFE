@@ -50,26 +50,40 @@ export const getMinMaxPriceDT = (products,diff) => {
     return {'min':min, 'max':max};
 }
 
+export const getMinMaxPriceStore = (products,storeid) => {
+    const storeproducts=[];
+    for(var i=0;i<products.length;i++){
+        if(products[i].store==storeid)
+            storeproducts.push(products[i]);
+    }
+    let min = 1000, max = 0;
+
+    storeproducts.map((product, index) => {
+        min = (product.price-(product.price*product.discount/100) < min) ? (product.price-(product.price*product.discount/100)) : min;
+        max = (product.price-(product.price*product.discount/100) > max) ? (product.price-(product.price*product.discount/100)) : max;
+    })
+
+    return {'min':min, 'max':max};
+}
+
+export const getMinMaxPriceDTStore = (products,diff,storeid) => {
+    const storeproducts=[];
+    for(var i=0;i<products.length;i++){
+        if(products[i].store==storeid)
+            storeproducts.push(products[i]);
+    }
+    let min = 1000, max = 0;
+
+    storeproducts.map((product, index) => {
+        min = (diff*(product.price-(product.price*product.discount/100)) < min) ? diff*(product.price-(product.price*product.discount/100)) : min;
+        max = (diff*(product.price-(product.price*product.discount/100) > max)) ? diff*(product.price-(product.price*product.discount/100)) : max;
+    })
+    return {'min':min, 'max':max};
+}
+
+
 export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,symbol,diff ) => {
     if(symbol.symbol=="DT"){
-        /* if(category.length==0 && store.length==0 && valueDT==0){
-            return data.products.sort((product1, product2) => {
-                if (sortBy === 'HighToLow') {
-                    return product2.price < product1.price ? -1 : 1;
-                } else if (sortBy === 'LowToHigh') {
-                    return product2.price > product1.price ? -1 : 1;
-                } else if (sortBy === 'Newest') {
-                    return product2.id < product1.id ? -1 : 1;
-                } else if (sortBy === 'AscOrder') {
-                    return product1.name.localeCompare(product2.name);
-                } else if (sortBy === 'DescOrder') {
-                    return product2.name.localeCompare(product1.name);
-                } else{
-                    return product2.id > product1.id ? -1 : 1;
-                }
-            });
-        }
-        else */
         return data.products.filter((product,index) => {
             let categoryMatch;
             for(var i=0;i<category.length;i++){
@@ -97,11 +111,17 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
             return categoryMatch || storeMatch || PriceMatch;
         }).sort((product1, product2) => {
             if (sortBy === 'HighToLow') {
-                return product2.price < product1.price ? -1 : 1;
+                return product2.price-(product2.price*product2.discount/100) < product1.price-(product1.price*product1.discount/100) ? -1 : 1;
             } else if (sortBy === 'LowToHigh') {
-                return product2.price > product1.price ? -1 : 1;
+                return product2.price-(product2.price*product2.discount/100) > product1.price-(product1.price*product1.discount/100) ? -1 : 1;
             } else if (sortBy === 'Newest') {
-                return product2.id < product1.id ? -1 : 1;
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2< d1? -1 : 1;
+            } else if (sortBy === 'Oldest') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2> d1? -1 : 1;
             } else if (sortBy === 'AscOrder') {
                 return product1.name.localeCompare(product2.name);
             } else if (sortBy === 'DescOrder') {
@@ -113,24 +133,6 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
     }
 
     else {
-        /* if(category.length==0 && store.length==0 && value==0){
-            return data.products.sort((product1, product2) => {
-                if (sortBy === 'HighToLow') {
-                    return product2.price < product1.price ? -1 : 1;
-                } else if (sortBy === 'LowToHigh') {
-                    return product2.price > product1.price ? -1 : 1;
-                } else if (sortBy === 'Newest') {
-                    return product2.id < product1.id ? -1 : 1;
-                } else if (sortBy === 'AscOrder') {
-                    return product1.name.localeCompare(product2.name);
-                } else if (sortBy === 'DescOrder') {
-                    return product2.name.localeCompare(product1.name);
-                } else{
-                    return product2.id > product1.id ? -1 : 1;
-                }
-            });
-        }
-        else */
         return data.products.filter(product => {
             let categoryMatch;
             for(var i=0;i<category.length;i++){
@@ -158,12 +160,19 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
             return categoryMatch || storeMatch || PriceMatch;
         }).sort((product1, product2) => {
             if (sortBy === 'HighToLow') {
-                return product2.price < product1.price ? -1 : 1;
+                return product2.price-(product2.price*product2.discount/100) < product1.price-(product1.price*product1.discount/100) ? -1 : 1;
             } else if (sortBy === 'LowToHigh') {
-                return product2.price > product1.price ? -1 : 1;
+                return product2.price-(product2.price*product2.discount/100) > product1.price-(product1.price*product1.discount/100)? -1 : 1;
             } else if (sortBy === 'Newest') {
-                return product2.id < product1.id ? -1 : 1;
-            } else if (sortBy === 'AscOrder') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2< d1? -1 : 1;
+                
+            }  else if (sortBy === 'Oldest') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2> d1? -1 : 1;
+            }  else if (sortBy === 'AscOrder') {
                 return product1.name.localeCompare(product2.name);
             } else if (sortBy === 'DescOrder') {
                 return product2.name.localeCompare(product1.name);
@@ -173,6 +182,76 @@ export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,
         });
 
     }
+}
+export const getVisibleStoreproducts = (data,storeid,value,valueDT,sortBy,symbol,diff) => {
+    const storeproducts=[];
+    for(var i=0;i<data.products.length;i++){
+        if(data.products[i].store==storeid)
+            storeproducts.push(data.products[i]);
+    }
+    if(symbol.symbol=="DT"){
+        return storeproducts.filter((product,index) => {
+            let PriceMatch;
+            if(diff*(product.price-(product.price*product.discount/100))>=valueDT)
+                PriceMatch=true;
+            else
+                PriceMatch=false;
+            return PriceMatch;
+        }).sort((product1, product2) => {
+            if (sortBy === 'HighToLow') {
+                return product2.price-(product2.price*product2.discount/100) < product1.price-(product1.price*product1.discount/100) ? -1 : 1;
+            } else if (sortBy === 'LowToHigh') {
+                return product2.price-(product2.price*product2.discount/100) > product1.price-(product1.price*product1.discount/100) ? -1 : 1;
+            } else if (sortBy === 'Newest') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2< d1? -1 : 1;
+            }  else if (sortBy === 'Oldest') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2> d1? -1 : 1;
+            }  else if (sortBy === 'AscOrder') {
+                return product1.name.localeCompare(product2.name);
+            } else if (sortBy === 'DescOrder') {
+                return product2.name.localeCompare(product1.name);
+            } else{
+                return product2.id > product1.id ? -1 : 1;
+            }
+        });
+    }
+
+    else {
+        return storeproducts.filter(product => {
+            let PriceMatch;
+            if(product.price-(product.price*product.discount/100)>=value)
+                PriceMatch=true;
+            else
+                PriceMatch=false;
+            return  PriceMatch;
+        }).sort((product1, product2) => {
+            if (sortBy === 'HighToLow') {
+                return product2.price-(product2.price*product2.discount/100) < product1.price-(product1.price*product1.discount/100) ? -1 : 1;
+            } else if (sortBy === 'LowToHigh') {
+                return product2.price-(product2.price*product2.discount/100) > product1.price-(product1.price*product1.discount/100) ? -1 : 1;
+            } else if (sortBy === 'Newest') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2< d1? -1 : 1;
+            }  else if (sortBy === 'Oldest') {
+                const d1=new Date(product1.creationdate.slice(0,10));
+                const d2=new Date(product2.creationdate.slice(0,10));
+                return d2> d1? -1 : 1;
+            }  else if (sortBy === 'AscOrder') {
+                return product1.name.localeCompare(product2.name);
+            } else if (sortBy === 'DescOrder') {
+                return product2.name.localeCompare(product1.name);
+            } else{
+                return product2.id > product1.id ? -1 : 1;
+            }
+        });
+
+    }
+
 }
 
 export const getCartTotal = cartItems => {
@@ -226,11 +305,15 @@ export const getNewProducts = (products, type) => {
 
 // Get Related Items
 export const getRelatedItems = (products, target,id) => {
-    const items = products.filter(product => {
+    let storenames=[];
+    const items = products.products.filter(product => {
         return product.category === target && product._id!=id;
     })
+    for(var i=0;i<items.length;i++){
+        storenames.push(products.storenames[i]);
+    }
 
-    return items.slice(0,4)
+    return {products:items.slice(0,5),storenames:storenames.slice(0,5)}
 
 }
 

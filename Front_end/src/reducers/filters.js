@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes'
 
- export const filtersReducer = (state = {filters:{},category:[],store:[],value:{},valueDT:{},sortBy:""}, action) => {
+ export const filtersReducer = (state = {filters:{},category:[],store:[],value:{},valueDT:{},sortBy:"",valuestore:{},valueDTstore:{},sortByStore:{}}, action) => {
     switch (action.type) {
         case types.FILTER_CATEGORY:
             return {
@@ -33,6 +33,27 @@ import * as types from '../constants/ActionTypes'
                 value: action.min,
                 valueDT:action.minDT
             };
+            case types.FILTER_PRICE_STORE:
+                return {
+                    ...state,
+                    valuestore: action.valuestore.value
+                };
+            case types.FILTER_PRICE_DT_STORE:
+                return {
+                    ...state,
+                    valueDTstore: action.valueDTstore.value
+                    };
+                    case types.EMPTY_FILTER_STORE:
+                        return {
+                            ...state,
+                            valuestore: action.minstore,
+                            valueDTstore:action.minDTstore
+                        };
+                        case types.SORT_BY_STORE:
+                            return {
+                                ...state,
+                                sortByStore: action.sort_by_store
+                            };
         default:
             return state;
     }

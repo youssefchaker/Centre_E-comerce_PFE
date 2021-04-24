@@ -44,7 +44,6 @@ class Addevent extends Component {
                 toast.warn("the event start date must be lower then the finish date");
             }
             else {
-                console.log(this.state.EventImg);
             this.props.newEvent({'storeName':this.props.userStore.store.name,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
             toast.success("event added !");
             setTimeout("location.reload(true);",2000);
@@ -76,7 +75,7 @@ class Addevent extends Component {
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12" id="1">
                                             <div className="checkout-title">
-                                                <h3>Event</h3>
+                                                <h3>New Event Information</h3>
                                             </div>
                                             
                                             <div className="row check-out">
@@ -99,6 +98,7 @@ class Addevent extends Component {
                                                 </div>  
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Event Image</div>
+                                                    <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions : :   <span><small>"910 x 310"</small></span></div>
                                                     <input type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
                                                     {this.validator.message('EventImage', this.state.EventImage, 'required')}
                                                 </div>                                  

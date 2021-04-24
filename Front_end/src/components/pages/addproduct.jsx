@@ -66,9 +66,13 @@ class Addproduct extends Component {
                 this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetailsValues[i]});
                 i++;
             }
+            if(this.state.ProductImages.length>3)
+                toast.warn("Only a limit of 3 images are allowed for 1 product");
+            else{
             this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
             setTimeout("location.reload(true);",2000);
+            }
           }
       }
       handlelist=(e)=>{
@@ -111,8 +115,18 @@ class Addproduct extends Component {
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                             <div className="checkout-title">
-                                                <h3>Product Information</h3>
+                                                <h3>New Product Information</h3>
                                             </div>
+                                            <table>
+                                            <tr>
+                                                <th>Product Information</th>
+                                                <th>Product Information Value</th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </table>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
                                                     <div className="field-label">Product Name</div>
@@ -162,7 +176,9 @@ class Addproduct extends Component {
                                                     </form>
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Product Image</div>
+                                                    <div className="field-label">Product Images</div>
+                                                    <h6>*3 Images are allowed for 1 product</h6>
+                                                    <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span></div>
                                                     <input type="file" id="img" name="ProductImages" accept="image/*" onChange={this.handleimages} multiple />
                                                     {this.validator.message('ProductImages', this.state.ProductImages, 'required')}
                                                     {/* <button type="submit" onClick={this.handleimages}>submit and add images</button>

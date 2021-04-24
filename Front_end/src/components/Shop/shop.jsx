@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Helmet} from 'react-helmet'
 import Breadcrumb from "../common/breadcrumb";
 import NewProduct from "../common/new-product";
-import Filter from "./common/filter";
-import FilterBar from "./common/filter-bar";
-import ProductListing from "./common/product-listing";
+import Filterstore from "./common/filterstores";
+import FilterBarStore from "./common/filter-barstores";
+import ProductListingStore from "./common/product-listingstores";
 import StickyBox from "react-sticky-box";
 import TopProduct from '../common/top-product';
 import { getStoreDetails, clearErrors } from '../../actions/index'
 import { getProducts } from '../../actions/productActions';
-import { emptyFilter } from '../../actions';
-import {getMinMaxPrice,getMinMaxPriceDT} from '../../services';
+import { emptyFilterStore } from '../../actions';
+import {getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../services';
 
 function Shop ({ match }) {
 
@@ -25,17 +25,16 @@ function Shop ({ match }) {
 
     const { loading, error, store } = useSelector(state => state.storeDetails)
     const {products } = useSelector(state => state.allproducts)
-    const {currencydiff } = useSelector(state => state.currencydiff)
+    const currencydiff = useSelector(state => state.currencydiff)
     useEffect(() => {
-        console.log("a");
         if (error) {
             alert(error);
             dispatch(clearErrors())
         }
-        const prices = getMinMaxPrice(products);
-        const pricesDT=  getMinMaxPriceDT(products, currencydiff);
+        const prices = getMinMaxPriceStore(products,store._id);
+        const pricesDT=  getMinMaxPriceDTStore(products,currencydiff,store._id);
         dispatch(getStoreDetails(match.params.id));
-        dispatch(emptyFilter(prices.min, pricesDT.min));
+        dispatch(emptyFilterStore(prices.min, pricesDT.min));
     }, [dispatch, alert, error, match.params.id])
      function LayoutViewClicked(colums) {
         setLayoutColumns({
@@ -61,11 +60,11 @@ function Shop ({ match }) {
 
                                     <StickyBox offsetTop={20} offsetBottom={20}>
                                         <div>
-                                            <Filter/>
+                                            <NewProduct storeid={store._id}/>
                                             <hr></hr>
-                                            <NewProduct/>
+                                            <TopProduct storeid={store._id}/>
                                             <hr></hr>
-                                            <TopProduct/>
+                                            <Filterstore/>
                                             <div className="collection-sidebar-banner">
                                                 <a href="#">
                                                     <img src={`${process.env.PUBLIC_URL}/assets/images/promotion-banner.png`} className="img-fluid" alt="" />
@@ -108,11 +107,12 @@ function Shop ({ match }) {
                                                                 </div>
                                                                 <div className="row">
                                                                     <div className="col-12">
-                                                                        <FilterBar onLayoutViewClicked={(colmuns) => LayoutViewClicked(colmuns)}/>
+                                                                        <FilterBarStore onLayoutViewClicked={(colmuns) => LayoutViewClicked(colmuns)} storeid={match.params.id}/>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <ProductListingStore storeid={match.params.id} colSize={layoutColumns}/>
                                                     </div>
                                                 </div>
                                             </div>
