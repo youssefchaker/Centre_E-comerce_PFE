@@ -63,7 +63,7 @@ function  checkOut ({history}) {
     
     const itemsPrice = symbol=="€"?total: Math.round((currencydiff*(total) + Number.EPSILON) * 100) / 100
     const shippingPrice = symbol=="€"?10:10*currencydiff
-    const taxPrice = symbol=="€"?0.05*itemsPrice:currencydiff*0.05*itemsPrice
+    const taxPrice = symbol=="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:currencydiff*0.05*itemsPrice
     const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2)
     
     
@@ -424,7 +424,7 @@ function  checkOut ({history}) {
                                                     </ul>
                                                     <ul className="qty">
                                                         <li>Shipping Price: <span>{symbol}{ symbol=="€"?10:10*currencydiff}</span></li>
-                                                        <li>Tax Cost: <span>{symbol}{ symbol=="€"?0.05*itemsPrice:currencydiff*0.05*itemsPrice}</span></li>
+                                                        <li>Tax Cost: <span>{symbol}{symbol=="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:currencydiff*0.05*itemsPrice}</span></li>
                                                     </ul>
                                                     <ul className="sub-total">
                                                         <li>Shipping <div className="shipping">

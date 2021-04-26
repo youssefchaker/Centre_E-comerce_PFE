@@ -70,7 +70,7 @@ const OrderDetails = ({ match }) => {
                                         <div className="box-account box-info">
                                             <div className="box-head">
                                                 <h2>Payment</h2><hr></hr>
-                                                <p style={{color:'green'}}><b>Amount: </b> {symbol}{symbol=="€"? (Math.round(order.totalPrice)):Math.round((currencydiff*(order.totalPrice) + Number.EPSILON) )}</p>
+                                                <p style={{color:'green'}}><b>Amount: </b> {symbol}{symbol=="€"? (order.totalPrice):Math.round((currencydiff*(order.totalPrice) + Number.EPSILON) )}</p>
                                                 <span className={isPaid ? "redColor" : "greenColor"}><span>{isPaid ? "NOT PAID" : " PAID"}</span></span>
                                             </div>
                                             <div className="row">
@@ -90,7 +90,7 @@ const OrderDetails = ({ match }) => {
                                                             <h6>{orderItems && orderItems.map(item => (
                                     <div key={item.product} className="row my-5">
                                         <div className="col-4 col-lg-2">
-                                            <img src={item.image} alt={item.name} height="45" width="65" />
+                                            <img src={item.images[0].url} alt={item.name} height="45" width="65" />
                                         </div>
 
                                         <div className="col-5 col-lg-5">
@@ -99,7 +99,7 @@ const OrderDetails = ({ match }) => {
 
 
                                         <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                                            <p>{symbol}{symbol=="€"?item.price: Math.round((currencydiff*(item.price)))}</p>
+                                            <p>{symbol}{symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</p>
                                         </div>
 
                                         <div className="col-4 col-lg-3 mt-4 mt-lg-0">
@@ -117,7 +117,7 @@ const OrderDetails = ({ match }) => {
                                                         </div>
                                                         <div className="box-content">
                                                             <p>
-                                                            {order.createdAt}
+                                                            {order.createdAt.slice(0,10)}
                                                             </p>
                                                         </div>
                                                     </div>

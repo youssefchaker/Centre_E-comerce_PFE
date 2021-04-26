@@ -65,7 +65,7 @@ function orderSuccess () {
                                                 <div className="col-3 order_detail">
                                                     <div>
                                                         <h4>price</h4>
-                                                        <h5>{symbol}{symbol=="€"?item.price: Math.round((currencydiff*(item.price)))}</h5>
+                                                        <h5>{symbol}{symbol=="€"?item.price-(item.price*item.discount/100): Math.round((currencydiff*(item.price-(item.price*item.discount/100))))}</h5>
                                                     </div>
                                                 </div>
                                             </div>

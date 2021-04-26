@@ -77,7 +77,7 @@ const ListOrders = () => {
         orders.forEach(order => {
             data.rows.push({
                 id: order._id,
-                date: order.createdAt.substring(0,9),
+                date: order.createdAt.slice(0,10),
                 numOfItems: order.orderItems.length,
                 amount: `${symbol}${symbol=="€"? (Math.round(order.totalPrice)):Math.round((currencydiff*(order.totalPrice) + Number.EPSILON) )}`,
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import SimpleReactValidator from 'simple-react-validator';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 import { createOrder, clearErrors } from '../../actions/orderActions'
+import {  clearResponse } from '../../actions/cartActions'
 
 
 import axios from 'axios'
@@ -147,7 +148,8 @@ const CheckoutPayment = ({ history }) => {
             // The payment is processed or not
             if (result.paymentIntent.status === 'succeeded') {
 
-              dispatch(createOrder(order))
+              dispatch(createOrder(order));
+              dispatch(clearResponse());
               history.push('/order-success')
 
                
