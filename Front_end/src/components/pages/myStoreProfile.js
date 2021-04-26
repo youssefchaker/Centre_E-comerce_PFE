@@ -17,12 +17,11 @@ function  myStore () {
     const {  error, store } = useSelector(state => state.userStore)
 
 
-    const year  = new Date(store.createdAt.substring(0,4)).getFullYear();
-    const month = new Date(store.createdAt.substring(4,7)).getMonth();
-    const day   = new Date(store.createdAt.substring(0,9)).getDay();
 
-    const date  = new Date(year + 1, month, day).toISOString().split('T')[0];
-    
+    let date  = store.createdAt.slice(0,10);
+    let year = parseInt(date.substring(3,4));
+    let secondYear = (year + 1).toString();
+    date = date.replace(year,secondYear)  
 
 
     useEffect(() => {
@@ -65,7 +64,7 @@ function  myStore () {
                                 <div className="block-content">
                                     <ul>
                                         <li><Link to='/pages/myprofile'>My Profile</Link></li>
-                                        <li className="active"><Link to="/mystore">My Store</Link></li>
+                                        <li className="active"><Link to="/pages/mystore">My Store</Link></li>
                                         <li><Link to="/pages/myevents">My Events</Link></li>
                                         <li><Link to="/orders/me">My Orders</Link></li>
                                         <li><Link to='/pages/myproducts'>My Products</Link></li>

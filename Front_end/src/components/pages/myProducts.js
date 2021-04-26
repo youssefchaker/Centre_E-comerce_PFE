@@ -169,7 +169,7 @@ class MyProducts extends Component {
                                     </div>
                                     <div className="block-content">
                                         <ul>
-                                        <Link to={`${process.env.PUBLIC_URL}/store/myproducts`}><li className="active"><a>My Products</a></li></Link>   
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/myproducts`}><li className="active"><a>My Products</a></li></Link>   
                                         <Link to={`${process.env.PUBLIC_URL}/pages/addproduct`}><li><a>Add Product</a></li></Link>
 
                                         </ul>

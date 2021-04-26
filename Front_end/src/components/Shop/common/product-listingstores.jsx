@@ -84,9 +84,9 @@ class ProductListingStore extends Component {
         )
     }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
     allproducts:state.allproducts,
-    storeproducts: getVisibleStoreproducts(state.allproducts,state.storeDetails.store._id,state.filters.valuestore,state.filters.valueDTstore,state.filters.sortByStore,state.symbol,state.currencydiff),
+    storeproducts: getVisibleStoreproducts(state.allproducts,ownProps.storeid,state.filters.valuestore,state.filters.valueDTstore,state.filters.sortByStore,state.symbol,state.currencydiff),
     filters:state.filters,
     symbol:state.symbol,
     currencydiff:state.currencydiff,

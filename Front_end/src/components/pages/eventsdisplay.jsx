@@ -13,10 +13,7 @@ class Eventsdisplay extends Component {
       }
 
     render (){
-        var eventsarray = [];
-        this.props.events.events.events.map((ev)=>{
-            eventsarray.push(ev);
-        })
+       
         return (
             <div>
                 <Breadcrumb title={'Events '}/>
@@ -26,7 +23,7 @@ class Eventsdisplay extends Component {
                         <div className="row">
 
                             <div className="col-xl-9 col-lg-8 col-md-7 ">
-                            {this.props.events.loading==false?eventsarray.map((event,index)=>(
+                            {this.props.events.loading==false?this.props.events.events.events.map((event,index)=>(
                                 <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`} ><div className="row blog-media">
                                     <div className="col-xl-6">
                                     
