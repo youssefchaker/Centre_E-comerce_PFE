@@ -77,32 +77,43 @@ class Addevent extends Component {
                                             <div className="checkout-title">
                                                 <h3>New Event Information</h3>
                                             </div>
-                                            
-                                            <div className="row check-out">
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                
-                                                    <div className="field-label">Event Name</div>
+                                            <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Event Information</th>
+                                                    <th>Event Information Value</th>
+                                                </tr>
+                                            </thead>
+                                                <tr>
+                                                    <td><div className="field-label">Event Name</div></td>
+                                                    <td>
                                                     <input type="text" name="EventName" onChange={this.setStateFromInput} value={this.state.EventName} />
                                                     {this.validator.message('EventName', this.state.EventName, 'required')}
-                                                </div>
-                                                 
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Date Start</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div className="field-label">Event Date Start</div></td>
+                                                    <td>
                                                     <input type="date" name="EventDatestart" onChange={this.setStateFromInput} value={this.state.EventDatestart}   />
-                                                    {this.validator.message('EventDatestart', this.state.EventDatestart, `required`)}
-                                                </div>   
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Date Finish</div>
+                                                    {this.validator.message('Event Start Date', this.state.EventDatestart, `required`)}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div className="field-label">Event Date Finish</div></td>
+                                                    <td>
                                                     <input type="date" name="EventDatefinish" onChange={this.setStateFromInput} value={this.state.EventDatefinish}  />
-                                                    {this.validator.message('EventDatefinish', this.state.EventDatefinish, 'required')}
-                                                </div>  
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Image</div>
+                                                    {this.validator.message('Event Finsih Date', this.state.EventDatefinish, 'required')}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div className="field-label">Event Image</div></td>
+                                                    <td>
                                                     <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions : :   <span><small>"910 x 310"</small></span></div>
                                                     <input type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
                                                     {this.validator.message('EventImage', this.state.EventImage, 'required')}
-                                                </div>                                  
-                                            </div>
+                                                    </td>
+                                                </tr>
+                                            </table>    
                                         </div>
                 </div>
                 <div>

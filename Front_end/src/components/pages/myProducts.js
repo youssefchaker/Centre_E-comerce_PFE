@@ -177,60 +177,81 @@ class MyProducts extends Component {
                                 </div>
                                         <div className="col-lg-8 col-sm-12 col-xs-12">
                                         <h5 style={{color:"#fe2b2a"}}>Click on the product's attribute to update it!</h5>
-                                        {this.props.storeproducts.loading==false?productsarray.map((product,index)=>(
-                                            <div>
-                                            <h3 style={{color:"black"}}>Product {index+1}</h3>
-                                            <div className="row check-out">
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <label onClick={()=>this.openSearch("name",product._id)} className="field-label">Product Name</label>
-                                                    <div>{product.name}</div>
-                                                </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <label onClick={()=>this.openSearch("price",product._id)} className="field-label">Product Price</label>
-                                                    <div >{product.price}</div>
-                                                </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <label onClick={()=>this.openSearch("stock",product._id)} className="field-label">Product Stock</label>
-                                                    <div  >{product.stock}</div>
-                                                </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <label onClick={()=>this.openSearch("category",product._id)} className="field-label">Product Category</label>
-                                                    <div >{product.category}</div>
-                                                </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <label className="field-label">Product Details</label>
-                                                    {productdetails[index].map((detail,ind)=>(
-                                                        <div>
-                                                        <label onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)} for="ProductDetail">Product Detail</label>
-                                                    <div  name="ProductDetail">{detail.detailname }</div>
-                                                    <label onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)}  for="ProductDetailValue">Product Detail Value</label>
-                                                    <div  name="ProductDetailValue">{ detail.value }</div>
-                                                    </div>
-                                                    ))}
-                                                </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label className="field-label" for="ProductImage">Product Images</label>
-                                                {product.images.map((image)=>(
-                                                        <div>
+                                    {this.props.storeproducts.loading==false?productsarray.map((product,index)=>(
+                                        <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Number</th>
+                                            <th>Product Information</th>
+                                            <th>Product Information Value</th>
+                                        </tr>
+                                    </thead>
+                                        <tr>
+                                            <td><h3 style={{color:"black"}}>Product {index+1}</h3></td>
+                                            <td><label onClick={()=>this.openSearch("name",product._id)} className="field-label">Product Name</label></td>
+                                            <td><div>{product.name}</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label onClick={()=>this.openSearch("price",product._id)} className="field-label">Product Price</label></td>
+                                            <td><div>{product.price}</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label onClick={()=>this.openSearch("stock",product._id)} className="field-label">Product Stock</label></td>
+                                            <td><div>{product.stock}</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label onClick={()=>this.openSearch("category",product._id)} className="field-label">Product Category</label></td>
+                                            <td><div >{product.category}</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label onClick={()=>this.openSearch("desc",product._id)} className="field-label" for="ProductDescription">Product Description</label></td>
+                                            <td><div name="ProductDescription">{product.description}</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label onClick={()=>this.openSearch("discount",product._id)} className="field-label">Product Discount</label></td>
+                                            <td><div >{product.discount}</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label className="field-label" for="ProductImage">Product Images</label></td>
+                                            {product.images.map((image)=>(
+                                                <td>
                                                     <img onClick={()=>this.openSearch("image",product._id)} src={image.url} alt="product image" style={{width:'150px',height:'75px'}}></img>
-                                                    </div>
-                                                    ))}
-                                                </div>
-                                                <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                <label onClick={()=>this.openSearch("desc",product._id)} className="field-label" for="ProductDescription">Product Description</label>
-                                                    <div   name="ProductDescription">{product.description}</div>
-                                                </div>  
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <label onClick={()=>this.openSearch("discount",product._id)} className="field-label">Product Discount</label>
-                                                    <div >{product.discount}</div>
-                                                </div>
-                                                <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                <button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(product._id)}>Delete Product</button>
-                                                <hr></hr>
-                                                </div>                                          
-                                                </div>
-                                                </div>
-                                        )):'This Store Contains no Products!!'} 
+                                                </td>
+                                            ))}
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><label className="field-label">Product Details</label></td>
+                                            <td>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product Detail</th>
+                                                            <th>Product Detail Value</th>
+                                                        </tr>
+                                                        </thead>
+                                                        {productdetails[index].map((detail,ind)=>(
+                                                            <tr>
+                                                                <td>
+                                                                <div onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)}  name="ProductDetail">{detail.detailname }</div>
+                                                                </td>
+                                                                <td>
+                                                                <div onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)}  name="ProductDetailValue">{ detail.value }</div>
+                                                                </td>
+                                                            </tr>
+                                                        ))} 
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td><button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(product._id)}>Delete Product</button></td></tr>
+                                        </table>
+                                    )):'This Store Contains no Products!!'}
                                         <div id="update-overlay" className="search-overlay">
                                         <div>
                                         <span className="closebtn" onClick={this.closeSearch} title="Close Overlay">×</span>
