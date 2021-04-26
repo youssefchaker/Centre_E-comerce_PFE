@@ -35,6 +35,8 @@ import Cart from './components/cart'
 import checkOut from './components/checkout'
 import orderSuccess from './components/checkout/success-page'
 import Payment from './components/cart/payment'
+import CheckoutPayment from './components/checkout/checkoutPayment'
+
 
 
 // Extra Pages
@@ -89,6 +91,10 @@ import MyEvents from './components/pages/myevents';
 import UpdateStore from './components/pages/updateStore'
 import BrowseProducts from "./components/Shop/browseProducts";
 import MyStoreProfile from './components/pages/myStoreProfile';
+import ListOrders from './components/order/listOrders';
+import OrderDetails from './components/order/orderDetails'
+
+
 
 
 
@@ -141,6 +147,7 @@ function Root() {
 								<Route path={`${process.env.PUBLIC_URL}/order-success`} component={orderSuccess}/>
 								<Route path={`${process.env.PUBLIC_URL}/sales/orders`} component={aboutUs}/>
                                 
+                                
 
                                 
 
@@ -165,6 +172,10 @@ function Root() {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/mystore`} component={MyStoreProfile}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/update/store/:id`} component={UpdateStore}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/myproducts`} component={MyProducts}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/orders/me`} component={ListOrders}/>
+                                <ProtectedRoute path="/myorder/:id" component={OrderDetails}  />
+
+
                                 <Route path={`${process.env.PUBLIC_URL}/pages/myevents`} component={MyEvents}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} component={Eventsdisplay}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/searchresult`} component={Searchresult}/>
@@ -195,12 +206,16 @@ function Root() {
                                 <Route path={`${process.env.PUBLIC_URL}/blog/details`} component={Details}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/blog-page`} component={BlogPage}/>
 
-
                                 {/*subscription*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/subscription`} component={Subscription}/>
                                 <Elements stripe={stripe}>
                                    <ProtectedRoute path={`${process.env.PUBLIC_URL}/payment`}  component={Payment} />
+                                   <ProtectedRoute path={`${process.env.PUBLIC_URL}/order/payment`}  component={CheckoutPayment} />
                                 </Elements>
+                                
+
+                                
+                               
 
                                  {/* <Route exact path="*" component={PageNotFound} /> */}
 

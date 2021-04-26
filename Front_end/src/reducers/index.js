@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { IntlReducer as Intl, IntlProvider } from 'react-redux-multilingual'
 
-// Import custom components
-import {newProductReducer,
+// Import custom reducers
+import { newProductReducer,
     getStoreProductsReducer,
     getProductReducer,
     searchProductsReducer,
@@ -22,11 +22,15 @@ import {newProductReducer,
     symbolReducer,
     currencyDiffReducer,
     updateProductDetailsReducer
-} from './products';
+   } from './products';
+
+
 import cartReducer from './cart';
-import {
-    filtersReducer
-} from './filters';
+
+
+import {filtersReducer} from './filters';
+
+
 import {
     newEventReducer,
     deleteEventReducer,
@@ -37,10 +41,16 @@ import {
     updateEventReducer,
     getAdminEventsReducer,
     deletrAdminEventReducer 
-} from './events';
+    }   from './events';
+
+
 import {authReducer,userReducer,forgotPasswordReducer,contactFormulaireReducer} from './user';
+
 import {storesReducer,storeDetailsReducer,newStoreReducer,userStoreDetailsReducer,storeReducer} from './store';
+
 import {newsLetterReducer} from './newsLetter';
+
+import {newOrderReducer, myOrdersReducer, orderDetailsReducer} from './order';
 
 
 
@@ -78,15 +88,18 @@ const rootReducer = combineReducers({
     deleteadminevent:deletrAdminEventReducer, 
     ///////////////////////////////////////////////////////////
     cartList: cartReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
+    orderDetails: orderDetailsReducer,
     filters: filtersReducer,
-    symbol:symbolReducer,
-    currencydiff:currencyDiffReducer,
+    symbol: symbolReducer,
+    currencydiff: currencyDiffReducer,
     stores: storesReducer,
     storeDetails: storeDetailsReducer,
     userStore: userStoreDetailsReducer,
     newStore: newStoreReducer,
     store: storeReducer,
-    auth:authReducer,
+    auth: authReducer,
     user: userReducer,
     forgotPassword: forgotPasswordReducer,
     contact: contactFormulaireReducer,

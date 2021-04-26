@@ -2,13 +2,13 @@ import React, { Fragment, useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SimpleReactValidator from 'simple-react-validator';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
-import { NEW_STORE_RESET } from '../../constants/ActionTypes'
-import { newStore, clearErrors } from '../../actions/index'
-import { toast } from 'react-toastify';
+import { createOrder, clearErrors } from '../../actions/orderActions'
+
 
 import axios from 'axios'
 import {Helmet} from 'react-helmet'
-import './payment.css';
+import { toast } from 'react-toastify';
+import '../cart/payment.css';
 
 const options = {
     style: {
@@ -30,7 +30,7 @@ const options = {
     }
 }
 
-const Payment = ({ history }) => {
+const CheckoutPayment = ({ history }) => {
 
     const [name, setName] = useState('');
     const [, forceUpdate] = useState()
@@ -46,10 +46,12 @@ const Payment = ({ history }) => {
 
     const dispatch = useDispatch();
     
-
+    const {cart} = useSelector(state => state.cartList);
     const { user } = useSelector(state => state.auth)
-    const { loading, error, success } = useSelector(state => state.newStore);
-    const { symbol } = useSelector(state => state.symbol);
+    const { loading, error } = useSelector(state => state.newOrder);
+    const {symbol} = useSelector(state => state.symbol);
+    const {currencydiff} = useSelector(state => state);
+
 
 
 
@@ -73,105 +75,94 @@ const Payment = ({ history }) => {
 
     }, [dispatch, alert,  error])
 
-    
+    const shippingInfo = JSON.parse(sessionStorage.getItem('shippingInfo'));
+    const order = {
+      orderItems: cart,
+      shippingInfo
+  }
 
-    const subscriptionInfo = JSON.parse(sessionStorage.getItem('subscriptionInfo'));
+  const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+  if (orderInfo) {
+      order.itemsPrice = orderInfo.itemsPrice
+      order.shippingPrice = orderInfo.shippingPrice
+      order.taxPrice = orderInfo.taxPrice
+      order.totalPrice = orderInfo.totalPrice
+  }
 
+
+
+    const paymentAmount = symbol=="€"? (Math.round(orderInfo.totalPrice)):Math.round((currencydiff*(orderInfo.totalPrice) + Number.EPSILON) ) / 100
+  
     const paymentData = {
-        amount: Math.round(subscriptionInfo.subscriptionPrice * 100)
-    }
+        amount: Math.round(paymentAmount*100)
+       
+  }
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
-        const formData = new FormData();
-        formData.set('name', subscriptionInfo.name);
-        formData.set('subscriptionPrice', subscriptionInfo.subscriptionPrice);
-        formData.set('email', subscriptionInfo.email);
-        formData.set('buisnessDomaine', subscriptionInfo.buisnessDomaine);
-        formData.set('phoneNumber', subscriptionInfo.phoneNumber);
-        formData.set('country', subscriptionInfo.country);
-        formData.set('city', subscriptionInfo.city);
-        formData.set('postalCode', subscriptionInfo.postalCode);
-        formData.set('address', subscriptionInfo.address);
-        formData.append('avatar', subscriptionInfo.avatar);
+    let res;
+    try {
 
-        let res;
-        try {
-
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
             }
-
-            res = await axios.post('/api/mall/payment/process', paymentData, config)
-
-            const clientSecret = res.data.client_secret;
-
-            
-
-            if (!stripe || !elements) {
-                return;
-            }
-
-            const result = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: elements.getElement(CardNumberElement),
-                    billing_details: {
-                        name: name,
-                        email: user.email
-                    }
-                }
-            });
-
-            if (result.error) {
-                
-                toast.error(result.error.message, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  });
-                
-            } else {
-
-                // The payment is processed or not
-                if (result.paymentIntent.status === 'succeeded') {
-
-                  dispatch(newStore(formData))
-
-
-                    history.push('/')
-
-                    if (success) {
-      
-                      toast.success('store created successfully', {
-                          position: "top-right",
-                          autoClose: 5000,
-                          hideProgressBar: false,
-                          closeOnClick: true,
-                          pauseOnHover: true,
-                          draggable: true,
-                          progress: undefined,
-                          });
-                      dispatch({ type: NEW_STORE_RESET })
-                  }
-                } else {
-                    alert('There is some issue while payment processing')
-                }
-            }
-
-
-        } catch (error) {
-            
-            alert(error.response.data.message)
-            
         }
+
+        res = await axios.post('/api/mall/payment/process', paymentData, config)
+
+        const clientSecret = res.data.client_secret;
+
+        
+
+        if (!stripe || !elements) {
+            return;
+        }
+
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardNumberElement),
+                billing_details: {
+                    name: name,
+                    email: user.email
+                }
+            }
+        });
+
+        if (result.error) {
+            
+            toast.error(result.error.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              });
+            
+        } else {
+
+            // The payment is processed or not
+            if (result.paymentIntent.status === 'succeeded') {
+
+              dispatch(createOrder(order))
+              history.push('/order-success')
+
+               
+            } else {
+                alert('There is some issue while payment processing')
+            }
+        }
+
+
+    } catch (error) {
+        
+        alert(error.response.data.message)
+        
     }
+}
 
 return (
    <Fragment>
@@ -242,4 +233,4 @@ return (
     )
 }
 
-export default Payment
+export default CheckoutPayment

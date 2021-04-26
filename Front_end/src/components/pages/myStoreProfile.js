@@ -15,6 +15,13 @@ function  myStore () {
 
 
     const {  error, store } = useSelector(state => state.userStore)
+
+
+    const year  = new Date(store.createdAt.substring(0,4)).getFullYear();
+    const month = new Date(store.createdAt.substring(4,7)).getMonth();
+    const day   = new Date(store.createdAt.substring(0,9)).getDay();
+
+    const date  = new Date(year + 1, month, day).toISOString().split('T')[0];
     
 
 
@@ -33,8 +40,9 @@ function  myStore () {
 
     }, [dispatch, alert, error])
 
-
+    
     return (
+        
         <div>
             <Breadcrumb title={'My Store'}/>
             <section className="section-b-space">
@@ -59,7 +67,7 @@ function  myStore () {
                                         <li><Link to='/pages/myprofile'>My Profile</Link></li>
                                         <li className="active"><Link to="/mystore">My Store</Link></li>
                                         <li><Link to="/pages/myevents">My Events</Link></li>
-                                        <li><Link to="/pages/myorders">My Orders</Link></li>
+                                        <li><Link to="/orders/me">My Orders</Link></li>
                                         <li><Link to='/pages/myproducts'>My Products</Link></li>
                                         <li><Link to="/cart">My Cart</Link></li>
                                         </ul>
@@ -71,7 +79,8 @@ function  myStore () {
                                                         <div className="top-banner-content small-section">
                                                             <h4>{store && store.name}</h4>
                                                             <h5>{store && store.name} is a {store && store.buisnessDomaine} company it is part of the international Inditex group</h5>
-                                                            <p>The company was created in {store.createdAt.substring(0, 4)} as a new store and unique concept, aimed at a young target Market.</p><hr></hr>
+                                                            <p>The company was created in {date} as a new store and unique concept, aimed at a young target Market.</p><hr></hr>
+                                                            <p style={{color:'red'}}>Your Subscription will end in {date} </p><br></br>
                                                             <ul className="contact-list">
                                                             <li>🏠 Address :    {store.address} {store.postalCode}, {store.city} </li><br></br>
                                                             <li>📞 Phone :    {store.phoneNumber}</li><br></br>

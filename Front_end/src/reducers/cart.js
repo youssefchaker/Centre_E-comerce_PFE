@@ -3,12 +3,13 @@ import {
     REMOVE_FROM_CART,
     INCREMENT_QTY,
     CLEAR_RESPONSE,
-    DECREMENT_QTY } from "../constants/cartConstants";
+    DECREMENT_QTY,
+    SAVE_SHIPPING_INFO } from "../constants/cartConstants";
     import {toast} from 'react-toastify'
 
 
 export default function cartReducer(state = {
-    cart: []
+    cart: [], shippingInfo: {}
 }, action) {
     switch (action.type) {
         case ADD_TO_CART:
@@ -59,6 +60,12 @@ export default function cartReducer(state = {
 
                 cart: []
             }
+
+            case SAVE_SHIPPING_INFO:
+                return {
+                    ...state,
+                    shippingInfo: action.payload
+                }
 
         default:
             return state;

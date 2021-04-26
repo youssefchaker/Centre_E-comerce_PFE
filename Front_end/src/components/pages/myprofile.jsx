@@ -52,7 +52,7 @@ function MyProfile ()  {
                                             )}
                                             {user.role !== 'Admin' && (
                                             <React.Fragment>
-                                            <li><Link to="/pages/myorders">My Orders</Link></li>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/orders/me`}>My Orders</Link></li>
                                             <li><Link to="/cart">My Cart</Link></li>
                                             <li className="last"><a href="/" onClick={logoutHandler}>Log Out</a></li>
                                             </React.Fragment>

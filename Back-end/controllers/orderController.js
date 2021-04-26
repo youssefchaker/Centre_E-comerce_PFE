@@ -2,8 +2,6 @@ const Order = require('../models/order');
 const Product = require('../models/product');
 
 
-
-
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
@@ -52,7 +50,7 @@ exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-// Get logged in user orders   =>   /api/v1/orders/me
+// Get logged in user orders   =>   /api/mall/orders/me
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
     const orders = await Order.find({ user: req.user.id })
 

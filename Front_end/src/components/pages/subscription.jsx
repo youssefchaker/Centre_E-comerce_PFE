@@ -1,5 +1,5 @@
 import React, {useState, useRef } from 'react'
-
+import { useSelector } from 'react-redux'
 import {Helmet} from 'react-helmet'
 import {Link, Redirect } from 'react-router-dom'
 import SimpleReactValidator from 'simple-react-validator';
@@ -25,7 +25,8 @@ function Subscription ({history})  {
 
 
     
-    
+    const {symbol} = useSelector(state => state.symbol);
+    const {currencydiff} = useSelector(state => state);
     const simpleValidator = useRef(new SimpleReactValidator({autoForceUpdate: {forceUpdate: forceUpdate}}));
 
 
@@ -42,7 +43,7 @@ function Subscription ({history})  {
         
 
         
-        const formValid = simpleValidator.current.allValid()
+        const formValid = simpleValidator.current.allValid();
         if (!formValid) {
           simpleValidator.current.showMessages()
         }
@@ -136,23 +137,23 @@ function Subscription ({history})  {
                                             </div>
                                             <div className="row check-out">
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Store name</div>
+                                                    <div className="field-label">Store name *</div>
                                                     <input type="text" name="company_name" value={name} onChange={(e) => setName(e.target.value)} />
                                                     {simpleValidator.current.message('name', name, 'required|alpha')}
                                                 </div>
                                                 
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Phone Number</div>
+                                                    <div className="field-label">Phone Number *</div>
                                                     <input type="text" name="phoneNumber"  value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                                                     {simpleValidator.current.message('phoneNumber', phoneNumber, 'required')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Email Address</div>
+                                                    <div className="field-label">Email Address *</div>
                                                     <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                                     {simpleValidator.current.message('email', email, 'required|email')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">business domain</div>
+                                                    <div className="field-label">Business domain *</div>
                                                     <select  name="domaine" value={buisnessDomaine} onChange={(e) => setBuisnessDomaine(e.target.value)} >
                                                     <option>Electronics</option>
                                                     <option>Cameras</option>
@@ -424,17 +425,17 @@ function Subscription ({history})  {
                                                 </div>
                                                 
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                    <div className="field-label">City</div>
+                                                    <div className="field-label">City *</div>
                                                     <input type="text" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
                                                     {simpleValidator.current.message('city', city, 'required|alpha')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                                    <div className="field-label">Address</div>
+                                                    <div className="field-label">Address *</div>
                                                     <input type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street address" />
                                                     {simpleValidator.current.message('address', address, 'required|min:8|max:120')}
                                                 </div>
                                                 <div className="form-group col-md-12 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Postal Code</div>
+                                                    <div className="field-label">Postal Code *</div>
                                                     <input type="text" name="postalCode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
                                                     {simpleValidator.current.message('postalCode', postalCode, 'required|number')}
                                                 </div>
@@ -453,7 +454,7 @@ function Subscription ({history})  {
                                                     </div>
                                                     <ul className="qty">
                                                         {
-                                                            <li >Per year <span>{subscriptionPrice}</span></li> }
+                                                            <li >Per year <span>{symbol}{symbol=="€"?subscriptionPrice:Math.round(subscriptionPrice*currencydiff)}</span></li> }
                                                         
                                                     </ul>
                                                     

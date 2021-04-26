@@ -49,7 +49,7 @@ const TopBar = (props) =>  {
                                     </li>
                                 )}
                                     <li>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/myorders`} data-lng="en">Orders</Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/orders/me`} data-lng="en">Orders</Link>
                                     </li>
                                     <li>
                                         <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`} data-lng="en">Profile</Link>
