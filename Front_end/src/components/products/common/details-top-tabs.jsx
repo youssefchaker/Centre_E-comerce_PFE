@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import SimpleReactValidator from 'simple-react-validator';
 import ReactStars from "react-rating-stars-component";
-import { deleteReview,  newReview, updateReview } from '../../../actions/productActions';
+import { deleteReview,  getProductReviews,  newReview, updateReview } from '../../../actions/productActions';
 class DetailsTopTabs extends Component {
     constructor(props){
         super(props);
@@ -17,11 +17,18 @@ class DetailsTopTabs extends Component {
             updatefield:null,
             inputtype:null,
             other:null,
-            reviewid:null
+            reviewid:null,
+            userid:null
 
         }
         this.validator = new SimpleReactValidator();
         this.validator2 = new SimpleReactValidator();
+    }
+    componentWillMount() {
+        this.props.getProductReviews(this.props.product._id);
+        if(this.props.auth.user!=undefined){
+            this.setState({userid:this.props.auth.user._id})
+        }
     }
     openSearch=(field,reviewid,other)=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -51,7 +58,7 @@ class DetailsTopTabs extends Component {
             this.forceUpdate();
           }
           else{
-            this.props.newReview(this.props.product._id,{"userid":"60427c490a3e58277869d28b","rating":this.state.Rating,"comment":this.state.Comment});
+            this.props.newReview(this.props.product._id,{"userid":this.state.userid,"rating":this.state.Rating,"comment":this.state.Comment});
             toast.success("Review added !");
             setTimeout("location.reload(true);",2000);
           }
@@ -74,9 +81,14 @@ class DetailsTopTabs extends Component {
                 setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="rating"){
+                if(this.state.updatevalue>5 || this.state.updatevalue<0){
+                    toast.warn("the new rating value must be between 0 and 5!!");
+                }
+                else{
                 this.props.updateReview(this.state.reviewid,{"rating":parseInt(this.state.updatevalue,10),"comment":this.state.other});
                 toast.success("review rating updated!!");
                 setTimeout("location.reload(true);",2000);
+                }
               }    
           }
       }
@@ -86,8 +98,8 @@ class DetailsTopTabs extends Component {
         setTimeout("location.reload(true);",2000);
     }
     render (){
-        
-
+        const reviews=this.props.productreviews.reviews.reviews;
+        const usernames=this.props.productreviews.reviews.usernames;
         return (
             <div>
             <section className="tab-product m-0">
@@ -137,22 +149,22 @@ class DetailsTopTabs extends Component {
                             {this.props.product.reviews.length!==0?
                                 <table className="table table-striped mb-0">
                                     <tr>
-                                        <th>delete review</th>
+                                        <th>Delete Review</th>
                                         <th>Reviewer</th>
-                                        <td>updatecomment</td>
+                                        <td>Update Comment</td>
                                         <th>Comment</th>
-                                        <td>update rating</td>
+                                        <td>Update Rating</td>
                                         <th>Rating</th>
                                     </tr>
-                                {this.props.product.reviews.map((review)=>(
+                                {reviews.map((review,index)=>(
                                     
                                     <tbody>
                                     <tr>
                                     <td><button  onClick={()=>this.handledelete(review._id,this.props.product._id)}><span>×</span></button></td>
-                                        <td>{review.user}</td>
-                                        <td ><button className="fa fa-edit" onClick={()=>this.openSearch("comment",review._id,review.rating)}></button></td>
+                                        <td>{usernames[index].firstname}{' '}{usernames[index].lastname}</td>
+                                        <td >{this.state.userid==review.user?<button className="fa fa-edit" onClick={()=>this.openSearch("comment",review._id,review.rating)}></button>:''}</td>
                                         <td>{review.comment}</td>
-                                        <td ><button className="fa fa-edit" onClick={()=>this.openSearch("rating",review._id,review.comment)}></button></td>
+                                        <td >{this.state.userid==review.user?<button className="fa fa-edit" onClick={()=>this.openSearch("rating",review._id,review.comment)}></button>:''}</td>
                                         <td><b>{review.rating}/5</b></td>
                                     </tr>
                                     </tbody>
@@ -223,14 +235,17 @@ const mapStateToProps=state=>{
     return {
         newreview:state.newreview,
         deleteproductreview:state.deleteproductreview,
-        updateproductreview:state.updateproductreview
+        updateproductreview:state.updateproductreview,
+        productreviews:state.productreviews,
+        auth:state.auth
       }
 }
 const mapDispatchToProps = dispatch => {
     return {
         newReview:(id,reviewData)=>dispatch(newReview(id,reviewData)),
         deleteReview:(reviewid,productid)=>dispatch(deleteReview(reviewid,productid)),
-        updateReview:(id,reviewData)=>dispatch(updateReview(id,reviewData))
+        updateReview:(id,reviewData)=>dispatch(updateReview(id,reviewData)),
+        getProductReviews:(id)=>dispatch(getProductReviews(id))
     }
 }
 

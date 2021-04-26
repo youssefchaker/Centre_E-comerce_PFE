@@ -636,9 +636,29 @@ export const filterSort = (sort_by) => ({
     sort_by
 });
 
-export const emptyFilter=(min)=>({
+export const filterSortStore = (sort_by_store) => ({
+    
+    type: types.SORT_BY_STORE,
+    sort_by_store
+});
+
+export const emptyFilter=(min,minDT)=>({
     type:types.EMPTY_FILTER,
-    min
+    min,
+    minDT
+})
+export const filterPriceStore = (valuestore) => ({
+    type: types.FILTER_PRICE_STORE,
+    valuestore
+});
+export const filterPriceDTStore = (valueDTstore) => ({
+    type: types.FILTER_PRICE_DT_STORE,
+    valueDTstore
+});
+export const emptyFilterStore=(minstore,minDTstore)=>({
+    type:types.EMPTY_FILTER_STORE,
+    minstore,
+    minDTstore
 })
 
 // Currency

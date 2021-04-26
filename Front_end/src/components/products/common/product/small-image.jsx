@@ -28,7 +28,7 @@ class SmallImages extends Component {
                         
                             product.images.map((vari, index) =>
                                 <div key={index}>
-                                    <img src={vari} key={index} alt=""  className="img-fluid" />
+                                    <img src={vari.url} key={index} alt="" style={{width:'200px',height:'200px'}}  className="img-fluid"  />
                                 </div>
                             )}
                     </Slider>

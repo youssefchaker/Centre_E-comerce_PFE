@@ -57,8 +57,9 @@ class ProductListItem extends Component {
                     <div className="product-box">
                         <div className="img-wrapper">
                             <div className="front">
-                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
-                                    src={product.images[0]}
+                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img 
+                                    style={{width:'150px',height:'150px'}}
+                                    src={product.images[0].url}
                                     className="img-fluid"
                                     alt="" /></Link>
                             </div>
@@ -113,9 +114,7 @@ class ProductListItem extends Component {
                                         <div className="row">
                                             <div className="col-lg-6  col-xs-12">
                                                 <div className="quick-view-img">
-                                                    <img src={product.images?
-                                                        this.state.image?this.state.image:product.images[0]
-                                                        :product.images[0]} alt="" className="img-fluid" />
+                                                    <img src={product.images[0].url} style={{width:'400px',height:'400px'}} alt="" className="img-fluid" />
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 rtl-text">

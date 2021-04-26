@@ -6,7 +6,8 @@ import { getNewProducts } from '../../../actions/productActions';
 import { IntlActions } from 'react-redux-multilingual';
 import Slider from 'react-slick';
 import store from '../../../store'
-
+import {Slider3} from "../../../services/script"
+import {Product4, Product5} from '../../../services/script'
 class SpecialProducts extends Component{
     componentWillMount() {
         this.props.getNewProducts();
@@ -16,6 +17,7 @@ class SpecialProducts extends Component{
             const products=newproducts.products.products;
             const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
+        var properties = Product4;
         return (
             <div>
                 <div className="title1 section-t-space">
@@ -23,14 +25,18 @@ class SpecialProducts extends Component{
                 </div>
                 <section className="section-b-space p-t-0">
                     <div className="container">
-                    <Slider  className="product-4 product-m no-arrow">
+                        <div className="row">
+                            <div className="col">
+                                <Slider {...Slider3} className="product-4 product-m no-arrow">
                                     { products.map((product, index ) =>
                                         <div key={index}>
-                                            <ProductItem product={product} symbol={symbol} currencydiff={currencydiff}
+                                            <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={() => addToCart(product, 1)} key={index} />
                                         </div>)
                                     }
                                 </Slider>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

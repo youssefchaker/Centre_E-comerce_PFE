@@ -107,7 +107,7 @@ class LeftSideBar extends Component {
                                     {/* <BrandBlock/> */}
                                     <Service/>
                                     {/*side-bar single product slider start*/}
-                                    <RelatedProduct target={product.category} own={product._id}/>
+                                    <RelatedProduct target={product.category} own={product._id} />
                                     {/*side-bar single product slider end*/}
                                 </div>
                                 <div className="col-lg-9 col-sm-12 col-xs-12">
@@ -127,7 +127,7 @@ class LeftSideBar extends Component {
                                                     
                                                     product.images.map((vari, index) =>
                                                         <div key={index}>
-                                                            <ImageZoom image={vari} />
+                                                            <ImageZoom image={vari.url} />
                                                         </div>
                                                     )}
                                                 </Slider>

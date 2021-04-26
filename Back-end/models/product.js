@@ -31,7 +31,12 @@ const productSchema = new Schema({
     },
     images: [
         {
-            
+            public_id: {
+                type: String
+            },
+            url: {
+                type: String
+            },
         }
     ],
     category:{

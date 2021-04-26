@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import {filterSort} from '../../../actions'
-import {getMinMaxPrice, getVisibleproducts} from '../../../services';
+import {filterSortStore} from '../../../actions'
+import {getMinMaxPrice, getVisibleStoreproducts} from '../../../services';
 
-class FilterBar extends Component {
+class FilterBarStore extends Component {
 
     //List Layout View
     listLayout(){
@@ -46,7 +46,8 @@ class FilterBar extends Component {
 
     render (){
         return (
-            <div className="product-filter-content">
+            <div>
+            {this.props.products.length!=0? <div className="product-filter-content">
                 <div className="search-count">
                     <h5>Showing Products 1-{this.props.products.length} Result</h5>
                 </div>
@@ -89,7 +90,7 @@ class FilterBar extends Component {
                     </ul>
                 </div>
                 <div className="product-page-filter">
-                    <select onChange={(e) => this.props.filterSort(e.target.value)}>
+                    <select onChange={(e) => this.props.filterSortStore(e.target.value)}>
                         <option value="">Sorting items</option>
                         <option value="HighToLow">Price: High to Low</option>
                         <option value="LowToHigh">Price: Low to High</option>
@@ -99,6 +100,8 @@ class FilterBar extends Component {
                         <option value="DescOrder">Sort By Name: Z To A</option>
                     </select>
                 </div>
+            </div>:''}
+           
             </div>
         )
     }
@@ -107,9 +110,9 @@ class FilterBar extends Component {
 const mapStateToProps = state => ({
     allproducts:state.allproducts,
     filters:state.filters,
-    products: getVisibleproducts(state.allproducts,state.filters.category,state.filters.store,state.filters.value,state.filters.valueDT,state.filters.sortBy,state.symbol,state.currencydiff),
+    products: getVisibleStoreproducts(state.allproducts,state.storeDetails.store._id,state.filters.valuestore,state.filters.valueDTstore,state.sortBy,state.symbol,state.currencydiff),
     symbol:state.symbol,
     currencydiff:state.currencydiff
 })
 
-export default connect(mapStateToProps, {filterSort})(FilterBar);
+export default connect(mapStateToProps, {filterSortStore})(FilterBarStore);

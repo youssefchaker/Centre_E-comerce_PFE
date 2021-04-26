@@ -19,7 +19,12 @@ const eventSchema = new mongoose.Schema({
         required: true
     },
     eventImage:{
-        type:String
+        public_id: {
+            type: String
+        },
+        url: {
+            type: String
+        },
     }
     
 })

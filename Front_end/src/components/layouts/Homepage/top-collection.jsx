@@ -6,7 +6,7 @@ import {Product4, Product5} from '../../../services/script'
 import {addToCart} from "../../../actions/cartActions";
 import ProductItem from '../common/product-item';
 import { getTopProducts } from '../../../actions/productActions';
-
+import {Slider3} from "../../../services/script"
 class TopCollection extends Component {
     componentWillMount() {
         this.props.getTopProducts();
@@ -28,7 +28,7 @@ class TopCollection extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <Slider  className="product-4 product-m no-arrow">
+                                <Slider {...Slider3} className="product-4 product-m no-arrow">
                                     { products.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff}

@@ -67,10 +67,50 @@ class ProductItem extends Component {
                         </div>
                         <div className="front">
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
-                                src={`${product.images[0]}`}
+                                src={`${product.images[0].url}`}
+                                style={{width:'200px',height:'200px'}} 
                                 className="img-fluid"
                                 alt="" /></Link>
                         </div>
+                        {product.nbreviews<10?
+                                            <div >
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>10 && product.nbreviews<20 ?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>20 && product.nbreviews<30?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>30 && product.nbreviews<40?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            </div>}
                         <div className="cart-info cart-wrap">
                             <button title="Add to cart" onClick={onAddToCartClicked}>
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -80,16 +120,6 @@ class ProductItem extends Component {
                                title="Quick View"
                                onClick={this.onOpenModal}><i className="fa fa-search" aria-hidden="true"></i></a>
                         </div>
-                        { product.images?
-                        <ul className="product-thumb-list">
-                            { product.images.map((vari, i) =>
-                                <li className={`grid_thumb_img ${(vari.images === this.state.image)?'active':''}`} key={i}>
-                                    <a href="javascript:void(0)" title="Add to Wishlist">
-                                        <img src={`${vari}`} onClick={() => this.onClickHandle(vari)} />
-                                    </a>
-                                </li>)}
-                        </ul>:'' }
-
                     </div>
                     <div className="product-detail">
                         <div>
@@ -102,7 +132,7 @@ class ProductItem extends Component {
                             </h4>:<h4>{symbol}{product.price}</h4>
                             :(product.discount != 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
-                                 <del><span className="money">{symbol}{currencydiff*product.price}</span></del> 
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                         </div>
                     </div>
@@ -113,11 +143,7 @@ class ProductItem extends Component {
                                     <div className="row">
                                         <div className="col-lg-6  col-xs-12">
                                             <div className="quick-view-img">
-                                                <img src={`${
-                                                    product.images?
-                                                    product.images[0]
-                                                        :product.images[0]
-                                                    }`} alt="" className="img-fluid" />
+                                                <img src={product.images[0].url} alt="" className="img-fluid" style={{width:'500px',height:'500px'}}   />
                                             </div>
                                         </div>
                                         <div className="col-lg-6 rtl-text">
@@ -126,13 +152,20 @@ class ProductItem extends Component {
                                                 <h3>{symbol}{product.price}</h3>
                                                 <div className="border-product">
                                                     <h6 className="product-title">product details</h6>
+                                                    
                                                      {product.details.map((detail)=>
-                                                        <div>
-                                                    <p>{detail.detailname}</p>
-                                                    <p>{detail.value}</p>
-                                                    </div> 
+                                                        <table style={{"border":"1px solid black","border-collapse":"collapse"}}>
+                                                        <tr>
+                                                            <th style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>Detail</th>
+                                                            <th style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>Detail Value</th>
+                                                        </tr>
+                                                        <tr>
+                                                        <td style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>{detail.detailname}</td>
+                                                        <td style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>{detail.value}</td>
+                                                        </tr>
+                                                        </table>
                                                      )}
-
+                                                     
                                                 </div>
                                                 <div className="product-description border-product">
                                                     <h6 className="product-title">quantity</h6>

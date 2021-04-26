@@ -23,10 +23,10 @@ class RelatedProduct extends Component {
             <div className="theme-card">
                 <h5 className="title-border">Related Products</h5>
                 <Slider className="offer-slider slide-1">
-                    {relatedproducts.length!=0?relatedproducts.map((product, index) =>
+                    {relatedproducts.products.length!=0?relatedproducts.products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
-                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0]}`} alt="" /></Link>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img style={{width:'80px',height:'80px'}} className="img-fluid" src={`${product.images[0].url}`} alt="" /></Link>
                                     <div className="media-body align-self-center">
                                     {product.nbreviews<10?
                                             <div >
@@ -68,6 +68,7 @@ class RelatedProduct extends Component {
                                             <i className="fa fa-star"></i>
                                             </div>}
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h6 style={{"textDecoration":"underline"}} className="sname">Product By:{relatedproducts.storenames[index]}</h6></Link>
                                         {symbol=="DT"?
                                         (product.discount != 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
@@ -89,7 +90,7 @@ class RelatedProduct extends Component {
 
 function mapStateToProps(state,ownProps) {
     return {
-        relatedproducts:getRelatedItems(state.allproducts.products,ownProps.target,ownProps.own),
+        relatedproducts:getRelatedItems(state.allproducts,ownProps.target,ownProps.own),
         symbol:state.symbol,
         currencydiff:state.currencydiff
     }

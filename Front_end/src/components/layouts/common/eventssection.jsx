@@ -25,9 +25,9 @@ class EventSection extends Component {
                             {eventsarray.map((event,index)=>(
                                 <div>
                                     <div className="col-md-12">
-                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection/${event.store}`}>
+                                        <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`}>
                                             <div className="classic-effect">
-                                                <img src={event.eventImage} className="img-fluid" alt="event image" />
+                                                <img src={event.eventImage.url} style={{width:'150px',height:'150px'}} className="img-fluid" alt="event image" />
                                                     <span></span>
                                             </div>
                                         </Link>
@@ -35,7 +35,7 @@ class EventSection extends Component {
                                             <h4>{event.eventDateStart.slice(0,10)}</h4>
                                             <p>{event.eventName} by {this.props.limitedevents.events.storenames[index]} ends in {event.eventDateFinish.slice(0,10)} </p>
                                             <hr className="style1" />
-                                            <Link to="../../../pages/eventsdisplay" style={{textDecorationLine:'underline'}} >
+                                            <Link to={`/pages/eventsdisplay`} style={{textDecorationLine:'underline'}} >
                                                 <h6>Check All Events</h6></Link>
                                         </div>
                                     </div>

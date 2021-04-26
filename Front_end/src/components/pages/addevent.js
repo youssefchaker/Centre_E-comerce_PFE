@@ -14,7 +14,8 @@ class Addevent extends Component {
         EventName:"",
         EventImage:null,
         EventDatestart:null,
-        EventDatefinish:null
+        EventDatefinish:null,
+        EventImg:null
     }
     this.validator = new SimpleReactValidator();
     }
@@ -34,6 +35,7 @@ class Addevent extends Component {
             this.validator.showMessages();
             this.forceUpdate();
           }
+        
           else{
             if(Date(this.state.EventDatestart)<Date(newdate)  || Date(this.state.EventDatefinish)<Date(newdate)){
                 toast.warn("the event start and finish dates must not be a past date");
@@ -42,12 +44,25 @@ class Addevent extends Component {
                 toast.warn("the event start date must be lower then the finish date");
             }
             else {
-            this.props.newEvent({'storeName':this.state.StoreName,'eventName':this.state.EventName,'eventImage':this.state.EventImage,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
+            this.props.newEvent({'storeName':this.props.userStore.store.name,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
             toast.success("event added !");
             setTimeout("location.reload(true);",2000);
             }
           }
       }
+      handleimages=(e)=>{
+        var obj = {};
+        obj[e.target.name] = e.target.value;
+        this.setState(obj);
+        const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {  
+                    this.setState({EventImg:reader.result});
+                }
+            }
+            reader.readAsDataURL(file)
+    }
     render (){
         return (
             <div>
@@ -60,38 +75,45 @@ class Addevent extends Component {
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12" id="1">
                                             <div className="checkout-title">
-                                                <h3>Event</h3>
+                                                <h3>New Event Information</h3>
                                             </div>
-                                            
-                                            <div className="row check-out">
-                                            <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Store Name</div>
-                                                    <input type="text" name="StoreName" onChange={this.setStateFromInput} value={this.state.StoreName} />
-                                                    {this.validator.message('StoreName', this.state.StoreName, 'required')}
-                                                </div>
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                
-                                                    <div className="field-label">Event Name</div>
+                                            <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Event Information</th>
+                                                    <th>Event Information Value</th>
+                                                </tr>
+                                            </thead>
+                                                <tr>
+                                                    <td><div className="field-label">Event Name</div></td>
+                                                    <td>
                                                     <input type="text" name="EventName" onChange={this.setStateFromInput} value={this.state.EventName} />
                                                     {this.validator.message('EventName', this.state.EventName, 'required')}
-                                                </div>
-                                                 
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Date Start</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div className="field-label">Event Date Start</div></td>
+                                                    <td>
                                                     <input type="date" name="EventDatestart" onChange={this.setStateFromInput} value={this.state.EventDatestart}   />
-                                                    {this.validator.message('EventDatestart', this.state.EventDatestart, `required`)}
-                                                </div>   
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Date Finish</div>
+                                                    {this.validator.message('Event Start Date', this.state.EventDatestart, `required`)}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div className="field-label">Event Date Finish</div></td>
+                                                    <td>
                                                     <input type="date" name="EventDatefinish" onChange={this.setStateFromInput} value={this.state.EventDatefinish}  />
-                                                    {this.validator.message('EventDatefinish', this.state.EventDatefinish, 'required')}
-                                                </div>  
-                                                <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                                                    <div className="field-label">Event Image</div>
-                                                    <input type="file" name="EventImage" accept="image/*"  onChange={this.setStateFromInput} value={this.state.EventImage}  />
+                                                    {this.validator.message('Event Finsih Date', this.state.EventDatefinish, 'required')}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div className="field-label">Event Image</div></td>
+                                                    <td>
+                                                    <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions : :   <span><small>"910 x 310"</small></span></div>
+                                                    <input type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
                                                     {this.validator.message('EventImage', this.state.EventImage, 'required')}
-                                                </div>                                  
-                                            </div>
+                                                    </td>
+                                                </tr>
+                                            </table>    
                                         </div>
                 </div>
                 <div>
@@ -101,7 +123,7 @@ class Addevent extends Component {
             </div>
             </div>
             </div>
-            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myprofile`} ><a><button type="submit" className="btn btn-solid" >Finish Adding events</button></a></Link></div>
+            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myevents`} ><a><button type="submit" className="btn btn-solid" >Finish Adding events</button></a></Link></div>
             </section>
             </div>
         )
@@ -111,7 +133,7 @@ class Addevent extends Component {
 const mapStateToProps=state=>{
     return {
         newevent:state.newevent,
-
+        userStore:state.userStore
       }
 }
 
