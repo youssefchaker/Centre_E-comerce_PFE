@@ -13,7 +13,7 @@ function MyProfile ()  {
     const logoutHandler = () => {
         dispatch(clearResponse());
         dispatch(logout());
-        toast.success('Logged out successfully.');
+        toast.success('Logged out successfully!!');
     }
 
 

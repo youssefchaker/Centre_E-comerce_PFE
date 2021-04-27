@@ -16,7 +16,6 @@ import {getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../services';
 function Shop ({ match }) {
 
     const [layoutColumns, setLayoutColumns] = useState(3);
-
   
 
 
@@ -31,16 +30,17 @@ function Shop ({ match }) {
             alert(error);
             dispatch(clearErrors())
         }
-        const prices = getMinMaxPriceStore(products,store._id);
-        const pricesDT=  getMinMaxPriceDTStore(products,currencydiff,store._id);
-        dispatch(getStoreDetails(match.params.id));
-        dispatch(emptyFilterStore(prices.min, pricesDT.min));
+         if(store._id!=match.params.id){
+            dispatch(getStoreDetails(match.params.id));
+            setTimeout("location.reload(true);",1);
+        } 
     }, [dispatch, alert, error, match.params.id])
      function LayoutViewClicked(colums) {
         setLayoutColumns({
             layoutColumns:colums
         })
     }
+    
         return (
             <div>
                 {/*SEO Support*/}

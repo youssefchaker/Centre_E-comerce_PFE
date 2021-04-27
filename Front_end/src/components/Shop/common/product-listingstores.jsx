@@ -5,11 +5,10 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 import { getTotal, getCartProducts } from '../../../reducers'
-import { addToCart } from '../../../actions'
-import {getMinMaxPrice, getVisibleStoreproducts} from '../../../services';
+import { addToCart, emptyFilterStore } from '../../../actions'
+import {getMinMaxPrice, getVisibleStoreproducts,getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../../services';
 import ProductListItem from "./product-list-item";
 import { getProducts } from '../../../actions/productActions';
-
 class ProductListingStore extends Component {
 
     constructor (props) {
@@ -20,7 +19,7 @@ class ProductListingStore extends Component {
     }
 
     componentWillMount(){
-        this.fetchMoreItems();
+        this.props.emptyFilterStore(this.props.pricesstore,this.props.pricesDTstore)
     }
 
     fetchMoreItems = () => {
@@ -40,14 +39,14 @@ class ProductListingStore extends Component {
 
     render (){
         const { addToCart} = this.props;
-        const products=this.props.products;
+        const storeproducts=this.props.storeproducts;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         return (
             <div>
                 <div className="product-wrapper-grid">
                     <div className="container-fluid">
-                        {this.props.storeproducts.length > 0 ?
+                        {storeproducts.length > 0 ?
                             <InfiniteScroll
                                 dataLength={this.state.limit} //This is important field to render the next data
                                 next={this.fetchMoreItems}
@@ -90,11 +89,14 @@ const mapStateToProps = (state, ownProps) => ({
     filters:state.filters,
     symbol:state.symbol,
     currencydiff:state.currencydiff,
-    storeDetails:state.storeDetails
+    storeDetails:state.storeDetails,
+    pricesstore:getMinMaxPriceStore(state.allproducts.products,state.storeDetails.store._id),
+    pricesDTstore:getMinMaxPriceDTStore(state.allproducts.products,state.currencydiff,state.storeDetails.store._id)
 })
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart:(product,qty)=>dispatch(addToCart(product,qty))
+        addToCart:(product,qty)=>dispatch(addToCart(product,qty)),
+        emptyFilterStore:(min,minDT)=>dispatch(emptyFilterStore(min,minDT))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ProductListingStore)

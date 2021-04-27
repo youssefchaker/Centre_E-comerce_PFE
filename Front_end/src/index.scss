@@ -1,2 +1,9 @@
 @import "../public/assets/scss/font-awesome";
 @import "../public/assets/scss/bootstrap";
+.sname{
+    color: gray;
+    text-decoration: underline;
+    &:hover{
+        color: black;
+    }
+}

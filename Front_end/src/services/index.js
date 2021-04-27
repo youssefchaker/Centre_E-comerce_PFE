@@ -83,6 +83,7 @@ export const getMinMaxPriceDTStore = (products,diff,storeid) => {
 
 
 export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,symbol,diff ) => {
+    console.log(value);
     if(symbol.symbol=="DT"){
         return data.products.filter((product,index) => {
             let categoryMatch;
@@ -220,7 +221,7 @@ export const getVisibleStoreproducts = (data,storeid,value,valueDT,sortBy,symbol
         });
     }
 
-    else {
+    else{
         return storeproducts.filter(product => {
             let PriceMatch;
             if(product.price-(product.price*product.discount/100)>=value)
