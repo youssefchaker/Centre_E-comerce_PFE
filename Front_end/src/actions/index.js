@@ -551,7 +551,7 @@ export const clearResponse = () => async (dispatch) => {
 
 // "Cart"
 export const addToCart = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
+    toast.success("Product Added to Cart!!");
         dispatch(addToCartUnsafe(product, qty))
 
 }
@@ -565,14 +565,14 @@ export const addToCartUnsafe = (product, qty) => ({
     qty
 });
 export const removeFromCart = product_id => (dispatch) => {
-    toast.error("Item Removed from Cart");
+    toast.error("Product Removed from Cart!!");
     dispatch({
         type: types.REMOVE_FROM_CART,
         product_id
     })
 };
 export const incrementQty = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
+    toast.success("Product Added to Cart!!");
     dispatch(addToCartUnsafe(product, qty))
 
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../../actions/index';
+import { clearResponse, logout } from '../../actions/index';
+import { toast } from 'react-toastify';
 function MyProfile ()  {
 
     const dispatch = useDispatch();
@@ -10,8 +11,9 @@ function MyProfile ()  {
 
     const { user, loading } = useSelector(state => state.auth)
     const logoutHandler = () => {
+        dispatch(clearResponse());
         dispatch(logout());
-        alert('Logged out successfully.');
+        toast.success('Logged out successfully.');
     }
 
 
