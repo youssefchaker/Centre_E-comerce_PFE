@@ -83,12 +83,10 @@ function Shop ({ match }) {
                                                         <img src={store.avatar.url} className="img-fluid" alt="" style={{width:'910px',height:'310px'}}/>
                                                         <div className="top-banner-content small-section">
                                                             <h4>{store.name}</h4>
-                                                            <h5>{store.name} is a {store.buisnessDomaine} company it is part of the international Inditex group</h5>
-                                                            <p>The company was created in {store.createdAt.substring(0, 4)} as a new store and unique concept, aimed at a young target Market.</p><hr></hr>
+                                                            <h5>{/* {store description} */}</h5>
                                                             <ul className="contact-list">
                                                           <li><i className="fa fa-phone"></i>  Call Us :    {store.phoneNumber}</li><br></br>
-                                                          <li><i className="fa fa-envelope-o"></i>  Email Us : <a
-                                                          href="#">{store.email}</a></li>
+                                                          <li><i className="fa fa-envelope-o"></i>  Email Us : {store.email}</li>
                                                         </ul>
                                                         </div>
                                                     </div>

@@ -217,7 +217,15 @@ function  Fashion()  {
                 </section>
                 {/*Blog Section End*/}
 
-
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <div className="title1 section-t-space">
+                                <h2 className="title-inner1">Featured Stores</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {/*logo section*/}
                 <LogoBlock />
                 {/*logo section end*/}

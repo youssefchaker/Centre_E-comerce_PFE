@@ -1,6 +1,6 @@
 import React, { Component,useState, useEffect } from 'react';
 import {connect} from 'react-redux'
-import {addToCart} from "../../../actions/cartActions"
+import { addToCart } from '../../../actions'
 import ProductItem from './product-item';
 import { getNewProducts } from '../../../actions/productActions';
 import { IntlActions } from 'react-redux-multilingual';
@@ -13,8 +13,10 @@ class SpecialProducts extends Component{
         this.props.getNewProducts();
     }
         render(){
+            const { addToCart} = this.props;
             const {newproducts} = this.props;
             const products=newproducts.products.products;
+            const storenames=newproducts.products.storenames
             const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         var properties = Product4;
@@ -30,8 +32,8 @@ class SpecialProducts extends Component{
                                 <Slider {...Slider3} className="product-4 product-m no-arrow">
                                     { products.map((product, index ) =>
                                         <div key={index}>
-                                            <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff}
-                                                         onAddToCartClicked={() => addToCart(product, 1)} key={index} />
+                                            <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff} storename={storenames[index]}
+                                                         onAddToCartClicked={addToCart} key={index} />
                                         </div>)
                                     }
                                 </Slider>

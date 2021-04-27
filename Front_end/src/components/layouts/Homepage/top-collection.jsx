@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import {connect} from 'react-redux'
 
 import {Product4, Product5} from '../../../services/script'
-import {addToCart} from "../../../actions/cartActions";
+import { addToCart } from '../../../actions'
 import ProductItem from '../common/product-item';
 import { getTopProducts } from '../../../actions/productActions';
 import {Slider3} from "../../../services/script"
@@ -12,9 +12,11 @@ class TopCollection extends Component {
         this.props.getTopProducts();
     }
     render (){
+        const { addToCart} = this.props;
         var properties = Product4;
         const {topproducts} = this.props;
         const products=topproducts.products.products;
+        const storenames=topproducts.products.storenames
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         return (
@@ -31,8 +33,8 @@ class TopCollection extends Component {
                                 <Slider {...Slider3} className="product-4 product-m no-arrow">
                                     { products.map((product, index ) =>
                                         <div key={index}>
-                                            <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff}
-                                                         onAddToCartClicked={() => addToCart(product, 1)} key={index} />
+                                            <ProductItem {...properties} product={product} storename={storenames[index]} symbol={symbol} currencydiff={currencydiff}
+                                                         onAddToCartClicked={addToCart} key={index} />
                                         </div>)
                                     }
                                 </Slider>

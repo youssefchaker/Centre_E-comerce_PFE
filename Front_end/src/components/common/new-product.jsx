@@ -19,7 +19,6 @@ class NewProduct extends Component {
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         const storeid=this.props.storeid;
-        console.log(storeid);
         var i=0;
         return (
             <div className="theme-card">

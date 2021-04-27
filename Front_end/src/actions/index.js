@@ -47,33 +47,6 @@ import {
     CLEAR_RESPONSE
 } from '../constants/ActionTypes'
 
-
-
-
-//products
-export const fetchProductsBegin = () => ({
-    type: types.FETCH_PRODUCTS_BEGIN
-});
-
-
-
-export const receiveProducts = products => ({
-    type: types.RECEIVE_PRODUCTS,
-    products
-})
-
-export const getAllProducts = () => dispatch => {
-    dispatch(fetchProductsBegin());
-    shop.getProducts(products => {
-        dispatch(receiveProducts(products));
-        return products;
-    })
-}
-export const fetchSingleProduct = productId => ({
-    type: types.FETCH_SINGLE_PRODUCT,
-    productId
-})
-
 //Stores
 
 export const getStores = (/*keyword = '', currentPage = 1, price, category*/) => async (dispatch) => {
