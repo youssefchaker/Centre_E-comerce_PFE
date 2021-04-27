@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom"
 import { withTranslate } from 'react-redux-multilingual'
-
+import {connect} from 'react-redux';
 import {SlideUpDown} from "../../services/script"
 import { ToastContainer } from 'react-toastify';
+import { changeMode } from '../../actions';
 
 class ThemeSettings extends Component {
 
@@ -76,16 +77,17 @@ class ThemeSettings extends Component {
         this.setState({
             themeLayout:!this.state.themeLayout
         })
+        this.props.changeMode(this.state.themeLayout);
     }
 
     render() {
-        if(this.state.themeLayout){
+        const mode=this.props.filters.mode;
+        if(mode){
             document.body.classList.add('dark');
         }else{
             document.body.classList.remove('dark');
         }
         let tap_to_top = {display: 'none'}
-
         return (
             <div>
                 
@@ -145,7 +147,7 @@ class ThemeSettings extends Component {
                         <div
                             className="theme-layout-version"
                             onClick={() => this.changeThemeLayout()}
-                        >{this.state.themeLayout?'Light':'Dark'}</div>
+                        >{mode?'Light':'Dark'}</div>
                     </div>
                 </div>
                 <div className="tap-top" onClick={this.clickToTop} style={tap_to_top}>
@@ -159,5 +161,15 @@ class ThemeSettings extends Component {
         );
     }
 }
+function mapStateToProps(state) {
+    return {
+        filters:state.filters
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        changeMode:(mode)=>dispatch(changeMode(mode))
 
-export default withTranslate(ThemeSettings);
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps) (withTranslate(ThemeSettings));

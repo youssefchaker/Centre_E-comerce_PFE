@@ -17,7 +17,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import {changeCurrency, getSearchedProducts} from '../../../actions/productActions'
 import Searchresult from '../../pages/searchresult';
 import { toast } from 'react-toastify';
-
+import './index.css'
 class HeaderTwo extends Component {
 
     constructor(props) {
@@ -70,21 +70,40 @@ class HeaderTwo extends Component {
     handlelang(lang){
         if(lang=="en"){
             this.state.lang="en";
+            document.getElementById("en").classList.add('red');
+            document.getElementById("fr").classList.remove('red');
+            document.getElementById("fr").classList.add('black');
+
         }
         else if(lang=="fn"){
             this.state.lang="fr";
+            document.getElementById("fr").classList.add('red');
+            document.getElementById("en").classList.remove('red');
+            document.getElementById("en").classList.add('black');
         }
     }
     handleCurrency(curr){
         if(curr=='€'){
-            this.setState({curr:'€'});
+            if(this.state.curr!='€'){
+                this.setState({curr:'€'});
             this.props.changeCurrency('€');
             toast.success("the currency has been changed to Euro!!");
+            document.getElementById("euro").classList.remove('classblack');
+            document.getElementById("euro").classList.add('classred');
+            document.getElementById("dinar").classList.remove('classred');
+            document.getElementById("dinar").classList.add('classblack');
+            }
         }
         else{
-            this.setState({curr:'DT'});
-            this.props.changeCurrency('DT');
-            toast.success("the currency has been changed to Tunisian Dinar!!");
+            if(this.state.curr!='DT'){
+                this.setState({curr:'DT'});
+                this.props.changeCurrency('DT');
+                toast.success("the currency has been changed to Tunisian Dinar!!");
+                document.getElementById("dinar").classList.remove('classblack');
+                document.getElementById("dinar").classList.add('classred');
+            document.getElementById("euro").classList.remove('classred');
+            document.getElementById("euro").classList.add('classblack');
+            }
         }
     }
     
@@ -168,13 +187,13 @@ class HeaderTwo extends Component {
                                                         <div className="show-div setting">
                                                             <h6>language</h6>
                                                             <ul>
-                                                                <li>{this.state.lang=="en"?<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"black"}} >English</a>:<a href={null} onClick={() => this.changeLanguage('en')} style={{color:"black"}} >English</a>} </li>
-                                                                <li>{this.state.lang=="fr"?<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"black"}} >French</a>:<a href={null} onClick={() => this.changeLanguage('fn')} style={{color:"black"}} >French</a>} </li>
+                                                                <li><a id="en" href={null} onClick={() => this.changeLanguage('en')}  >English</a> </li>
+                                                                <li><a id="fr" href={null} onClick={() => this.changeLanguage('fn')} >French</a> </li>
                                                             </ul>
                                                             <h6>currency</h6>
                                                             <ul className="list-inline">
-                                                                <li>{this.state.curr=='€'?<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"black"}} >euro</a>:<a href={null} onClick={() => this.handleCurrency('€')} style={{color:"black"}} >euro</a>}</li>
-                                                                <li>{this.state.curr=='DT'?<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"black"}}>tunisian dinar</a>:<a href={null} onClick={() => this.handleCurrency('DT')} style={{color:"black"}}>tunisian dinar</a>}</li>
+                                                                <li><a className="classred" id="euro" href={null} onClick={() => this.handleCurrency('€')}  >euro</a></li>
+                                                                <li><a id="dinar" href={null} onClick={() => this.handleCurrency('DT')}>tunisian dinar</a></li>
                                                             </ul>
                                                         </div>
                                                         

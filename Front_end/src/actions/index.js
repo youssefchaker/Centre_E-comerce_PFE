@@ -640,6 +640,10 @@ export const changeCurrency = (symbol) => ({
     symbol
 });
 
+export const changeMode = (mode) => ({
+    type: types.CHANGE_MODE,
+    mode
+});
 
 
 //News Letter

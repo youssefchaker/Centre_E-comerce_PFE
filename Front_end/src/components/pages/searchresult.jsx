@@ -29,16 +29,21 @@ class Searchresult extends Component {
                                     
                                         <div className="blog-left">
                                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} >
-                                                <img onClick={this.closeSearch} src={product.images[0]} className="img-fluid" alt="product image" style={{width:'200px',height:'200px'}}/></Link>
+                                                <img onClick={this.closeSearch} src={product.images[0].url} className="img-fluid" alt="product image" style={{width:'200px',height:'200px'}}/></Link>
                                         </div>
                                     </div>
                                     <div className="col-xl-6">
                                         <div className="blog-right">
                                             <div>
-                                                <h4>{product.name}</h4>
-                                                <h6>{product.description} </h6>
-                                                {symbol=="DT"?product.discount?<h6>Price:{symbol}&nbsp;{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100} </h6>:<h6>Price:{symbol}&nbsp;{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100} </h6>:product.discount?<h6>Price:{symbol}&nbsp;{(product.price-(product.price*product.discount/100))} </h6>:<h6>Price:{symbol}&nbsp;{product.price} </h6>}
-                                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5 onClick={this.closeSearch}>Product By: {storenames[index]} </h5></Link>
+                                            <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h4>{product.name}</h4></Link>
+                                                {symbol=="€"?(product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}                                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5 className="sname" onClick={this.closeSearch}>Product By: {storenames[index]} </h5></Link>
                                             </div>
                                         </div>
                                     </div>
