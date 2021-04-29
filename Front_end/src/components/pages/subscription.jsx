@@ -4,6 +4,7 @@ import {Helmet} from 'react-helmet'
 import {Link, Redirect } from 'react-router-dom'
 import SimpleReactValidator from 'simple-react-validator';
 import Breadcrumb from "../common/breadcrumb";
+import { toast } from 'react-toastify';
 
 
 
@@ -21,6 +22,8 @@ function Subscription ({history})  {
     const [avatar, setAvatar] = useState({});
     const [payment, setPayment] = useState('Stripe');
     const [subscriptionPrice, setSubscriptionPrice] = useState(1188);
+    const [ImageSizeLimit,setImageSizeLimit]=useState(910*310)
+    const [ImageTest,setImageTest]=useState(true)
     const [, forceUpdate] = useState()
 
 
@@ -35,23 +38,16 @@ function Subscription ({history})  {
 
 
     const submitHandler = (e) => {
-        e.preventDefault();
-
-       
-
-
-        
-
-        
+        e.preventDefault();   
         const formValid = simpleValidator.current.allValid();
         if (!formValid) {
           simpleValidator.current.showMessages()
         }
+        if(ImageTest==false){
+            toast.warn("Image too big to upload");
+        }
 
-        
     }
-      
-
     function checkhandle(value) {
         setPayment({
              value
@@ -90,29 +86,20 @@ function Subscription ({history})  {
     const onChangeImage = e => {
 
         const file = e.target.files[0];
-
-        
-        
-
-        
+        if(file.size>ImageSizeLimit){
+            setImageTest(false);
+        }
+        else{
+            setImageTest(true);
             const reader = new FileReader();
-
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    
                     setAvatar (reader.result);
                 }
             }
-
             reader.readAsDataURL(file)
-        
+        }
     }
-
-    
-
-        
-
-
         return (
             <div>
 

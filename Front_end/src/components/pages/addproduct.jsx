@@ -24,7 +24,9 @@ class Addproduct extends Component {
         ProductDetails:[],
         ProductDetailsValues:[],
         ProductDiscount:0,
-        details:[]
+        details:[],
+        ImageSizeLimit:512*512,
+        ImageTest:true
     }
     this.validator = new SimpleReactValidator();
     this.validator2 = new SimpleReactValidator();
@@ -67,7 +69,16 @@ class Addproduct extends Component {
                 i++;
             }
             if(this.state.ProductImages.length>3)
-                toast.warn("Only a limit of 3 images are allowed for 1 product");
+                toast.warn("Only a maximum of 3 images are allowed for 1 product");
+            else if(this.state.ImageTest==false){
+                toast.warn("1 or more of the images are too big to upload");
+            }
+            else if(this.state.ProductPrice<0){
+                toast.warn("The product Price must be a positive number")
+            }
+            else if(this.state.ProductStock<0){
+                toast.warn("The product Stock must be a positive number")
+            }
             else{
             this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
@@ -79,8 +90,19 @@ class Addproduct extends Component {
         this.setState({ProductCategory:e.target.value});
       }
       handleimages=(e)=>{
+          let c=0;
         const files = Array.from(e.target.files)
-        this.setState({ProductImages:[]})
+        for(var j=0;j<files.length;j++){
+            if(files[j].size>this.state.ImageSizeLimit){
+                this.setState({ImageTest:false});
+                c++;
+            }
+        }
+        if(c==0){
+            this.setState({ImageTest:true});
+        }        
+        if(this.state.ImageTest==true){
+            this.setState({ProductImages:[]})
         files.forEach(file => {
             const reader = new FileReader();
 
@@ -91,6 +113,8 @@ class Addproduct extends Component {
             }
             reader.readAsDataURL(file)
         })
+        }
+        
         /* if(!this.validator3.allValid() ||this.state.ProductImage==null){
             this.validator3.showMessages();
             this.forceUpdate();
@@ -121,32 +145,32 @@ class Addproduct extends Component {
                                             <table>
                                             <thead>
                                             <tr>
-                                                <th>Product Information</th>
-                                                <th>Product Information Value</th>
+                                                <th className="styleTHeader">Product Information</th>
+                                                <th className="styleTHeader">Product Information Value</th>
                                             </tr>
                                             </thead>
                                             <tr>
-                                                <td><div className="field-label">Product Name</div></td>
-                                                <td>
+                                                <td className="styleT"><div className="field-label">Product Name</div></td>
+                                                <td className="styleT">
                                                 <input type="text" name="ProductName" onChange={this.setStateFromInput} value={this.state.ProductName} />
                                                     {this.validator.message('ProductName', this.state.ProductName, 'required')}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><div className="field-label">Product Price</div></td>
-                                                <td>
-                                                <input  type="text" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} />
-                                                    {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|integer|min:0')}
+                                                <td className="styleT"><div className="field-label">Product Price</div></td>
+                                                <td className="styleT">
+                                                <input  type="number" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} min="0" oninput="validity.valid||(value='');"  />
+                                                    {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|min:0')}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><div className="field-label">Product Stock</div></td>
-                                                <td><input type="text" name="ProductStock" onChange={this.setStateFromInput} value={this.state.ProductStock}/>
-                                                    {this.validator.message('ProductStock', this.state.ProductStock, 'required|integer|min:0')}</td>
+                                                <td className="styleT"><div className="field-label">Product Stock</div></td>
+                                                <td className="styleT"><input type="number" name="ProductStock" onChange={this.setStateFromInput} value={this.state.ProductStock} min="0" />
+                                                    {this.validator.message('ProductStock', this.state.ProductStock, 'required|min:0')}</td>
                                             </tr>
                                             <tr>
-                                                <td><div className="field-label">Product Category</div></td>
-                                                <td><select name="ProductCategory" onChange={(e)=>this.handlelist(e)} value={this.state.ProductCategory}>
+                                                <td className="styleT"><div className="field-label">Product Category</div></td>
+                                                <td className="styleT"><select name="ProductCategory" onChange={(e)=>this.handlelist(e)} value={this.state.ProductCategory}>
                                                     <option selected>Electronics</option>
                                                     <option>Cameras</option>
                                                     <option>Laptops</option>
@@ -165,57 +189,50 @@ class Addproduct extends Component {
                                             <tr>
                                             </tr>
                                             <tr>
-                                                <td><div className="field-label">Product Images</div>
-                                                    <h6>*3 Images are allowed for 1 product</h6></td>
-                                                <td>
-                                                <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span></div>
+                                                <td className="styleT"><div className="field-label">Product Images</div>
+                                                    </td>
+                                                <td className="styleT">
+                                                <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span> <h6>*A maximum of 3 Images are allowed for 1 product</h6></div>
                                                     <input type="file" id="img" name="ProductImages" accept="image/*" onChange={this.handleimages} multiple />
                                                     {this.validator.message('ProductImages', this.state.ProductImages, 'required')}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><div className="field-label">Product Discount(%)</div></td>
-                                                <td>
+                                                <td className="styleT"><div className="field-label">Product Discount(%)</div></td>
+                                                <td className="styleT">
                                                 <select  name="ProductDiscount" onChange={this.setStateFromInput} value={this.state.ProductDiscount}>
                                                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option><option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option><option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option>
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><div className="field-label">Product Description</div></td>
-                                                <td>
+                                                <td className="styleT"><div className="field-label">Product Description</div></td>
+                                                <td className="styleT">
                                                 <textarea name="ProductDescription" rows="4" cols="50" onChange={this.setStateFromInput} value={this.state.ProductDescription} ></textarea>
                                                     {this.validator.message('ProductDescription', this.state.ProductDescription, 'required')}
                                                 </td>
                                             </tr>
-                                            </table>
-                                            <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product Detail</th>
-                                                            <th>Product Detail Value</th>
-                                                            <th rowspan="2">&nbsp;</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tr>
-                                                        <td><label for="ProductDetail">Product Detail</label></td>
-                                                        <td>
+                                            <tr>
+                                                <td className="styleT"><label for="ProductDetail">Product Detail</label></td>
+                                                <td className="styleT">
                                                         <input type="text" name="ProductDetail" onChange={this.setStateFromInput} value={this.state.ProductDetail} id="1" />
                                                     {this.validator.message('ProductDetail', this.state.ProductDetail, 'required')}
                                                     {this.validator2.message('ProductDetail', this.state.ProductDetail, 'required')}
                                                         </td>
-                                                        <td rowSpan="2"><button type="submit" onClick={this.handleDetails}>submit and add Details</button></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label for="ProductDetailValue">Product Detail Value</label></td>
-                                                        <td>
+                                            </tr>
+                                            <tr>
+                                            <td className="styleT"><label for="ProductDetailValue">Product Detail Value</label></td>
+                                            <td className="styleT">
                                                         <input type="text" name="ProductDetailValue" onChange={this.setStateFromInput} value={this.state.ProductDetailValue} id="2" />
                                                     {this.validator.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
                                                     {this.validator2.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
                                                         </td>
-                                                        <td>&nbsp;</td>
-                                                    </tr>
-                                                </table>
+                                            </tr>
+                                            <tr>
+                                            <td className="styleT"><label for="submitdetail">Submit Product Details</label></td>
+                                            <td className="styleT"><button name="submitdetail" type="submit" onClick={this.handleDetails}>submit and add Details</button></td>
+                                            </tr>
+                                            </table>
                                             </form>
                                         </div>
                 </div>

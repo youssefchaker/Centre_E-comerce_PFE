@@ -15,7 +15,9 @@ class Addevent extends Component {
         EventImage:null,
         EventDatestart:null,
         EventDatefinish:null,
-        EventImg:null
+        EventImg:null,
+        ImageSizeLimit:910*310,
+        ImageTest:true
     }
     this.validator = new SimpleReactValidator();
     }
@@ -43,10 +45,13 @@ class Addevent extends Component {
             else if(this.state.EventDatestart>this.state.EventDatefinish){
                 toast.warn("the event start date must be lower then the finish date");
             }
-            else {
+            else if(!this.state.ImageTest) {
+                toast.warn("Image too big to upload");
+            }
+            else{
             this.props.newEvent({'storeName':this.props.userStore.store.name,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
-            toast.success("event added !");
-            setTimeout("location.reload(true);",2000);
+            toast.success("Event added !");
+            setTimeout("location.reload(true);",2500);
             }
           }
       }
@@ -55,6 +60,12 @@ class Addevent extends Component {
         obj[e.target.name] = e.target.value;
         this.setState(obj);
         const file = e.target.files[0];
+        if(file.size>this.state.ImageSizeLimit){
+            this.setState({ImageTest:false});
+
+        }
+        else{
+            this.setState({ImageTest:true});
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {  
@@ -63,6 +74,7 @@ class Addevent extends Component {
             }
             reader.readAsDataURL(file)
     }
+}
     render (){
         return (
             <div>
@@ -80,36 +92,36 @@ class Addevent extends Component {
                                             <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Event Information</th>
-                                                    <th>Event Information Value</th>
+                                                    <th className="styleTHeader">Event Information</th>
+                                                    <th className="styleTHeader">Event Information Value</th>
                                                 </tr>
                                             </thead>
                                                 <tr>
-                                                    <td><div className="field-label">Event Name</div></td>
-                                                    <td>
+                                                    <td className="styleT"><div className="field-label">Event Name</div></td>
+                                                    <td className="styleT">
                                                     <input type="text" name="EventName" onChange={this.setStateFromInput} value={this.state.EventName} />
                                                     {this.validator.message('EventName', this.state.EventName, 'required')}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><div className="field-label">Event Date Start</div></td>
-                                                    <td>
+                                                    <td className="styleT"><div className="field-label">Event Date Start</div></td>
+                                                    <td className="styleT">
                                                     <input type="date" name="EventDatestart" onChange={this.setStateFromInput} value={this.state.EventDatestart}   />
                                                     {this.validator.message('Event Start Date', this.state.EventDatestart, `required`)}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><div className="field-label">Event Date Finish</div></td>
-                                                    <td>
+                                                    <td className="styleT"><div className="field-label">Event Date Finish</div></td>
+                                                    <td className="styleT">
                                                     <input type="date" name="EventDatefinish" onChange={this.setStateFromInput} value={this.state.EventDatefinish}  />
                                                     {this.validator.message('Event Finsih Date', this.state.EventDatefinish, 'required')}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><div className="field-label">Event Image</div></td>
-                                                    <td>
-                                                    <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions : :   <span><small>"910 x 310"</small></span></div>
-                                                    <input type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
+                                                    <td className="styleT"><div className="field-label">Event Image</div></td>
+                                                    <td className="styleT">
+                                                    <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small>"910 x 310"</small></span></div>
+                                                    <input id="img" type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
                                                     {this.validator.message('EventImage', this.state.EventImage, 'required')}
                                                     </td>
                                                 </tr>

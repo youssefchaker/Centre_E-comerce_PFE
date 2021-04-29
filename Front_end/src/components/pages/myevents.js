@@ -63,7 +63,7 @@ class MyEvents extends Component {
               }
               else if(this.state.updatefield=="datestart"){
                 if(this.state.updatevalue>this.state.date){
-                    toast.warn("the event start date must lower then the event end date!!");                 
+                    toast.warn("the event start date must before the event end date!!");                 
                 }
                 else{
                     this.props.updateEvent(this.state.eventid,{"eventDateStart":this.state.updatevalue});
@@ -73,7 +73,7 @@ class MyEvents extends Component {
               }
               else if(this.state.updatefield=="datefinish"){
                 if(this.state.updatevalue<this.state.date){
-                    toast.warn("the event end date must higher then the event start date!!");               
+                    toast.warn("the event end date must be after the event start date!!");               
                 }
                 else{
                     this.props.updateEvent(this.state.eventid,{"eventDateFinish":this.state.updatevalue});
@@ -140,9 +140,35 @@ class MyEvents extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                        <div className="col-lg-6 col-sm-12 col-xs-12">
-                                        <h5 style={{color:"#fe2b2a"}}>Click on the event's attribute to update it!</h5>
-                                            {this.props.storeevents.loading==false?eventsarray.map((event,index)=>(
+                                <div className="col-lg-10 col-sm-12 col-xs-12">
+                                <h5 style={{color:"#fe2b2a"}}>Click on the event's attribute to update it!</h5>
+                                <table >
+                                    <thead>
+                                        <tr>
+                                            <th className="styleTHeader">Product Number</th>
+                                            <th className="styleTHeader">Event Name</th>
+                                            <th className="styleTHeader">Event Start Date</th>
+                                            <th className="styleTHeader">Event Finish Date</th>
+                                            <th className="styleTHeader">Event Image</th>
+                                            <th className="styleTHeader">Action</th>
+                                        </tr>
+                                    </thead>
+                                    {this.props.storeevents.loading==false?eventsarray.map((event,index)=>(
+                                        <tr>
+                                        <td className="styleT"><h4 style={{color:"black"}}>Event {index+1}</h4></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("name",event._id)}>{event.eventName}</div></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("datestart",event._id,event.eventDateFinish.slice(0,10))} >{event.eventDateStart.slice(0,10)}</div> </td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("datefinish",event._id,event.eventDateStart.slice(0,10))}>{event.eventDateFinish.slice(0,10)}</div></td>
+                                        <td className="styleT"><img className="update"  onClick={()=>this.openSearch("image",event._id)} src={event.eventImage.url} alt="event image" style={{width:'150px',height:'75px'}}></img></td>
+                                        <td className="styleT"><div className="update"><i className="fa fa-trash" onClick={()=>this.handledelete(event._id)} style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
+                                ></i></div></td>
+                                    </tr>
+                                    )):
+                                    <h3 style={{textAlign:'center'}}>Your Store contains no products</h3>} 
+                                    
+                                </table>
+                                        
+                                            {/* {this.props.storeevents.loading==false?eventsarray.map((event,index)=>(
                                                 <div>
                                                 <h3 style={{color:"black"}}>Event {index+1}</h3>
                                                 <div className="row check-out">
@@ -168,7 +194,7 @@ class MyEvents extends Component {
                                             </div>
                                             </div>
                                             )):
-                                            'This Store Contains no Events'} 
+                                            'This Store Contains no Events'} */} 
                                             <div id="update-overlay" className="search-overlay">
                                         <div>
                                         <span className="closebtn" onClick={this.closeSearch} title="Close Overlay">×</span>

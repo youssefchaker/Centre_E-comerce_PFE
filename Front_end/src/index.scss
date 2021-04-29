@@ -7,3 +7,29 @@
         color: black;
     }
 }
+.update{
+    &:hover{
+        color: grey;
+        opacity: 0.6;
+    }
+}
+.styleT{
+    border: 1px solid black;
+    text-align: center;
+}
+.styleTHeader{
+    border: 1px solid black;
+    text-align: center;
+    background-color: gray;
+}
+.styleTflex{
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+}
+.divstyle {
+    height:100px;
+    width:100%;
+    border:1px solid red;
+    overflow:auto;
+}

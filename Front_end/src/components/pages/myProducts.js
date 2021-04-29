@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import {connect} from 'react-redux'
 import SimpleReactValidator from 'simple-react-validator';
-import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getStoreProducts, updateProduct,deleteProduct, updateProductDetails } from '../../actions/productActions';
 import {Link} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import Datatable from './common/datatable';
+
 class MyProducts extends Component {
     constructor(props){
     super(props);
@@ -17,7 +19,9 @@ class MyProducts extends Component {
         inputfield:null,
         detail:null,
         detailid:null,
-        ProductImages:[]
+        ProductImages:[],
+        ImageSizeLimit:512*512,
+        ImageTest:true
     }
     this.validator=new SimpleReactValidator();
       }
@@ -106,10 +110,15 @@ class MyProducts extends Component {
                 setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="image"){ 
+                if(this.state.ImageTest==false){
+                    toast.warn("1 or more of the images are too big to upload");
+                }
+                else{
                 this.props.updateProduct(this.state.productid,{"images":this.state.ProductImages});
                 toast.success("The product's images has been updated!!");
                 setTimeout("location.reload(true);",2000);
-              }
+            } 
+            }
           }
       }
     setStateFromInput = (event) => {
@@ -118,10 +127,21 @@ class MyProducts extends Component {
         this.setState(obj);
       }
       handleimages=(e)=>{
+        let c=0;
         var obj = {};
         obj[e.target.name] = e.target.value;
         this.setState(obj);
         const files = Array.from(e.target.files)
+        for(var j=0;j<files.length;j++){
+            if(files[j].size>this.state.ImageSizeLimit){
+                this.setState({ImageTest:false});
+                c++;
+            }
+        }
+        if(c==0){
+            this.setState({ImageTest:true});
+        }   
+        if(this.state.ImageTest==true){     
         this.setState({ProductImages:[]})
         files.forEach(file => {
             const reader = new FileReader();
@@ -134,9 +154,11 @@ class MyProducts extends Component {
             reader.readAsDataURL(file)
         })
     }
+}
 
     render (){
         var productsarray = [];
+        var productsimages=[]
         var productdetails=[]
         this.props.storeproducts.products.products.map((pr)=>{
             productsarray.push(pr);
@@ -175,83 +197,60 @@ class MyProducts extends Component {
                                         </ul>
                                     </div>
                                 </div>
+                                <div id="basicScenario" className="product-physical">
+                                        <Datatable
+                                            multiSelectOption={false}
+                                            myData={productsarray} 
+                                            pageSize={5} 
+                                            pagination={true}
+                                            class="-striped -highlight" 
+                                        />
+                                    </div>
                                         <div className="col-lg-8 col-sm-12 col-xs-12">
-                                        <h5 style={{color:"#fe2b2a"}}>Click on the product's attribute to update it!</h5>
-                                    {this.props.storeproducts.loading==false?productsarray.map((product,index)=>(
-                                        <table width="100%">
+                                        <table>
                                     <thead>
                                         <tr>
-                                            <th>Product Number</th>
-                                            <th>Product Information</th>
-                                            <th>Product Information Value</th>
+                                            <th className="styleTHeader">Product Number</th>
+                                            <th className="styleTHeader">Product Name</th>
+                                            <th className="styleTHeader">Product Price</th>
+                                            <th className="styleTHeader">Product Stock</th>
+                                            <th className="styleTHeader">Product Category</th>
+                                            <th className="styleTHeader">Product Description</th>
+                                            <th className="styleTHeader">Product Discount</th>
+                                            <th className="styleTHeader">Product Images</th>
+                                            <th className="styleTHeader">Product Details</th>
+                                            <th className="styleTHeader">Action</th>
                                         </tr>
                                     </thead>
-                                        <tr>
-                                            <td><h3 style={{color:"black"}}>Product {index+1}</h3></td>
-                                            <td><label onClick={()=>this.openSearch("name",product._id)} className="field-label">Product Name</label></td>
-                                            <td><div>{product.name}</div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label onClick={()=>this.openSearch("price",product._id)} className="field-label">Product Price</label></td>
-                                            <td><div>{product.price}</div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label onClick={()=>this.openSearch("stock",product._id)} className="field-label">Product Stock</label></td>
-                                            <td><div>{product.stock}</div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label onClick={()=>this.openSearch("category",product._id)} className="field-label">Product Category</label></td>
-                                            <td><div >{product.category}</div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label onClick={()=>this.openSearch("desc",product._id)} className="field-label" for="ProductDescription">Product Description</label></td>
-                                            <td><div name="ProductDescription">{product.description}</div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label onClick={()=>this.openSearch("discount",product._id)} className="field-label">Product Discount</label></td>
-                                            <td><div >{product.discount}</div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label className="field-label" for="ProductImage">Product Images</label></td>
-                                            {product.images.map((image)=>(
-                                                <td>
-                                                    <img onClick={()=>this.openSearch("image",product._id)} src={image.url} alt="product image" style={{width:'150px',height:'75px'}}></img>
+                                    {this.props.storeproducts.loading==false?productsarray.map((product,index)=>(
+                                        
+                                    <tr>
+                                        <td className="styleT"><h4 style={{color:"black"}}>Product {index+1}</h4></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("name",product._id)}>{product.name}</div></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("price",product._id)}>{product.price}</div></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("stock",product._id)}>{product.stock}</div></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("category",product._id)} >{product.category}</div></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("desc",product._id)}>{product.description}</div></td>
+                                        <td className="styleT"><div className="update" onClick={()=>this.openSearch("discount",product._id)} >{product.discount}</div></td>
+                                        <td>
+                                        {product.images.map((image)=>(
+                                                <td className="styleT">
+                                                    <img className="update" onClick={()=>this.openSearch("image",product._id)} src={image.url} alt="product image" style={{width:'75px',height:'75px'}}></img>
                                                 </td>
                                             ))}
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td><label className="field-label">Product Details</label></td>
-                                            <td>
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product Detail</th>
-                                                            <th>Product Detail Value</th>
-                                                        </tr>
-                                                        </thead>
-                                                        {productdetails[index].map((detail,ind)=>(
-                                                            <tr>
-                                                                <td>
-                                                                <div onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)}  name="ProductDetail">{detail.detailname }</div>
+                                        </td>
+                                        {productdetails[index].map((detail,ind)=>(
+                                                                <td className="styleTflex">
+                                                                <div className="update" onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)}  name="ProductDetail">{detail.detailname }:</div>
+                                                                <div className="update" onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)}  name="ProductDetailValue">{ detail.value }</div>
                                                                 </td>
-                                                                <td>
-                                                                <div onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)}  name="ProductDetailValue">{ detail.value }</div>
-                                                                </td>
-                                                            </tr>
-                                                        ))} 
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr><td><button type="submit" className="btn btn-solid" onClick={()=>this.handledelete(product._id)}>Delete Product</button></td></tr>
-                                        </table>
-                                    )):'This Store Contains no Products!!'}
+                                                        ))}
+                                        <td className="styleT"> <div className="update"><i className="fa fa-trash" onClick={()=>this.handledelete(product._id)} style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
+                                ></i></div></td> 
+                                                        
+                                    </tr>                                     
+                                    )):<h3 style={{textAlign:'center'}}>Your Store contains no products</h3>}
+                                    </table>
                                         <div id="update-overlay" className="search-overlay">
                                         <div>
                                         <span className="closebtn" onClick={this.closeSearch} title="Close Overlay">×</span>
@@ -282,7 +281,8 @@ class MyProducts extends Component {
                                                     <option>Home</option>
                                                     <option>Other</option>
                                                     </select>:
-                                                    <input id="img" onChange={this.handleimages} type="file" name="updatevalue" accept="image/*" multiple value={this.state.updatevalue} />}
+                                                    <div><input id="img" onChange={this.handleimages} type="file" name="updatevalue" accept="image/*" multiple value={this.state.updatevalue} />                                                <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span></div>
+</div>}
                                                     {this.validator.message('new value', this.state.updatevalue, 'required')}
                                                     </div>
                                                 <button type="submit" onClick={this.handlesubmit} className="btn btn-primary" style={{marginRight:"-35px"}}><i className="fa fa-check"></i></button>
