@@ -25,6 +25,7 @@ import {NEW_PRODUCT_REQUEST,
     DELETE_PRODUCT_REQUEST,
     DELETE_PRODUCT_SUCCESS,
     DELETE_PRODUCT_FAIL,
+    DELETE_PRODUCT_RESET,
     DELETE_ADMIN_PRODUCT_REQUEST,
     DELETE_ADMIN_PRODUCT_SUCCESS,
     DELETE_ADMIN_PRODUCT_FAIL,
@@ -56,7 +57,10 @@ import {NEW_PRODUCT_REQUEST,
     CHANGE_CURRENCY,
     UPDATE_PRODUCT_DETAIL_REQUEST,
     UPDATE_PRODUCT_DETAIL_SUCCESS,
-    UPDATE_PRODUCT_DETAIL_FAIL
+    UPDATE_PRODUCT_DETAIL_FAIL,
+    GET_PRODUCTS_BY_CATEGORY_REQUEST,
+    GET_PRODUCTS_BY_CATEGORY_SUCCESS,
+    GET_PRODUCTS_BY_CATEGORY_FAIL
 } from "../constants/productConstants";
 
 /* export const productReducer = (state = { products: {} }, action) => {
@@ -413,6 +417,39 @@ export const getAllProductsReducer = (state = { allproducts: {} }, action) => {
     }
 }
 
+export const getProductsByCategoryReducer = (state = { productsByCategory: {} }, action) => {
+    switch (action.type) {
+
+        case GET_PRODUCTS_BY_CATEGORY_REQUEST:       
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_PRODUCTS_BY_CATEGORY_SUCCESS:
+            return{
+                loading: false,
+                productsByCategory: action.payload.products,
+                productsCount: action.payload.productsCount,
+                filteredProductsCount: action.payload.filteredProductsCount,
+                storenames:action.payload.storenames
+            }
+        case GET_PRODUCTS_BY_CATEGORY_FAIL:
+            return {
+                ...state,
+                error: action.payload
+                }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+}
+
+
+
 export const updateProductReducer = (state = { updateproduct: {} }, action) => {
     switch (action.type) {
 
@@ -471,7 +508,7 @@ export const updateProductDetailsReducer = (state = { updateproductdetail: {} },
     }
 }
 
-export const deleteProductReducer = (state = { deleteproduct: {} }, action) => {
+export const deleteProductReducer = (state = {}, action) => {
     switch (action.type) {
 
         case DELETE_PRODUCT_REQUEST:           
@@ -484,6 +521,11 @@ export const deleteProductReducer = (state = { deleteproduct: {} }, action) => {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
+            }
+            case DELETE_PRODUCT_RESET:
+            return {
+                ...state,
+                isDeleted: false
             }
         case DELETE_PRODUCT_FAIL:
             return {
@@ -529,7 +571,7 @@ export const deleteAdminProductReducer = (state = { deleteadminproduct: {} }, ac
     }
 }
 
-export const getAdminProductsReducer = (state = { adminproducts: {} }, action) => {
+export const getAdminProductsReducer = (state = { adminProducts: [] }, action) => {
     switch (action.type) {
 
         case GET_ADMIN_PRODUCTS_REQUEST:           
@@ -540,7 +582,7 @@ export const getAdminProductsReducer = (state = { adminproducts: {} }, action) =
         case GET_ADMIN_PRODUCTS_SUCCESS:
             return {
                 loading: false,
-                products: action.payload
+                adminProducts: action.payload
             }
 
         case GET_ADMIN_PRODUCTS_FAIL:

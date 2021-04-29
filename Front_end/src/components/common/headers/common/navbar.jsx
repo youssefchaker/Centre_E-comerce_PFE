@@ -9,6 +9,8 @@ class NavBar extends Component {
         this.state = {
             navClose: { right: '0px' }
         }
+
+
     }
 
     componentWillMount() {
@@ -18,6 +20,8 @@ class NavBar extends Component {
         if (window.innerWidth < 1199) {
             this.setState({ navClose: { right: '-300px' } })
         }
+
+
     }
 
     openNav() {
@@ -65,6 +69,8 @@ class NavBar extends Component {
 
     render() {
         const { translate } = this.props;
+        const role = JSON.parse(sessionStorage.getItem('role'));
+
         return (
             <div>
                 <div className="main-navbar">
@@ -104,11 +110,13 @@ class NavBar extends Component {
                                 </Link>
                                 
                             </li>
+                            {role !== 'Seller' && (
                             <li>
                             <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
                                     {translate('become_a_seller')}
                             </Link>
                             </li>
+                            )}
                              <li>
                             
                                 <Link to={`${process.env.PUBLIC_URL}/pages/contact`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>

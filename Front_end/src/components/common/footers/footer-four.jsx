@@ -143,7 +143,7 @@ function FooterFour ( {  logoName }) {
                                     </div>
                                     <div className="footer-contant">
                                         <ul>
-                                            <li><Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} >Learn to sell</Link></li>
+                                            <li><Link to='/'>Learn to sell</Link></li>
                                             <li><Link to={`${process.env.PUBLIC_URL}/pages/subscription`} >Start selling</Link></li>
                                             <li><Link to={`${process.env.PUBLIC_URL}/pages/register`} >Registration</Link></li>
                                             <li><Link to={`${process.env.PUBLIC_URL}/stores`} >Business sellers</Link></li>

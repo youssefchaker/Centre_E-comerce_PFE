@@ -58,10 +58,7 @@ import NewPassword from './components/pages/newPassword'
 import Eventsdisplay from './components/pages/eventsdisplay';
 import Searchresult from './components/pages/searchresult';
 
-// Blog Pages
-import RightSide from './components/blogs/right-sidebar'
-import Details from './components/blogs/details'
-import BlogPage from './components/blogs/blog-page'
+
 
 // Theme Element
 import ElementTitle from "./components/features/theme/element-title"
@@ -93,6 +90,11 @@ import BrowseProducts from "./components/Shop/browseProducts";
 import MyStoreProfile from './components/pages/myStoreProfile';
 import ListOrders from './components/order/listOrders';
 import OrderDetails from './components/order/orderDetails'
+
+// Admin Pages
+import Dashboard from './components/admin/Dashboard'
+import ProductsList from './components/admin/ProductsList'
+
 
 
 
@@ -201,10 +203,14 @@ function Root() {
 								{/*Stores*/}
                                 <Route path={`${process.env.PUBLIC_URL}/stores`} component={GridCols}/>
 
-								{/*Blog Pages*/}
-                                <Route path={`${process.env.PUBLIC_URL}/blog/right-sidebar`} component={RightSide}/>
-                                <Route path={`${process.env.PUBLIC_URL}/blog/details`} component={Details}/>
-                                <Route path={`${process.env.PUBLIC_URL}/blog/blog-page`} component={BlogPage}/>
+							
+
+
+                                {/* Admin */}
+                                <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard}  />
+                                <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
+
+
 
                                 {/*subscription*/}
                                 <Route path={`${process.env.PUBLIC_URL}/pages/subscription`} component={Subscription}/>

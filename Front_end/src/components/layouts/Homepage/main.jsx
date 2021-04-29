@@ -73,6 +73,7 @@ function  Fashion()  {
                 {/*Home Slider*/}
                 <section className="p-0">
                     <Slider  className="slide-1 home-slider" {...settings}>
+                        
                         <div>
                             <div className="home home1 text-center">
                                 <div className="container">
@@ -80,8 +81,7 @@ function  Fashion()  {
                                         <div className="col">
                                             <div className="slider-contain">
                                                 <div>
-                                                    <h4>welcome to Mall</h4>
-                                                    <h1>clothes store</h1>
+                                                    <h4>Welcome to Mall</h4>
                                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">shop now</Link>
                                                 </div>
                                             </div>
@@ -97,8 +97,23 @@ function  Fashion()  {
                                         <div className="col">
                                             <div className="slider-contain">
                                                 <div>
-                                                    <h4>welcome to Mall</h4>
-                                                    <h1>makeup store</h1>
+                                                    <h4>Welcome to Mall</h4>
+                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">shop now</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="home home3 text-center">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col">
+                                            <div className="slider-contain">
+                                                <div>
+                                                    <h4>Welcome to Mall</h4>
                                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">shop now</Link>
                                                 </div>
                                             </div>
@@ -118,11 +133,11 @@ function  Fashion()  {
                             <div className="col-md-6">
                                 <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>
                                     <div className="collection-banner p-right text-center">
-                                        <img src={`${process.env.PUBLIC_URL}/assets/images/sub-banner1.jpg`} className="img-fluid" alt=""/>
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/fashion.jpg`} className="img-fluid" alt=""/>
                                             <div className="contain-banner">
                                                 <div>
                                                     <h4>save 30%</h4>
-                                                    <h2>men</h2>
+                                                    <h2>Fashion</h2>
                                                 </div>
                                             </div>
                                     </div>
@@ -131,11 +146,11 @@ function  Fashion()  {
                             <div className="col-md-6">
                                 <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>
                                     <div className="collection-banner p-right text-center">
-                                        <img src={`${process.env.PUBLIC_URL}/assets/images/sub-banner2.jpg`} className="img-fluid" alt=""/>
+                                        <img src={`${process.env.PUBLIC_URL}/assets/images/high-tech.jpg`} className="img-fluid" alt=""/>
                                             <div className="contain-banner">
                                                 <div>
                                                     <h4>save 60%</h4>
-                                                    <h2>women</h2>
+                                                    <h2>Tech</h2>
                                                 </div>
                                             </div>
                                     </div>
@@ -155,8 +170,8 @@ function  Fashion()  {
                             <div className="row">
                                 <div className="col">
                                     <div className="banner-contain">
-                                        <h2>2021</h2>
-                                        <h3>fashion trends</h3>
+                                        <h2>{new Date().getFullYear()}</h2>
+                                        <h3>Beauty & Health trends</h3>
                                         <h4>special offer</h4>
                                     </div>
                                 </div>

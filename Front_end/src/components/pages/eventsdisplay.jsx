@@ -32,6 +32,7 @@ class Eventsdisplay extends Component {
                                                 <img src={event.eventImage.url} className="img-fluid" alt="event image" style={{width:'210px',height:'200px'}}/></Link>
                                                 
                                         </div>
+                                        <br></br>
                                     </div>
                                     <div className="col-xl-6">
                                         <div className="blog-right">

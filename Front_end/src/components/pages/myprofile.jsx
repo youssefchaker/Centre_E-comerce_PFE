@@ -41,7 +41,7 @@ function MyProfile ()  {
                                         <ul>
                                             <li className="active"><Link to='/pages/myprofile'>My Profile</Link></li>
                                             {user.role == 'Admin' && (
-                                            <li><Link to="/pages/dashboard">Dashboard</Link></li>
+                                            <li><Link to="/dashboard">Dashboard</Link></li>
                                             )}
                                             {user.role == 'Seller' && (
                                             <React.Fragment>

@@ -36,7 +36,7 @@ function LogoBlock ()  {
                                 {stores && stores.map(store =>
                                     <div >
                                         <a href={null}>
-                                        <img src={store.avatar.url} alt="store logo" style={{width:'200px',height:'160px'}} />
+                                        <img src={store.avatar.url} alt="store logo" style={{width:'200px',height:'160px',borderRadius:'4px'}} />
 
                                         </a>
                                     </div>

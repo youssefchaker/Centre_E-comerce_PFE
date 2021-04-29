@@ -58,7 +58,10 @@ import {NEW_PRODUCT_REQUEST,
     CHANGE_CURRENCY,
     UPDATE_PRODUCT_DETAIL_REQUEST,
     UPDATE_PRODUCT_DETAIL_SUCCESS,
-    UPDATE_PRODUCT_DETAIL_FAIL } from '../constants/productConstants'
+    UPDATE_PRODUCT_DETAIL_FAIL,
+    GET_PRODUCTS_BY_CATEGORY_REQUEST,
+    GET_PRODUCTS_BY_CATEGORY_SUCCESS,
+    GET_PRODUCTS_BY_CATEGORY_FAIL } from '../constants/productConstants'
 
 export const newProduct = (productData) => async (dispatch) => {
     try {
@@ -211,6 +214,53 @@ export const getProducts = () => async (dispatch) => {
     }
 }
 
+export const getProductsByCategory = (category) => async (dispatch) => {
+    try {
+
+        dispatch({ type: GET_PRODUCTS_BY_CATEGORY_REQUEST })
+
+        let link = `/api/mall/products`
+
+        if (category) {
+            link = `/api/mall/products?category=${category}`
+        }
+
+
+        const { data } = await axios.get(link)
+
+        dispatch({
+            type: GET_PRODUCTS_BY_CATEGORY_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GET_PRODUCTS_BY_CATEGORY_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const updateProduct = (id, productData) => async (dispatch) => {
     try {
 
@@ -312,7 +362,7 @@ export const getAdminProducts = () => async (dispatch) => {
 
         dispatch({
             type: GET_ADMIN_PRODUCTS_SUCCESS,
-            payload: data
+            payload: data.products
         })
 
     } catch (error) {
@@ -491,3 +541,6 @@ export const changeCurrency = (symbol) =>async (dispatch)=> {
         symbol
     })
 };
+
+
+

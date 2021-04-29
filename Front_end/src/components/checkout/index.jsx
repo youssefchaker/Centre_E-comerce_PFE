@@ -424,7 +424,7 @@ function  checkOut ({history}) {
                                                     </ul>
                                                     <ul className="qty">
                                                         <li>Shipping Price: <span>{symbol}{ symbol=="€"?10:10*currencydiff}</span></li>
-                                                        <li>Tax Cost: <span>{symbol}{symbol=="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:currencydiff*0.05*itemsPrice}</span></li>
+                                                        <li>Tax Cost: <span>{symbol}{symbol=="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:Math.round((currencydiff*0.05*itemsPrice+Number.EPSILON)*100)/100}</span></li>
                                                     </ul>
                                                     <ul className="sub-total">
                                                         <li>Shipping <div className="shipping">

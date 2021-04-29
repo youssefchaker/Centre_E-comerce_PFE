@@ -21,7 +21,8 @@ import { newProductReducer,
     updateProductReviewReducer,
     symbolReducer,
     currencyDiffReducer,
-    updateProductDetailsReducer
+    updateProductDetailsReducer,
+    getProductsByCategoryReducer
    } from './products';
 
 
@@ -64,6 +65,7 @@ const rootReducer = combineReducers({
     topproducts:topProductsReducer,
     newproducts:getNewProductsReducer,
     allproducts:getAllProductsReducer,
+    productsByCategory:getProductsByCategoryReducer,
     updateproduct:updateProductReducer,
     deleteproduct:deleteProductReducer,
     deleteadminproduct:deleteAdminProductReducer,

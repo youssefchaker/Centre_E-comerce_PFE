@@ -16,7 +16,7 @@ const Login = ({history}) => {
 
     const dispatch = useDispatch();
 
-    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    const { isAuthenticated, error, loading, user } = useSelector(state => state.auth);
     
     //const redirect = location.search ? location.search.split('=')[1] : '/'
 
@@ -26,6 +26,8 @@ const Login = ({history}) => {
 
         if (isAuthenticated) {
            history.push(`/`)
+
+           sessionStorage.setItem('role', JSON.stringify(user.role))
         }
        
 

@@ -84,7 +84,7 @@ const ListOrders = () => {
                     ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,
                 actions:
-                 <Link to={`/myorder/${order._id}`} className="btn btn-primary">
+                 <Link to={`/myorder/${order._id}`} className="btn btn-primary" style={{borderRadius:'4px'}}>
                         <i className="fa fa-eye"></i>
                     </Link>
             })
