@@ -48,7 +48,7 @@ class ProductListItem extends Component {
 
 
     render() {
-        const {product, onAddToCartClicked} = this.props;
+        const {product, onAddToCartClicked,storename} = this.props;
         const {open} = this.state;
         const symbol=this.props.symbol;
         const currencydiff=this.props.currencydiff;
@@ -72,17 +72,6 @@ class ProductListItem extends Component {
                                    title="Quick View"
                                    onClick={this.onOpenModal}><i className="fa fa-search" aria-hidden="true"></i></a>
                             </div>
-                            {/* {product.images?
-                            <ul className="product-thumb-list">
-                                {product.images.map((vari, i) =>
-                                    <li className={`grid_thumb_img ${(vari === this.state.image)?'active':''}`} key={i}>
-                                        <a href="javascript:void(0)" title="Add to Wishlist">
-                                            <img src={`${vari.images}`} onClick={() => this.onClickHandle(vari)} />
-                                        </a>
-                                    </li>)
-                                }
-                            </ul>:''} */}
-
                         </div>
                         <div className="product-detail">
                             <div>
@@ -98,13 +87,6 @@ class ProductListItem extends Component {
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
                                  <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
-                                {/* {product.details?
-                                <ul className="color-variant">
-                                    {product.details.map((vari, i) => {
-                                        return (
-                                            <li className={vari} key={i} title={vari} onClick={() => this.onClickHandle(vari)}></li>)
-                                    })}
-                                </ul>:''} */}
                             </div>
                         </div>
                     <Modal open={open} onClose={this.onCloseModal} center>
@@ -120,6 +102,7 @@ class ProductListItem extends Component {
                                             <div className="col-lg-6 rtl-text">
                                                 <div className="product-right">
                                                 <h2> {product.name} </h2>
+                                                <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h4 className="sname">Product By:{storename}</h4></Link>
                                                 {symbol=="€"?(product.discount != 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 
@@ -128,25 +111,7 @@ class ProductListItem extends Component {
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
                                  <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
-                                                    {/* {product.variants?
-                                                    <ul className="color-variant">
-                                                        {product.variants.map((vari, i) =>
-                                                            <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
-                                                        }
-                                                    </ul>:''} */}
-                                                    {/* <div className="border-product">
-                                                        <h6 className="product-title">product details</h6>
-                                                        <p>{product.shortDetails}</p>
-                                                    </div> */}
                                                     <div className="product-description border-product">
-                                                        {/* {product.size?
-                                                        <div className="size-box">
-                                                            <ul>
-                                                                {product.size.map((size, i) => {
-                                                                    return <li key={i}><a href="#">{size}</a></li>
-                                                                })}
-                                                            </ul>
-                                                        </div>:''} */}
                                                         <h6 className="product-title">quantity</h6>
                                                         <div className="qty-box">
                                                             <div className="input-group">

@@ -1,4 +1,5 @@
-
+//light/dark mode
+export const CHANGE_MODE='CHANGE_MODE'
 // Get Products
 export const FETCH_PRODUCTS_BEGIN = 'FETCH_PRODUCTS_BEGIN'
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS'

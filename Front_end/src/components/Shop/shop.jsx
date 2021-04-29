@@ -16,7 +16,6 @@ import {getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../services';
 function Shop ({ match }) {
 
     const [layoutColumns, setLayoutColumns] = useState(3);
-
   
 
 
@@ -31,16 +30,17 @@ function Shop ({ match }) {
             alert(error);
             dispatch(clearErrors())
         }
-        const prices = getMinMaxPriceStore(products,store._id);
-        const pricesDT=  getMinMaxPriceDTStore(products,currencydiff,store._id);
-        dispatch(getStoreDetails(match.params.id));
-        dispatch(emptyFilterStore(prices.min, pricesDT.min));
+         if(store._id!=match.params.id){
+            dispatch(getStoreDetails(match.params.id));
+            setTimeout("location.reload(true);",1);
+        } 
     }, [dispatch, alert, error, match.params.id])
      function LayoutViewClicked(colums) {
         setLayoutColumns({
             layoutColumns:colums
         })
     }
+    
         return (
             <div>
                 {/*SEO Support*/}
@@ -83,12 +83,10 @@ function Shop ({ match }) {
                                                         <img src={store.avatar.url} className="img-fluid" alt="" style={{width:'910px',height:'310px'}}/>
                                                         <div className="top-banner-content small-section">
                                                             <h4>{store.name}</h4>
-                                                            <h5>{store.name} is a {store.buisnessDomaine} company it is part of the international Inditex group</h5>
-                                                            <p>The company was created in {store.createdAt.substring(0, 4)} as a new store and unique concept, aimed at a young target Market.</p><hr></hr>
+                                                            <h5>{/* {store description} */}</h5>
                                                             <ul className="contact-list">
                                                           <li><i className="fa fa-phone"></i>  Call Us :    {store.phoneNumber}</li><br></br>
-                                                          <li><i className="fa fa-envelope-o"></i>  Email Us : <a
-                                                          href="#">{store.email}</a></li>
+                                                          <li><i className="fa fa-envelope-o"></i>  Email Us : {store.email}</li>
                                                         </ul>
                                                         </div>
                                                     </div>

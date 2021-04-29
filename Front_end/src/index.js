@@ -9,7 +9,6 @@ import './index.scss';
 // Import custom components
 import store from './store';
 import translations from './constants/translations'
-import { getAllProducts } from './actions'
 import { loadUser } from './actions/index'
 
 // Payment
@@ -90,6 +89,7 @@ import BrowseProducts from "./components/Shop/browseProducts";
 import MyStoreProfile from './components/pages/myStoreProfile';
 import ListOrders from './components/order/listOrders';
 import OrderDetails from './components/order/orderDetails'
+import { getProducts } from './actions/productActions';
 
 // Admin Pages
 import Dashboard from './components/admin/Dashboard'
@@ -107,7 +107,7 @@ function Root() {
       );
 
     useEffect(() => {
-        store.dispatch(getAllProducts());
+        store.dispatch(getProducts());
         store.dispatch(loadUser());
         
         

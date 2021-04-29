@@ -46,7 +46,7 @@ class ProductItem extends Component {
     }
 
     render() {
-        const {product, onAddToCartClicked} = this.props;
+        const {product, onAddToCartClicked,storename} = this.props;
         const symbol=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         let RatingStars = []
@@ -112,7 +112,7 @@ class ProductItem extends Component {
                                             <i className="fa fa-star"></i>
                                             </div>}
                         <div className="cart-info cart-wrap">
-                            <button title="Add to cart" onClick={onAddToCartClicked}>
+                            <button title="Add to cart" onClick={() => onAddToCartClicked(product, 1)}>
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             </button>
                             <a href="javascript:void(0)" data-toggle="modal"
@@ -149,24 +149,15 @@ class ProductItem extends Component {
                                         <div className="col-lg-6 rtl-text">
                                             <div className="product-right">
                                                 <h2> {product.name} </h2>
-                                                <h3>{symbol}{product.price}</h3>
-                                                <div className="border-product">
-                                                    <h6 className="product-title">product details</h6>
-                                                    
-                                                     {product.details.map((detail)=>
-                                                        <table style={{"border":"1px solid black","border-collapse":"collapse"}}>
-                                                        <tr>
-                                                            <th style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>Detail</th>
-                                                            <th style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>Detail Value</th>
-                                                        </tr>
-                                                        <tr>
-                                                        <td style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>{detail.detailname}</td>
-                                                        <td style={{"border":"1px solid black","border-collapse":"collapse","padding":"5px","textAlign":"left"}}>{detail.value}</td>
-                                                        </tr>
-                                                        </table>
-                                                     )}
-                                                     
-                                                </div>
+                                                <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h4 className="sname">Product By:{storename}</h4></Link>
+                                                {symbol=="€"?(product.discount != 0)?
+                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                 <del><span className="money">{symbol}{product.price}</span></del> 
+                            </h4>:<h4>{symbol}{product.price}</h4>
+                            :(product.discount != 0)?
+                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                                                 <div className="product-description border-product">
                                                     <h6 className="product-title">quantity</h6>
                                                     <div className="qty-box">

@@ -84,6 +84,8 @@
     "react-spring": "^8.0.27",
     "react-sticky-box": "^0.7.8",
     "react-stripe-checkout": "^2.6.3",
+    "react-table": "^7.7.0",
+    "react-table-6": "^6.11.0",
     "react-tabs": "^2.3.1",
     "react-toast-notifications": "^2.4.3",
     "react-toastify": "^4.5.2",
@@ -171,5 +173,5 @@
     "sass-loader": "^7.3.1",
     "webpack": "^4.41.2"
   },
-  "proxy": "http://127.0.0.1:9000"
+  "proxy": "http://127.0.0.1:5000"
 }

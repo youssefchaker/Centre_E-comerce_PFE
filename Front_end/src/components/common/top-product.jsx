@@ -11,16 +11,26 @@ class TopProduct extends Component {
     }
 
     render (){
+        let filteredproducts=[];
+        const storeid=this.props.storeid;
         const {topproducts} = this.props;
-        const products=topproducts.products.products;
+        let products=topproducts.products.products;
         const storenames=topproducts.products.storenames;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
+        if(storeid!=undefined){
+            for(var i=0;i<products.length;i++){
+                if(products[i].store!=storeid){
+                    filteredproducts.push(products[i])
+                }
+            }
+            products=filteredproducts;
+        }
         return (
             <div className="theme-card">
                 <h5 className="title-border">Top Products</h5>
                 <Slider className="offer-slider slide-1">
-                    {products.map((product, index) =>
+                    {products.length>0?products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" style={{width:'80px',height:'80px'}} src={`${product.images[0].url}`} alt="" /></Link>
@@ -79,7 +89,7 @@ class TopProduct extends Component {
                                     </div>
                                 </div>
                         </div>
-                    )}
+                    ):<p>There are no new products from other stores</p>}
                 </Slider>
             </div>
         )

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { withTranslate } from 'react-redux-multilingual'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../../../../actions/index';
+import { clearResponse,logout } from '../../../../actions/index';
 import { toast } from 'react-toastify';
 
 const TopBar = (props) =>  {
@@ -11,8 +11,9 @@ const TopBar = (props) =>  {
 
     const { user, loading } = useSelector(state => state.auth)
     const logoutHandler = () => {
+        dispatch(clearResponse());
         dispatch(logout());
-        toast.success('Logged out', {
+        toast.success('Logged out successfully!!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

@@ -47,33 +47,6 @@ import {
     CLEAR_RESPONSE
 } from '../constants/ActionTypes'
 
-
-
-
-//products
-export const fetchProductsBegin = () => ({
-    type: types.FETCH_PRODUCTS_BEGIN
-});
-
-
-
-export const receiveProducts = products => ({
-    type: types.RECEIVE_PRODUCTS,
-    products
-})
-
-export const getAllProducts = () => dispatch => {
-    dispatch(fetchProductsBegin());
-    shop.getProducts(products => {
-        dispatch(receiveProducts(products));
-        return products;
-    })
-}
-export const fetchSingleProduct = productId => ({
-    type: types.FETCH_SINGLE_PRODUCT,
-    productId
-})
-
 //Stores
 
 export const getStores = (/*keyword = '', currentPage = 1, price, category*/) => async (dispatch) => {
@@ -578,7 +551,7 @@ export const clearResponse = () => async (dispatch) => {
 
 // "Cart"
 export const addToCart = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
+    toast.success("Product Added to Cart!!");
         dispatch(addToCartUnsafe(product, qty))
 
 }
@@ -592,14 +565,14 @@ export const addToCartUnsafe = (product, qty) => ({
     qty
 });
 export const removeFromCart = product_id => (dispatch) => {
-    toast.error("Item Removed from Cart");
+    toast.error("Product Removed from Cart!!");
     dispatch({
         type: types.REMOVE_FROM_CART,
         product_id
     })
 };
 export const incrementQty = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
+    toast.success("Product Added to Cart!!");
     dispatch(addToCartUnsafe(product, qty))
 
 }
@@ -667,6 +640,10 @@ export const changeCurrency = (symbol) => ({
     symbol
 });
 
+export const changeMode = (mode) => ({
+    type: types.CHANGE_MODE,
+    mode
+});
 
 
 //News Letter

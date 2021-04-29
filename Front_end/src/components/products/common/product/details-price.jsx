@@ -62,7 +62,7 @@ class DetailsWithPrice extends Component {
             <div className="col-lg-6 rtl-text">
                 <div className="product-right">
                     <h2> {product.name} </h2>
-                    <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`}><h3 style={{"textDecoration":"underline"}}>Product By: {storename}</h3></Link>
+                    <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`}><h2 className="sname" style={{"textDecoration":"underline"}}>Product By: {storename}</h2></Link>
                     {symbol=="€"?(product.discount != 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 

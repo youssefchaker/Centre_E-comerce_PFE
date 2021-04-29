@@ -46,14 +46,19 @@ import * as types from '../constants/ActionTypes'
                     case types.EMPTY_FILTER_STORE:
                         return {
                             ...state,
-                            valuestore: action.minstore,
-                            valueDTstore:action.minDTstore
+                            valuestore: action.minstore.min,
+                            valueDTstore:action.minDTstore.min
                         };
                         case types.SORT_BY_STORE:
                             return {
                                 ...state,
                                 sortByStore: action.sort_by_store
                             };
+                        case types.CHANGE_MODE:
+                            return{
+                                ...state,
+                                mode:action.mode
+                            }
         default:
             return state;
     }
