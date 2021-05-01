@@ -22,7 +22,8 @@ function Subscription ({history})  {
     const [avatar, setAvatar] = useState({});
     const [payment, setPayment] = useState('Stripe');
     const [subscriptionPrice, setSubscriptionPrice] = useState(1188);
-    const [ImageSizeLimit,setImageSizeLimit]=useState(910*310)
+    const [ImageSizeLimit,setImageSizeLimit]=useState(700*700)
+    const [description,setDescription]=useState("")
     const [ImageTest,setImageTest]=useState(true)
     const [, forceUpdate] = useState()
 
@@ -61,6 +62,7 @@ function Subscription ({history})  {
                 subscriptionPrice: subscriptionPrice,
                 name:name,
                 email: email,
+                description:description,
                 buisnessDomaine: buisnessDomaine,
                 phoneNumber: phoneNumber,
                 country: country,
@@ -140,6 +142,11 @@ function Subscription ({history})  {
                                                     {simpleValidator.current.message('email', email, 'required|email')}
                                                 </div>
                                                 <div className="form-group col-md-6 col-sm-6 col-xs-12">
+                                                    <div className="field-label">Store Description *</div>
+                                                    <textarea type="text" name="desc" value={description} onChange={(e) => setDescription(e.target.value)} />
+                                                    {simpleValidator.current.message('description', description, 'required')}
+                                                </div>
+                                                <div className="form-group col-md-12 col-sm-6 col-xs-12">
                                                     <div className="field-label">Business domain *</div>
                                                     <select  name="domaine" value={buisnessDomaine} onChange={(e) => setBuisnessDomaine(e.target.value)} >
                                                     <option>Electronics</option>

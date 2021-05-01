@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
+import {Product4, Product5} from '../../services/script'
+import { addToCart } from '../../actions'
+import ProductItem from '../layouts/common/product-item';
 
 class Searchresult extends Component {
     constructor(props) {
@@ -12,6 +15,8 @@ class Searchresult extends Component {
         setTimeout("location.reload(true);",1);
     }
         render(){
+            const { addToCart} = this.props;
+            var properties = Product4;
             const {products}=this.props.searchedproducts.products
             const storenames=this.props.searchedproducts.products.storenames;
             const {symbol}=this.props.symbol;
@@ -31,35 +36,8 @@ class Searchresult extends Component {
                                         <div className="card">
                                             <div className="products-admin">
                                                 <div className="card-body product-box">
-                                                    <div className="img-wrapper">
-                                                        <div className="lable-block">
-                                                            {(product.creationdate.slice(0,4) === '2021' )?<span className="lable3">NEW</span> : ''}
-                                                            {product.discount?<span className="lable4">on  sale</span> : '' }
-                                                            </div>
-                                                        <div className="front">
-                                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} >
-                                                            <a className="bg-size"><img className="img-fluid blur-up bg-img lazyloaded"  src={product.images[0].url} onClick={this.closeSearch} style={{width:'210px',height:'180px'}}/></a></Link>
-                                                            <div className="product-hover">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="product-detail">
-                                                        <div className="rating">
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                        </div>
-                                                        <a> <h6 >{product.name}</h6></a>
-                                                        <h6>{product.description}</h6>
-                                                        <h4 >{symbol}{symbol=='DT'?Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100:product.price-(product.price*product.discount/100)} <del >{symbol}{symbol=='DT'?product.discount*currencydiff:product.discount}</del></h4>
-                                                        <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5 onClick={this.closeSearch}>By: {storenames[index]} </h5></Link>
-                                                        <ul className="color-variant">
-                                                            
-                                                        </ul>
-                                                    </div>
+                                                <ProductItem {...properties} product={product} storename={storenames[index]} symbol={symbol} currencydiff={currencydiff}
+                                                         onAddToCartClicked={addToCart} key={index} />
                                                 </div>
                                             </div>
                                         </div>
@@ -86,4 +64,4 @@ const mapStateToProps=state=>{
       }
 }
 
-export default connect(mapStateToProps)(Searchresult)
+export default connect(mapStateToProps,{addToCart})(Searchresult)

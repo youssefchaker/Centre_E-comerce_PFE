@@ -77,7 +77,7 @@ function  myStore () {
                                                         <img src={store && store.avatar.url} className="img-fluid" alt="" style={{width:'800px',height:'310px'}}/>
                                                         <div className="top-banner-content small-section">
                                                             <h4>{store && store.name}</h4>
-                                                            <h5>{/* {store description} */}</h5>
+                                                            <h5>{store.description}</h5>
                                                             <p style={{color:'red'}}>Your Subscription will end in {date} </p><br></br>
                                                             <ul className="contact-list">
                                                             <li>🏠 Address :    {store.address} {store.postalCode}, {store.city} </li><br></br>
