@@ -189,7 +189,7 @@ import {NEW_EVENT_REQUEST,
     
             dispatch({
                 type: GET_ADMIN_EVENTS_SUCCESS,
-                payload: data.events
+                payload: data
             })
     
         } catch (error) {

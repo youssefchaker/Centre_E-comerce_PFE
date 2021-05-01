@@ -94,7 +94,8 @@ import { getProducts } from './actions/productActions';
 // Admin Pages
 import Dashboard from './components/admin/Dashboard'
 import ProductsList from './components/admin/ProductsList'
-
+import EventsList from './components/admin/EventsList'
+import ReviewsList from './components/admin/ReviewsList'
 
 
 
@@ -209,7 +210,8 @@ function Root() {
                                 {/* Admin */}
                                 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard}  />
                                 <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
-
+                                <ProtectedRoute path="/admin/events" isAdmin={true} component={EventsList} exact />
+                                <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ReviewsList} exact />
 
 
                                 {/*subscription*/}

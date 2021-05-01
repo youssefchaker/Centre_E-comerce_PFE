@@ -112,7 +112,7 @@ class MyEvents extends Component {
             reader.readAsDataURL(file)
     }
     render (){
-        const {storeevents,loading,symbol,currencydiff}=this.props;
+        const {storeevents,loading}=this.props;
         const error=storeevents.error;
         const data = {
             columns: [

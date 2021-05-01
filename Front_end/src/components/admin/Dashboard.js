@@ -6,7 +6,8 @@ import Sidebar from './sidebar_components/sidebar'
 import Doughnut from './chart/Doughnut'
 import VerticalBar from './chart/VerticalBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminProducts } from '../../actions/productActions'
+import { getAdminProducts,getAdminReviews } from '../../actions/productActions'
+import { getAdminEvents } from '../../actions/eventActions'
 import './admin.css'
 
 
@@ -20,9 +21,10 @@ const Dashboard = () => {
     const dispatch = useDispatch();
 
     const {  adminProducts } = useSelector(state => state.adminproducts);
-
+    const {  reviews } = useSelector(state => state.adminreviews);
+    const {  events } = useSelector(state => state.adminevents);
     let outOfStock = 0;
-    adminProducts.forEach(product => {
+    adminProducts.products.forEach(product => {
         if (product.stock === 0) {
             outOfStock += 1;
         }
@@ -30,7 +32,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(getAdminProducts());
-
+        dispatch(getAdminReviews());
+        dispatch(getAdminEvents());
        
 
     }, [dispatch])
@@ -75,7 +78,7 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-dark o-hidden h-100" style={{borderRadius: '15px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Products<br /> <b>{adminProducts && adminProducts.length}</b></div>
+                                            <div className="text-center card-font-size">Products<br /> <b>{adminProducts.products && adminProducts.products.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" to="/admin/products">
                                             <span className="float-left">View Details</span>
@@ -116,6 +119,33 @@ const Dashboard = () => {
                                     </div>
                                 </div>
 
+                                <div className="col-xl-3 col-sm-6 mb-3">
+                                    <div className="card text-white bg-success o-hidden h-100" style={{borderRadius: '15px'}}>
+                                        <div className="card-body">
+                                            <div className="text-center card-font-size">Events<br /> <b>{events.events && events.events.length}</b></div>
+                                        </div>
+                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/events">
+                                            <span className="float-left">View Details</span>
+                                            <span className="float-right">
+                                                <i className="fa fa-angle-right"></i>
+                                            </span>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className="col-xl-3 col-sm-6 mb-3">
+                                    <div className="card text-white bg-secondary o-hidden h-100" style={{borderRadius: '15px'}}>
+                                        <div className="card-body">
+                                            <div className="text-center card-font-size">Reviews<br /> <b>{reviews.reviews && reviews.reviews.length}</b></div>
+                                        </div>
+                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/reviews">
+                                            <span className="float-left">View Details</span>
+                                            <span className="float-right">
+                                                <i className="fa fa-angle-right"></i>
+                                            </span>
+                                        </Link>
+                                    </div>
+                                </div>
 
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-warning o-hidden h-100" style={{borderRadius: '15px'}}>

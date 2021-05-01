@@ -6,22 +6,19 @@ import {Helmet} from 'react-helmet'
 import Sidebar from './sidebar_components/sidebar'
 import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminProducts, deleteAdminProduct, clearErrors } from '../../actions/productActions'
-import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
+import { getAdminEvents, deleteAdminEvent, clearErrors } from '../../actions/eventActions'
 import { toast } from 'react-toastify';
 
-const ProductsList = ({ history }) => {
+const EventsList = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const { loading, error, adminProducts } = useSelector(state => state.adminproducts);
-    const { error: deleteError, isDeleted } = useSelector(state => state.deleteproduct)
-    const { symbol} = useSelector(state => state.symbol);
-    const {currencydiff} = useSelector(state => state);
+    const { loading, error, events } = useSelector(state => state.adminevents);
+    const { error: deleteError, isDeleted } = useSelector(state => state.deleteadminevent)
 
 
     useEffect(() => {
-        dispatch(getAdminProducts());
+        dispatch(getAdminEvents());
 
         if (error) {
             alert(error);
@@ -33,55 +30,34 @@ const ProductsList = ({ history }) => {
             dispatch(clearErrors())
         }
 
-        if (isDeleted) {
-            toast.success('Product deleted successfully');
-            history.push('/admin/products');
-            dispatch({ type: DELETE_PRODUCT_RESET })
-        }
-
     }, [dispatch, alert, error, deleteError, isDeleted, history])
 
-    const setProducts = () => {
+    const setEvents = () => {
         const data = {
             columns: [
                 {
                     label: 'Image',
-                    field: 'image',
+                    field: 'eventImage',
                     sort: 'asc'
                 },
                 {
                     label: 'Store',
-                    field: 'storename',
+                    field: 'store',
                     sort: 'asc'
                 },
                 {
                     label: 'Name',
-                    field: 'name',
+                    field: 'eventName',
                     sort: 'asc'
                 },
                 {
-                    label: 'Price',
-                    field: 'price',
+                    label: 'Start Date',
+                    field: 'eventDateStart',
                     sort: 'asc'
                 },
                 {
-                    label: 'Discount',
-                    field: 'discount',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Category',
-                    field: 'category',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Stock',
-                    field: 'stock',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Creation Date',
-                    field: 'creationdate',
+                    label: 'Finish Date',
+                    field: 'eventDateFinish',
                     sort: 'asc'
                 },
                 {
@@ -91,19 +67,17 @@ const ProductsList = ({ history }) => {
             ],
             rows: []
         }
-        if (adminProducts) {
-        adminProducts.products.forEach((product,index) => {
+        if (events) {
+            
+            events.events.forEach((event,index) => {
             data.rows.push({
-                image:<img src = {product.images[0].url} style = {{width:'80px',height:'80px'}}></img>,
-                storename: adminProducts.storenames[index],
-                name: product.name,
-                price: `${symbol}${symbol=="€"? product.price:Math.round(currencydiff*product.price)}`,
-                discount: product.discount,
-                category: product.category,
-                stock: product.stock,
-                creationdate:product.creationdate.slice(0,10),
+                eventImage:<img src = {event.eventImage.url} style = {{width:'80px',height:'80px'}}></img>,
+                store: events.storenames[index],
+                eventName: event.eventName,
+                eventDateStart:event.eventDateStart.slice(0,10),
+                eventDateFinish:event.eventDateFinish.slice(0,10),
                 actions: <Fragment>
-                    <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => deleteProductHandler(product._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => deleteEventHandler(event._id)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>
@@ -114,9 +88,9 @@ const ProductsList = ({ history }) => {
         return data;
     }
 
-    const deleteProductHandler = (id) => {
-        dispatch(deleteAdminProduct(id));
-        toast.success('Product deleted successfully');
+    const deleteEventHandler = (id) => {
+        dispatch(deleteAdminEvent(id));
+        toast.success('Event deleted successfully');
         setTimeout("location.reload(true);",2000);
     }
 
@@ -138,7 +112,7 @@ const ProductsList = ({ history }) => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">All Products</h1>
+                        <h1 className="my-5">All Events</h1>
 
                         {loading ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
@@ -147,7 +121,7 @@ const ProductsList = ({ history }) => {
                              width={300}
                 /></div> : (
                             <MDBDataTable
-                                data={setProducts()}
+                                data={setEvents()}
                                 className="px-3"
                                 bordered
                                 striped
@@ -163,4 +137,4 @@ const ProductsList = ({ history }) => {
     )
 }
 
-export default ProductsList
+export default EventsList

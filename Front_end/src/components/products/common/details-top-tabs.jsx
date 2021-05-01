@@ -98,8 +98,10 @@ class DetailsTopTabs extends Component {
         setTimeout("location.reload(true);",2000);
     }
     render (){
-        const reviews=this.props.productreviews.reviews.reviews;
-        const usernames=this.props.productreviews.reviews.usernames;
+        const {productreviews}=this.props
+        console.log(productreviews);
+        const reviews=productreviews.reviews.reviews;
+        const usernames=productreviews.reviews.usernames;
         return (
             <div>
             <section className="tab-product m-0">

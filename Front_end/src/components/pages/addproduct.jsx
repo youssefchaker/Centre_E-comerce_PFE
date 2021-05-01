@@ -82,7 +82,7 @@ class Addproduct extends Component {
             else{
             this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
             toast.success("New Product Added!!");
-            //setTimeout("location.reload(true);",2000);
+            setTimeout("location.reload(true);",2000);
             }
           }
       }

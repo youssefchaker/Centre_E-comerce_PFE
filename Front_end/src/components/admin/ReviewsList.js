@@ -6,22 +6,18 @@ import {Helmet} from 'react-helmet'
 import Sidebar from './sidebar_components/sidebar'
 import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminProducts, deleteAdminProduct, clearErrors } from '../../actions/productActions'
-import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
+import { getAdminReviews, deleteAdminReview, clearErrors } from '../../actions/productActions'
 import { toast } from 'react-toastify';
 
-const ProductsList = ({ history }) => {
+const ReviewsList = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const { loading, error, adminProducts } = useSelector(state => state.adminproducts);
-    const { error: deleteError, isDeleted } = useSelector(state => state.deleteproduct)
-    const { symbol} = useSelector(state => state.symbol);
-    const {currencydiff} = useSelector(state => state);
-
+    const { loading, error, reviews } = useSelector(state => state.adminreviews);
+    const { error: deleteError, isDeleted } = useSelector(state => state.deleteadminproductreview)
 
     useEffect(() => {
-        dispatch(getAdminProducts());
+        dispatch(getAdminReviews());
 
         if (error) {
             alert(error);
@@ -33,55 +29,29 @@ const ProductsList = ({ history }) => {
             dispatch(clearErrors())
         }
 
-        if (isDeleted) {
-            toast.success('Product deleted successfully');
-            history.push('/admin/products');
-            dispatch({ type: DELETE_PRODUCT_RESET })
-        }
-
     }, [dispatch, alert, error, deleteError, isDeleted, history])
 
-    const setProducts = () => {
+    const setReviews = () => {
         const data = {
             columns: [
                 {
-                    label: 'Image',
-                    field: 'image',
+                    label: 'Product',
+                    field: 'product',
                     sort: 'asc'
                 },
                 {
-                    label: 'Store',
-                    field: 'storename',
+                    label: 'User',
+                    field: 'user',
                     sort: 'asc'
                 },
                 {
-                    label: 'Name',
-                    field: 'name',
+                    label: 'Comment',
+                    field: 'comment',
                     sort: 'asc'
                 },
                 {
-                    label: 'Price',
-                    field: 'price',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Discount',
-                    field: 'discount',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Category',
-                    field: 'category',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Stock',
-                    field: 'stock',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Creation Date',
-                    field: 'creationdate',
+                    label: 'Rating',
+                    field: 'rating',
                     sort: 'asc'
                 },
                 {
@@ -91,19 +61,15 @@ const ProductsList = ({ history }) => {
             ],
             rows: []
         }
-        if (adminProducts) {
-        adminProducts.products.forEach((product,index) => {
+        if (reviews) {  
+            reviews.reviews.forEach((review,index) => {
             data.rows.push({
-                image:<img src = {product.images[0].url} style = {{width:'80px',height:'80px'}}></img>,
-                storename: adminProducts.storenames[index],
-                name: product.name,
-                price: `${symbol}${symbol=="€"? product.price:Math.round(currencydiff*product.price)}`,
-                discount: product.discount,
-                category: product.category,
-                stock: product.stock,
-                creationdate:product.creationdate.slice(0,10),
+                product:review.product,
+                user: review.user,
+                comment: review.comment,
+                rating:review.rating,
                 actions: <Fragment>
-                    <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => deleteProductHandler(product._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => deleteReviewHandler(review.productid,review.reviewid)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>
@@ -114,9 +80,9 @@ const ProductsList = ({ history }) => {
         return data;
     }
 
-    const deleteProductHandler = (id) => {
-        dispatch(deleteAdminProduct(id));
-        toast.success('Product deleted successfully');
+    const deleteReviewHandler = (productid,reviewid) => {
+        dispatch(deleteAdminReview(reviewid,productid));
+        toast.success('Review deleted successfully');
         setTimeout("location.reload(true);",2000);
     }
 
@@ -138,7 +104,7 @@ const ProductsList = ({ history }) => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">All Products</h1>
+                        <h1 className="my-5">All Reviews</h1>
 
                         {loading ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
@@ -147,7 +113,7 @@ const ProductsList = ({ history }) => {
                              width={300}
                 /></div> : (
                             <MDBDataTable
-                                data={setProducts()}
+                                data={setReviews()}
                                 className="px-3"
                                 bordered
                                 striped
@@ -163,4 +129,4 @@ const ProductsList = ({ history }) => {
     )
 }
 
-export default ProductsList
+export default ReviewsList

@@ -65,7 +65,7 @@ const Sidebar = () => {
                     </div>
                     <h6 className="mt-3 f-14">ADMIN</h6>
                     <p>General Manager.</p>
-                </div><hr></hr>
+                </div>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}

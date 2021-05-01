@@ -92,12 +92,16 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Admin Get all products   =>   /api/mall/admin/products
 exports.adminGetProducts = catchAsyncErrors(async (req, res, next) => {
-
+    const storenames=[];
     const products = await Product.find();
-
+    for(var i=0;i<products.length;i++){
+        const store= await Store.findById(products[i].store);
+        storenames.push(store.name);
+    }
     res.status(200).json({
         success: true,
-        products
+        products,
+        storenames
     })
 
 })
@@ -295,10 +299,10 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 // Delete Product Review   =>   /admin/reviews/:id
 exports.deleteAdminReview = catchAsyncErrors(async (req, res, next) => {
 
-    const product=await Product.findByIdAndUpdate(req.params.productid,{$pull: {reviews:{_id:req.params.reviewid},$inc: {nbreviews:-1}}})
-         product.save();    
-        product.Update({$inc: {nbreviews:-1}});
-         product.save();   
+    const product1=await Product.findByIdAndUpdate(req.params.productid,{$pull: {reviews:{_id:req.params.reviewid}}})
+    product1.save();  
+    const product2=await Product.findByIdAndUpdate(req.params.productid,{$inc: {nbreviews:-1}})     
+    product2.save();    
         res.status(200).json({
             success: true,
             message:"review deleted"}) 
@@ -325,17 +329,20 @@ exports.updateProductReview = catchAsyncErrors(async (req, res, next) => {
 // admin Get all Products Reviews   =>   api/mall/admin/reviews
 
 exports.getAllProductReviews = catchAsyncErrors(async (req, res, next) => {
-    const tabreviews=[];
+    const reviews=[];
     (await Product.find()).forEach(function(product){
-        tabreviews.push({productname:product.name,productreviews:product.reviews})
+        product.reviews.forEach((review,index)=>{
+            reviews.push({"product":product.name,"productid":product._id,"reviewid":review._id,"user":review.user,"comment":review.comment,"rating":review.rating})
+        })
     })
-    if (tabreviews.length==0) {
+    if (reviews.length==0) {
         return next(new ErrorHandler('there are no reviews in the website at the moment', 404));
     }
+
     else{
         res.status(200).json({
             success: true,
-            reviews: tabreviews
+            reviews
         })
     }
 })
