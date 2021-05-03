@@ -163,8 +163,8 @@ class MyProducts extends Component {
 }
 
     render (){
-        const {storeproducts,loading,symbol,currencydiff}=this.props;
-
+        const {storeproducts,loading}=this.props;
+        const setProducts = () => {
         const data = {
             columns: [
                 {
@@ -223,7 +223,7 @@ class MyProducts extends Component {
         if (storeproducts) {
             storeproducts.products.products.forEach(product => {
                 data.rows.push({
-                    image:<div>{product.images.map((img)=>(<img className="update" onClick={()=>this.openSearch("image",product._id)} src = {img.url} style = {{width:'80px',height:'80px'}}></img>))}</div>,
+                    image:<img className="update" onClick={()=>this.openSearch("image",product._id)} src = {product.images[0].url} style = {{width:'80px',height:'80px'}}></img>,
                     name: <div className="update" onClick={()=>this.openSearch("name",product._id)}>{product.name}</div>,
                     price: <div className="update" onClick={()=>this.openSearch("price",product._id)}>{product.price}</div>,
                     stock: <div className="update" onClick={()=>this.openSearch("stock",product._id)}>{product.stock}</div>,
@@ -240,7 +240,8 @@ class MyProducts extends Component {
                 })
             })
         }
-       
+        return data;
+    }
         return (
             <div>
                 <Breadcrumb title={'My Store'}/>
@@ -285,7 +286,7 @@ class MyProducts extends Component {
                              width={300}
                 /></div> : (
                             <MDBDataTable
-                                data={data}
+                                data={setProducts()}
                                 className="px-3"
                                 bordered
                                 striped

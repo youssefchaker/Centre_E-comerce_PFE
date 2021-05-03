@@ -2,13 +2,10 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-
-import { getTotal, getCartProducts } from '../../../reducers'
 import { addToCart } from '../../../actions'
-import {getMinMaxPrice, getVisibleproducts} from '../../../services';
+import { getVisibleproducts} from '../../../services';
 import ProductListItem from "./product-list-item";
-import { getProducts } from '../../../actions/productActions';
+import Loader from "react-loader-spinner";
 
 class ProductListing extends Component {
 
@@ -35,6 +32,7 @@ class ProductListing extends Component {
     }
 
     render (){
+        const {loading}=this.props.allproducts
         const { addToCart} = this.props;
         const products=this.props.products;
         const storenames=this.props.allproducts.storenames;
@@ -57,12 +55,17 @@ class ProductListing extends Component {
                                 }
                             >
                                 <div className="row">
-                                    { products/*.slice(0, this.state.limit)*/.map((product, index) =>
+                                    { loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :products.length!=0?products.map((product, index) =>
                                         <div className={`${this.props.colSize===3?'col-xl-3 col-md-6 col-grid-box':'col-lg-'+this.props.colSize}`} key={index}>
                                         <ProductListItem product={product} symbol={symbol} currencydiff={currencydiff} storename={storenames[index]}
                                                          onAddToCartClicked={addToCart} key={index}/>
                                         </div>)
-                                    }
+                                    :<h3>There are no products at the moment!</h3>}
                                 </div>
                             </InfiniteScroll>
                             :
@@ -70,7 +73,7 @@ class ProductListing extends Component {
                                 <div className="col-sm-12 text-center section-b-space mt-5 no-found" >
                                     <img src={`${process.env.PUBLIC_URL}/assets/images/empty-search.jpg`} className="img-fluid mb-4" />
                                     <h3>Sorry! Couldn't find the product you were looking For!!!    </h3>
-                                    <p>Please check if you have misspelt something or try searching with other words.</p>
+                                    <p>Please check your filter options.</p>
                                     <Link to={`${process.env.PUBLIC_URL}/`} className="btn btn-solid">continue shopping</Link>
                                 </div>
                             </div>

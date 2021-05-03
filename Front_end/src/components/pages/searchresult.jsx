@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Product4, Product5} from '../../services/script'
 import { addToCart } from '../../actions'
 import ProductItem from '../layouts/common/product-item';
-
+import Loader from "react-loader-spinner";
 class Searchresult extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +15,7 @@ class Searchresult extends Component {
         setTimeout("location.reload(true);",1);
     }
         render(){
+            const { loading} = this.props.searchedproducts;
             const { addToCart} = this.props;
             var properties = Product4;
             const {products}=this.props.searchedproducts.products
@@ -29,7 +30,12 @@ class Searchresult extends Component {
                 <div className="product-wrapper-grid">
                     <div className="container-fluid">
                     <div className="row">
-                        {
+                        {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :products.products.length!=0?
                             products.map((product, index) => {
                                 return (
                                     <div className="col-xl-3 col-sm-6" key={index}>
@@ -44,7 +50,7 @@ class Searchresult extends Component {
                                     </div>
                                 )
                             })
-                        }
+                            :<h3>There are no products at the moment!</h3>}
                         </div>
                         </div>
                         </div>

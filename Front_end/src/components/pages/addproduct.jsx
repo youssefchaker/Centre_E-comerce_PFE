@@ -136,7 +136,7 @@ class Addproduct extends Component {
                                                     {this.validator.message('ProductName', this.state.ProductName, 'required')}
                                     </div>
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <div className="field-label">Product Price</div>
+                                        <div className="field-label">Product Price(€)</div>
                                         <input  type="number" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} min="0" oninput="validity.valid||(value='');"  />
                                                     {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|min:0')}
                                     </div>

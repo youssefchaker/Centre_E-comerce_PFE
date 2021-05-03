@@ -60,8 +60,7 @@ class FooterOne extends Component {
                                     <div className="footer-logo">
                                         <LogoImage logo={this.props.logoName} />
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                                    <p>Welcome to our E-commerce website where you can browse the different products and events from different stores.Along with the possiblity of becoming a seller yourself by buying our subscription on the website and with that begin able to add your own products and events as a store. </p>
                                     <div className="footer-social">
                                         <ul>
                                             <li>

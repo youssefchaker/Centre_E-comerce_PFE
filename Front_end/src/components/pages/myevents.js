@@ -114,6 +114,7 @@ class MyEvents extends Component {
     render (){
         const {storeevents,loading}=this.props;
         const error=storeevents.error;
+        const setEvents = () => {
         const data = {
             columns: [
                 {
@@ -158,6 +159,8 @@ class MyEvents extends Component {
                 })
             })
         }
+        return data;
+    }
         return (
             <div>
                 <Breadcrumb title={'My Events'}/>
@@ -199,7 +202,7 @@ class MyEvents extends Component {
                              width={300}
                 /></div> : (
                             <MDBDataTable
-                                data={data}
+                                data={setEvents()}
                                 className="px-3"
                                 bordered
                                 striped

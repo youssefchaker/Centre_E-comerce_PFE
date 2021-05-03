@@ -80,7 +80,6 @@ import GridCols from "./components/features/portfolio/grid-cols"
 // subscription page
 import  Subscription from './components/pages/subscription'
 
-import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
 import Becomeaseller from './components/pages/becomeaseller';
 import MyProducts from './components/pages/myProducts';
 import MyEvents from './components/pages/myevents';

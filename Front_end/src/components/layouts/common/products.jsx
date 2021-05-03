@@ -1,11 +1,10 @@
-import React, { Component,useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { addToCart } from '../../../actions'
 import ProductItem from './product-item';
+import Loader from "react-loader-spinner";
 import { getNewProducts } from '../../../actions/productActions';
-import { IntlActions } from 'react-redux-multilingual';
 import Slider from 'react-slick';
-import store from '../../../store'
 import {Slider3} from "../../../services/script"
 import {Product4, Product5} from '../../../services/script'
 class SpecialProducts extends Component{
@@ -14,9 +13,8 @@ class SpecialProducts extends Component{
     }
         render(){
             const { addToCart} = this.props;
-            const {newproducts} = this.props;
-            const products=newproducts.products.products;
-            const storenames=newproducts.products.storenames
+            const {products,loading} = this.props.newproducts;
+            const storenames=products.storenames
             const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
         var properties = Product4;
@@ -30,12 +28,17 @@ class SpecialProducts extends Component{
                         <div className="row">
                             <div className="col">
                                 <Slider {...Slider3} className="product-4 product-m no-arrow">
-                                    { products.map((product, index ) =>
+                                    {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :products.products.length!=0? products.products.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff} storename={storenames[index]}
                                                          onAddToCartClicked={addToCart} key={index} />
                                         </div>)
-                                    }
+                                    :<h3>There are no products at the moment!</h3>}
                                 </Slider>
                             </div>
                         </div>

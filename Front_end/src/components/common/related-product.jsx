@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-
+import Loader from "react-loader-spinner";
 import {getRelatedItems} from "../../services";
 import { getProducts } from '../../actions/productActions';
 
@@ -16,6 +16,7 @@ class RelatedProduct extends Component {
     }
 
     render (){
+        const {loading}=this.props.allproducts
         const {relatedproducts} = this.props;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
@@ -23,7 +24,12 @@ class RelatedProduct extends Component {
             <div className="theme-card">
                 <h5 className="title-border">Related Products</h5>
                 <Slider className="offer-slider slide-1">
-                    {relatedproducts.products.length!=0?relatedproducts.products.map((product, index) =>
+                    {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :relatedproducts.products.length!=0?relatedproducts.products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img style={{width:'80px',height:'80px'}} className="img-fluid" src={`${product.images[0].url}`} alt="" /></Link>
@@ -92,7 +98,8 @@ function mapStateToProps(state,ownProps) {
     return {
         relatedproducts:getRelatedItems(state.allproducts,ownProps.target,ownProps.own),
         symbol:state.symbol,
-        currencydiff:state.currencydiff
+        currencydiff:state.currencydiff,
+        allproducts:state.allproducts
     }
 }
 const mapDispatchToProps = dispatch => {

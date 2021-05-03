@@ -4,6 +4,7 @@ import { getStores } from '../../../actions/index'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import Loader from "react-loader-spinner";
 import {
     BrowserRouter as Router,
     Switch,
@@ -79,7 +80,12 @@ function  GridCols () {
                             <hr></hr>
                             <TabPanel>
                                 <div className="row zoom-gallery">
-                                    {stores && stores.map(store => 
+                                    {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :stores && stores.map(store => 
                                         <Store key={store._id} store={store} columns={columns} />
                                     )}
                                 </div>

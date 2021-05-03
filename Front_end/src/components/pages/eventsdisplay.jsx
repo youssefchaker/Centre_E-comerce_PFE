@@ -3,6 +3,7 @@ import Breadcrumb from "../common/breadcrumb";
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { getEvents } from '../../actions/eventActions';
+import Loader from "react-loader-spinner";
 class Eventsdisplay extends Component {
 
     constructor (props) {
@@ -13,7 +14,7 @@ class Eventsdisplay extends Component {
       }
 
     render (){
-       
+       const {events,loading}=this.props.events
         return (
             <div>
                 <Breadcrumb title={'Events '}/>
@@ -23,7 +24,12 @@ class Eventsdisplay extends Component {
                         <div className="row">
 
                             <div className="col-xl-9 col-lg-8 col-md-7 ">
-                            {this.props.events.loading==false?this.props.events.events.events.map((event,index)=>(
+                            {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :events.events.length!=0?events.events.map((event,index)=>(
                                 <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`} ><div className="row blog-media">
                                     <div className="col-xl-6">
                                     
@@ -39,7 +45,7 @@ class Eventsdisplay extends Component {
                                             <div>
                                                 <h4>{event.eventName}</h4>
                                                 <h6>Active from {event.eventDateStart.slice(0,10)} To {event.eventDateFinish.slice(0,10)} </h6>
-                                                <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`} ><h5>Event By {this.props.events.events.storenames[index]} </h5></Link>
+                                                <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`} ><h5>Event By {events.storenames[index]} </h5></Link>
                                             </div>
                                         </div>
                                         <hr></hr>
@@ -48,7 +54,7 @@ class Eventsdisplay extends Component {
                                 </div>
                                 </Link>
                                 
-                            )):'There are no events at the moment!!'}
+                            )):<h3>There are no events at the moment!</h3>}
                                 
                             </div>
                         </div>

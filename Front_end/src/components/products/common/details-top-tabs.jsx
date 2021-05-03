@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import SimpleReactValidator from 'simple-react-validator';
 import ReactStars from "react-rating-stars-component";
 import { deleteReview,  getProductReviews,  newReview, updateReview } from '../../../actions/productActions';
+import RatingDisplay from './product/ratingDisplay';
+import Loader from "react-loader-spinner";
 class DetailsTopTabs extends Component {
     constructor(props){
         super(props);
@@ -98,10 +100,8 @@ class DetailsTopTabs extends Component {
         setTimeout("location.reload(true);",2000);
     }
     render (){
-        const {productreviews}=this.props
-        console.log(productreviews);
-        const reviews=productreviews.reviews.reviews;
-        const usernames=productreviews.reviews.usernames;
+        const {reviews,loading}=this.props.productreviews
+        const usernames=reviews.usernames;
         return (
             <div>
             <section className="tab-product m-0">
@@ -148,26 +148,31 @@ class DetailsTopTabs extends Component {
                                 </p>
                             </TabPanel>
                             <TabPanel>
-                            {this.props.product.reviews.length!==0?
+                            {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :reviews.reviews.length!==0?
                                 <table className="table table-striped mb-0">
                                     <tr>
-                                        <th>Delete Review</th>
-                                        <th>Reviewer</th>
-                                        <td>Update Comment</td>
-                                        <th>Comment</th>
-                                        <td>Update Rating</td>
-                                        <th>Rating</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
-                                {reviews.map((review,index)=>(
+                                {reviews.reviews.map((review,index)=>(
                                     
                                     <tbody>
                                     <tr>
-                                    <td><button  onClick={()=>this.handledelete(review._id,this.props.product._id)}><span>×</span></button></td>
                                         <td>{usernames[index].firstname}{' '}{usernames[index].lastname}</td>
-                                        <td >{this.state.userid==review.user?<button className="fa fa-edit" onClick={()=>this.openSearch("comment",review._id,review.rating)}></button>:''}</td>
                                         <td>{review.comment}</td>
-                                        <td >{this.state.userid==review.user?<button className="fa fa-edit" onClick={()=>this.openSearch("rating",review._id,review.comment)}></button>:''}</td>
-                                        <td><b>{review.rating}/5</b></td>
+                                        <td><RatingDisplay rating={review.rating}></RatingDisplay></td>
+                                        <td>
+                                        {this.state.userid==review.user?<button className="fa fa-edit btn btn-primary py-1 px-2 ml-2" onClick={()=>this.openSearch("comment",review._id,review.rating)}></button>:''}
+                                        {this.state.userid==review.user?<button className="fa fa-star btn btn-secondary py-1 px-2 ml-2" onClick={()=>this.openSearch("rating",review._id,review.comment)}></button>:''}
+                                        <button className="btn btn-danger py-1 px-2 ml-2"  onClick={()=>this.handledelete(review._id,this.props.product._id)}><i className="fa fa-trash"></i></button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 ))}      

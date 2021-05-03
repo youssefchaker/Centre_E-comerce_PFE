@@ -113,8 +113,7 @@ function FooterFour ( {  logoName }) {
                                     <div className="footer-logo">
                                         <LogoImage logo={logoName} />
                                     </div>
-                                    <p>Centre commercial en ligne qui permettra aux entreprises et aux particuliers de faire la promotion de leurs produits et de leurs services.
-                                        Le site proposera des espaces vitrines locatives payables mensuellement par abonnement pour ceux qui souhaitent promouvoir et vendre leurs produits. </p>
+                                    <p>Welcome to our E-commerce website where you can browse the different products and events from different stores.Along with the possiblity of becoming a seller yourself by buying our subscription on the website and with that begin able to add your own products and events as a store. </p>
                                     <div className="footer-social">
                                         <ul>
                                             <li>
@@ -139,30 +138,14 @@ function FooterFour ( {  logoName }) {
                             <div className="col offset-xl-1">
                                 <div className="sub-title">
                                     <div className="footer-title">
-                                        <h4>Sell</h4>
+                                        <h4>Features</h4>
                                     </div>
                                     <div className="footer-contant">
                                         <ul>
-                                            <li><Link to='/'>Learn to sell</Link></li>
                                             <li><Link to={`${process.env.PUBLIC_URL}/pages/subscription`} >Start selling</Link></li>
                                             <li><Link to={`${process.env.PUBLIC_URL}/pages/register`} >Registration</Link></li>
-                                            <li><Link to={`${process.env.PUBLIC_URL}/stores`} >Business sellers</Link></li>
-                                            <li><Link to={`${process.env.PUBLIC_URL}/`} >featured</Link></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className="sub-title">
-                                    <div className="footer-title">
-                                        <h4>why we choose</h4>
-                                    </div>
-                                    <div className="footer-contant">
-                                        <ul>
-                                            <li><a href="/">shipping & return</a></li>
-                                            <li><a href="/">secure shopping</a></li>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/pages/login`} >Login</Link></li>
                                             <li><a href={`${process.env.PUBLIC_URL}/pages/about-us`}>staff</a></li>
-                                            <li><a href="/">affiliates</a></li>
                                             <li><a href={`${process.env.PUBLIC_URL}/pages/contact`}>contact us</a></li>
                                         </ul>
                                     </div>
@@ -171,7 +154,21 @@ function FooterFour ( {  logoName }) {
                             <div className="col">
                                 <div className="sub-title">
                                     <div className="footer-title">
-                                        <h4>store information</h4>
+                                        <h4>Display Section</h4>
+                                    </div>
+                                    <div className="footer-contant">
+                                        <ul>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/stores`} >Featured Stores</Link></li>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} >Featured Products</Link></li>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} >Featured Events</Link></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="sub-title">
+                                    <div className="footer-title">
+                                        <h4>Website information</h4>
                                     </div>
                                     <div className="footer-contant">
                                         <ul className="contact-list">

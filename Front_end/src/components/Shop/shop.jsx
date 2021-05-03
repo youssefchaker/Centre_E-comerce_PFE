@@ -19,9 +19,7 @@ function Shop ({ match }) {
 
     const dispatch = useDispatch();
 
-    const { loading, error, store } = useSelector(state => state.storeDetails)
-    const {products } = useSelector(state => state.allproducts)
-    const currencydiff = useSelector(state => state.currencydiff)
+    const { error, store } = useSelector(state => state.storeDetails)
     useEffect(() => {
         if (error) {
             alert(error);
