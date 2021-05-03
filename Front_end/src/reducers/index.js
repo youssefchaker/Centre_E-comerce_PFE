@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { IntlReducer as Intl, IntlProvider } from 'react-redux-multilingual'
 
-// Import custom reducers
+// custom Product Reducers
 import { newProductReducer,
     getStoreProductsReducer,
     getProductReducer,
@@ -25,13 +25,14 @@ import { newProductReducer,
     getProductsByCategoryReducer
    } from './products';
 
-
+// Cart Reducers
 import cartReducer from './cart';
 
-
+// Filters Reducers
 import {filtersReducer} from './filters';
 
 
+// Event Reducers
 import {
     newEventReducer,
     deleteEventReducer,
@@ -41,17 +42,21 @@ import {
     getStoreEventsReducer,
     updateEventReducer,
     getAdminEventsReducer,
-    deletrAdminEventReducer 
+    deleteAdminEventReducer 
     }   from './events';
 
+// User Reducers
+import {authReducer,userReducer,forgotPasswordReducer,contactFormulaireReducer, allUsersReducer, userDetailsReducer, userAccountReducer} from './user';
 
-import {authReducer,userReducer,forgotPasswordReducer,contactFormulaireReducer} from './user';
 
+// store Reducers
 import {storesReducer,storeDetailsReducer,newStoreReducer,userStoreDetailsReducer,storeReducer} from './store';
 
+// Newsletter Reducer
 import {newsLetterReducer} from './newsLetter';
 
-import {newOrderReducer, myOrdersReducer, orderDetailsReducer} from './order';
+// Order Reducers
+import {newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer} from './order';
 
 
 
@@ -68,15 +73,15 @@ const rootReducer = combineReducers({
     productsByCategory:getProductsByCategoryReducer,
     updateproduct:updateProductReducer,
     deleteproduct:deleteProductReducer,
-    deleteadminproduct:deleteAdminProductReducer,
+    deleteAdminProduct:deleteAdminProductReducer,
     adminproducts:getAdminProductsReducer,
     updateproductdetail:updateProductDetailsReducer,
     ////////////////////////////////////////////////////////
     newreview:newReviewReducer,
-    adminreviews:getAdminReviewsReducer,
+    adminReviews:getAdminReviewsReducer,
     productreviews:getProductReviewReducer,
     deleteproductreview:deleteProductReviewReducer,
-    deleteadminproductreview:deleteAdminProductReviewReducer,
+    review:deleteAdminProductReviewReducer,
     updateproductreview:updateProductReviewReducer,
     ///////////////////////////////////////////////////////////
     newevent:newEventReducer,
@@ -86,13 +91,15 @@ const rootReducer = combineReducers({
     event:getEventReducer,
     storeevents:getStoreEventsReducer,
     updateevent:updateEventReducer,
-    adminevents:getAdminEventsReducer,
-    deleteadminevent:deletrAdminEventReducer, 
+    adminEvents:getAdminEventsReducer,
+    deleteAdminEvent:deleteAdminEventReducer, 
     ///////////////////////////////////////////////////////////
     cartList: cartReducer,
     newOrder: newOrderReducer,
     myOrders: myOrdersReducer,
     orderDetails: orderDetailsReducer,
+    allOrders: allOrdersReducer,
+    order: orderReducer,
     filters: filtersReducer,
     symbol: symbolReducer,
     currencydiff: currencyDiffReducer,
@@ -103,6 +110,9 @@ const rootReducer = combineReducers({
     store: storeReducer,
     auth: authReducer,
     user: userReducer,
+    allUsers: allUsersReducer,
+    userDetails:userDetailsReducer,
+    userAccount:userAccountReducer,
     forgotPassword: forgotPasswordReducer,
     contact: contactFormulaireReducer,
     newsLetter:newsLetterReducer,

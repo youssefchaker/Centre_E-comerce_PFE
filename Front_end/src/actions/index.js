@@ -38,6 +38,9 @@ import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_FAIL,
+    UPDATE_ACCOUNT_STATUS_REQUEST,
+    UPDATE_ACCOUNT_STATUS_SUCCESS,
+    UPDATE_ACCOUNT_STATUS_FAIL,
     DELETE_USER_REQUEST,
     DELETE_USER_SUCCESS,
     DELETE_USER_FAIL,
@@ -171,7 +174,25 @@ export const updateStore = (id, storeData) => async (dispatch) => {
 
 
 
+export const getStoresAdmin = () => async (dispatch) => {
+    try {
 
+        dispatch({ type: types.ADMIN_STORES_REQUEST })
+
+        const { data } = await axios.get(`/api/mall/admin/stores`)
+
+        dispatch({
+            type: types.ADMIN_STORES_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: types.ADMIN_STORES_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 
 
@@ -510,6 +531,39 @@ export const deleteUser = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+// admin activate or deactivate user account
+export const updateAccountStatus = (userData) => async (dispatch) => {
+    try {
+          
+        
+        
+
+        dispatch({ type: UPDATE_ACCOUNT_STATUS_REQUEST })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+         
+        
+
+        const { data } = await axios.post('/api/mall/admin/user/activate', userData, config)
+        
+
+        dispatch({
+            type: UPDATE_ACCOUNT_STATUS_SUCCESS,
+            payload: data.user
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_ACCOUNT_STATUS_FAIL,
             payload: error.response.data.message
         })
     }

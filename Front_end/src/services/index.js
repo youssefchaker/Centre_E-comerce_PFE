@@ -83,7 +83,7 @@ export const getMinMaxPriceDTStore = (products,diff,storeid) => {
 
 
 export const getVisibleproducts = (data, category, store, value,valueDT, sortBy,symbol,diff ) => {
-    console.log(value);
+    
     if(symbol.symbol=="DT"){
         return data.products.filter((product,index) => {
             let categoryMatch;

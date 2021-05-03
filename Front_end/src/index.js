@@ -94,6 +94,16 @@ import { getProducts } from './actions/productActions';
 // Admin Pages
 import Dashboard from './components/admin/Dashboard'
 import ProductsList from './components/admin/ProductsList'
+import OrdersList from './components/admin/OrdersList'
+import ProcessOrder from './components/admin/ProcessOrder'
+import UsersList from './components/admin/UsersList'
+import UpdateUser from './components/admin/UpdateUser'
+import ProductReviews from './components/admin/ProductReviews'
+import EventsList from './components/admin/EventsList'
+import StoresList from './components/admin/StoresList'
+
+
+
 
 
 
@@ -209,7 +219,13 @@ function Root() {
                                 {/* Admin */}
                                 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard}  />
                                 <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
-
+                                <ProtectedRoute path="/admin/orders" isAdmin={true} component={OrdersList} exact />
+                                <ProtectedRoute path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact />
+                                <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
+                                <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
+                                <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
+                                <ProtectedRoute path="/admin/events" isAdmin={true} component={EventsList} exact />
+                                <ProtectedRoute path="/admin/stores" isAdmin={true} component={StoresList} exact />
 
 
                                 {/*subscription*/}
@@ -221,7 +237,7 @@ function Root() {
                                 
 
                                 
-                               
+                                   
 
                                  {/* <Route exact path="*" component={PageNotFound} /> */}
 

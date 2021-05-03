@@ -53,6 +53,11 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Invalid Email or Password', 401));
     }
 
+    // 
+    if (!user.active) {
+        return next(new ErrorHandler('Your account is deactivated', 401));
+    }
+
     // Checks if password is correct or not
     const isPasswordMatched = await user.comparePassword(password);
 
@@ -241,9 +246,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 // Admin Update user profile   =>   /api/mall/admin/user/:id
 exports.AdminUpdateUser = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
+        
         role: req.body.role
     }
 
@@ -283,18 +286,6 @@ exports.contactFormulaire = catchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
-    if (!user) {
-        return next(new ErrorHandler('User not found with this email', 404));
-    }
-
-
-
-
-   
-
-    
-    
-
     try {
 
         await sendEmail({
@@ -315,4 +306,27 @@ exports.contactFormulaire = catchAsyncErrors(async (req, res, next) => {
 
 })
 
+// Admin reactivate or deactivate user account
+exports.activateAccount = catchAsyncErrors(async (req, res, next) => {
+    
+    const {id,active}=req.body;
+    
+   const user = await User.findByIdAndUpdate(id, {active: active}, {
+       new: true,
+       runValidators: true,
+       useFindAndModify: false
+   })
+   if (user && active )
+   res.status(200).json({
+       success: true,
+       message:"user account has been activated !",
+       user
+   })
 
+   if (user && !active )
+   res.status(200).json({
+       success: true,
+       message:"user account has been deactivated !",
+       user
+   })
+}) 

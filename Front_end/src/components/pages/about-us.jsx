@@ -62,7 +62,7 @@ class aboutUs extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="banner-section">
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/coming-soon.jpg`} className="img-fluid" alt=""/>
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/about/about-us-banner.jpg`} className="img-fluid" alt=""/>
                                 </div>
                             </div>
                             <div className="col-sm-12">
@@ -132,7 +132,7 @@ via flexible functionalities will also be offered in the platform for sellers.</
                                     </div>
                                     <div>
                                         <img src={`${process.env.PUBLIC_URL}/assets/images/team/4.jpg`} className="img-fluid" alt=""/>
-                                        <h4>Marwen</h4>
+                                        <h4>...</h4>
                                         <h6>Silver Digital project Officer</h6>
                                     </div>
                                     <div>

@@ -79,7 +79,7 @@ const ListOrders = () => {
                 id: order._id,
                 date: order.createdAt.slice(0,10),
                 numOfItems: order.orderItems.length,
-                amount: `${symbol}${symbol=="€"? (Math.round(order.totalPrice)):Math.round((currencydiff*(order.totalPrice) + Number.EPSILON) )}`,
+                amount: `${symbol}${symbol=="€"? order.totalPrice:Math.round((currencydiff*(order.totalPrice) + Number.EPSILON) )}`,
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')
                     ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,

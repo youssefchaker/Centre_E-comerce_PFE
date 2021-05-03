@@ -16,7 +16,9 @@ const Login = ({history}) => {
 
     const dispatch = useDispatch();
 
-    const { isAuthenticated, error, loading, user } = useSelector(state => state.auth);
+    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.userAccount);
+
     
     //const redirect = location.search ? location.search.split('=')[1] : '/'
 
@@ -29,6 +31,8 @@ const Login = ({history}) => {
 
            sessionStorage.setItem('role', JSON.stringify(user.role))
         }
+
+        
        
 
         if (error) {
@@ -55,6 +59,19 @@ const Login = ({history}) => {
           simpleValidator.current.showMessages()
         }
         dispatch(login(email, password))
+
+        if (user.email===email && !user.active) {
+            toast.error('Your account is Deactivated !', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+                history.push(`/`)
+         }
     }
 
 
@@ -92,7 +109,7 @@ const Login = ({history}) => {
                                         </div>
                                         
                                         <button type="submit" /*onClick={handlesubmit}*/ className="btn btn-solid" style={{marginRight:'100px'}}>Login</button>
-                                        <Link to="/password/forgot"><a className="btn btn-solid">Forget Password?</a></Link>
+                                        <Link to="/password/forgot"><button className="btn btn-solid">Forget Password?</button></Link>
                                     </form>
                                 </div>
                             </div>

@@ -25,6 +25,7 @@ import {NEW_EVENT_REQUEST,
     DELETE_ADMIN_EVENT_REQUEST,
     DELETE_ADMIN_EVENT_SUCCESS,
     DELETE_ADMIN_EVENT_FAIL,
+    DELETE_ADMIN_EVENT_RESET,
     CLEAR_ERRORS } from '../constants/eventConstants'
 
     /* export const eventReducer = (state = { events: {} }, action) => {
@@ -320,7 +321,7 @@ import {NEW_EVENT_REQUEST,
         }
     }
     
-    export const getAdminEventsReducer = (state = { adminevents: {} }, action) => {
+    export const getAdminEventsReducer = (state = { events: [] }, action) => {
         switch (action.type) {
     
             case GET_ADMIN_EVENTS_REQUEST:          
@@ -348,7 +349,7 @@ import {NEW_EVENT_REQUEST,
         }
     }
 
-    export const deletrAdminEventReducer = (state = { deleteadminevent: {} }, action) => {
+    export const deleteAdminEventReducer = (state = {}, action) => {
         switch (action.type) {
 
             case DELETE_ADMIN_EVENT_REQUEST:            
@@ -367,6 +368,11 @@ import {NEW_EVENT_REQUEST,
                     ...state,
                     error: action.payload
                     }
+            case DELETE_ADMIN_EVENT_RESET: 
+                return {
+                    ...state,
+                     isDeleted: false
+                     }
             case CLEAR_ERRORS:
                 return {
                     ...state,

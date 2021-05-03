@@ -34,9 +34,9 @@ function LogoBlock ()  {
                             <Slider {...Slider2} className="slide-2 no-arrow">
                                 
                                 {stores && stores.map(store =>
-                                    <div >
+                                    <div key={store._id}>
                                         <a href={null}>
-                                        <img src={store.avatar.url} alt="store logo" style={{width:'200px',height:'160px',borderRadius:'4px'}} />
+                                        <img src={store.avatar.url} alt="store logo" style={{width:'200px',height:'160px',borderRadius:'3.5px'}} />
 
                                         </a>
                                     </div>

@@ -62,8 +62,17 @@ const UpdateStore = ({ match, history }) => {
 
 
         if (isUpdated) {
-            history.push('/mystore');
-            alert('store updated successfully');
+            
+            toast.success('Store updated successfully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+                history.push('/pages/mystore');
             dispatch({ type: UPDATE_STORE_RESET })
         }
 

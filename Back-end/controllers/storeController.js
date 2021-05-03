@@ -79,7 +79,7 @@ exports.getStores = catchAsyncErrors(async (req, res, next) => {
 
 })
 
-// Admin Get all stores   =>   /api/mall/stores
+// Admin Get all stores   =>   /api/mall/admin/stores
 exports.getStoresAdmin = catchAsyncErrors(async (req, res, next) => {
 
     const stores = await Store.find();

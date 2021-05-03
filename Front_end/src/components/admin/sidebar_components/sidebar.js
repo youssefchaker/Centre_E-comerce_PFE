@@ -61,11 +61,11 @@ const Sidebar = () => {
               <AiIcons.AiOutlineClose onClick={showSidebar} />
             </NavIcon>
                <div className="sidebar-user text-center">
-                    <div><img className="img-60 rounded-circle lazyloaded blur-up" src={`${process.env.PUBLIC_URL}/assets/images/dashboard/man.png`} alt="#" style={{width:'100px',height:'100px'}}/>
+                    <div><img className="img-60 rounded-circle lazyloaded blur-up" src={`${process.env.PUBLIC_URL}/assets/images/dashboard/man.png`} alt="#" style={{width:'90px',height:'90px'}}/>
                     </div>
-                    <h6 className="mt-3 f-14">ADMIN</h6>
-                    <p>General Manager.</p>
-                </div><hr></hr>
+                    <h6 className="mt-3 f-14">General Manager.</h6>
+                    
+                </div>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}

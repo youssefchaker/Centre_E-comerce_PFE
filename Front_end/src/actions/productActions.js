@@ -48,6 +48,7 @@ import {NEW_PRODUCT_REQUEST,
     DELETE_ADMIN_REVIEW_REQUEST,
     DELETE_ADMIN_REVIEW_SUCCESS,
     DELETE_ADMIN_REVIEW_FAIL,
+    DELETE_ADMIN_REVIEW_RESET,
     UPDATE_REVIEW_REQUEST,
     UPDATE_REVIEW_SUCCESS,
     UPDATE_REVIEW_FAIL,
@@ -429,7 +430,7 @@ export const getAdminReviews = () => async (dispatch) => {
 
         dispatch({
             type: GET_ADMIN_REVIEWS_SUCCESS,
-            payload: data
+            payload: data.reviews
         })
 
     } catch (error) {

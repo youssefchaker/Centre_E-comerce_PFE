@@ -15,8 +15,8 @@ const {
     getUserDetails,
     AdminUpdateUser,
     deleteUser,
-    contactFormulaire
-
+    contactFormulaire,
+    activateAccount
 } = require('../controllers/authController');
 
 
@@ -38,11 +38,12 @@ router.route('/admin/users').get(isAuthenticatedUser,authorizeRoles('Admin'),all
 router.route('/admin/user/:id')
               .get(isAuthenticatedUser,authorizeRoles('Admin'),getUserDetails)
               .put(isAuthenticatedUser,authorizeRoles('Admin'),AdminUpdateUser)
-              .delete(isAuthenticatedUser,authorizeRoles('Admin'),deleteUser);
+              .delete(isAuthenticatedUser,authorizeRoles('Admin'),deleteUser)
+            
 
 
 router.route('/contact').post(contactFormulaire);
-
+router.route('/admin/user/activate').post(isAuthenticatedUser,authorizeRoles('Admin'),activateAccount)
 
 
 

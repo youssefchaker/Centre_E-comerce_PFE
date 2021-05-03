@@ -8,13 +8,15 @@ import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminProducts, deleteAdminProduct, clearErrors } from '../../actions/productActions'
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
+import { toast } from 'react-toastify';
+
 
 const ProductsList = ({ history }) => {
 
     const dispatch = useDispatch();
 
     const { loading, error, adminProducts } = useSelector(state => state.adminproducts);
-    const { error: deleteError, isDeleted } = useSelector(state => state.deleteproduct)
+    const { error: deleteError, isDeleted } = useSelector(state => state.deleteAdminProduct)
     const { symbol} = useSelector(state => state.symbol);
     const {currencydiff} = useSelector(state => state);
 
@@ -23,7 +25,15 @@ const ProductsList = ({ history }) => {
         dispatch(getAdminProducts());
 
         if (error) {
-            alert(error);
+            toast.error(error, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             dispatch(clearErrors())
         }
 
@@ -33,7 +43,16 @@ const ProductsList = ({ history }) => {
         }
 
         if (isDeleted) {
-            alert('Product deleted successfully');
+            toast.success('Product deleted successfully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+            
             history.push('/admin/products');
             dispatch({ type: DELETE_PRODUCT_RESET })
         }
@@ -96,9 +115,15 @@ const ProductsList = ({ history }) => {
                 category: product.category,
                 stock: product.stock,
                 actions: <Fragment>
+
+                    
+                     {/* if you want to add edit product feature
+            
                     <Link to={`/admin/product/${product._id}`} className="btn btn-success py-1 px-2" style={{borderRadius:'4px'}}>
                         <i className="fa fa-pencil"></i>
                     </Link>
+                    
+                    */}
                     <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => deleteProductHandler(product._id)}>
                         <i className="fa fa-trash"></i>
                     </button>

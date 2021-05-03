@@ -23,7 +23,7 @@ class EventSection extends Component {
                         <div className="col-md-12">
                             <Slider {...Slider3} className="slide-3 no-arrow ">
                             {eventsarray.map((event,index)=>(
-                                <div>
+                                <div key={index}>
                                     <div className="col-md-12">
                                         <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`}>
                                             <div className="classic-effect">

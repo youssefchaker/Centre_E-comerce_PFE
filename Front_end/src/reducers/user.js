@@ -41,6 +41,10 @@ import {
     DELETE_USER_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    UPDATE_ACCOUNT_STATUS_REQUEST,
+    UPDATE_ACCOUNT_STATUS_SUCCESS,
+    UPDATE_ACCOUNT_STATUS_FAIL,
+    UPDATE_ACCOUNT_STATUS_RESET,
     CLEAR_ERRORS,
     CLEAR_RESPONSE
 } from '../constants/ActionTypes'
@@ -322,6 +326,47 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const userAccountReducer = (state = {user:{}}, action) => {
+    switch (action.type) {
+
+        case UPDATE_ACCOUNT_STATUS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case UPDATE_ACCOUNT_STATUS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: true,
+                user:action.payload
+            }
+
+        case UPDATE_ACCOUNT_STATUS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+
+            case UPDATE_ACCOUNT_STATUS_RESET:
+            return {
+                ...state,
+                isUpdated: false
             }
 
         case CLEAR_ERRORS:

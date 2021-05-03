@@ -47,6 +47,7 @@ import {NEW_PRODUCT_REQUEST,
     DELETE_ADMIN_REVIEW_REQUEST,
     DELETE_ADMIN_REVIEW_SUCCESS,
     DELETE_ADMIN_REVIEW_FAIL,
+    DELETE_ADMIN_REVIEW_RESET,
     UPDATE_REVIEW_REQUEST,
     UPDATE_REVIEW_SUCCESS,
     UPDATE_REVIEW_FAIL,
@@ -542,7 +543,7 @@ export const deleteProductReducer = (state = {}, action) => {
     }
 }
 
-export const deleteAdminProductReducer = (state = { deleteadminproduct: {} }, action) => {
+export const deleteAdminProductReducer = (state = { }, action) => {
     switch (action.type) {
 
         case DELETE_ADMIN_PRODUCT_REQUEST:          
@@ -561,6 +562,11 @@ export const deleteAdminProductReducer = (state = { deleteadminproduct: {} }, ac
                 ...state,
                 error: action.payload
                 }
+                case DELETE_PRODUCT_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
         case CLEAR_ERRORS:
             return {
                 ...state,
@@ -628,7 +634,7 @@ export const newReviewReducer = (state = { newreview: {} }, action) => {
     }
 }
 
-export const getAdminReviewsReducer = (state = { adminreviews: {} }, action) => {
+export const getAdminReviewsReducer = (state = { reviews: [] }, action) => {
     switch (action.type) {
 
         case GET_ADMIN_REVIEWS_REQUEST:         
@@ -713,7 +719,7 @@ export const deleteProductReviewReducer = (state = { deleteproductreview: {} }, 
     }
 }
 
-export const deleteAdminProductReviewReducer = (state = { deleteadminproductreview: {} }, action) => {
+export const deleteAdminProductReviewReducer = (state = {}, action) => {
     switch (action.type) {
  
         case DELETE_ADMIN_REVIEW_REQUEST:     
@@ -732,6 +738,11 @@ export const deleteAdminProductReviewReducer = (state = { deleteadminproductrevi
                 ...state,
                 error: action.payload
                 }
+        case DELETE_ADMIN_REVIEW_RESET:
+             return {
+                ...state,
+                isDeleted: false
+               }
         case CLEAR_ERRORS:
             return {
                 ...state,

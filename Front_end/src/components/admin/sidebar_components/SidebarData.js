@@ -27,7 +27,7 @@ export const SidebarData = [
   },
   {
     title: 'Stores',
-    path: 'admin/stores',
+    path: '/admin/stores',
     icon: <AiIcons.AiFillShop />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -54,22 +54,27 @@ export const SidebarData = [
   },
   {
     title: 'Products',
-    path: 'admin/products',
+    path: '/admin/products',
     icon: <FaIcons.FaCartPlus />
   },
   {
+    title: 'Events',
+    path: '/admin/events',
+    icon: <RiIcons.RiCalendarEventFill />
+  },
+  {
     title: 'Users',
-    path: 'admin/users',
+    path: '/admin/users',
     icon: <IoIcons.IoMdPeople />
   },
   {
     title: 'Orders',
-    path: 'admin/orders',
+    path: '/admin/orders',
     icon: <FaIcons.FaShoppingBag />
   },
   {
     title: 'Reviews',
-    path: 'admin/reviews',
+    path: '/admin/reviews',
     icon: <AiIcons.AiFillStar />
   }
 ];

@@ -7,6 +7,9 @@ import Doughnut from './chart/Doughnut'
 import VerticalBar from './chart/VerticalBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminProducts } from '../../actions/productActions'
+import { allOrders } from '../../actions/orderActions'
+import { allUsers } from '../../actions/index'
+import Loader from "react-loader-spinner";
 import './admin.css'
 
 
@@ -20,6 +23,11 @@ const Dashboard = () => {
     const dispatch = useDispatch();
 
     const {  adminProducts } = useSelector(state => state.adminproducts);
+    const { orders, totalAmount, loading } = useSelector(state => state.allOrders)
+    const { users } = useSelector(state => state.allUsers)
+    const { symbol} = useSelector(state => state.symbol);
+    const {currencydiff} = useSelector(state => state);
+
 
     let outOfStock = 0;
     adminProducts.forEach(product => {
@@ -29,7 +37,9 @@ const Dashboard = () => {
     })
 
     useEffect(() => {
-        dispatch(getAdminProducts());
+        dispatch(getAdminProducts())
+        dispatch(allOrders())
+        dispatch(allUsers())
 
        
 
@@ -56,6 +66,13 @@ const Dashboard = () => {
                 <div className="col-12 col-md-10">
                     <h1 className="my-4">Dashboard</h1>
 
+                    {loading ?<div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> : (
+
                     
                         <Fragment>
                             
@@ -64,7 +81,7 @@ const Dashboard = () => {
                                 <div className="col-xl-12 col-sm-12 mb-3">
                                     <div className="card text-white bg-primary o-hidden h-100 " style={{borderRadius: '60px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Total Amount<br /> <b>€45</b>
+                                            <div className="text-center card-font-size">Total Amount<br /> <b>{symbol}{totalAmount && symbol=="€"?  totalAmount.toFixed(2):Math.round((currencydiff*(totalAmount) + Number.EPSILON) )}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +107,7 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-danger o-hidden h-100" style={{borderRadius: '15px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Orders<br /> <b>50</b></div>
+                                            <div className="text-center card-font-size">Orders<br /> <b>{orders && orders.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" to="/admin/orders">
                                             <span className="float-left">View Details</span>
@@ -105,7 +122,7 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-info o-hidden h-100" style={{borderRadius: '15px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Users<br /> <b>10</b></div>
+                                            <div className="text-center card-font-size">Users<br /> <b>{users && users.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" to="/admin/users">
                                             <span className="float-left">View Details</span>
@@ -136,6 +153,8 @@ const Dashboard = () => {
                             </div><hr></hr>
                           
                         </Fragment>
+
+                )}
                     
 
                 </div>

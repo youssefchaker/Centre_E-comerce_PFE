@@ -25,7 +25,7 @@ class HeaderTwo extends Component {
 
         this.state = {
             isLoading:false,
-            search:null,
+            search:'',
             loadsearch:null,
             lang:"en",
             curr:'€',
