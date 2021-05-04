@@ -339,7 +339,7 @@ export const deleteAdminProduct = (id) => async (dispatch) => {
 
         dispatch({ type: DELETE_ADMIN_PRODUCT_REQUEST })
 
-        const { data } = await axios.delete(`/api/mall/admin/product/${id}`)
+        const { data } = await axios.delete(`/api/mall/store/product/${id}`)
 
         dispatch({
             type: DELETE_ADMIN_PRODUCT_SUCCESS,

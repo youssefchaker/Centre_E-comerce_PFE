@@ -37,7 +37,15 @@ const ProductsList = ({ history }) => {
         }
 
         if (deleteError) {
-            alert(deleteError);
+            toast.error(deleteError, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             dispatch(clearErrors())
         }
 
@@ -142,8 +150,7 @@ const ProductsList = ({ history }) => {
 
     const deleteProductHandler = (id) => {
         dispatch(deleteAdminProduct(id));
-        toast.success('Product deleted successfully');
-        setTimeout("location.reload(true);",2000);
+    
     }
 
     return (

@@ -7,26 +7,58 @@ import Sidebar from './sidebar_components/sidebar'
 import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminReviews, deleteAdminReview, clearErrors } from '../../actions/productActions'
+import { DELETE_ADMIN_REVIEW_RESET} from '../../constants/productConstants'
+
 import { toast } from 'react-toastify';
 
 const ReviewsList = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const { loading, error, reviews } = useSelector(state => state.adminreviews);
-    const { error: deleteError, isDeleted } = useSelector(state => state.deleteadminproductreview)
+    const { loading, error, reviews } = useSelector(state => state.adminReviews);
+    const { error: deleteError, isDeleted } = useSelector(state => state.review)
 
     useEffect(() => {
         dispatch(getAdminReviews());
 
         if (error) {
-            alert(error);
+            toast.error(error, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             dispatch(clearErrors())
         }
 
         if (deleteError) {
-            alert(deleteError);
+            toast.error(deleteError, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             dispatch(clearErrors())
+        }
+
+        if (isDeleted) {
+            toast.success('Review deleted successfully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+            history.push('/admin/reviews');
+            dispatch({ type: DELETE_ADMIN_REVIEW_RESET })
         }
 
     }, [dispatch, alert, error, deleteError, isDeleted, history])
@@ -40,7 +72,7 @@ const ReviewsList = ({ history }) => {
                     sort: 'asc'
                 },
                 {
-                    label: 'User',
+                    label: 'User ID',
                     field: 'user',
                     sort: 'asc'
                 },
@@ -62,7 +94,7 @@ const ReviewsList = ({ history }) => {
             rows: []
         }
         if (reviews) {  
-            reviews.reviews.forEach((review,index) => {
+            reviews.forEach((review) => {
             data.rows.push({
                 product:review.product,
                 user: review.user,
@@ -82,8 +114,6 @@ const ReviewsList = ({ history }) => {
 
     const deleteReviewHandler = (productid,reviewid) => {
         dispatch(deleteAdminReview(reviewid,productid));
-        toast.success('Review deleted successfully');
-        setTimeout("location.reload(true);",2000);
     }
 
     return (

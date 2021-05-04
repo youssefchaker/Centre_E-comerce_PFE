@@ -25,7 +25,7 @@ class Addproduct extends Component {
         ProductDetailsValues:[],
         ProductDiscount:0,
         details:[],
-        ImageSizeLimit:530*530,
+        ImageSizeLimit:400*400,
         ImageTest:true
     }
     this.validator = new SimpleReactValidator();

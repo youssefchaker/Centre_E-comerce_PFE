@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import SimpleReactValidator from 'simple-react-validator';
 import ReactStars from "react-rating-stars-component";
 import { deleteReview,  getProductReviews,  newReview, updateReview } from '../../../actions/productActions';
@@ -28,7 +28,7 @@ class DetailsTopTabs extends Component {
     }
     componentWillMount() {
         this.props.getProductReviews(this.props.product._id);
-        if(this.props.auth.user!=undefined){
+        if(this.props.auth.user){
             this.setState({userid:this.props.auth.user._id})
         }
     }
@@ -165,7 +165,7 @@ class DetailsTopTabs extends Component {
                                         <th></th>
                                         <th></th>
                                     </tr>
-                                {reviews.reviews.map((review,index)=>(
+                                {reviews.reviews && reviews.reviews.map((review,index)=>(
                                     
                                     <tbody>
                                     <tr key={index}>
@@ -173,9 +173,9 @@ class DetailsTopTabs extends Component {
                                         <td>{review.comment}</td>
                                         <td><RatingDisplay rating={review.rating}></RatingDisplay></td>
                                         <td>
-                                        {this.state.userid==review.user?<button className="fa fa-edit btn btn-primary py-1 px-2 ml-2" onClick={()=>this.openSearch("comment",review._id,review.rating)} style={{borderRadius:'4px'}}></button>:''}
-                                        {this.state.userid==review.user?<button className="fa fa-star btn btn-secondary py-1 px-2 ml-2" onClick={()=>this.openSearch("rating",review._id,review.comment)} style={{borderRadius:'4px'}}></button>:''}
-                                        
+                                        {this.state.userid && this.state.userid==review.user?<button className="fa fa-pencil btn btn-danger py-1 px-2 ml-2" onClick={()=>this.openSearch("comment",review._id,review.rating)} style={{borderRadius:'4px'}}></button>:''}
+                                        {this.state.userid && this.state.userid==review.user?<button className="fa fa-star btn btn-danger py-1 px-2 ml-2" onClick={()=>this.openSearch("rating",review._id,review.comment)} style={{borderRadius:'4px'}}></button>:''}
+                                        {this.state.userid && this.state.userid==review.user?<button className="btn btn-danger py-1 px-2 ml-2"  onClick={()=>this.handledelete(review._id,this.props.product._id)} style={{borderRadius:'4px'}}><i className="fa fa-trash"></i></button>:''}
                                         </td>
                                     </tr>
                                     </tbody>

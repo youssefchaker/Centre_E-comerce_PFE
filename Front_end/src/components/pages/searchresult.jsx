@@ -6,6 +6,8 @@ import {Product4, Product5} from '../../services/script'
 import { addToCart } from '../../actions'
 import ProductItem from '../layouts/common/product-item';
 import Loader from "react-loader-spinner";
+import {Helmet} from 'react-helmet'
+
 class Searchresult extends Component {
     constructor(props) {
         super(props);
@@ -24,8 +26,15 @@ class Searchresult extends Component {
             const currencydiff=this.props.currencydiff;
         return (
             <div>
-                <Breadcrumb title={'Search Result'}/>
-                
+                  {/*SEO Support*/}
+            <Helmet>
+                <title>Mall</title>
+                <meta name="description" content=" online mall." />
+            </Helmet>
+            {/*SEO Support End */}
+
+            <Breadcrumb title={'Search Result'}/>
+                   
             <section>
                 <div className="product-wrapper-grid">
                     <div className="container-fluid">
@@ -55,7 +64,9 @@ class Searchresult extends Component {
                         </div>
                         </div>
                         </section>
-                    </div>
+                        </div>
+                        
+                    
         )
 
             

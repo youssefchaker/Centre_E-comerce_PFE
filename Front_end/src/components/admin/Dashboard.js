@@ -23,21 +23,24 @@ const Dashboard = () => {
 
     const dispatch = useDispatch();
 
-    const {  adminProducts } = useSelector(state => state.adminproducts);
+    const { adminProducts } = useSelector(state => state.adminproducts);
     const { orders, totalAmount, loading } = useSelector(state => state.allOrders)
     const { users } = useSelector(state => state.allUsers)
     const { symbol} = useSelector(state => state.symbol);
     const {currencydiff} = useSelector(state => state);
 
+    const { stores } = useSelector(state => state.stores)
+    const {  events } = useSelector(state => state.adminEvents);
 
-    const {  reviews } = useSelector(state => state.adminreviews);
-    const {  events } = useSelector(state => state.adminevents);
     let outOfStock = 0;
+
+    if (adminProducts) {
     adminProducts.products.forEach(product => {
         if (product.stock === 0) {
             outOfStock += 1;
         }
     })
+}
 
     useEffect(() => {
         dispatch(getAdminProducts())
@@ -154,9 +157,9 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-secondary o-hidden h-100" style={{borderRadius: '15px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Reviews<br /> <b>{reviews.reviews && reviews.reviews.length}</b></div>
+                                            <div className="text-center card-font-size">Stores<br /> <b>{stores && stores.length}</b></div>
                                         </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/reviews">
+                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/stores">
                                             <span className="float-left">View Details</span>
                                             <span className="float-right">
                                                 <i className="fa fa-angle-right"></i>

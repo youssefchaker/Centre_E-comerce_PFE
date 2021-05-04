@@ -15,8 +15,8 @@ const EventsList = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const { loading, error, events } = useSelector(state => state.adminevents);
-    const { error: deleteError, isDeleted } = useSelector(state => state.deleteadminevent)
+    const { loading, error, events } = useSelector(state => state.adminEvents);
+    const { error: deleteError, isDeleted } = useSelector(state => state.deleteAdminEvent)
 
 
     useEffect(() => {
