@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withTranslate } from 'react-redux-multilingual'
+import {connect} from 'react-redux'
 
 class NavBar extends Component {
     constructor(props) {
@@ -69,8 +70,7 @@ class NavBar extends Component {
 
     render() {
         const { translate } = this.props;
-        const role = JSON.parse(sessionStorage.getItem('role'));
-
+        const {isAuthenticated,user}=this.props.auth
         return (
             <div>
                 <div className="main-navbar">
@@ -110,13 +110,15 @@ class NavBar extends Component {
                                 </Link>
                                 
                             </li>
-                            {role !== 'Seller' && (
+                            {isAuthenticated?user.role!='Seller'?
                             <li>
                             <Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
                                     {translate('become_a_seller')}
                             </Link>
                             </li>
-                            )}
+                            : '': <li><Link to={`${process.env.PUBLIC_URL}/pages/becomeaseller`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
+                                    {translate('become_a_seller')}
+                            </Link></li>}
                              <li>
                             
                                 <Link to={`${process.env.PUBLIC_URL}/pages/contact`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
@@ -135,5 +137,9 @@ class NavBar extends Component {
     }
 }
 
-
-export default withTranslate(NavBar);
+const mapStateToProps=state=>{
+    return {
+        auth:state.auth
+      }
+}
+export default connect(mapStateToProps) (withTranslate(NavBar));
