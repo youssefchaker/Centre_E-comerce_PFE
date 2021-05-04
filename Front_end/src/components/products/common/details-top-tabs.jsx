@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'
-import { toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import SimpleReactValidator from 'simple-react-validator';
 import ReactStars from "react-rating-stars-component";
 import { deleteReview,  getProductReviews,  newReview, updateReview } from '../../../actions/productActions';
@@ -20,7 +19,8 @@ class DetailsTopTabs extends Component {
             inputtype:null,
             other:null,
             reviewid:null,
-            userid:''
+            userid:null,
+            newrating:3
 
         }
         this.validator = new SimpleReactValidator();
@@ -28,9 +28,6 @@ class DetailsTopTabs extends Component {
     }
     componentWillMount() {
         this.props.getProductReviews(this.props.product._id);
-        if(this.props.auth.user){
-            this.setState({userid:this.props.auth.user._id})
-        }
     }
     openSearch=(field,reviewid,other)=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -59,12 +56,8 @@ class DetailsTopTabs extends Component {
             this.validator.showMessages();
             this.forceUpdate();
           }
-          if (!this.props.auth.isAuthenticated) {
-            toast.error("You must have an account to create a review !");
-
-          }
           else{
-            this.props.newReview(this.props.product._id,{"userid":this.state.userid,"rating":this.state.Rating,"comment":this.state.Comment});
+            this.props.newReview(this.props.product._id,{"userid":this.props.auth.user._id,"rating":this.state.Rating,"comment":this.state.Comment});
             toast.success("Review added !");
             setTimeout("location.reload(true);",2000);
           }
@@ -73,6 +66,9 @@ class DetailsTopTabs extends Component {
       }
        ratingChanged = (newRating) => {
         this.setState({Rating:newRating});
+      };
+      ratingChangedNew = (newRating) => {
+        this.setState({newrating:newRating});
       };
       handleupdate=(e)=>{
         e.preventDefault(); 
@@ -87,15 +83,15 @@ class DetailsTopTabs extends Component {
                 setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="rating"){
-                if(this.state.updatevalue>5 || this.state.updatevalue<0){
+                if(this.state.newrating>5 || this.state.newrating<1){
                     toast.warn("the new rating value must be between 0 and 5!!");
                 }
                 else{
-                this.props.updateReview(this.state.reviewid,{"rating":parseInt(this.state.updatevalue,10),"comment":this.state.other});
-                toast.success("review rating updated!!");
-                setTimeout("location.reload(true);",2000);
-                }
-              }    
+                    this.props.updateReview(this.state.reviewid,{"rating":parseInt(this.state.newrating,10),"comment":this.state.other});
+                    toast.success("review rating updated!!");
+                    setTimeout("location.reload(true);",2000);
+                    }  
+            }    
           }
       }
       handledelete=(reviewid,productid)=>{
@@ -104,6 +100,7 @@ class DetailsTopTabs extends Component {
         setTimeout("location.reload(true);",2000);
     }
     render (){
+        const {isAuthenticated}=this.props.auth;
         const {reviews,loading}=this.props.productreviews
         const usernames=reviews.usernames;
         return (
@@ -152,31 +149,59 @@ class DetailsTopTabs extends Component {
                                 </p>
                             </TabPanel>
                             <TabPanel>
-                            {loading ? <div style={{ textAlign: "center" }}><Loader
+                            {!isAuthenticated ?loading ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> :reviews.reviews.length!==0?
+                /></div> : <table className="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                {reviews.reviews.map((review,index)=>(
+                                    
+                                    <tbody key={index}>
+                                    <tr>
+                                        <td>{usernames[index].firstname}{' '}{usernames[index].lastname}</td>
+                                        <td>{review.comment}</td>
+                                        <td><RatingDisplay rating={review.rating}></RatingDisplay></td>
+                                        
+                                    </tr>
+                                    </tbody>
+                                ))}      
+                                </table> :loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :reviews.reviews.length!=0?
                                 <table className="table table-striped mb-0">
+                                <thead>
                                     <tr>
                                         <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
-                                {reviews.reviews && reviews.reviews.map((review,index)=>(
+                                    </thead>
+                                {reviews.reviews.map((review,index)=>(
                                     
                                     <tbody>
-                                    <tr key={index}>
+                                    <tr>
                                         <td>{usernames[index].firstname}{' '}{usernames[index].lastname}</td>
                                         <td>{review.comment}</td>
                                         <td><RatingDisplay rating={review.rating}></RatingDisplay></td>
-                                        <td>
-                                        {this.state.userid && this.state.userid==review.user?<button className="fa fa-pencil btn btn-danger py-1 px-2 ml-2" onClick={()=>this.openSearch("comment",review._id,review.rating)} style={{borderRadius:'4px'}}></button>:''}
-                                        {this.state.userid && this.state.userid==review.user?<button className="fa fa-star btn btn-danger py-1 px-2 ml-2" onClick={()=>this.openSearch("rating",review._id,review.comment)} style={{borderRadius:'4px'}}></button>:''}
-                                        {this.state.userid && this.state.userid==review.user?<button className="btn btn-danger py-1 px-2 ml-2"  onClick={()=>this.handledelete(review._id,this.props.product._id)} style={{borderRadius:'4px'}}><i className="fa fa-trash"></i></button>:''}
-                                        </td>
+
+                                        {this.props.auth.user._id==review.user?<td>
+                                        <button className="fa fa-pencil btn btn-primary py-1 px-2 ml-2" onClick={()=>this.openSearch("comment",review._id,review.rating)} style={{borderRadius:'4px'}}></button>
+                                        <button className="fa fa-star btn btn-secondary py-1 px-2 ml-2" onClick={()=>this.openSearch("rating",review._id,review.comment)} style={{borderRadius:'4px'}}></button>
+                                        <button className="btn btn-danger py-1 px-2 ml-2"  onClick={()=>this.handledelete(review._id,this.props.product._id)} style={{borderRadius:'4px'}}><i className="fa fa-trash"></i></button>
+                                        </td>:''}
                                     </tr>
                                     </tbody>
                                 ))}      
@@ -184,8 +209,9 @@ class DetailsTopTabs extends Component {
                             :<h3>No current Reviews for this product</h3>}
                             
                             </TabPanel>
+                            
                             <TabPanel>
-                                <form className="theme-form mt-4">
+                            {isAuthenticated?<form className="theme-form mt-4">
                                     <div className="form-row">
                                         <div className="col-md-12 ">
                                             <div className="media m-0">
@@ -208,7 +234,8 @@ class DetailsTopTabs extends Component {
                                             <button className="btn btn-solid" type="submit" onClick={this.handlesubmit}>Submit YOur Review</button>
                                         </div>
                                     </div>
-                                </form>
+                                </form>:<h3>You must have an account to be able to add a review for this product!!</h3>}
+                                
                             </TabPanel>
                         </Tabs>
                     </div>
@@ -224,9 +251,15 @@ class DetailsTopTabs extends Component {
                                                 <form>
                                                     <div className="form-group">
                                                     {this.state.inputtype=="text"?<input type="text" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
-                                                     :<input type="number" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} min="0" max="5" />}  
+                                                     :<ReactStars
+                                                    name="rating"
+                                                    onChange={this.setStateFromInput} value={this.state.newrating}
+                                                        count={5}
+                                                        onChange={this.ratingChangedNew}
+                                                        size={24} 
+                                                        activeColor="#ffd700" />}  
 
-                                                    {this.state.inputtype=="text"?this.validator2.message('new value', this.state.updatevalue, 'required'):this.validator2.message('new value', this.state.updatevalue, 'required|between:0,5')}
+                                                    {this.state.inputtype=="text"?this.validator2.message('new value', this.state.updatevalue, 'required'):''}
                                                     </div>
                                                 <button type="submit" onClick={this.handleupdate} style={{marginRight:"-35px"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
                                                 </form>

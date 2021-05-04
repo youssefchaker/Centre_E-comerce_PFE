@@ -15,9 +15,8 @@ class Addevent extends Component {
         EventImage:null,
         EventDatestart:null,
         EventDatefinish:null,
-        EventImg:null,
-        ImageSizeLimit:700*700,
-        ImageTest:true
+        EventImg:{},
+        
     }
     this.validator = new SimpleReactValidator();
     }
@@ -45,13 +44,11 @@ class Addevent extends Component {
             else if(this.state.EventDatestart>this.state.EventDatefinish){
                 toast.warn("the event start date must be lower then the finish date");
             }
-            else if(!this.state.ImageTest) {
-                toast.warn("Event Image too big to upload");
-            }
+            
             else{
             this.props.newEvent({'storeName':this.props.userStore.store.name,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
             toast.success("Event added !");
-            setTimeout("location.reload(true);",2500);
+            
             }
           }
       }
@@ -60,12 +57,8 @@ class Addevent extends Component {
         obj[e.target.name] = e.target.value;
         this.setState(obj);
         const file = e.target.files[0];
-        if(file.size>this.state.ImageSizeLimit){
-            this.setState({ImageTest:false});
+        
 
-        }
-        else{
-            this.setState({ImageTest:true});
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {  
@@ -73,7 +66,7 @@ class Addevent extends Component {
                 }
             }
             reader.readAsDataURL(file)
-    }
+    
 }
     render (){
         return (

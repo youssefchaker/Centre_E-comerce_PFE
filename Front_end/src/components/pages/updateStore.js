@@ -92,6 +92,8 @@ const UpdateStore = ({ match, history }) => {
         formData.set('address', address);
         formData.append('avatar', avatar);
 
+        
+
 
         dispatch(updateStore(store._id, formData))
     }

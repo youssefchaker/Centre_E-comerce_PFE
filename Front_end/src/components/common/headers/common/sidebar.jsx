@@ -77,6 +77,7 @@ class SideBar extends Component {
 
     render() {
         const {categories,allproducts}=this.props;
+        const products=allproducts.products;
         return (
             <div id="mySidenav" className="sidenav">
                 <a href="javascript:void(0)" className="sidebar-overlay" onClick={this.closeNav}></a>
@@ -98,11 +99,15 @@ class SideBar extends Component {
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
-                                                <ul>
-                                                    <li>
-                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#"></Link>
-                                                    </li>
-                                                </ul>
+                                                {products.map((product,index)=>(
+                                                    <div>
+                                                    {product.category==category?
+                                                    <div>                                                 
+                                                        <Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><h5>{product.name}</h5><img src={product.images[0].url} style = {{width:'80px',height:'80px'}} alt="" className="img-fluid" /></Link>
+                                                        </div>
+                                                    :''}  
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
