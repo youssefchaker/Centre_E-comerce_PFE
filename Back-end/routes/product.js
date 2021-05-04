@@ -43,11 +43,10 @@ router.route('/products/search/:keyword').get(getSearchedProduct);//
 router.route('/review/:id').put( isAuthenticatedUser,  createProductReview)//
 router.route('/reviews/:id').get(getProductReviews)//
 router.route('/reviews/:reviewid/:productid').delete( isAuthenticatedUser,  deleteReview)//
-router.route('/admin/reviews/:id').delete(isAuthenticatedUser, authorizeRoles('Admin'),deleteAdminReview)//
+router.route('/admin/reviews/:reviewid/:productid').delete(isAuthenticatedUser, authorizeRoles('Admin'),deleteAdminReview)//
 router.route('/product/updatereview/:id').put( isAuthenticatedUser, updateProductReview)//
 router.route('/admin/reviews').get(isAuthenticatedUser,authorizeRoles('Admin'),getAllProductReviews)//
 router.route('/storename/:id').get(getStorename);//
-
 
 
 

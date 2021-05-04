@@ -2,13 +2,10 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-
-import { getTotal, getCartProducts } from '../../../reducers'
+import Loader from "react-loader-spinner";
 import { addToCart, emptyFilterStore } from '../../../actions'
-import {getMinMaxPrice, getVisibleStoreproducts,getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../../services';
+import { getVisibleStoreproducts,getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../../services';
 import ProductListItem from "./product-list-item";
-import { getProducts } from '../../../actions/productActions';
 class ProductListingStore extends Component {
 
     constructor (props) {
@@ -38,6 +35,7 @@ class ProductListingStore extends Component {
     }
 
     render (){
+        const {loading}=this.props.allproducts;
         const { addToCart} = this.props;
         const storeproducts=this.props.storeproducts;
         const {symbol}=this.props.symbol;
@@ -46,7 +44,12 @@ class ProductListingStore extends Component {
             <div>
                 <div className="product-wrapper-grid">
                     <div className="container-fluid">
-                        {storeproducts.length > 0 ?
+                        {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :storeproducts.length > 0 ?
                             <InfiniteScroll
                                 dataLength={this.state.limit} //This is important field to render the next data
                                 next={this.fetchMoreItems}

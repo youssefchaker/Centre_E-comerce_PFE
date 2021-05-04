@@ -15,7 +15,7 @@ import { addToCart, addToCartUnsafe } from '../../actions/cartActions'
 import ImageZoom from './common/product/image-zoom'
 import SmallImages from './common/product/small-image'
 import { getStoreProduct } from '../../actions/productActions';
-
+import Loader from "react-loader-spinner";
 
 
 class LeftSideBar extends Component {
@@ -58,7 +58,7 @@ class LeftSideBar extends Component {
     }
 
     render(){
-
+        const { loading} = this.props.product; 
         const { product} = this.props.product.product; 
         const storename=this.props.product.product.storename;
         const {addToCart,addToCartUnsafe}=this.props;
@@ -81,17 +81,17 @@ class LeftSideBar extends Component {
 
         return (
             <div>
-                {/*SEO Support*/}
                 <Helmet>
                     <title>Mall | {product.category} | {product.name}</title>
                     <meta name="description" content="online Mall" />
                 </Helmet>
-                {/*SEO Support End */}
-
                 <Breadcrumb  parent={'Product'} title={product.name} />
-
-                {/*Section Start*/}
-                {(product)?
+                {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :(product)?
                 <section className="section-b-space">
                     <div className="collection-wrapper">
                         <div className="container">

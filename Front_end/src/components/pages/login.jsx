@@ -16,7 +16,7 @@ const Login = ({history}) => {
 
     const dispatch = useDispatch();
 
-    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    const { isAuthenticated, error, loading} = useSelector(state => state.auth);
     const { user } = useSelector(state => state.userAccount);
 
     

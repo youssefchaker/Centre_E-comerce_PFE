@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'
 import {Slider3} from "../../../services/script"
 import { getEventsLimited } from '../../../actions/eventActions';
-
+import Loader from "react-loader-spinner";
 class EventSection extends Component {
     constructor(props){
         super(props);
@@ -13,16 +13,19 @@ class EventSection extends Component {
         this.props.getEventsLimited();
       }
     render (){
-        var eventsarray = [];
-        this.props.limitedevents.events.events.map((ev)=>{
-            eventsarray.push(ev);
-        })
+        const {events,loading}=this.props.limitedevents;
+
         return (
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <Slider {...Slider3} className="slide-3 no-arrow ">
-                            {eventsarray.map((event,index)=>(
+                            {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :events.events.length!=0?events.events.map((event,index)=>(
                                 <div key={index}>
                                     <div className="col-md-12">
                                         <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`}>
@@ -41,7 +44,7 @@ class EventSection extends Component {
                                     </div>
                                 </div>
 
-                            ))}
+                            )):<h3>There are no events at the moment !</h3>}
                                 
                             </Slider>
                         </div>

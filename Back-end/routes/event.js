@@ -33,5 +33,4 @@ router.route('/admin/events').get(isAuthenticatedUser,authorizeRoles("Admin"),ge
 
 
 
-
 module.exports = router;

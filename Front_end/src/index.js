@@ -80,7 +80,6 @@ import GridCols from "./components/features/portfolio/grid-cols"
 // subscription page
 import  Subscription from './components/pages/subscription'
 
-import MasonaryGridCols from "./components/features/portfolio/masonary-grid-cols"
 import Becomeaseller from './components/pages/becomeaseller';
 import MyProducts from './components/pages/myProducts';
 import MyEvents from './components/pages/myevents';
@@ -98,13 +97,9 @@ import OrdersList from './components/admin/OrdersList'
 import ProcessOrder from './components/admin/ProcessOrder'
 import UsersList from './components/admin/UsersList'
 import UpdateUser from './components/admin/UpdateUser'
-import ProductReviews from './components/admin/ProductReviews'
-import EventsList from './components/admin/EventsList'
 import StoresList from './components/admin/StoresList'
-
-
-
-
+import EventsList from './components/admin/EventsList'
+import ReviewsList from './components/admin/ReviewsList'
 
 
 
@@ -223,9 +218,9 @@ function Root() {
                                 <ProtectedRoute path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact />
                                 <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
                                 <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
-                                <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
-                                <ProtectedRoute path="/admin/events" isAdmin={true} component={EventsList} exact />
                                 <ProtectedRoute path="/admin/stores" isAdmin={true} component={StoresList} exact />
+                                <ProtectedRoute path="/admin/events" isAdmin={true} component={EventsList} exact />
+                                <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ReviewsList} exact />
 
 
                                 {/*subscription*/}

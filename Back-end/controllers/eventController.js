@@ -143,13 +143,19 @@ exports.getStoreEvents = catchAsyncErrors(async (req, res, next) => {
 exports.getAllEvents = catchAsyncErrors(async (req, res, next) => {
 
     const events = await Event.find();
+    const storenames=[];
     if (events.length==0) {
         return next(new ErrorHandler('there are no events in the website at the moment', 404));
     }
     else{
+        for(var i=0;i<events.length;i++){
+            const store= await Store.findById(events[i].store)
+            storenames.push(store.name);
+        }
         res.status(200).json({
             success: true,
-            events
+            events,
+            storenames
         })
     }
 })

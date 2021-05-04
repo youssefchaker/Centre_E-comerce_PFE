@@ -83,7 +83,8 @@ const storeSchema = new mongoose.Schema({
         default: Date.now
     },
     description: {
-        type: String
+        type: String,
+        required:true,
     }
 })
 

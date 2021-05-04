@@ -63,6 +63,45 @@ class ProductListItem extends Component {
                                     className="img-fluid"
                                     alt="" /></Link>
                             </div>
+                            {product.nbreviews<10?
+                                            <div >
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>10 && product.nbreviews<20 ?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>20 && product.nbreviews<30?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            product.nbreviews>30 && product.nbreviews<40?
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star-o"></i>
+                                            </div>:
+                                            <div>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i>
+                                            </div>}
                             <div className="cart-info cart-wrap">
                                 <button title="Add to cart" onClick={() => onAddToCartClicked(product, 1)}>
                                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -102,7 +141,7 @@ class ProductListItem extends Component {
                                             <div className="col-lg-6 rtl-text">
                                                 <div className="product-right">
                                                 <h2> {product.name} </h2>
-                                                <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h4 className="sname">Product By:{storename}</h4></Link>
+                                                {storename!=undefined?<Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h4 className="sname">Product By:{storename}</h4></Link>:''}
                                                 {symbol=="€"?(product.discount != 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 

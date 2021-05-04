@@ -9,9 +9,6 @@ import ProductListingStore from "./common/product-listingstores";
 import StickyBox from "react-sticky-box";
 import TopProduct from '../common/top-product';
 import { getStoreDetails, clearErrors } from '../../actions/index'
-import { getProducts } from '../../actions/productActions';
-import { emptyFilterStore } from '../../actions';
-import {getMinMaxPriceStore,getMinMaxPriceDTStore} from '../../services';
 
 function Shop ({ match }) {
 
@@ -22,9 +19,7 @@ function Shop ({ match }) {
 
     const dispatch = useDispatch();
 
-    const { loading, error, store } = useSelector(state => state.storeDetails)
-    const {products } = useSelector(state => state.allproducts)
-    const currencydiff = useSelector(state => state.currencydiff)
+    const { error, store } = useSelector(state => state.storeDetails)
     useEffect(() => {
         if (error) {
             alert(error);
@@ -32,7 +27,7 @@ function Shop ({ match }) {
         }
          if(store._id!=match.params.id){
             dispatch(getStoreDetails(match.params.id));
-            setTimeout("location.reload(true);",1);
+            setTimeout("location.reload(true);",500);
         } 
     }, [dispatch, alert, error, match.params.id])
      function LayoutViewClicked(colums) {
@@ -40,7 +35,6 @@ function Shop ({ match }) {
             layoutColumns:colums
         })
     }
-    
         return (
             <div>
                 {/*SEO Support*/}
@@ -72,7 +66,6 @@ function Shop ({ match }) {
                                             </div>
                                         </div>
                                     </StickyBox>
-                                    {/*side-bar banner end here*/}
                                 </div>
                                 <div className="collection-content col">
                                     <div className="page-main-content ">
@@ -83,7 +76,7 @@ function Shop ({ match }) {
                                                         <img src={store.avatar.url} className="img-fluid" alt="" style={{width:'910px',height:'310px'}}/>
                                                         <div className="top-banner-content small-section">
                                                             <h4>{store.name}</h4>
-                                                            <h5>{/* {store description} */}</h5>
+                                                            <h5>{store.description }</h5>
                                                             <ul className="contact-list">
                                                           <li><i className="fa fa-phone"></i>  Call Us :    {store.phoneNumber}</li><br></br>
                                                           <li><i className="fa fa-envelope-o"></i>  Email Us : {store.email}</li>

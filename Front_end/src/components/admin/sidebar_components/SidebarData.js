@@ -73,6 +73,11 @@ export const SidebarData = [
     icon: <FaIcons.FaShoppingBag />
   },
   {
+    title: 'Events',
+    path: 'admin/events',
+    icon: <RiIcons.RiCalendarEventFill />
+  },
+  {
     title: 'Reviews',
     path: '/admin/reviews',
     icon: <AiIcons.AiFillStar />

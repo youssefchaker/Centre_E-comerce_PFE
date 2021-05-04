@@ -143,7 +143,7 @@ class ProductItem extends Component {
                                     <div className="row">
                                         <div className="col-lg-6  col-xs-12">
                                             <div className="quick-view-img">
-                                                <img src={product.images[0].url} alt="" className="img-fluid" style={{width:'500px',height:'500px'}}   />
+                                                <img src={product.images[0].url} alt="" className="img-fluid"    />
                                             </div>
                                         </div>
                                         <div className="col-lg-6 rtl-text">

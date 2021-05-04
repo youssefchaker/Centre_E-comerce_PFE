@@ -10,7 +10,6 @@ import { getAdminProducts, deleteAdminProduct, clearErrors } from '../../actions
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
 import { toast } from 'react-toastify';
 
-
 const ProductsList = ({ history }) => {
 
     const dispatch = useDispatch();
@@ -68,8 +67,8 @@ const ProductsList = ({ history }) => {
                     sort: 'asc'
                 },
                 {
-                    label: 'ID',
-                    field: 'id',
+                    label: 'Store',
+                    field: 'store',
                     sort: 'asc'
                 },
                 {
@@ -98,6 +97,11 @@ const ProductsList = ({ history }) => {
                     sort: 'asc'
                 },
                 {
+                    label: 'Creation Date',
+                    field: 'creationdate',
+                    sort: 'asc'
+                },
+                {
                     label: 'Actions',
                     field: 'actions',
                 },
@@ -105,15 +109,16 @@ const ProductsList = ({ history }) => {
             rows: []
         }
         if (adminProducts) {
-        adminProducts.forEach(product => {
+        adminProducts.products.forEach((product,index) => {
             data.rows.push({
                 image:<img src = {product.images[0].url} style = {{width:'80px',height:'80px'}}></img>,
-                id: product._id,
+                store: adminProducts.storenames[index],
                 name: product.name,
                 price: `${symbol}${symbol=="€"? product.price:Math.round(currencydiff*product.price)}`,
                 discount: product.discount,
                 category: product.category,
                 stock: product.stock,
+                creationdate:product.creationdate.slice(0,10),
                 actions: <Fragment>
 
                     
@@ -136,7 +141,9 @@ const ProductsList = ({ history }) => {
     }
 
     const deleteProductHandler = (id) => {
-        dispatch(deleteAdminProduct(id))
+        dispatch(deleteAdminProduct(id));
+        toast.success('Product deleted successfully');
+        setTimeout("location.reload(true);",2000);
     }
 
     return (

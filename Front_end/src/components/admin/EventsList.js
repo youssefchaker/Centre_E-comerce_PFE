@@ -15,8 +15,9 @@ const EventsList = ({ history }) => {
 
     const dispatch = useDispatch();
 
-    const { loading, error, events } = useSelector(state => state.adminEvents);
-    const { isDeleted } = useSelector(state => state.deleteAdminEvent)
+    const { loading, error, events } = useSelector(state => state.adminevents);
+    const { error: deleteError, isDeleted } = useSelector(state => state.deleteadminevent)
+
 
     useEffect(() => {
         dispatch(getAdminEvents());
@@ -58,33 +59,28 @@ const EventsList = ({ history }) => {
         const data = {
             columns: [
                 {
-                    label: 'Event ID',
-                    field: 'id',
+                    label: 'Image',
+                    field: 'eventImage',
+                    sort: 'asc'
+                },
+                {
+                    label: 'Store',
+                    field: 'store',
                     sort: 'asc'
                 },
                 {
                     label: 'Name',
-                    field: 'name',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Image',
-                    field: 'image',
+                    field: 'eventName',
                     sort: 'asc'
                 },
                 {
                     label: 'Start Date',
-                    field: 'start',
+                    field: 'eventDateStart',
                     sort: 'asc'
                 },
                 {
-                    label: 'End Date',
-                    field: 'end',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Store ID',
-                    field: 'store',
+                    label: 'Finish Date',
+                    field: 'eventDateFinish',
                     sort: 'asc'
                 },
                 {
@@ -94,17 +90,17 @@ const EventsList = ({ history }) => {
             ],
             rows: []
         }
-      if(events) {
-        events.forEach(event => {
+        if (events) {
+            
+            events.events.forEach((event,index) => {
             data.rows.push({
-                id: event._id,
-                name: event.eventName,
-                image: <img src={event.eventImage.url} style = {{width:'80px',height:'80px'}} />,
-                start:  event.eventDateStart.slice(0,10),
-                end: event.eventDateFinish.slice(0,10),
-                store: event.store,
+                eventImage:<img src = {event.eventImage.url} style = {{width:'80px',height:'80px'}}></img>,
+                store: events.storenames[index],
+                eventName: event.eventName,
+                eventDateStart:event.eventDateStart.slice(0,10),
+                eventDateFinish:event.eventDateFinish.slice(0,10),
                 actions: <Fragment>
-                    <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}} onClick={() => deleteEventHandler(event._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => deleteEventHandler(event._id)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>

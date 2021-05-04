@@ -43,8 +43,8 @@ export const getMinMaxPriceDT = (products,diff) => {
     let min = 1000, max = 0;
 
     products.map((product, index) => {
-        min = (diff*(product.price-(product.price*product.discount/100)) < min) ? diff*(product.price-(product.price*product.discount/100)) : min;
-        max = (diff*(product.price-(product.price*product.discount/100) > max)) ? diff*(product.price-(product.price*product.discount/100)) : max;
+        min = (Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100 < min) ? Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100 : min;
+        max = (Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100 > max) ? Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100)/100 : max;
     })
 
     return {'min':min, 'max':max};
@@ -75,8 +75,8 @@ export const getMinMaxPriceDTStore = (products,diff,storeid) => {
     let min = 1000, max = 0;
 
     storeproducts.map((product, index) => {
-        min = (diff*(product.price-(product.price*product.discount/100)) < min) ? diff*(product.price-(product.price*product.discount/100)) : min;
-        max = (diff*(product.price-(product.price*product.discount/100) > max)) ? diff*(product.price-(product.price*product.discount/100)) : max;
+        min = (Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100 < min) ? Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100 : min;
+        max = (Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100 > max) ? Math.round((diff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100)/100 : max;
     })
     return {'min':min, 'max':max};
 }

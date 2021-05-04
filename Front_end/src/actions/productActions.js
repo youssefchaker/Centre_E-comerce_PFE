@@ -339,7 +339,7 @@ export const deleteAdminProduct = (id) => async (dispatch) => {
 
         dispatch({ type: DELETE_ADMIN_PRODUCT_REQUEST })
 
-        const { data } = await axios.delete(`/api/mall/store/product/${id}`)
+        const { data } = await axios.delete(`/api/mall/admin/product/${id}`)
 
         dispatch({
             type: DELETE_ADMIN_PRODUCT_SUCCESS,
@@ -363,7 +363,7 @@ export const getAdminProducts = () => async (dispatch) => {
 
         dispatch({
             type: GET_ADMIN_PRODUCTS_SUCCESS,
-            payload: data.products
+            payload: data
         })
 
     } catch (error) {
@@ -462,12 +462,12 @@ export const deleteReview = (reviewid,productid) => async (dispatch) => {
     }
 }
 
-export const deleteAdminReview = (id) => async (dispatch) => {
+export const deleteAdminReview = (reviewid,productid) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_ADMIN_REVIEW_REQUEST })
 
-        const { data } = await axios.delete(`/api/mall/admin/reviews/${id}`)
+        const { data } = await axios.delete(`/api/mall/admin/reviews/${reviewid}/${productid}`)
 
         dispatch({
             type: DELETE_ADMIN_REVIEW_SUCCESS,

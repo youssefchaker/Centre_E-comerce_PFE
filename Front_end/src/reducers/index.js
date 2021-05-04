@@ -85,7 +85,7 @@ const rootReducer = combineReducers({
     updateproductreview:updateProductReviewReducer,
     ///////////////////////////////////////////////////////////
     newevent:newEventReducer,
-    delteevent:deleteEventReducer,
+    deleteevent:deleteEventReducer,
     limitedevents:getLimitedEventsReducer,
     events:getEventsReducer,
     event:getEventReducer,
