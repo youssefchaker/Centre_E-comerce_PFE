@@ -49,20 +49,6 @@ class HeaderTwo extends Component {
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
     }
-
-    /* handleScroll = () => {
-        let number = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-
-        if (number >= 300) {
-            if (window.innerWidth < 576) {
-                document.getElementById("sticky").classList.remove('fixed');
-            }else
-                document.getElementById("sticky").classList.add('fixed');
-        } else {
-            document.getElementById("sticky").classList.remove('fixed');
-        }
-    } */
-
     changeLanguage(lang) {
         this.handlelang(lang);
         store.dispatch(IntlActions.setLocale(lang))
@@ -84,30 +70,18 @@ class HeaderTwo extends Component {
     }
     handleCurrency(curr){
         if(curr=='€'){
-            if(this.state.curr!='€'){
-                this.setState({curr:'€'});
-            this.props.changeCurrency('€');
-            toast.success("the currency has been changed to Euro!!");
-            document.getElementById("euro").classList.remove('classblack');
-            document.getElementById("euro").classList.add('classred');
-            document.getElementById("dinar").classList.remove('classred');
-            document.getElementById("dinar").classList.add('classblack');
+            if(this.props.symbol.symbol!='€'){
+                this.props.changeCurrency('€');
+            toast.success("The currency has been changed to Euro!!");
             }
         }
         else{
-            if(this.state.curr!='DT'){
-                this.setState({curr:'DT'});
+            if(this.props.symbol.symbol!='DT'){
                 this.props.changeCurrency('DT');
-                toast.success("the currency has been changed to Tunisian Dinar!!");
-                document.getElementById("dinar").classList.remove('classblack');
-                document.getElementById("dinar").classList.add('classred');
-            document.getElementById("euro").classList.remove('classred');
-            document.getElementById("euro").classList.add('classblack');
+                toast.success("The currency has been changed to Tunisian Dinar!!");
+            }     
             }
         }
-    }
-    
-
     openNav() {
         var openmyslide = document.getElementById("mySidenav");
         if(openmyslide){

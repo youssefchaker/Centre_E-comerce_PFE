@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { deleteEvent, updateEvent,getStoreEvents  } from '../../actions/eventActions';
 import Loader from "react-loader-spinner";
 import { MDBDataTable } from 'mdbreact'
+import { DELETE_EVENT_RESET, UPDATE_EVENT_RESET } from '../../constants/eventConstants';
 class MyEvents extends Component {
     constructor(props){
     super(props);
@@ -27,9 +28,21 @@ class MyEvents extends Component {
     this.validator=new SimpleReactValidator();
       }
       componentWillMount=()=>{
-          //get store's id from state
         this.props.getStoreEvents(this.props.userStore.store._id);
       }
+      componentDidUpdate(){
+        if(this.props.updateevent.isUpdated){
+            
+            toast.success("Event has been updated!!");
+            this.props.history.push('/pages/mystore');
+            this.props.updatereset();
+        }
+        if(this.props.deleteevent.isDeleted){
+            toast.error("Event has been deleted!!");
+            this.props.history.push('/pages/mystore');
+            this.props.deleteproductreset();
+        }
+    }
       openSearch=(field,id,date="")=> {
         document.getElementById("update-overlay").style.display = "block";
         if(field=="name"){
@@ -50,8 +63,6 @@ class MyEvents extends Component {
     }
       handledelete=id=>{
         this.props.deleteEvent(id);
-        toast.error("Event deleted !");
-        setTimeout("location.reload(true);",2000);
     }
 
     handlesubmit=(e)=>{
@@ -63,8 +74,6 @@ class MyEvents extends Component {
           else{
               if(this.state.updatefield=="name"){  
                 this.props.updateEvent(this.state.eventid,{"eventName":this.state.updatevaluetext});
-                toast.success("event name updated!!");
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="datestart"){
                 if(this.state.updatevaluedate>this.state.date){
@@ -72,8 +81,6 @@ class MyEvents extends Component {
                 }
                 else{
                     this.props.updateEvent(this.state.eventid,{"eventDateStart":this.state.updatevaluedate});
-                    toast.success("event start date updated!!");
-                    setTimeout("location.reload(true);",2000);
                 } 
               }
               else if(this.state.updatefield=="datefinish"){
@@ -82,14 +89,10 @@ class MyEvents extends Component {
                 }
                 else{
                     this.props.updateEvent(this.state.eventid,{"eventDateFinish":this.state.updatevaluedate});
-                    toast.success("event end date updated!!"); 
-                    setTimeout("location.reload(true);",2000);
                 }           
               }
               else if(this.state.updatefield=="image"){ 
                 this.props.updateEvent(this.state.eventid,{"eventImage":this.state.EventImg});
-                toast.success("The event's image has been updated!!");
-                setTimeout("location.reload(true);",2500);
               }
           }
       }
@@ -112,8 +115,9 @@ class MyEvents extends Component {
             reader.readAsDataURL(file)
     }
     render (){
-        const {storeevents,loading}=this.props;
-        const error=storeevents.error;
+        const {events,loading,error}=this.props.storeevents;
+        const loadingdel=this.props.deleteevent.loading
+        const loadingup=this.props.updateevent.loading
         const setEvents = () => {
         const data = {
             columns: [
@@ -144,8 +148,8 @@ class MyEvents extends Component {
             ],
             rows: []
         }
-        if (storeevents) {
-            storeevents.events.forEach(event => {
+        if (events) {
+            events.forEach(event => {
                 data.rows.push({
                     eventImage:<img className="update"  onClick={()=>this.openSearch("image",event._id)} src={event.eventImage.url} alt="event image" style={{width:'80px',height:'80px'}}></img>,
                     eventName: <div className="update" onClick={()=>this.openSearch("name",event._id)}>{event.eventName}</div>,
@@ -195,7 +199,7 @@ class MyEvents extends Component {
                     <div className="col-10 col-md-10">
                     <Fragment>
 
-                        {loading ? <div style={{ textAlign: "center" }}><Loader
+                        {loading||loadingdel ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}
@@ -222,6 +226,12 @@ class MyEvents extends Component {
                                                 <div className="container">
                                                 <div className="row">
                                                 <div className="col-xl-12">
+                                                {loadingup ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                                                 <form>
                                                     <div className="form-group">
                                                     {this.state.inputtype=="text"?<input type="text" name="updatevaluetext" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevaluetext} />
@@ -230,7 +240,7 @@ class MyEvents extends Component {
                                                     {this.state.inputtype=="text"?this.validator.message('new event name', this.state.updatevaluetext, 'required'):this.state.inputtype=="date"?this.validator.message('new event date', this.state.updatevaluedate, 'required'):this.validator.message('new event image', this.state.updatevalueimage, 'required')}
                                                     </div>
                                                 <button type="submit" onClick={this.handlesubmit} style={{marginRight:"-35px"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
-                                                </form>
+                                                </form>}
                                                 </div>
                                                 </div>
                                                 </div>
@@ -264,7 +274,9 @@ const mapDispatchToProps = dispatch => {
     return {
         getStoreEvents: (id) => dispatch(getStoreEvents(id)),
         updateEvent:(id,productdata)=>dispatch(updateEvent(id,productdata)),
-        deleteEvent:(id)=>dispatch(deleteEvent(id))
+        deleteEvent:(id)=>dispatch(deleteEvent(id)),
+        updatereset:()=>dispatch({type:UPDATE_EVENT_RESET}),
+        deleteproductreset:()=>dispatch({type:DELETE_EVENT_RESET})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(MyEvents)

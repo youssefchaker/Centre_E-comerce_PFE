@@ -8,6 +8,7 @@ import ReactStars from "react-rating-stars-component";
 import { deleteReview,  getProductReviews,  newReview, updateReview } from '../../../actions/productActions';
 import RatingDisplay from './product/ratingDisplay';
 import Loader from "react-loader-spinner";
+import { DELETE_REVIEW_RESET, NEW_REVIEW_RESET, UPDATE_REVIEW_RESET } from '../../../constants/productConstants';
 class DetailsTopTabs extends Component {
     constructor(props){
         super(props);
@@ -28,6 +29,25 @@ class DetailsTopTabs extends Component {
     }
     componentWillMount() {
         this.props.getProductReviews(this.props.product._id);
+    }
+    componentDidUpdate(){
+        if(this.props.newreview.success){
+            
+            toast.success("Review added !");
+            setTimeout("location.reload(true);",500);
+            this.props.reviewtreset();
+        }
+        if(this.props.deleteproductreview.isDeleted){
+            toast.error("Review deleted !");
+            setTimeout("location.reload(true);",500);
+            this.props.deletereviewreset();
+        }
+        if(this.props.updateproductreview.isUpdated){
+            
+            toast.success("The review has been updated!!");
+            setTimeout("location.reload(true);",500);
+            this.props.updatereset();
+        }
     }
     openSearch=(field,reviewid,other)=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -58,8 +78,6 @@ class DetailsTopTabs extends Component {
           }
           else{
             this.props.newReview(this.props.product._id,{"userid":this.props.auth.user._id,"rating":this.state.Rating,"comment":this.state.Comment});
-            toast.success("Review added !");
-            setTimeout("location.reload(true);",2000);
           }
           
  
@@ -79,8 +97,6 @@ class DetailsTopTabs extends Component {
           else{
               if(this.state.updatefield=="comment"){
                 this.props.updateReview(this.state.reviewid,{"rating":this.state.other,"comment":this.state.updatevalue});
-                toast.success("review comment updated!!");
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="rating"){
                 if(this.state.newrating>5 || this.state.newrating<1){
@@ -88,21 +104,20 @@ class DetailsTopTabs extends Component {
                 }
                 else{
                     this.props.updateReview(this.state.reviewid,{"rating":parseInt(this.state.newrating,10),"comment":this.state.other});
-                    toast.success("review rating updated!!");
-                    setTimeout("location.reload(true);",2000);
                     }  
             }    
           }
       }
       handledelete=(reviewid,productid)=>{
         this.props.deleteReview(reviewid,productid);
-        toast.error("Review deleted !");
-        setTimeout("location.reload(true);",2000);
     }
     render (){
         const {isAuthenticated}=this.props.auth;
         const {reviews,loading}=this.props.productreviews
         const usernames=reviews.usernames;
+        const loadingdel=this.props.deleteproductreview.loading;
+        const loadingup=this.props.updateproductreview.loading
+        const loadingnew=this.props.newreview.loading
         return (
             <div>
             <section className="tab-product m-0">
@@ -149,7 +164,7 @@ class DetailsTopTabs extends Component {
                                 </p>
                             </TabPanel>
                             <TabPanel>
-                            {!isAuthenticated ?loading ? <div style={{ textAlign: "center" }}><Loader
+                            {!isAuthenticated ?loading  ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}
@@ -174,7 +189,7 @@ class DetailsTopTabs extends Component {
                                     </tr>
                                     </tbody>
                                 ))}      
-                                </table> :loading ? <div style={{ textAlign: "center" }}><Loader
+                                </table> :loading ||loadingdel ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}
@@ -211,7 +226,12 @@ class DetailsTopTabs extends Component {
                             </TabPanel>
                             
                             <TabPanel>
-                            {isAuthenticated?<form className="theme-form mt-4">
+                            {isAuthenticated?loadingnew ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :<form className="theme-form mt-4">
                                     <div className="form-row">
                                         <div className="col-md-12 ">
                                             <div className="media m-0">
@@ -248,6 +268,12 @@ class DetailsTopTabs extends Component {
                                                 <div className="container">
                                                 <div className="row">
                                                 <div className="col-xl-12">
+                                                {loadingup ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                                                 <form>
                                                     <div className="form-group">
                                                     {this.state.inputtype=="text"?<input type="text" name="updatevalue" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevalue} />
@@ -262,7 +288,7 @@ class DetailsTopTabs extends Component {
                                                     {this.state.inputtype=="text"?this.validator2.message('new value', this.state.updatevalue, 'required'):''}
                                                     </div>
                                                 <button type="submit" onClick={this.handleupdate} style={{marginRight:"-35px"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
-                                                </form>
+                                                </form>}
                                                 </div>
                                                 </div>
                                                 </div>
@@ -289,7 +315,10 @@ const mapDispatchToProps = dispatch => {
         newReview:(id,reviewData)=>dispatch(newReview(id,reviewData)),
         deleteReview:(reviewid,productid)=>dispatch(deleteReview(reviewid,productid)),
         updateReview:(id,reviewData)=>dispatch(updateReview(id,reviewData)),
-        getProductReviews:(id)=>dispatch(getProductReviews(id))
+        getProductReviews:(id)=>dispatch(getProductReviews(id)),
+        updatereset:()=>dispatch({type:UPDATE_REVIEW_RESET}),
+        deletereviewreset:()=>dispatch({type:DELETE_REVIEW_RESET}),
+        reviewtreset:()=>dispatch({type:NEW_REVIEW_RESET})
     }
 }
 

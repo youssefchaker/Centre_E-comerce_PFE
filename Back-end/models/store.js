@@ -36,7 +36,8 @@ const storeSchema = new mongoose.Schema({
                 'Beauty&Health',
                 'Sports',
                 'Outdoor',
-                'Home'
+                'Home',
+                'Other'
             ],
             message: 'Please select correct buisness domaine for the store'
         }

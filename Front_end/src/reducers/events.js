@@ -26,7 +26,10 @@ import {NEW_EVENT_REQUEST,
     DELETE_ADMIN_EVENT_SUCCESS,
     DELETE_ADMIN_EVENT_FAIL,
     DELETE_ADMIN_EVENT_RESET,
-    CLEAR_ERRORS } from '../constants/eventConstants'
+    CLEAR_ERRORS,
+    NEW_EVENT_RESET,
+    UPDATE_EVENT_RESET,
+    DELETE_EVENT_RESET } from '../constants/eventConstants'
     
     export const newEventReducer = (state = { newevent: {} }, action) => {
         switch (action.type) {
@@ -47,6 +50,11 @@ import {NEW_EVENT_REQUEST,
                 return {
                     ...state,
                     error: action.payload
+                    }
+            case NEW_EVENT_RESET: 
+                return {
+                    ...state,
+                    success: false
                     }
             case CLEAR_ERRORS:
                 return {
@@ -77,6 +85,11 @@ import {NEW_EVENT_REQUEST,
                 return {
                     ...state,
                     error: action.payload
+                    }
+            case DELETE_EVENT_RESET:
+                return {
+                    ...state,
+                    isDeleted:false
                     }
             case CLEAR_ERRORS:
                 return {
@@ -226,6 +239,11 @@ import {NEW_EVENT_REQUEST,
                     ...state,
                     error: null
                 }
+            case UPDATE_EVENT_RESET:
+                return {
+                    ...state,
+                    isUpdated: false
+                    }
             default:
                 return state
         }

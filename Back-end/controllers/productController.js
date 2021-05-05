@@ -208,7 +208,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     else{
         res.status(200).json({
             success: true,
-            "message":"product updated"
+            message:"product updated"
         })
     }
 

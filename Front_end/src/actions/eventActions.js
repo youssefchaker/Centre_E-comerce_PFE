@@ -49,7 +49,7 @@ import {NEW_EVENT_REQUEST,
         } catch (error) {
             dispatch({
                 type: NEW_EVENT_FAIL,
-                payload: error.response.data.message
+                payload: error
             })
         }
     }
