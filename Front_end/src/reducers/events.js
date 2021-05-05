@@ -1,6 +1,7 @@
 import {NEW_EVENT_REQUEST,
     NEW_EVENT_SUCCESS,
     NEW_EVENT_FAIL,
+    NEW_EVENT_RESET,
     DELETE_EVENT_REQUEST,
     DELETE_EVENT_SUCCESS,
     DELETE_EVENT_FAIL,
@@ -48,6 +49,13 @@ import {NEW_EVENT_REQUEST,
                     ...state,
                     error: action.payload
                     }
+
+             case NEW_EVENT_RESET:
+                return {
+                ...state,
+                success: false
+            }
+
             case CLEAR_ERRORS:
                 return {
                     ...state,

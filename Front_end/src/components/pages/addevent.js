@@ -6,6 +6,8 @@ import {connect} from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
 import { newEvent } from '../../actions/eventActions';
+import { NEW_EVENT_RESET } from '../../constants/eventConstants'
+import { withRouter } from 'react-router-dom';
 class Addevent extends Component {
     constructor(props){
     super(props);
@@ -20,6 +22,18 @@ class Addevent extends Component {
     }
     this.validator = new SimpleReactValidator();
     }
+
+    componentDidUpdate() {
+
+      if(this.props.newevent.success) {
+
+        toast.success("Event added !");
+        this.props.history.push("/pages/myevents");
+        this.props.eventReset();
+      }
+
+    }
+
     setStateFromInput = (event) => {
         var obj = {};
         obj[event.target.name] = event.target.value;
@@ -46,8 +60,22 @@ class Addevent extends Component {
             }
             
             else{
-            this.props.newEvent({'storeName':this.props.userStore.store.name,'eventName':this.state.EventName,'eventImage':this.state.EventImg,'eventDateStart':this.state.EventDatestart,'eventDateFinish':this.state.EventDatefinish});
-            toast.success("Event added !");
+
+                const formData = new FormData();
+                formData.set('storeName', this.props.userStore.store.name);
+                formData.set('eventName', this.state.EventName);
+                formData.set('eventDateStart', this.state.EventDatestart);
+                formData.set('eventDateFinish', this.state.EventDatefinish);
+                formData.append('eventImage', this.state.EventImg);
+
+
+
+
+            this.props.newEvent(formData);
+            
+            
+            
+            
             
             }
           }
@@ -108,13 +136,12 @@ class Addevent extends Component {
                                         </div>
                 </div><br></br>
                 <div>
-                    <button type="submit" className="btn btn-solid" style={{marginTop:"25px"}} >Submit event</button>
+                    <button type="submit" className="btn btn-solid" style={{marginTop:"25px"}} disabled={this.props.newevent.loading ? true : false}>Submit event</button>
                 </div>
                 </form>
             </div>
             </div>
             </div>
-            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myevents`} ><a><button type="submit" className="btn btn-solid" >Finish Adding events</button></a></Link></div>
             </section>
             </div>
         )
@@ -130,7 +157,9 @@ const mapStateToProps=state=>{
 
 const mapDispatchToProps = dispatch => {
     return {
-        newEvent: (eventData) => dispatch(newEvent(eventData))
+        newEvent: (eventData) => dispatch(newEvent(eventData)),
+        eventReset: () => dispatch({ type: NEW_EVENT_RESET })
+        
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Addevent)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Addevent));

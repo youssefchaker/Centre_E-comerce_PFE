@@ -12,12 +12,12 @@ class Addproduct extends Component {
     this.state = {
         StoreName:'',
         ProductName:'',
-        ProductPrice:null,
+        ProductPrice:0,
         ProductImages:[],
         ProductImage:null,
         ProductDescription:'',
         Productnumber:1,
-        ProductStock:null,
+        ProductStock:0,
         ProductCategory:"Electronics",
         ProductDetail:"",
         ProductDetailValue:"",
@@ -25,8 +25,7 @@ class Addproduct extends Component {
         ProductDetailsValues:[],
         ProductDiscount:0,
         details:[],
-        ImageSizeLimit:400*400,
-        ImageTest:true
+        
     }
     this.validator = new SimpleReactValidator();
     this.validator2 = new SimpleReactValidator();
@@ -68,10 +67,8 @@ class Addproduct extends Component {
                 this.state.details.push({"detailname":this.state.ProductDetails[i],"value":this.state.ProductDetailsValues[i]});
                 i++;
             }
-            if(this.state.ProductImages.length>3)
+            if(this.state.ProductImages.length>3){
                 toast.warn("Only a maximum of 3 images are allowed for 1 product");
-            else if(this.state.ImageTest==false){
-                toast.warn("1 or more of the product images are too big to upload");
             }
             else if(this.state.ProductPrice<0){
                 toast.warn("The product Price must be a positive number")
@@ -80,7 +77,12 @@ class Addproduct extends Component {
                 toast.warn("The product Stock must be a positive number")
             }
             else{
-            this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'images':this.state.ProductImages,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount});
+                       const formData = new FormData();
+                this.state.ProductImages.forEach(image => {
+                    formData.append('images', image)
+                })
+                
+            this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount,formData});
             toast.success("New Product Added!!");
             //setTimeout("location.reload(true);",2000);
             }
@@ -90,19 +92,12 @@ class Addproduct extends Component {
         this.setState({ProductCategory:e.target.value});
       }
       handleimages=(e)=>{
-          let c=0;
+        
         const files = Array.from(e.target.files)
-        console.log(files[0].size);
-        for(var j=0;j<files.length;j++){
-            if(files[j].size>this.state.ImageSizeLimit){
-                this.setState({ImageTest:false});
-                c++;
-            }
-        }
-        if(c==0){
-            this.setState({ImageTest:true});
-        }        
-        if(this.state.ImageTest==true){
+      
+        
+        
+       
             this.setState({ProductImages:[]})
         files.forEach(file => {
             const reader = new FileReader();
@@ -114,7 +109,7 @@ class Addproduct extends Component {
             }
             reader.readAsDataURL(file)
         })
-        }
+        
       }
     render (){
         return (

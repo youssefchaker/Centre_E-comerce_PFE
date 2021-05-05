@@ -228,7 +228,7 @@ export const newProductReducer = (state = { newproduct: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                product: action.payload
+                product: action.payload.product
             }
         case NEW_PRODUCT_FAIL:
             return {

@@ -3,6 +3,7 @@
 export const NEW_EVENT_REQUEST = 'NEW_EVENT_REQUEST'
 export const NEW_EVENT_SUCCESS = 'NEW_EVENT_SUCCESS'
 export const NEW_EVENT_FAIL = 'NEW_EVENT_FAIL'
+export const NEW_EVENT_RESET = 'NEW_EVENT_RESET'
 
 //the store can delete a specific event
 

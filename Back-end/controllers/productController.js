@@ -14,17 +14,17 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
     let images=req.body.images
     Product.find({name:name}).exec(function(err,product){
             Store.findOne({name:storename}).populate('store').exec(async function(err,store){
-                let imageLinks=[];
+                let imagesLinks=[];
                 for(var i=0;i<images.length;i++){
                     const result = await cloudinary.v2.uploader.upload(images[i],{
                         folder:'products'
                     });
-                    imageLinks.push({
+                    imagesLinks.push({
                         public_id:result.public_id,
                         url:result.secure_url
                     })
                 }
-                images=imageLinks;
+                images=imagesLinks;
                 Product.create({
                     name,
                     description,
