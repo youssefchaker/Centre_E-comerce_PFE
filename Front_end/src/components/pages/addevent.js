@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 import { newEvent } from '../../actions/eventActions';
 import { NEW_EVENT_RESET } from '../../constants/eventConstants'
 import { withRouter } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 class Addevent extends Component {
     constructor(props){
     super(props);
@@ -17,7 +18,7 @@ class Addevent extends Component {
         EventImage:null,
         EventDatestart:null,
         EventDatefinish:null,
-        EventImg:{},
+        EventImg:'',
         
     }
     this.validator = new SimpleReactValidator();
@@ -27,7 +28,7 @@ class Addevent extends Component {
 
       if(this.props.newevent.success) {
 
-        toast.success("Event added !");
+        toast.success("New Event added !");
         this.props.history.push("/pages/myevents");
         this.props.eventReset();
       }
@@ -81,9 +82,6 @@ class Addevent extends Component {
           }
       }
       handleimages=(e)=>{
-        var obj = {};
-        obj[e.target.name] = e.target.value;
-        this.setState(obj);
         const file = e.target.files[0];
         
 
@@ -97,9 +95,16 @@ class Addevent extends Component {
     
 }
     render (){
+        const {loading}=this.props.newevent
         return (
             <div>
                 <Breadcrumb title={'Add event'}/>
+                {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                 <section className="section-b-space">
                     <div className="container padding-cls">
                         <div className="checkout-page">
@@ -129,8 +134,8 @@ class Addevent extends Component {
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div className="field-label">Event Image *</div>
                                         <div className="field-label" style={{border: '1px solid #ccc',display: 'block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small>"1000 X 1000"</small></span></div>
-                                                    <input id="img" type="file" name="EventImage" accept="image/*"  onChange={this.handleimages} value={this.state.EventImage}  />
-                                                    {this.validator.message('EventImage', this.state.EventImage, 'required')}
+                                                    <input id="img" type="file" name="EventImage" accept="image/*"  onChange={this.handleimages}  />
+                                                    {this.validator.message('EventImage', this.state.EventImg, 'required')}
                                     </div>
                                     </div>  
                                         </div>
@@ -143,6 +148,7 @@ class Addevent extends Component {
             </div>
             </div>
             </section>
+                }
             </div>
         )
     }

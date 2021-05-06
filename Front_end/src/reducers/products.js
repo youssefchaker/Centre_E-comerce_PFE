@@ -61,158 +61,14 @@ import {NEW_PRODUCT_REQUEST,
     UPDATE_PRODUCT_DETAIL_FAIL,
     GET_PRODUCTS_BY_CATEGORY_REQUEST,
     GET_PRODUCTS_BY_CATEGORY_SUCCESS,
-    GET_PRODUCTS_BY_CATEGORY_FAIL
+    GET_PRODUCTS_BY_CATEGORY_FAIL,
+    NEW_PRODUCT_RESET,
+    UPDATE_PRODUCT_RESET,
+    UPDATE_PRODUCT_DETAIL_RESET,
+    NEW_REVIEW_RESET,
+    UPDATE_REVIEW_RESET,
+    DELETE_REVIEW_RESET
 } from "../constants/productConstants";
-
-/* export const productReducer = (state = { products: {} }, action) => {
-    switch (action.type) {
-
-        case NEW_PRODUCT_REQUEST:
-        case GET_STORE_PRODUCTS_REQUEST:
-        case GET_STORE_PRODUCT_REQUEST:
-        case SEARCH_PRODUCT_REQUEST:
-        case TOP_PRODUCTS_REQUEST:
-        case NEW_PRODUCTS_REQUEST:
-        case GET_ALL_PRODUCTS_REQUEST:
-        case UPDATE_PRODUCT_REQUEST:
-        case DELETE_PRODUCT_REQUEST:
-        case DELETE_ADMIN_PRODUCT_REQUEST:
-        case GET_ADMIN_PRODUCTS_REQUEST:
-        case NEW_REVIEW_REQUEST:
-        case GET_ADMIN_REVIEWS_REQUEST:
-        case GET_PRODUCT_REVIEWS_REQUEST:   
-        case DELETE_REVIEW_REQUEST:
-        case UPDATE_REVIEW_REQUEST:            
-            return {
-                ...state,
-                loading: true
-            }
-
-        case NEW_PRODUCT_SUCCESS:
-            return {
-                loading: false,
-                success: action.payload.success,
-                product: action.payload.product
-            }
-
-        case GET_STORE_PRODUCTS_SUCCESS:
-            return{
-                loading: false,
-                products: action.payload.products,
-            }
-        case GET_STORE_PRODUCT_SUCCESS:
-            return{
-                loading: false,
-                product: action.payload.product,
-            }
-        case SEARCH_PRODUCT_SUCCESS:
-            return{
-                loading:false,
-                products:action.payload.products
-            }
-        case TOP_PRODUCTS_SUCCESS:
-            return{
-                loading:false,
-                products:action.payload.products
-            }
-        case NEW_PRODUCTS_SUCCESS :
-            return{
-                loading:false,
-                products:action.payload.products
-            }
-        case GET_ALL_PRODUCTS_SUCCESS:
-            return{
-                loading: false,
-                products: action.payload.products,
-                productsCount: action.payload.productsCount,
-                resPerPage: action.payload.resPerPage,
-                filteredProductsCount: action.payload.filteredProductsCount
-            }
-        case UPDATE_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isUpdated: action.payload
-            }
-        case DELETE_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isDeleted: action.payload
-            }
-        case DELETE_ADMIN_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isDeleted: action.payload
-            }
-        case GET_ADMIN_PRODUCTS_SUCCESS:
-            return {
-                loading: false,
-                products: action.payload
-            }
-        case NEW_REVIEW_SUCCESS:
-            return {
-                loading: false,
-                success: action.payload
-            }
-        case GET_ADMIN_REVIEWS_SUCCESS:
-            return{
-                loading: false,
-                reviews: action.payload
-            }
-        case GET_PRODUCT_REVIEWS_SUCCESS:
-            return{
-                loading: false,
-                reviews: action.payload
-            }
-        case DELETE_REVIEW_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isDeleted: action.payload
-            }
-        case UPDATE_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isUpdated: action.payload
-            }
-        case UPDATE_REVIEW_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isUpdated: action.payload
-            }
-        case NEW_PRODUCT_FAIL:
-        case GET_STORE_PRODUCTS_FAIL:
-        case GET_STORE_PRODUCT_FAIL:
-        case SEARCH_PRODUCT_FAIL:
-        case TOP_PRODUCTS_FAIL:
-        case NEW_PRODUCTS_FAIL:
-        case GET_ALL_PRODUCTS_FAIL:
-        case UPDATE_PRODUCT_FAIL:
-        case DELETE_PRODUCT_FAIL:
-        case DELETE_ADMIN_PRODUCT_FAIL:
-        case GET_ADMIN_PRODUCTS_FAIL:
-        case NEW_REVIEW_FAIL:
-        case GET_ADMIN_REVIEWS_FAIL:
-        case GET_PRODUCT_REVIEWS_FAIL:
-        case DELETE_REVIEW_FAIL:
-        case UPDATE_REVIEW_FAIL:
-            return {
-                ...state,
-                error: action.payload
-                }
-        case CLEAR_ERRORS:
-            return {
-                ...state,
-                error: null
-            }
-        default:
-            return state
-    }
-} */
 
 export const newProductReducer = (state = { newproduct: {} }, action) => {
     switch (action.type) {
@@ -228,7 +84,6 @@ export const newProductReducer = (state = { newproduct: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                product: action.payload.product
             }
         case NEW_PRODUCT_FAIL:
             return {
@@ -239,6 +94,12 @@ export const newProductReducer = (state = { newproduct: {} }, action) => {
             return {
                 ...state,
                 error: null
+            }
+        case NEW_PRODUCT_RESET:
+            return{
+                ...state,
+                loading:false,
+                success:false
             }
         default:
             return state
@@ -470,6 +331,11 @@ export const updateProductReducer = (state = { updateproduct: {} }, action) => {
                 ...state,
                 error: action.payload
                 }
+        case UPDATE_PRODUCT_RESET:
+            return {
+                ...state,
+                isUpdated: false
+                }
         case CLEAR_ERRORS:
             return {
                 ...state,
@@ -498,6 +364,11 @@ export const updateProductDetailsReducer = (state = { updateproductdetail: {} },
             return {
                 ...state,
                 error: action.payload
+                }
+        case UPDATE_PRODUCT_DETAIL_RESET:
+            return {
+                ...state,
+                isUpdated: false
                 }
         case CLEAR_ERRORS:
             return {
@@ -624,6 +495,12 @@ export const newReviewReducer = (state = { newreview: {} }, action) => {
                 ...state,
                 error: action.payload
                 }
+        case NEW_REVIEW_RESET:
+            return {
+                ...state,
+                success: false,
+                loading:false
+                }
         case CLEAR_ERRORS:
             return {
                 ...state,
@@ -709,6 +586,12 @@ export const deleteProductReviewReducer = (state = { deleteproductreview: {} }, 
                 ...state,
                 error: action.payload
                 }
+        case DELETE_REVIEW_RESET:
+            return {
+                ...state,
+                isDeleted:false,
+                loading:false
+                }
         case CLEAR_ERRORS:
             return {
                 ...state,
@@ -771,6 +654,12 @@ export const updateProductReviewReducer = (state = { updateproductreview: {} }, 
             return {
                 ...state,
                 error: action.payload
+                }
+        case UPDATE_REVIEW_RESET:
+            return {
+                ...state,
+                isUpdated:false,
+                loading:false
                 }
         case CLEAR_ERRORS:
             return {

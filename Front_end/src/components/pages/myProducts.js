@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Loader from "react-loader-spinner";
 import { MDBDataTable } from 'mdbreact'
+import { UPDATE_PRODUCT_DETAIL_RESET, UPDATE_PRODUCT_RESET,DELETE_PRODUCT_RESET } from '../../constants/productConstants';
 
 class MyProducts extends Component {
     constructor(props){
@@ -26,15 +27,32 @@ class MyProducts extends Component {
         detail:null,
         detailid:null,
         ProductImages:[],
-        ImageSizeLimit:512*512,
-        ImageTest:true
+        
     }
     this.validator=new SimpleReactValidator();
       }
       componentWillMount=()=>{
-          // get store's id from state
         this.props.getStoreProducts(this.props.userStore.store._id);
+        
       }
+      componentDidUpdate(){
+        if(this.props.updateproduct.isUpdated){
+            
+            toast.success("Product has been updated!!");
+            this.props.history.push('/pages/mystore');
+            this.props.updatereset();
+        }
+        if(this.props.updateproductdetail.isUpdated){
+            toast.success("Product Detail has been updated!!");
+            this.props.history.push('/pages/mystore');
+            this.props.updatedetailreset();
+        }
+        if(this.props.deleteproduct.isDeleted){
+            toast.error("Product has been deleted!!");
+            this.props.history.push('/pages/mystore');
+            this.props.deleteproductreset();
+        }
+    }
       openSearch=(field,id,detail="",detailid="")=> {
         document.getElementById("update-overlay").style.display = "block";
         if(field=="name"||field=="desc" || field=="detailname" || field=="detailvalue"){
@@ -64,8 +82,6 @@ class MyProducts extends Component {
 
     handledelete=id=>{
         this.props.deleteProduct(id);
-        toast.error("Product deleted !");
-        setTimeout("location.reload(true);",2000);
     }
 
     handlesubmit=(e)=>{
@@ -77,54 +93,34 @@ class MyProducts extends Component {
           else{
               if(this.state.updatefield=="name"){
                 this.props.updateProduct(this.state.productid,{"name":this.state.updatevaluetext});
-                toast.success("The product's name has been updated!!");
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="price"){
                 this.props.updateProduct(this.state.productid,{"price":this.state.updatevaluenumber});
-                toast.success("The product's price has been updated!!");
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="stock"){
                 this.props.updateProduct(this.state.productid,{"stock":this.state.updatevaluenumber});
-                toast.success("The product's stock has been updated!!");
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="desc"){
                 this.props.updateProduct(this.state.productid,{"description":this.state.updatevaluetext});
-                toast.success("The product's description has been updated!!");
-                setTimeout("location.reload(true);",2000);
               }     
               else if(this.state.updatefield=="discount"){
                 this.props.updateProduct(this.state.productid,{"discount":this.state.updatevaluediscount});
-                toast.success("The product discount has been updated!!");
-                setTimeout("location.reload(true);",2000);
               }  
               else if(this.state.updatefield=="category"){ 
                 this.props.updateProduct(this.state.productid,{"category":this.state.updatevaluecategory});
-                toast.success("The product's category has been updated!!");
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="detailname"){ 
                 this.props.updateProductDetails(this.state.detailid,{"detailname":this.state.updatevaluetext,"value":this.state.detail});
-                toast.success(`The product's detail name has been updated!!`);
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="detailvalue"){ 
                 this.props.updateProductDetails(this.state.detailid,{"detailname":this.state.detail,"value":this.state.updatevaluetext});
-                toast.success(`product's ${this.state.detail} has been updated!!`);
-                setTimeout("location.reload(true);",2000);
               }
               else if(this.state.updatefield=="image"){ 
-                if(this.state.ImageTest==false){
-                    toast.warn("1 or more of the images are too big to upload");
-                }
-                else{
+                
+                
                 this.props.updateProduct(this.state.productid,{"images":this.state.ProductImages});
-                toast.success("The product's images has been updated!!");
-                setTimeout("location.reload(true);",2000);
-            } 
             }
+            
           }
       }
     setStateFromInput = (event) => {
@@ -133,22 +129,10 @@ class MyProducts extends Component {
         this.setState(obj);
       }
       handleimages=(e)=>{
-        let c=0;
-        var obj = {};
-        obj[e.target.name] = e.target.value;
-        this.setState(obj);
+        
         const files = Array.from(e.target.files)
-        for(var j=0;j<files.length;j++){
-            if(files[j].size>this.state.ImageSizeLimit){
-                this.setState({ImageTest:false});
-                c++;
-            }
-        }
-        if(c==0){
-            this.setState({ImageTest:true});
-        }   
-        if(this.state.ImageTest==true){     
-        this.setState({ProductImages:[]})
+      
+            this.setState({ProductImages:[]})
         files.forEach(file => {
             const reader = new FileReader();
 
@@ -159,11 +143,16 @@ class MyProducts extends Component {
             }
             reader.readAsDataURL(file)
         })
-    }
-}
+        
+      }
+    
+
 
     render (){
         const {storeproducts,loading}=this.props;
+        const loadingpr=this.props.updateProduct.loading
+        const loadingdet=this.props.updateproductdetail.loading
+        const loadingdel=this.props.updateproductdetail.loading
         const setProducts = () => {
         const data = {
             columns: [
@@ -279,7 +268,7 @@ class MyProducts extends Component {
                 <div className="col-10 col-md-10">
                     <Fragment>
 
-                        {loading ? <div style={{ textAlign: "center" }}><Loader
+                        {loading ||loadingdel ? <div style={{ textAlign: "center" }}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}
@@ -308,6 +297,12 @@ class MyProducts extends Component {
                                                 <div className="container">
                                                 <div className="row">
                                                 <div className="col-xl-12">
+                                                {loadingdet || loadingpr ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                                                 <form>
                                                     <div className="form-group">
                                                     {this.state.inputtype=="text"?<input type="text" name="updatevaluetext" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevaluetext} />
@@ -331,12 +326,12 @@ class MyProducts extends Component {
                                                     <option>Home</option>
                                                     <option>Other</option>
                                                     </select>:
-                                                    <div><input id="img" onChange={this.handleimages} type="file" name="updatevalueimage" accept="image/*" multiple value={this.state.updatevalueimage} /><div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span></div>
+                                                    <div><input id="img" onChange={this.handleimages} type="file" name="updatevalueimage" accept="image/*" multiple /><div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span></div>
 </div>}
-                                                    {this.state.inputtype=="text"?this.validator.message('new value', this.state.updatevaluetext, 'required'):this.state.inputtype=="number"?this.validator.message('new value', this.state.updatevaluenumber, 'required'):this.state.inputtype=="discount"?this.validator.message('new discount value', this.state.updatevaluediscount, 'required'):this.state.inputtype=="category"?this.validator.message('new category value', this.state.updatevaluecategory, 'required'):this.validator.message('new image', this.state.updatevalueimage, 'required')}
+                                                    {this.state.inputtype=="text"?this.validator.message('new value', this.state.updatevaluetext, 'required'):this.state.inputtype=="number"?this.validator.message('new value', this.state.updatevaluenumber, 'required'):this.state.inputtype=="discount"?this.validator.message('new discount value', this.state.updatevaluediscount, 'required'):this.state.inputtype=="category"?this.validator.message('new category value', this.state.updatevaluecategory, 'required'):this.validator.message('new image', this.state.ProductImages, 'required')}
                                                     </div>
                                                 <button type="submit" onClick={this.handlesubmit} className="btn btn-primary" style={{marginRight:"-35px"}}><i className="fa fa-check"></i></button>
-                                                </form>
+                                                </form>}
                                                 </div>
                                                 </div>
                                                 </div>
@@ -372,7 +367,10 @@ const mapDispatchToProps = dispatch => {
         getStoreProducts: (id) => dispatch(getStoreProducts(id)),
         updateProduct:(id,productdata)=>dispatch(updateProduct(id,productdata)),
         deleteProduct:(id)=>dispatch(deleteProduct(id)),
-        updateProductDetails:(id,productdata)=>dispatch(updateProductDetails(id,productdata))
+        updateProductDetails:(id,productdata)=>dispatch(updateProductDetails(id,productdata)),
+        updatereset:()=>dispatch({type:UPDATE_PRODUCT_RESET}),
+        updatedetailreset:()=>dispatch({type:UPDATE_PRODUCT_DETAIL_RESET}),
+        deleteproductreset:()=>dispatch({type:DELETE_PRODUCT_RESET})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (MyProducts)

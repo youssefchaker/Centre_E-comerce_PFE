@@ -10,11 +10,34 @@ const cloudinary = require('cloudinary')
 // Create new product   =>   /api/mall/store/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
      
-    const { name , description , storename , price , stock , category , details, discount } = req.body;
-    let images=req.body.images
-    Product.find({name:name}).exec(function(err,product){
-            Store.findOne({name:storename}).populate('store').exec(async function(err,store){
-                let imagesLinks=[];
+    const { name , description , mystore , price , stock , category , discount } = req.body;
+    
+ let details = req.body.details;
+
+const mydetails =JSON.parse(details);    
+    
+   details=mydetails;
+    
+    
+
+
+
+
+
+    let images = []
+    if (typeof req.body.images === 'string') {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
+    }
+
+    let imagesLinks=[];
+     
+   
+        const store = await Store.findById(mystore);
+
+
+                
                 for(var i=0;i<images.length;i++){
                     const result = await cloudinary.v2.uploader.upload(images[i],{
                         folder:'products'
@@ -25,15 +48,17 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
                     })
                 }
                 images=imagesLinks;
+                
+                
                 Product.create({
                     name,
                     description,
                     store,
                     price,
                     stock,
+                    details,
                     images,
                     category,
-                    details,
                     discount
                 });
                 res.status(201).json({
@@ -41,9 +66,9 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
                     message:"product has been added"
                 })
             })
-    })
+   
             
-})
+
 
 // Get all products for a specific store   =>   /store/products/:id
 
@@ -208,7 +233,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     else{
         res.status(200).json({
             success: true,
-            "message":"product updated"
+            message:"product updated"
         })
     }
 

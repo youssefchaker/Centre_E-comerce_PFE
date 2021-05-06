@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
 import {newProduct} from '../../actions/productActions'
+import Loader from "react-loader-spinner";
+import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
 class Addproduct extends Component {
     constructor(props){
     super(props);
@@ -31,7 +33,19 @@ class Addproduct extends Component {
     this.validator2 = new SimpleReactValidator();
     this.validator3 = new SimpleReactValidator();
     }
+    componentWillMount(){
+        this.props.productreset();
 
+    }
+    
+    componentDidUpdate(){
+        if(this.props.newproduct.success){
+            
+            toast.success("New Product Added!!");
+            this.props.history.push('/pages/myproducts');
+            this.props.productreset();
+        }
+    }
     setStateFromInput = (event) => {
         var obj = {};
         obj[event.target.name] = event.target.value;
@@ -77,14 +91,33 @@ class Addproduct extends Component {
                 toast.warn("The product Stock must be a positive number")
             }
             else{
-                       const formData = new FormData();
+                const formData = new FormData();
+                formData.set('mystore', this.props.userStore.store._id);
+                formData.set('name', this.state.ProductName);
+                formData.set('price', this.state.ProductPrice);
+                formData.set('description', this.state.ProductDescription);
+                formData.set('stock', this.state.ProductStock);
+                formData.set('category', this.state.ProductCategory);
+                formData.set('discount', this.state.ProductDiscount);
+                //formData.set('details', this.state.details);
+                
+                  
+               
+                    formData.append('details', JSON.stringify(this.state.details))
+                
+
                 this.state.ProductImages.forEach(image => {
                     formData.append('images', image)
                 })
+
                 
-            this.props.newProduct({'storename':this.props.userStore.store.name,'name':this.state.ProductName,'price':this.state.ProductPrice,'description':this.state.ProductDescription,'stock':this.state.ProductStock,'category':this.state.ProductCategory,'details':this.state.details,'discount':this.state.ProductDiscount,formData});
-            toast.success("New Product Added!!");
-            //setTimeout("location.reload(true);",2000);
+               
+
+             
+                console.log(formData)
+        
+            this.props.newProduct(formData);
+            
             }
           }
       }
@@ -112,14 +145,21 @@ class Addproduct extends Component {
         
       }
     render (){
+        const {loading}=this.props.newproduct
         return (
             <div>
                 <Breadcrumb title={'Add product'}/>
+                {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                 <section className="section-b-space">
                     <div className="container padding-cls">
                         <div className="checkout-page">
                             <div className="checkout-form" >
-                                <form>
+                            <form>
                                     <div className="checkout row">
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                             <div className="checkout-title">
@@ -199,11 +239,13 @@ class Addproduct extends Component {
                     <button type="submit" className="btn btn-solid" style={{marginTop:"25px"}} onClick={this.handlesubmit}>Submit Product</button>
                 </div>
                 </form>
+                                
             </div>
             </div>
             </div>
             <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myProducts`} ><a><button type="submit" className="btn btn-solid" >Finish Adding Products</button></a></Link></div>
             </section>
+        }
             </div>
         )
     }
@@ -219,7 +261,8 @@ const mapStateToProps=state=>{
 
 const mapDispatchToProps = dispatch => {
     return {
-        newProduct: (productData) => dispatch(newProduct(productData))
+        newProduct: (productData) => dispatch(newProduct(productData)),
+        productreset:()=>dispatch({type:NEW_PRODUCT_RESET})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Addproduct)

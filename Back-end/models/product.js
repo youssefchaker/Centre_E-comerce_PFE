@@ -60,13 +60,13 @@ const productSchema = new Schema({
     details:[
         {
             detailname:{
-                type:String,
-                required:[true,'please enter the detail name']
+                type:String
+                
             },
 
             value:{
-                type:String,
-                required:[true,'please enter the detail value']
+                type:String
+                
             }
         }
 ],
