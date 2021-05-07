@@ -35,7 +35,7 @@ class NewProduct extends Component {
                     {products.length>0?products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
-                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0].url}`} style={{width:'80px',height:'80px'}} alt="new product" /></Link>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" src={`${product.images[0].url}`} style={{width:'100px',height:'120px'}} alt="new product" /></Link>
                                     <div className="media-body align-self-center">
                                         
                                         {product.nbreviews<10?

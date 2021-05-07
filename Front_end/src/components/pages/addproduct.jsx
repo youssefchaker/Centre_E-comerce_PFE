@@ -99,19 +99,13 @@ class Addproduct extends Component {
                 formData.set('stock', this.state.ProductStock);
                 formData.set('category', this.state.ProductCategory);
                 formData.set('discount', this.state.ProductDiscount);
-                //formData.set('details', this.state.details);
                 
-                  
                
                     formData.append('details', JSON.stringify(this.state.details))
                 
-
                 this.state.ProductImages.forEach(image => {
                     formData.append('images', image)
                 })
-
-                
-               
 
              
                 console.log(formData)
