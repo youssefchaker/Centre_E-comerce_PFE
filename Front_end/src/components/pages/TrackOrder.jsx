@@ -3,21 +3,10 @@ import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
 
 class TrackOrder  extends Component {
-
-    constructor (props) {
-        super (props)
-
-    }
-
     render (){
-
-
         return (
             <div>
                 <Breadcrumb title={'track your order'}/>
-                
-                
-                {/*Search section*/}
                 <section className="authentication-page section-b-space">
                     <div className="container">
                         <section className="search-block">

@@ -79,7 +79,6 @@ class MyProducts extends Component {
     closeSearch() {
         document.getElementById("update-overlay").style.display = "none";
     }
-
     handledelete=id=>{
         this.props.deleteProduct(id);
     }
@@ -219,8 +218,8 @@ class MyProducts extends Component {
                     discount: <div className="update" onClick={()=>this.openSearch("discount",product._id)} >{product.discount}</div>,
                     description:<div className="update" onClick={()=>this.openSearch("desc",product._id)}>{product.description}</div>,
                     category: <div className="update" onClick={()=>this.openSearch("category",product._id)} >{product.category}</div>,
-                    productdetail:<div> {product.details.map((detail)=>(<div className="update" onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)}  name="ProductDetail">{detail.detailname }</div>))} </div>,
-                    productdetailvalue:<div>{product.details.map((detail)=>(<div className="update" onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)}  name="ProductDetailValue">{detail.value }</div>))}</div>,
+                    productdetail:<div> {product.details.map((detail,index)=>(<div key={index} className="update" onClick={()=>this.openSearch("detailname",product._id,detail.value,detail._id)}  name="ProductDetail" key={index}>{detail.detailname }</div>))} </div>,
+                    productdetailvalue:<div>{product.details.map((detail,index)=>(<div key={index} className="update" onClick={()=>this.openSearch("detailvalue",product._id,detail.detailname,detail._id)}  name="ProductDetailValue">{detail.value }</div>))}</div>,
                     actions: <Fragment>
                         <button className="btn btn-danger py-1 px-2 ml-2" style={{borderRadius:'4px'}}  onClick={() => this.handledelete(product._id)}>
                             <i className="fa fa-trash"></i>
@@ -245,18 +244,16 @@ class MyProducts extends Component {
                                 <div className="dashboard-left">
                                     <div className="block-content">
                                         <ul>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`}><li><a>My Profile</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/mystore`}><li><a>My Store</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/orders/me`}><li><a>My Orders</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/myevents`}><li><a>My Events</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/cart`}><li><a>My Cart</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/`}><li className="last"><a href="#">Log Out</a></li></Link>
+                                        <li> <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`}>My Profile</Link></li>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/pages/mystore`}>My Store</Link></li>
+                                        <li> <Link to={`${process.env.PUBLIC_URL}/orders/me`}>My Orders</Link></li>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/pages/myevents`}>My Events</Link></li>
                                         </ul>
                                     </div>
                                     <div className="block-content">
                                         <ul>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/myproducts`}><li className="active"><a>My Products</a></li></Link>   
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/addproduct`}><li><a>Add Product</a></li></Link>
+                                        <li className="active"> <Link to={`${process.env.PUBLIC_URL}/pages/myproducts`}>My Products</Link></li>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/pages/addproduct`}>Add Product</Link></li>
 
                                         </ul>
                                     </div>

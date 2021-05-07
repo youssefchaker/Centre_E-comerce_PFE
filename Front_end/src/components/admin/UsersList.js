@@ -60,12 +60,7 @@ const UsersList = ({ history }) => {
 
     const updateAccountStatusHandler = (id, active) => {
         const formData = {id: id, active: active}
-        
-        
-        
-
         dispatch(updateAccountStatus(formData))
-        console.log(formData)
     }
 
     const setUsers = () => {

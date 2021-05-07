@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import SimpleReactValidator from 'simple-react-validator';
 import Breadcrumb from "../common/breadcrumb";
 import {Helmet} from 'react-helmet'
+import { Link } from 'react-router-dom';
 
 
 
@@ -431,8 +432,8 @@ return (
                                     
                                     
                                          
-                                       <label class="uploadLabel" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto',marginLeft:'13px'}}>
-                                         <i class="fa fa-upload"></i> 
+                                       <label className="uploadLabel" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto',marginLeft:'13px'}}>
+                                         <i className="fa fa-upload"></i> 
                                       <input type="file" style={{ display: 'inline-block'}}  name="avatar"  accept="image/*" onChange={onChangeImage} />
                                       <span>Upload Image "910 x 310"</span>
                                       </label>
@@ -446,6 +447,7 @@ return (
 
                         
                     </form>
+                    <div style={{textAlign:'center' , top:'50%'}}><Link  to={`${process.env.PUBLIC_URL}/pages/mystore`}><button type="submit" className="btn-solid btn"  >Finish Updating Store</button></Link></div>
                 </div>
             </div>
         </div>

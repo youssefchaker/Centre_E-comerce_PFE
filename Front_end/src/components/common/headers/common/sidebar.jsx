@@ -114,7 +114,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -133,7 +133,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -152,7 +152,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -171,7 +171,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -190,7 +190,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -209,7 +209,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -228,7 +228,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -247,7 +247,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -266,7 +266,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -285,7 +285,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -304,7 +304,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
@@ -323,7 +323,7 @@ class SideBar extends Component {
                             </Link>
                             <ul className="mega-menu clothing-menu">
                             {stores.map((store,index)=>(
-                                <li>
+                                <li key={index}>
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">

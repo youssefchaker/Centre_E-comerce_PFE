@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 // import Custom Components
 import Breadcrumb from "../../common/breadcrumb";
 import ProductStyleOne from "./common/product-style-one";
-import {getVisibleproducts} from "../../../services";
 import {addToCart } from "../../../actions";
 import {Product4} from "../../../services/script";
 

@@ -109,15 +109,7 @@ class Addproduct extends Component {
                 this.state.ProductImages.forEach(image => {
                     formData.append('images', image)
                 })
-
-                
-               
-
-             
-                console.log(formData)
-        
             this.props.newProduct(formData);
-            
             }
           }
       }
@@ -127,10 +119,6 @@ class Addproduct extends Component {
       handleimages=(e)=>{
         
         const files = Array.from(e.target.files)
-      
-        
-        
-       
             this.setState({ProductImages:[]})
         files.forEach(file => {
             const reader = new FileReader();
@@ -141,8 +129,7 @@ class Addproduct extends Component {
                 }
             }
             reader.readAsDataURL(file)
-        })
-        
+        }) 
       }
     render (){
         const {loading}=this.props.newproduct
@@ -173,7 +160,7 @@ class Addproduct extends Component {
                                     </div>
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div className="field-label">Product Price(€) *</div>
-                                        <input  type="number" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} min="0" oninput="validity.valid||(value='');"  />
+                                        <input  type="number" name="ProductPrice" onChange={this.setStateFromInput} value={this.state.ProductPrice} min="0"  />
                                                     {this.validator.message('ProductPrice', this.state.ProductPrice, 'required|min:0')}
                                     </div>
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
@@ -184,7 +171,7 @@ class Addproduct extends Component {
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div className="field-label">Product Category *</div>
                                         <select name="ProductCategory" onChange={(e)=>this.handlelist(e)} value={this.state.ProductCategory}>
-                                                    <option selected>Electronics</option>
+                                                    <option defaultValue>Electronics</option>
                                                     <option>Cameras</option>
                                                     <option>Laptops</option>
                                                     <option>Accessories</option>
@@ -214,11 +201,11 @@ class Addproduct extends Component {
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                     <form id="detailsform">
                                         <div className="field-label">Product Details *</div>
-                                        <label for="ProductDetail">Product Detail </label>
+                                        <label htmlFor="ProductDetail">Product Detail </label>
                                         <input type="text" name="ProductDetail" onChange={this.setStateFromInput} value={this.state.ProductDetail} id="1" /><br></br>
                                                     {this.validator.message('ProductDetail', this.state.ProductDetail, 'required')}
                                                     {this.validator2.message('ProductDetail', this.state.ProductDetail, 'required')}    
-                                        <label for="ProductDetailValue">Product Detail Value </label>
+                                        <label htmlFor="ProductDetailValue">Product Detail Value </label>
                                         <input type="text" name="ProductDetailValue" onChange={this.setStateFromInput} value={this.state.ProductDetailValue} id="2" />
                                                     {this.validator.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
                                                     {this.validator2.message('ProductDetailValue', this.state.ProductDetailValue, 'required')}
@@ -243,7 +230,7 @@ class Addproduct extends Component {
             </div>
             </div>
             </div>
-            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myProducts`} ><a><button type="submit" className="btn btn-solid" >Finish Adding Products</button></a></Link></div>
+            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myProducts`} ><button type="submit" className="btn btn-solid" >Finish Adding Products</button></Link></div>
             </section>
         }
             </div>

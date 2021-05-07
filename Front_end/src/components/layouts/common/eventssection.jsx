@@ -6,9 +6,7 @@ import {Slider3} from "../../../services/script"
 import { getEventsLimited } from '../../../actions/eventActions';
 import Loader from "react-loader-spinner";
 class EventSection extends Component {
-    constructor(props){
-        super(props);
-    }
+
     componentWillMount=()=>{
         this.props.getEventsLimited();
       }
@@ -25,12 +23,12 @@ class EventSection extends Component {
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> :events.events.length!=0?events.events.map((event,index)=>(
+                /></div> :events.events.length!==0?events.events.map((event,index)=>(
                                 <div key={index}>
                                     <div className="col-md-12">
                                         <Link to={`${process.env.PUBLIC_URL}/store/${event.store}`}>
                                             <div className="classic-effect">
-                                                <img src={event.eventImage.url} style={{width:'500px',height:'370px',borderRadius:'2px'}} className="img-fluid" alt="event image" />
+                                                <img src={event.eventImage.url} style={{width:'500px',height:'370px',borderRadius:'2px'}} className="img-fluid" alt="event banner" />
                                                     <span></span>
                                             </div>
                                         </Link>

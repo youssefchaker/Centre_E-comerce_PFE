@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserStoreDetails, clearErrors } from '../../actions/index'
 
-
+import { clearResponse, logout } from '../../actions/index';
 
 function  myStore () {
 
@@ -39,7 +39,11 @@ function  myStore () {
 
     }, [dispatch, alert, error])
 
-    
+    const logoutHandler = () => {
+        dispatch(clearResponse());
+        dispatch(logout());
+        toast.success('Logged out successfully!!');
+    }
     return (
         
         <div>
@@ -69,6 +73,7 @@ function  myStore () {
                                         <li><Link to="/orders/me">My Orders</Link></li>
                                         <li><Link to='/pages/myproducts'>My Products</Link></li>
                                         <li><Link to="/cart">My Cart</Link></li>
+                                        <li className="last"><a href="/" onClick={logoutHandler}>Log Out</a></li>
                                         </ul>
                                     </div>
                                     </div>

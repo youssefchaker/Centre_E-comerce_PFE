@@ -5,7 +5,7 @@ export default class ImageZoom extends Component {
         const {image} = this.props;
 
         return (
-            <img src={`${image}`}  style={{width:'300px',height:'300px'}}  className="img-fluid image_zoom_cls-0" />
+            <img src={`${image}`}  style={{width:'300px',height:'300px'}}  className="img-fluid image_zoom_cls-0" alt="product" />
         );
     }
 }

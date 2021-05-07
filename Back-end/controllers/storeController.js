@@ -15,37 +15,19 @@ exports.newStore = catchAsyncErrors(async (req, res, next) => {
 
         return next(new ErrorHandler('this store already exist',404));
 
-        }
-      /*const result = await cloudinary.v2.uploader.upload(req.body.avatar,{
-          folder: 'stores'
-      })*/
-    //const {name,phoneNumber,email,buisnessDomaine,address,city,postalCode,country,subscriptionPrice} = req.body;
-    
-    
+        }  
      image = req.body.avatar
-
-    
         const result = await cloudinary.v2.uploader.upload(image, {
             folder: 'stores'
         });
-
         const imagesLinks = {
             public_id: result.public_id,
             url: result.secure_url
         };
-        console.log(imagesLinks);
-    
-
     req.body.avatar = imagesLinks
     req.body.user=req.user.id;
-
-
-
-
     const store = await Store.create(
         req.body
-       
-    
     );
     const user = await User.findByIdAndUpdate({ _id: req.user.id },{ role: 'Seller' });
 
@@ -100,13 +82,10 @@ exports.getSingleStore = catchAsyncErrors(async (req, res, next) => {
     if (!store) {
         return next(new ErrorHandler('store not found', 404));
     }
-
-
     res.status(200).json({
         success: true,
         store
     })
-
 })
 
 // user and admin Update store   =>   /api/mall/user/store/:id   &&   /api/mall/admin/store/:id
@@ -128,8 +107,6 @@ exports.updateStore = catchAsyncErrors(async (req, res, next) => {
         public_id: result.public_id,
         url: result.secure_url
     };
-    console.log(imagesLinks);
-
 
     req.body.avatar = imagesLinks
 

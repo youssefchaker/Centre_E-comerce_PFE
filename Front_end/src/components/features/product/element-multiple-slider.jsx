@@ -7,8 +7,7 @@ import Breadcrumb from "../../common/breadcrumb";
 import ProductMultiSlider from "./common/product-multi-slider"
 import {
     getBestSellerProducts,
-    getNewProducts,
-    getVisibleproducts
+    getNewProducts
 } from "../../../services";
 import {addToCart} from "../../../actions";
 import ProductStyleTwo from "./common/product-style-two";

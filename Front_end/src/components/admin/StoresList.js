@@ -92,7 +92,7 @@ const StoresList = ({ history }) => {
                 name: store.name,
                 address: store.address + store.city + ',' +'\n'+ store.postalCode +'\n'+ store.country,
                 buisnessDomaine: store.buisnessDomaine,
-                image: <img src={store.avatar.url} style = {{width:'80px',height:'72px'}} />,
+                image: <img src={store.avatar.url} style = {{width:'80px',height:'72px'}} alt="store avatar" />,
                 actions: <Fragment>
                     <Link to={`/store/${store._id}`} className="btn btn-primary py-1 px-2" style={{borderRadius:'4px'}}>
                         <i className="fa fa-eye"></i>
@@ -106,7 +106,6 @@ const StoresList = ({ history }) => {
         return data;
     }
 
-     let [subscriptionPrice]=stores;
     return (
         <Fragment>
            
@@ -131,7 +130,7 @@ const StoresList = ({ history }) => {
                                 <div className="col-xl-12 col-sm-12 mb-3">
                                     <div className="card text-white bg-primary o-hidden h-100 " style={{borderRadius: '60px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Total Subsciptions Amount<br /> <b>{symbol}{symbol=="€"?(stores[0].subscriptionPrice*stores.length).toFixed(2):Math.round((stores[0].subscriptionPrice*currencydiff)*stores.length)}</b>
+                                            <div className="text-center card-font-size">Total Subsciptions Amount<br /> <b>{symbol}{symbol==="€"?(stores[0].subscriptionPrice*stores.length).toFixed(2):Math.round((stores[0].subscriptionPrice*currencydiff)*stores.length)}</b>
                                             </div>
                                         </div>
                                     </div>

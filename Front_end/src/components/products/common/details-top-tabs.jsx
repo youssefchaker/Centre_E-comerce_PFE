@@ -14,7 +14,7 @@ class DetailsTopTabs extends Component {
         super(props);
         this.state={
             Rating:3,
-            Comment:null,
+            Comment:'',
             updatevalue:null,
             updatefield:null,
             inputtype:null,
@@ -147,8 +147,8 @@ class DetailsTopTabs extends Component {
                             </TabList>
                             <TabPanel className="tab-pane fade mt-4 show active">
                                 <table className="table table-striped mb-0">
-                                {this.props.product.details.map((detail)=>(
-                                    <tbody>
+                                {this.props.product.details.map((detail,index)=>(
+                                    <tbody key={index}>
                                     <tr>
                                         <th>{detail.detailname}</th>
                                         <td>{detail.value}</td>
@@ -204,9 +204,8 @@ class DetailsTopTabs extends Component {
                                         <th></th>
                                     </tr>
                                     </thead>
-                                {reviews.reviews.map((review,index)=>(
-                                    
-                                    <tbody>
+                                {reviews.reviews.map((review,index)=>(                                
+                                    <tbody key={index}>
                                     <tr>
                                         <td>{usernames[index].firstname}{' '}{usernames[index].lastname}</td>
                                         <td>{review.comment}</td>

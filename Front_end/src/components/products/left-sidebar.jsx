@@ -3,10 +3,7 @@ import {Helmet} from 'react-helmet'
 import Slider from 'react-slick';
 import '../common/index.scss';
 import {connect} from "react-redux";
-
-// import custom Components
 import Service from "./common/service";
-import BrandBlock from "./common/brand-block";
 import RelatedProduct from "../common/related-product";
 import Breadcrumb from "../common/breadcrumb";
 import DetailsWithPrice from "./common/product/details-price";
@@ -46,7 +43,7 @@ class LeftSideBar extends Component {
         this.setState({id:this.props.match.params.id});
     }
     componentDidUpdate() {
-        if(this.props.match.params.id!=this.state.id){
+        if(this.props.match.params.id!==this.state.id){
             setTimeout("location.reload(true);",1);
         }
     }

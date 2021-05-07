@@ -6,10 +6,6 @@ import {Slider2, Team4} from "../../services/script"
 
 class aboutUs extends Component {
 
-    constructor (props) {
-        super (props)
-
-    }
 
     render (){
 

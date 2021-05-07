@@ -28,7 +28,7 @@ const Dashboard = () => {
     const { users } = useSelector(state => state.allUsers)
     const { symbol} = useSelector(state => state.symbol);
     const {currencydiff} = useSelector(state => state);
-
+    const {  reviews } = useSelector(state => state.adminReviews);
     const { stores } = useSelector(state => state.stores)
     const {  events } = useSelector(state => state.adminEvents);
 
@@ -88,7 +88,7 @@ const Dashboard = () => {
                                 <div className="col-xl-12 col-sm-12 mb-3">
                                     <div className="card text-white bg-primary o-hidden h-100 " style={{borderRadius: '60px'}}>
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Total Amount<br /> <b>{symbol}{totalAmount && symbol=="€"?  totalAmount.toFixed(2):Math.round((currencydiff*(totalAmount) + Number.EPSILON) )}</b>
+                                            <div className="text-center card-font-size">Total Amount<br /> <b>{symbol}{totalAmount && symbol==="€"?  totalAmount.toFixed(2):Math.round((currencydiff*(totalAmount) + Number.EPSILON) )}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -160,6 +160,20 @@ const Dashboard = () => {
                                             <div className="text-center card-font-size">Stores<br /> <b>{stores && stores.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" to="/admin/stores">
+                                            <span className="float-left">View Details</span>
+                                            <span className="float-right">
+                                                <i className="fa fa-angle-right"></i>
+                                            </span>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className="col-xl-3 col-sm-6 mb-3">
+                                    <div className="card text-white bg-primary o-hidden h-100" style={{borderRadius: '15px'}}>
+                                        <div className="card-body">
+                                            <div className="text-center card-font-size">Reviews<br /> <b>{reviews && reviews.length}</b></div>
+                                        </div>
+                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/reviews">
                                             <span className="float-left">View Details</span>
                                             <span className="float-right">
                                                 <i className="fa fa-angle-right"></i>

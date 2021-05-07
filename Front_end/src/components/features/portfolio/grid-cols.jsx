@@ -5,12 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import Loader from "react-loader-spinner";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import {Link} from "react-router-dom";
   import Store from './store';
 
 // import Custom Components
@@ -34,7 +29,7 @@ function  GridCols () {
 
 
      const dispatch = useDispatch();
-         const { loading, stores, error, storesCount } = useSelector(state => state.stores) 
+         const { loading, stores, error } = useSelector(state => state.stores) 
 
 
      useEffect(() => {
@@ -101,7 +96,7 @@ function  GridCols () {
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     </Link>
-                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" />
+                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" alt="store avatar" />
                                                 </div>
                                             </div>
                                         </div>
@@ -119,7 +114,7 @@ function  GridCols () {
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     </Link>
-                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" />
+                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" alt="store avatar" />
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +132,7 @@ function  GridCols () {
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     </Link>
-                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" />
+                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" alt="store avatar" />
                                                 </div>
                                             </div>
                                         </div>
@@ -155,7 +150,7 @@ function  GridCols () {
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     </Link>
-                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" />
+                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" alt="store avatar" />
                                                 </div>
                                             </div>
                                         </div>
@@ -173,7 +168,7 @@ function  GridCols () {
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </div>
                                                     </Link>
-                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" />
+                                                    <img src={store.avatar.url} className="img-fluid blur-up lazyload bg-img" alt="store avatar" />
                                                 </div>
                                             </div>
                                         </div>

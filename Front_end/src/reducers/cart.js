@@ -36,7 +36,6 @@ export default function cartReducer(state = {
                 const cart = state.cart.reduce((cartAcc, product) => {
                     if (product._id === action.productId && product.qty > 1) {
                         if(product.qty!=1){
-                        //console.log('price: '+product.price+'Qty: '+product.qty)
                         cartAcc.push({ ...product, qty: product.qty-1, sum:(product.price*product.discount/100)*(product.qty-1) })} // Decrement qty
                         toast.warn("Item Decrement Qty to Cart");
                     } else {

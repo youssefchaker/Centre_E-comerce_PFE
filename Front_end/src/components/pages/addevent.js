@@ -4,7 +4,6 @@ import SimpleReactValidator from 'simple-react-validator';
 import { toast } from 'react-toastify';
 import {connect} from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
-import {Link} from 'react-router-dom';
 import { newEvent } from '../../actions/eventActions';
 import { NEW_EVENT_RESET } from '../../constants/eventConstants'
 import { withRouter } from 'react-router-dom';
@@ -15,9 +14,9 @@ class Addevent extends Component {
     this.state = {
         StoreName:"",
         EventName:"",
-        EventImage:null,
-        EventDatestart:null,
-        EventDatefinish:null,
+        EventImage:'',
+        EventDatestart:'',
+        EventDatefinish:'',
         EventImg:'',
         
     }

@@ -27,12 +27,9 @@ class APIFeatures {
         // Advance filter for price, ratings etc
         let queryStr = JSON.stringify(queryCopy)
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`)
-
-        console.log(queryStr);
         this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
-
     pagination(resPerPage) {
         const currentPage = Number(this.queryStr.page) || 1;
         const skip = resPerPage * (currentPage - 1);

@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import { getNewProducts } from '../../../actions/productActions';
 import Slider from 'react-slick';
 import {Slider3} from "../../../services/script"
-import {Product4, Product5} from '../../../services/script'
+import {Product4} from '../../../services/script'
 class SpecialProducts extends Component{
     componentWillMount() {
         this.props.getNewProducts();
@@ -33,7 +33,7 @@ class SpecialProducts extends Component{
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> :products.products.length!=0? products.products.map((product, index ) =>
+                /></div> :products.products.length!==0? products.products.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem {...properties} product={product} symbol={symbol} currencydiff={currencydiff} storename={storenames[index]}
                                                          onAddToCartClicked={addToCart} key={index} />

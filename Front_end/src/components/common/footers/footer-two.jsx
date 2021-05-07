@@ -87,19 +87,19 @@ class FooterTwo extends Component {
                                     <div className="payment-card-bottom">
                                         <ul>
                                             <li>
-                                                <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/visa.png`} alt="" /></a>
+                                                <button ><img src={`${process.env.PUBLIC_URL}/assets/images/icon/visa.png`} alt="" /></button>
                                             </li>
                                             <li>
-                                                <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/mastercard.png`} alt="" /></a>
+                                                <button ><img src={`${process.env.PUBLIC_URL}/assets/images/icon/mastercard.png`} alt="" /></button>
                                             </li>
                                             <li>
-                                                <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/paypal.png`} alt="" /></a>
+                                                <button ><img src={`${process.env.PUBLIC_URL}/assets/images/icon/paypal.png`} alt="" /></button>
                                             </li>
                                             <li>
-                                                <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/american-express.png`} alt="" /></a>
+                                                <button ><img src={`${process.env.PUBLIC_URL}/assets/images/icon/american-express.png`} alt="" /></button>
                                             </li>
                                             <li>
-                                                <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/discover.png`} alt="" /></a>
+                                                <button ><img src={`${process.env.PUBLIC_URL}/assets/images/icon/discover.png`} alt="" /></button>
                                             </li>
                                         </ul>
                                     </div>

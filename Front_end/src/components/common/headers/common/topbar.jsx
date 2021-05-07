@@ -44,14 +44,6 @@ const TopBar = (props) =>  {
                             <li className="onhover-dropdown mobile-account" >
                                 <i className="fa fa-user" aria-hidden="true"></i><span>{user && user.firstname}</span>
                                 <ul className="onhover-show-div">
-                                {user && user.role === 'admin' && (
-                                    <li>
-                                    <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
-                                    </li>
-                                )}
-                                    <li>
-                                        <Link to={`${process.env.PUBLIC_URL}/orders/me`} data-lng="en">Orders</Link>
-                                    </li>
                                     <li>
                                         <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`} data-lng="en">Profile</Link>
                                     </li>

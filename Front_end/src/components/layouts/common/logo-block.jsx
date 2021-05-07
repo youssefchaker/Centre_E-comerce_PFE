@@ -4,6 +4,7 @@ import { getStores } from '../../../actions/index'
 import Slider from 'react-slick';
 
 import {Slider2} from "../../../services/script";
+import { toast } from 'react-toastify';
 
 function LogoBlock ()  {
 
@@ -17,13 +18,13 @@ function LogoBlock ()  {
 
     useEffect(() => {
         if (error) {
-             console.log(error);
+             toast.error(error);
         }
 
-        dispatch(getStores(/*keyword, currentPage, price, category, rating)*/));
+        dispatch(getStores());
 
 
-    }, [dispatch, alert,  error  /*,keyword, currentPage, price, category, rating*/])
+    }, [dispatch, alert,  error  ])
 
     
         return (

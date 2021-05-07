@@ -185,11 +185,10 @@ class MyEvents extends Component {
                                 <div className="dashboard-left">
                                     <div className="block-content">
                                         <ul>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/myprofile`}><li><a>My Profile</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/mystore`}><li><a>My Store</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/pages/myevents`}><li className="active"><a>My Events</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/orders/me`}><li><a>My Orders</a></li></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/cart`}><li><a>My Cart</a></li></Link>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/pages/myprofile`}>My Profile</Link></li>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/pages/mystore`}>My Store</Link></li>
+                                        <li className="active"><Link to={`${process.env.PUBLIC_URL}/pages/myevents`}>My Events</Link></li>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/orders/me`}>My Orders</Link></li>
                                         </ul>
                                     </div>
                                     <div className="block-content">
