@@ -46,7 +46,8 @@ import {
     UPDATE_ACCOUNT_STATUS_FAIL,
     UPDATE_ACCOUNT_STATUS_RESET,
     CLEAR_ERRORS,
-    CLEAR_RESPONSE
+    CLEAR_RESPONSE,
+    RESET
 } from '../constants/ActionTypes'
 
 export const authReducer = (state = { user: {} }, action) => {
@@ -218,6 +219,12 @@ export const forgotPasswordReducer = (state = {}, action) => {
                 message: null,
                 success:false,
                 
+            }
+            case RESET: 
+            return {
+
+                ...state,
+                loading: false
             }
 
         default:

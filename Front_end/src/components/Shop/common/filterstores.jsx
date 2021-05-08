@@ -30,7 +30,7 @@ class filterstore extends Component {
                             <i className="fa fa-angle-left" aria-hidden="true"></i> back
                         </span>
                     </div>
-                    {this.props.products!==0?<SlideToggle>
+                    {this.props.products.length!==0?<SlideToggle>
                         {({onToggle, setCollapsibleElement}) => (
                             <div className="collection-collapse-block open">
                                 <h3 className="collapse-block-title" onClick={onToggle}>price({symbol})</h3>

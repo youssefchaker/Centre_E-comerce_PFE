@@ -102,7 +102,7 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL'
 
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 export const CLEAR_RESPONSE = 'CLEAR_RESPONSE'
-
+export const RESET = 'RESET'
 
 
 

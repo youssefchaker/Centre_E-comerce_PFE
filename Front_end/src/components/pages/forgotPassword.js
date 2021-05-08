@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import { useDispatch, useSelector } from 'react-redux'
 import { forgotPassword, clearErrors, clearResponse } from '../../actions/index'
+import { RESET } from '../../constants/ActionTypes'
 import { toast } from 'react-toastify';
 
 
@@ -16,6 +17,9 @@ const ForgotPassword = () => {
     const { error, loading, message } = useSelector(state => state.forgotPassword)
 
     useEffect(() => {
+         
+
+        dispatch({type: RESET});
 
         if (error) {
             toast.error(error, {
@@ -41,6 +45,7 @@ const ForgotPassword = () => {
                 progress: undefined,
                 }); 
              dispatch(clearResponse());
+             
 
         }
 
@@ -77,7 +82,7 @@ const ForgotPassword = () => {
                                                    placeholder="Enter Your Email" required="please enter a valid email" value={email}
                                                    onChange={(e) => setEmail(e.target.value)}/>
                                         </div>
-                                        <button type='submit' className="btn btn-solid" >Send Email</button>
+                                        <button type='submit' className="btn btn-solid" disabled={loading ? true : false}>Send Email </button>
                                     </div>
                                 </form>
                             </div>

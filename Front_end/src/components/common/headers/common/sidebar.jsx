@@ -89,8 +89,8 @@ class SideBar extends Component {
                     </a>
                     
                         <ul id="sub-menu" className="sidebar-menu">
-                        {categories.map((category)=>(
-                        <li>
+                        {categories.map((category, index)=>(
+                        <li key={index} >
                             <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
                             {category}
                                 <span className="sub-arrow"></span>
@@ -101,7 +101,7 @@ class SideBar extends Component {
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
-                                                {store.buisnessDomaine===category?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5><i class="fa fa-shopping-bag" aria-hidden="true" style={{color:'#960000', width:'40px' }}></i>{store.name}</h5></Link>:''}
+                                                {store.buisnessDomaine===category?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5><i className="fa fa-shopping-bag" aria-hidden="true" style={{color:'#960000', width:'40px' }}></i>{store.name}</h5></Link>:''}
                                             </div>   
                                         </div>
                                     </div>

@@ -27,10 +27,8 @@ function Shop ({ match }) {
             alert(error);
             dispatch(clearErrors())
         }
-         if(store._id!=match.params.id){
-            dispatch(getStoreDetails(match.params.id));
-            setTimeout("location.reload(true);",500);
-        } 
+        dispatch(getStoreDetails(match.params.id));
+        
     }, [dispatch, alert, error, match.params.id])
      function LayoutViewClicked(colums) {
         setLayoutColumns({
@@ -69,7 +67,7 @@ function Shop ({ match }) {
                                         </div>
                                     </StickyBox>
                                 </div>
-                                {loading ? <div style={{ textAlign: "center" }}><Loader
+                                {loading ? <div style={{  margin: '0.3em auto'}}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}

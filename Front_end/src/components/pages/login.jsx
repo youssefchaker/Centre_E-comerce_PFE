@@ -130,7 +130,7 @@ const Login = ({history}) => {
                                     <p>Sign up for a free account at our store. Registration is quick and easy. It
                                         allows you to be able to order from our shop. To start shopping click
                                         register.</p>
-                                    <a href={`${process.env.PUBLIC_URL}/pages/register`} className="btn btn-solid">Create an Account</a>
+                                    <Link to={`${process.env.PUBLIC_URL}/pages/register`} className="btn btn-solid">Create an Account</Link>
                                 </div>
                             </div>
                         </div>

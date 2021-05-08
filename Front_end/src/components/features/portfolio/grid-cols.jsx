@@ -75,7 +75,7 @@ function  GridCols () {
                             <hr></hr>
                             <TabPanel>
                                 <div className="row zoom-gallery">
-                                    {loading ? <div style={{ textAlign: "center" }}><Loader
+                                    {loading ? <div style={{ margin: '0.3em auto' }}><Loader
                              type="Rings"
                              color="#cc2121"
                              height={200}
