@@ -7,7 +7,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import Breadcrumb from "../common/breadcrumb";
 import {Helmet} from 'react-helmet'
 import { Link } from 'react-router-dom';
-
+import Loader from "react-loader-spinner";
 
 
 
@@ -21,7 +21,6 @@ const UpdateStore = ({ match, history }) => {
     const [postalCode, setPostalCode] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [avatar, setAvatar] = useState({});
-    //const [description, setDescription] = useState('');
     const [, forceUpdate] = useState()
 
     const simpleValidator = useRef(new SimpleReactValidator({autoForceUpdate: {forceUpdate: forceUpdate}}));
@@ -60,7 +59,6 @@ const UpdateStore = ({ match, history }) => {
             alert(updateError);
             dispatch(clearErrors())
         }
-
 
         if (isUpdated) {
             
@@ -134,6 +132,12 @@ return (
     <Breadcrumb  title={'Update Store'}/>
 
     <section className="section-b-space">
+    {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
         <div className="container padding-cls">
             <div className="checkout-page">
                 <div className="checkout-form">
@@ -451,6 +455,7 @@ return (
                 </div>
             </div>
         </div>
+    }
     </section>
     </Fragment>
 

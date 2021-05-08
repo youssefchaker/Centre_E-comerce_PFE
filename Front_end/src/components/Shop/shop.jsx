@@ -9,7 +9,7 @@ import ProductListingStore from "./common/product-listingstores";
 import StickyBox from "react-sticky-box";
 import TopProduct from '../common/top-product';
 import { getStoreDetails, clearErrors } from '../../actions/index'
-
+import Loader from "react-loader-spinner";
 function Shop ({ match }) {
 
     const [layoutColumns, setLayoutColumns] = useState(3);
@@ -19,7 +19,7 @@ function Shop ({ match }) {
 
     const dispatch = useDispatch();
 
-    const { error, store } = useSelector(state => state.storeDetails)
+    const { error, store,loading } = useSelector(state => state.storeDetails)
     useEffect(() => {
         if (error) {
             alert(error);
@@ -67,6 +67,12 @@ function Shop ({ match }) {
                                         </div>
                                     </StickyBox>
                                 </div>
+                                {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                                 <div className="collection-content col">
                                     <div className="page-main-content ">
                                         <div className="">
@@ -110,6 +116,7 @@ function Shop ({ match }) {
                                         </div>
                                     </div>
                                 </div>
+                                }
                             </div>
                         </div>
                     </div>

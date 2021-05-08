@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import {getCategories} from '../../../../services';
+import {getBuisnessDomaines} from '../../../../services';
 import {connect} from 'react-redux';
 class SideBar extends Component {
 
@@ -77,6 +77,7 @@ class SideBar extends Component {
 
     render() {
         const {stores}=this.props.stores
+        const {categories}=this.props;
         return (
             <div id="mySidenav" className="sidenav">
                 <a href="javascript:void(0)" className="sidebar-overlay" onClick={this.closeNav}></a>
@@ -88,9 +89,10 @@ class SideBar extends Component {
                     </a>
                     
                         <ul id="sub-menu" className="sidebar-menu">
+                        {categories.map((category)=>(
                         <li>
                             <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Electronics
+                            {category}
                                 <span className="sub-arrow"></span>
                             </Link>
                             <ul className="mega-menu clothing-menu">
@@ -99,246 +101,16 @@ class SideBar extends Component {
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
-                                                {store.buisnessDomaine=="Electronics"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
+                                                {store.buisnessDomaine===category?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
+                                            </div>   
                                         </div>
                                     </div>
                                 </li>
                                 ))}
                             </ul>
                         </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Cameras
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Cameras"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Laptops
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Laptops"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Accessories
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Accessories"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Phones&Tablets
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Phones&Tablets"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Food
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Food"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Books
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Books"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Fashion
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Fashion"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Beauty&Health
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Beauty&Health"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Sports
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Sports"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Outdoor
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Outdoor"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Home
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Home"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link style={{fontSize:"small",marginBottom:"-5px"}} to="#" onClick={(e) => this.handleMegaSubmenu(e)}>
-                            Other
-                                <span className="sub-arrow"></span>
-                            </Link>
-                            <ul className="mega-menu clothing-menu">
-                            {stores.map((store,index)=>(
-                                <li key={index}>
-                                    <div className="row m-0">
-                                        <div className="col-xl-4">
-                                            <div className="Link-section">
-                                                {store.buisnessDomaine=="Other"?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5>{store.name}</h5></Link>:''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                ))}
-                            </ul>
-                        </li>
-                        
+                        ))}
                     </ul>
-                    
-                    
                 </nav>
             </div>
 
@@ -348,7 +120,8 @@ class SideBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        stores:state.stores
+        stores:state.stores,
+        categories:getBuisnessDomaines(state.stores.stores)
     }
 }
 export default connect(mapStateToProps) (SideBar);

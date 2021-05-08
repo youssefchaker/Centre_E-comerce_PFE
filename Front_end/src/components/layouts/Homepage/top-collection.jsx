@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux'
 import Loader from "react-loader-spinner";
-import {Product4, Product5} from '../../../services/script'
+import {Product4} from '../../../services/script'
 import { addToCart } from '../../../actions'
 import ProductItem from '../common/product-item';
 import { getTopProducts } from '../../../actions/productActions';
@@ -36,7 +36,7 @@ class TopCollection extends Component {
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> :products.products.length!=0? products.products.map((product, index ) =>
+                /></div> :products.products.length!==0? products.products.map((product, index ) =>
                                         <div key={index}>
                                             <ProductItem {...properties} product={product} storename={storenames[index]} symbol={symbol} currencydiff={currencydiff}
                                                          onAddToCartClicked={addToCart} key={index} />

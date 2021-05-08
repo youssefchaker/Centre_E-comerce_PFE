@@ -1,8 +1,5 @@
 const express = require('express')
 const router = express.Router();
-
-
-
 const {
     newStore,
     getStores,
@@ -26,15 +23,5 @@ router.route('/admin/stores').get(isAuthenticatedUser,authorizeRoles('Admin'),ge
 router.route('/admin/store/:id').put(isAuthenticatedUser,authorizeRoles('Admin'),updateStore)
                                 .delete(isAuthenticatedUser,authorizeRoles('Admin'),deleteStore);
  router.route('/mystore').get(isAuthenticatedUser,authorizeRoles('Seller'),getProfileStore);
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

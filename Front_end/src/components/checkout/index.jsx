@@ -4,7 +4,6 @@ import {Helmet} from 'react-helmet'
 import SimpleReactValidator from 'simple-react-validator';
 import Breadcrumb from "../common/breadcrumb";
 import {getCartTotal} from "../../services";
-import { toast } from 'react-toastify';
 
 
 
@@ -61,9 +60,9 @@ function  checkOut ({history}) {
 
     // Calculate Order Prices
     
-    const itemsPrice = symbol=="€"?total: Math.round((currencydiff*(total) + Number.EPSILON) * 100) / 100
-    const shippingPrice = symbol=="€"?10:10*currencydiff
-    const taxPrice = symbol=="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:currencydiff*0.05*itemsPrice
+    const itemsPrice = symbol==="€"?total: Math.round((currencydiff*(total) + Number.EPSILON) * 100) / 100
+    const shippingPrice = symbol==="€"?10:10*currencydiff
+    const taxPrice = symbol==="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:currencydiff*0.05*itemsPrice
     const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2)
     
     
@@ -418,13 +417,13 @@ function  checkOut ({history}) {
                                                     </div>
                                                     <ul className="qty">
                                                         {cart.map((item, index) => {
-                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {symbol=="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</span></li> })
+                                                            return <li key={index}>{item.name} × {item.qty} <span>{symbol} {symbol==="€"?item.price-(item.price*item.discount/100):Math.round((currencydiff*(item.price-(item.price*item.discount/100)) + Number.EPSILON) * 100) / 100}</span></li> })
                                                         }
 
                                                     </ul>
                                                     <ul className="qty">
-                                                        <li>Shipping Price: <span>{symbol}{ symbol=="€"?10:10*currencydiff}</span></li>
-                                                        <li>Tax Cost: <span>{symbol}{symbol=="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:Math.round((currencydiff*0.05*itemsPrice+Number.EPSILON)*100)/100}</span></li>
+                                                        <li>Shipping Price: <span>{symbol}{ symbol==="€"?10:10*currencydiff}</span></li>
+                                                        <li>Tax Cost: <span>{symbol}{symbol==="€"?Math.round((0.05*itemsPrice+Number.EPSILON)*100)/100:Math.round((currencydiff*0.05*itemsPrice+Number.EPSILON)*100)/100}</span></li>
                                                     </ul>
                                                     <ul className="sub-total">
                                                         <li>Shipping <div className="shipping">

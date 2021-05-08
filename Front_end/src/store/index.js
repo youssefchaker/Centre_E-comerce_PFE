@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 // middlewares
 import thunkMiddleware from 'redux-thunk'
-import logger from 'redux-logger'
 
 // Import custom components
 import rootReducer from '../reducers';
@@ -42,9 +41,5 @@ const store = createStore(rootReducer, persistedState, compose(
     }
 ));
 
-const unsubscribe = store.subscribe(() => {
-    const state = store.getState();
-    saveToLocalStorage(state);
-});
 
 export default store;

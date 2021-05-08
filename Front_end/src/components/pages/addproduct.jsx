@@ -62,8 +62,8 @@ class Addproduct extends Component {
             this.state.ProductDetailsValues.push(this.state.ProductDetailValue);
             document.getElementById("1").value="";
             document.getElementById("2").value="";
-            this.state.ProductDetail="";
-            this.state.ProductDetailValue="";
+            this.setState({ProductDetail:""});
+            this.setState({ProductDetailValue:""});
             toast.success("New Product Detail Added!!");
           }
     }
@@ -99,13 +99,7 @@ class Addproduct extends Component {
                 formData.set('stock', this.state.ProductStock);
                 formData.set('category', this.state.ProductCategory);
                 formData.set('discount', this.state.ProductDiscount);
-                //formData.set('details', this.state.details);
-                
-                  
-               
-                    formData.append('details', JSON.stringify(this.state.details))
-                
-
+                formData.append('details', JSON.stringify(this.state.details))
                 this.state.ProductImages.forEach(image => {
                     formData.append('images', image)
                 })

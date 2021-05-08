@@ -7,7 +7,6 @@ const cloudinary = require('cloudinary')
 app.use(express.json());
 
 
-
 // Handle Uncaught exceptions
 process.on('uncaughtException', err => {
     console.log(`ERROR: ${err.stack}`);
@@ -20,11 +19,8 @@ process.on('uncaughtException', err => {
 // setting up .env
 dotenv.config({path:"Back-end/config.env"});
 
-
 //connect to mongoDB
 connectdb();
-
-
 
 //setting up cloudinary configuration
 cloudinary.config({
@@ -32,12 +28,6 @@ cloudinary.config({
     api_key : process.env.CLOUDINARY_API_KEY,
     api_secret : process.env.CLOUDINARY_API_SECRET
 })
-
-
-//production mode
-
-
-
 
 //setting up port 
 const server = app.listen(process.env.PORT, () => {

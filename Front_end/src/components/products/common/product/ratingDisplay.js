@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 
 class RatingDisplay extends Component {
 
-    constructor (props) {
-        super (props)
-    }
-
     render (){
         const {rating} = this.props
         let tab=[];
@@ -45,6 +41,12 @@ class RatingDisplay extends Component {
                 tab.push(<i key={4} className="fa fa-star"></i>)
                 tab.push(<i key={5} className="fa fa-star"></i>)
                 break;
+            default:
+                tab.push(<i key={1} className="fa fa-star"></i>)
+                tab.push(<i key={2} className="fa fa-star"></i>)
+                tab.push(<i key={3} className="fa fa-star"></i>)
+                tab.push(<i key={4} className="fa fa-star-o"></i>)
+                tab.push(<i key={5} className="fa fa-star-o"></i>)
         }
         return (
             <div>{tab}</div>

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import Slider from 'react-slick';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-
-import {getBestSeller} from "../../services";
 import { getNewProducts } from '../../actions/productActions';
 
 
@@ -20,9 +18,9 @@ class NewProduct extends Component {
         const storenames=newproducts.products.storenames;
         const {symbol}=this.props.symbol;
         const currencydiff=this.props.currencydiff;
-        if(storeid!=undefined){
+        if(storeid!==undefined){
             for(var i=0;i<products.length;i++){
-                if(products[i].store!=storeid){
+                if(products[i].store!==storeid){
                     filteredproducts.push(products[i])
                 }
             }
@@ -79,12 +77,12 @@ class NewProduct extends Component {
                                             </div>}
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
                                         <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h6 style={{"textDecoration":"underline"}} className="sname">Product By:{storenames[index]}</h6></Link>
-                                        {symbol=="DT"?
-                                        (product.discount != 0)?
+                                        {symbol==="DT"?
+                                        (product.discount !== 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
                                  <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>:
-                            (product.discount != 0)?
+                            (product.discount !== 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 
                             </h4>:<h4>{symbol}{product.price}</h4>}

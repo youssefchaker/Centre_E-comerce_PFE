@@ -17,12 +17,6 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 const mydetails =JSON.parse(details);    
     
    details=mydetails;
-    
-    
-
-
-
-
 
     let images = []
     if (typeof req.body.images === 'string') {
@@ -32,12 +26,7 @@ const mydetails =JSON.parse(details);
     }
 
     let imagesLinks=[];
-     
-   
         const store = await Store.findById(mystore);
-
-
-                
                 for(var i=0;i<images.length;i++){
                     const result = await cloudinary.v2.uploader.upload(images[i],{
                         folder:'products'
@@ -48,8 +37,6 @@ const mydetails =JSON.parse(details);
                     })
                 }
                 images=imagesLinks;
-                
-                
                 Product.create({
                     name,
                     description,
@@ -66,13 +53,7 @@ const mydetails =JSON.parse(details);
                     message:"product has been added"
                 })
             })
-   
-            
-
-
 // Get all products for a specific store   =>   /store/products/:id
-
-
 exports.getStoreProducts = catchAsyncErrors(async (req, res, next) => {
     Store.findById(req.params.id).exec(function(err,store){
         Product.find({store:store}).exec(function(err,products){

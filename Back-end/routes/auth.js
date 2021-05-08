@@ -19,12 +19,7 @@ const {
     activateAccount
 } = require('../controllers/authController');
 
-
-
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
-
-
-
 
 router.route('/register').post(registerUser);
 router.route('/login').post(loginUser);
@@ -39,9 +34,6 @@ router.route('/admin/user/:id')
               .get(isAuthenticatedUser,authorizeRoles('Admin'),getUserDetails)
               .put(isAuthenticatedUser,authorizeRoles('Admin'),AdminUpdateUser)
               .delete(isAuthenticatedUser,authorizeRoles('Admin'),deleteUser)
-            
-
-
 router.route('/contact').post(contactFormulaire);
 router.route('/admin/user/activate').post(isAuthenticatedUser,authorizeRoles('Admin'),activateAccount)
 

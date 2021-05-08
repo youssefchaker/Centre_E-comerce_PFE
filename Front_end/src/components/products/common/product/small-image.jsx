@@ -23,7 +23,7 @@ class SmallImages extends Component {
         return (
             <div className="row">
                 <div className="col-12 p-0">
-                    <Slider {...productsnav} asNavFor={this.props.navOne} ref={slider => (this.slider2 = slider)} className="slider-nav">
+                    <Slider {...productsnav} ref={slider => (this.slider2 = slider)} className="slider-nav">
                         {
                         
                             product.images.map((vari, index) =>
