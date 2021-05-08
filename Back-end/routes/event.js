@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router();
-
-
 const {
     addEvent,
     deleteEvent,
@@ -19,18 +17,12 @@ router.route('/store/event/new').post( isAuthenticatedUser,authorizeRoles("Selle
 router.route('/events/limited').get(getEventsLimited);
 router.route('/events').get(getEvents);
 router.route('/event/:id').get(getEvent);
-
 router.route('/store/event/:id')
                .delete( isAuthenticatedUser,authorizeRoles("Seller"), deleteEvent)
                .put( isAuthenticatedUser,authorizeRoles("Seller"), updateEvent);
 
 router.route('/store/events/:id').get( isAuthenticatedUser,authorizeRoles("Seller"), getStoreEvents);               
-
 router.route('/admin/event/:id').delete(isAuthenticatedUser,authorizeRoles("Admin"),deleteEvent);
-
-
 router.route('/admin/events').get(isAuthenticatedUser,authorizeRoles("Admin"),getAllEvents);
-
-
 
 module.exports = router;

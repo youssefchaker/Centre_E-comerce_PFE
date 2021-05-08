@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateProfile, loadUser, clearErrors } from '../../actions/index'
 import { UPDATE_PROFILE_RESET } from '../../constants/ActionTypes'
 import { toast } from 'react-toastify';
-
+import Loader from "react-loader-spinner";
 
 const UpdateProfile = ({ history }) => {
 
@@ -80,6 +80,12 @@ const UpdateProfile = ({ history }) => {
                 
                 {/*edit section*/}
                 <section className="register-page section-b-space">
+                {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
@@ -119,6 +125,7 @@ const UpdateProfile = ({ history }) => {
                             </div>
                         </div>
                     </div>
+                }
                 </section>
 
 

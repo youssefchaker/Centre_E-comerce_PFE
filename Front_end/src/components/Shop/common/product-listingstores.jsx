@@ -73,7 +73,7 @@ class ProductListingStore extends Component {
                             :
                             <div className="row">
                                 <div className="col-sm-12 text-center section-b-space mt-5 no-found" >
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/empty-search.jpg`} className="img-fluid mb-4" />
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/empty-search.jpg`} className="img-fluid mb-4" alt="no products" />
                                     <h3>There are no products for the store!!</h3>
                                     <p></p>
                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">Browse Products</Link>

@@ -21,19 +21,4 @@ router.route('/admin/order/:id')
     .put( isAuthenticatedUser,authorizeRoles('Admin'),updateOrder)
     .delete(isAuthenticatedUser,authorizeRoles('Admin'),deleteOrder);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;

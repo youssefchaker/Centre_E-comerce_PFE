@@ -13,6 +13,20 @@ export const getCategories = (products) => {
     return uniqueChars;
 }
 
+// Get buisness domains from stores
+export const getBuisnessDomaines = (stores) => {
+    var BD = [];
+    var i=0;
+    while(i<stores.length){
+        BD.push(stores[i].buisnessDomaine);
+        i++;
+    }
+    let uniqueChars = BD.filter((c, index) => {
+        return BD.indexOf(c) === index;
+    });
+    return uniqueChars;
+}
+
 // Get stores from products
 export const getStores = (products) => {
     var stores = [];

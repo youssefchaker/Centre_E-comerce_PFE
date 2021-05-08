@@ -80,7 +80,7 @@ function MyProfile ()  {
                                                 <div className="col-sm-6">
                                                     <div className="box">
                                                         <div className="box-title">
-                                                            <h3>Contact Information</h3>
+                                                            <h3>Profile Information</h3>
                                                             <a href="/profile/update">Edit</a>
                                                         </div>
                                                         <div className="box-content">

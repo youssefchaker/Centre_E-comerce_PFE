@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updatePassword, clearErrors } from '../../actions/index'
 import { UPDATE_PASSWORD_RESET } from '../../constants/ActionTypes'
 import { toast } from 'react-toastify';
-
+import Loader from "react-loader-spinner";
 
 const UpdatePassword = ({ history }) => {
 
@@ -63,10 +63,14 @@ const UpdatePassword = ({ history }) => {
     return (
         <Fragment>
              <Breadcrumb title={'Update password'}/>
-                
-                
-                {/*edit section*/}
+
                 <section className="register-page section-b-space">
+                {loading ? <div style={{ textAlign: "center" }}><Loader
+                             type="Rings"
+                             color="#cc2121"
+                             height={200}
+                             width={300}
+                /></div> :
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
@@ -98,6 +102,7 @@ const UpdatePassword = ({ history }) => {
                             </div>
                         </div>
                     </div>
+                }
                 </section>
 
 

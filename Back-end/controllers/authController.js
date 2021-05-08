@@ -6,9 +6,6 @@ const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
-//const cloudinary = require('cloudinary');
-//const Product = require('../models/Product');
-
 
 // Register a user   => api/mall/register
 
@@ -40,13 +37,10 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 // Login User  =>  /api/mall/login
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { email, password } = req.body;
-
-    // Checks if email and password is entered by user
     if (!email || !password) {
         return next(new ErrorHandler('Please enter email & password', 400))
     }
 
-    // Finding user in database
     const user = await User.findOne({ email }).select('+password')
 
     if (!user) {
@@ -58,7 +52,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Your account is deactivated', 401));
     }
 
-    // Checks if password is correct or not
     const isPasswordMatched = await user.comparePassword(password);
 
     if (!isPasswordMatched) {
@@ -91,19 +84,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('User not found with this email', 404));
     }
 
-    // Get reset token
     const resetToken = user.getResetPasswordToken();
-
     await user.save({ validateBeforeSave: false });
-
-    // Create reset password url
-
-    //const resetUrl = `${req.protocol}://${req.get('host')}/api/mall/password/reset/${resetToken}`;
     const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
-
-   // const resetUrl = `${req.protocol}://${req.get('host')}/api/mall/password/reset/${resetToken}`;
-
-
     const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`
 
     try {
@@ -133,9 +116,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 // Reset Password   =>  /api/mall/password/reset/:token
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
-    // Hash URL token
     const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
-
     const user = await User.findOne({
         resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
@@ -149,7 +130,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Password does not match', 400))
     }
 
-    // Setup new password
     user.password = req.body.password;
 
     user.resetPasswordToken = undefined;
@@ -165,7 +145,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 // Get currently logged in user details   =>   api/mall/myprofile
 
 exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
-    //gets current loged in user
     const user = await User.findById(req.user.id);
 
     res.status(200).json({
@@ -177,22 +156,14 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
 // Update / Change password   =>  /api/mall/password/update
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id).select('+password');
-
-    // Check previous user password
     const isMatched = await user.comparePassword(req.body.oldPassword)
     if (!isMatched) {
         return next(new ErrorHandler('Old password is incorrect',400));
     }
-
-
     user.password = req.body.password;
-
     user.password = req.body.newPassword;
-
     await user.save();
-
     sendToken(user, 200, res);
-
 })
                                                             
 // Update user profile   =>   api/mall/myprofile/update

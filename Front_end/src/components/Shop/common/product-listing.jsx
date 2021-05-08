@@ -60,7 +60,7 @@ class ProductListing extends Component {
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> :products.length!=0?products.map((product, index) =>
+                /></div> :products.length!==0?products.map((product, index) =>
                                         <div className={`${this.props.colSize===3?'col-xl-3 col-md-6 col-grid-box':'col-lg-'+this.props.colSize}`} key={index}>
                                         <ProductListItem product={product} symbol={symbol} currencydiff={currencydiff} storename={storenames[index]}
                                                          onAddToCartClicked={addToCart} key={index}/>
@@ -71,7 +71,7 @@ class ProductListing extends Component {
                             :
                             <div className="row">
                                 <div className="col-sm-12 text-center section-b-space mt-5 no-found" >
-                                    <img src={`${process.env.PUBLIC_URL}/assets/images/empty-search.jpg`} className="img-fluid mb-4" />
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/empty-search.jpg`} className="img-fluid mb-4" alt="no products" />
                                     <h3>Sorry! Couldn't find the product you were looking For!!!    </h3>
                                     <p>Please check your filter options.</p>
                                     <Link to={`${process.env.PUBLIC_URL}/`} className="btn btn-solid">continue shopping</Link>

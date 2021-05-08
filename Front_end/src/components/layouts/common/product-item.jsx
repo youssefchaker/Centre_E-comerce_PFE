@@ -63,7 +63,7 @@ class ProductItem extends Component {
                     <div className="img-wrapper">
                         <div className="lable-block">
                             {(diffDays <8)? <span className="lable3">new</span> : ''}
-                            {(product.discount != 0)? <span className="lable4">on sale</span> : ''}
+                            {(product.discount !== 0)? <span className="lable4">on sale</span> : ''}
                         </div>
                         <div className="front">
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} ><img
@@ -126,11 +126,11 @@ class ProductItem extends Component {
                             <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}>
                                 <h6>{product.name}</h6>
                             </Link>
-                            {symbol=="€"?(product.discount != 0)?
+                            {symbol==="€"?(product.discount !== 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 
                             </h4>:<h4>{symbol}{product.price}</h4>
-                            :(product.discount != 0)?
+                            :(product.discount !== 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
                                  <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
@@ -150,11 +150,11 @@ class ProductItem extends Component {
                                             <div className="product-right">
                                                 <h2> {product.name} </h2>
                                                 <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h4 className="sname">Product By:{storename}</h4></Link>
-                                                {symbol=="€"?(product.discount != 0)?
+                                                {symbol==="€"?(product.discount !== 0)?
                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
                                  <del><span className="money">{symbol}{product.price}</span></del> 
                             </h4>:<h4>{symbol}{product.price}</h4>
-                            :(product.discount != 0)?
+                            :(product.discount !== 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
                                  <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
                             </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}

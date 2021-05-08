@@ -74,7 +74,7 @@ function Shop ({ match }) {
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> : (
+                /></div> :
                                 <div className="collection-content col">
                                     <div className="page-main-content ">
                                         <div className="">
@@ -118,7 +118,7 @@ function Shop ({ match }) {
                                         </div>
                                     </div>
                                 </div>
-                )}
+                                }
                             </div>
                         </div>
                     </div>

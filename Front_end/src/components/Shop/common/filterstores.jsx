@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 import { SlideToggle } from 'react-slide-toggle';
-import {getCategories, getMinMaxPriceStore,getMinMaxPriceDTStore, getVisibleStoreproducts} from '../../../services';
+import {getMinMaxPriceStore,getMinMaxPriceDTStore, getVisibleStoreproducts} from '../../../services';
 import {filterPriceStore,filterPriceDTStore} from '../../../actions'
 
 class filterstore extends Component {
@@ -21,7 +21,6 @@ class filterstore extends Component {
 
 
     render (){
-        const {currencydiff}=this.props;
         const symbol=this.props.symbol.symbol;
         return (
                 <div className="collection-filter-block">
@@ -31,13 +30,13 @@ class filterstore extends Component {
                             <i className="fa fa-angle-left" aria-hidden="true"></i> back
                         </span>
                     </div>
-                    {this.props.products!=0?<SlideToggle>
+                    {this.props.products!==0?<SlideToggle>
                         {({onToggle, setCollapsibleElement}) => (
                             <div className="collection-collapse-block open">
                                 <h3 className="collapse-block-title" onClick={onToggle}>price({symbol})</h3>
                                 <div className="collection-collapse-block-content block-price-content" ref={setCollapsibleElement}>
                                     <div className="collection-brand-filter">
-                                    {symbol=="DT"?
+                                    {symbol==="DT"?
                                     <div className="custom-control custom-checkbox collection-filter-checkbox">
                                             <InputRange
                                                 maxValue={this.props.pricestoreDT.max}

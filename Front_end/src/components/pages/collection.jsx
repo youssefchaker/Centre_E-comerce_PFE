@@ -3,10 +3,6 @@ import Breadcrumb from "../common/breadcrumb";
 
 class Collection extends Component {
 
-    constructor (props) {
-        super (props)
-    }
-
     render (){
 
 

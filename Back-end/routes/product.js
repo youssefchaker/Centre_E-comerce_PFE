@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router();
-
-
 const {
     
     newProduct,
@@ -26,14 +24,12 @@ const {
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
 
-
 router.route('/store/product/new').post( isAuthenticatedUser, authorizeRoles('Seller'),  newProduct);//
 router.route('/store/products/:id').get( isAuthenticatedUser, authorizeRoles('Seller'), getStoreProducts);//
 router.route('/store/product/:id')
               .put( isAuthenticatedUser, authorizeRoles('Seller'), updateProduct)//
               .delete( isAuthenticatedUser, authorizeRoles('Seller','Admin'), deleteProduct);//
 router.route('/store/productdetail/:id').put( isAuthenticatedUser, authorizeRoles('Seller'), updateProductDetails)//
-
 router.route('/products').get(getProducts);//
 router.route('/admin/products').get(isAuthenticatedUser,authorizeRoles('Admin'),adminGetProducts);//
 router.route('/product/:id').get(getSingleProduct);//
@@ -47,20 +43,5 @@ router.route('/admin/reviews/:reviewid/:productid').delete(isAuthenticatedUser, 
 router.route('/product/updatereview/:id').put( isAuthenticatedUser, updateProductReview)//
 router.route('/admin/reviews').get(isAuthenticatedUser,authorizeRoles('Admin'),getAllProductReviews)//
 router.route('/storename/:id').get(getStorename);//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
