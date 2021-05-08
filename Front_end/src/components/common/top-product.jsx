@@ -33,7 +33,7 @@ class TopProduct extends Component {
                     {products.length>0?products.map((product, index) =>
                         <div key={index}>
                                 <div className="media" key={index}>
-                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" style={{width:'80px',height:'80px'}} src={`${product.images[0].url}`} alt="" /></Link>
+                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`}><img className="img-fluid" style={{width:'120px',height:'130px'}} src={`${product.images[0].url}`} alt="" /></Link>
                                     <div className="media-body align-self-center">
                                         
                                         {product.nbreviews<10?
@@ -76,7 +76,7 @@ class TopProduct extends Component {
                                             <i className="fa fa-star"></i>
                                             </div>}
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product._id}`} onClick={this.forceUpdate}><h6>{product.name}</h6></Link>
-                                        <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h6 style={{"textDecoration":"underline"}} className="sname">Product By:{storenames[index]}</h6></Link>
+                                        <Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h6 style={{"textDecoration":"underline"}} className="sname">Product By: {storenames[index]}</h6></Link>
                                         {symbol=="DT"?
                                         (product.discount != 0)?
                             <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}

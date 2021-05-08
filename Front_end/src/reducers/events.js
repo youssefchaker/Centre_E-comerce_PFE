@@ -55,7 +55,8 @@ import {NEW_EVENT_REQUEST,
              case NEW_EVENT_RESET:
                 return {
                 ...state,
-                success: false
+                success: false,
+                loading:false,
             }
 
             case CLEAR_ERRORS:
@@ -244,6 +245,7 @@ import {NEW_EVENT_REQUEST,
             case UPDATE_EVENT_RESET:
                 return {
                     ...state,
+                    loading: false,
                     isUpdated: false
                     }
             default:

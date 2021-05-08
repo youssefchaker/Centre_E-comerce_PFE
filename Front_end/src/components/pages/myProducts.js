@@ -3,7 +3,7 @@ import Breadcrumb from "../common/breadcrumb";
 import {connect} from 'react-redux'
 import SimpleReactValidator from 'simple-react-validator';
 import 'react-toastify/dist/ReactToastify.css';
-import { getStoreProducts, updateProduct,deleteProduct, updateProductDetails } from '../../actions/productActions';
+import { getStoreProducts, updateProduct,deleteProduct, updateProductDetails, clearErrors } from '../../actions/productActions';
 import {Link} from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Loader from "react-loader-spinner";
@@ -43,15 +43,24 @@ class MyProducts extends Component {
             this.props.updatereset();
         }
         if(this.props.updateproductdetail.isUpdated){
-            toast.success("Product Detail has been updated!!");
+            toast.success("Product Detail has been updated !");
             this.props.history.push('/pages/mystore');
             this.props.updatedetailreset();
         }
         if(this.props.deleteproduct.isDeleted){
-            toast.error("Product has been deleted!!");
+            toast.success("Product has been deleted !");
             this.props.history.push('/pages/mystore');
             this.props.deleteproductreset();
         }
+
+        if(this.props.updateproduct.error) {
+            toast.error(" Update failed ! please try again ");
+            this.props.clearErrors();
+            this.props.history.push('/pages/myproducts');
+
+        }
+
+
     }
       openSearch=(field,id,detail="",detailid="")=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -323,7 +332,7 @@ class MyProducts extends Component {
                                                     <option>Home</option>
                                                     <option>Other</option>
                                                     </select>:
-                                                    <div><input id="img" onChange={this.handleimages} type="file" name="updatevalueimage" accept="image/*" multiple /><div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span></div>
+                                                    <div><input id="img" onChange={this.handleimages} type="file" name="updatevalueimage" accept="image/*" multiple /><div className="field-label" style={{border: '1px solid #ccc',display: 'block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "1920 x 1080"</small></span><h6>*A maximum of 3 Images under 2mb are allowed for 1 product</h6></div>
 </div>}
                                                     {this.state.inputtype=="text"?this.validator.message('new value', this.state.updatevaluetext, 'required'):this.state.inputtype=="number"?this.validator.message('new value', this.state.updatevaluenumber, 'required'):this.state.inputtype=="discount"?this.validator.message('new discount value', this.state.updatevaluediscount, 'required'):this.state.inputtype=="category"?this.validator.message('new category value', this.state.updatevaluecategory, 'required'):this.validator.message('new image', this.state.ProductImages, 'required')}
                                                     </div>
@@ -367,7 +376,8 @@ const mapDispatchToProps = dispatch => {
         updateProductDetails:(id,productdata)=>dispatch(updateProductDetails(id,productdata)),
         updatereset:()=>dispatch({type:UPDATE_PRODUCT_RESET}),
         updatedetailreset:()=>dispatch({type:UPDATE_PRODUCT_DETAIL_RESET}),
-        deleteproductreset:()=>dispatch({type:DELETE_PRODUCT_RESET})
+        deleteproductreset:()=>dispatch({type:DELETE_PRODUCT_RESET}),
+        clearErrors: () => dispatch(clearErrors())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (MyProducts)

@@ -70,6 +70,16 @@ const Login = ({history}) => {
                 draggable: true,
                 progress: undefined,
                 });
+
+                toast.error('For further information please contact support@mall.com ', {
+                    position: "top-right",
+                    autoClose: 7000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
                 history.push(`/`)
          }
     }

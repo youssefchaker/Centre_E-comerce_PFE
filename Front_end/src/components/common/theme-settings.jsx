@@ -141,6 +141,7 @@ class ThemeSettings extends Component {
                         </div>
                     </div>
                 </div>
+                
                 <div className="sidebar-btn dark-light-btn">
                     <div className="dark-light">
                         <div
@@ -149,6 +150,7 @@ class ThemeSettings extends Component {
                         >{mode?'Light':'Dark'}</div>
                     </div>
                 </div>
+                
                 <div className="tap-top" onClick={this.clickToTop} style={tap_to_top}>
                     <div>
                         <i className="fa fa-angle-double-up"></i>

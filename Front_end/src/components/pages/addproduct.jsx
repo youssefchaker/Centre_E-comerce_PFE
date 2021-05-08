@@ -5,7 +5,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
-import {newProduct} from '../../actions/productActions'
+import {newProduct, clearErrors} from '../../actions/productActions'
 import Loader from "react-loader-spinner";
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
 class Addproduct extends Component {
@@ -41,9 +41,14 @@ class Addproduct extends Component {
     componentDidUpdate(){
         if(this.props.newproduct.success){
             
-            toast.success("New Product Added!!");
+            toast.success("New Product Added !");
             this.props.history.push('/pages/myproducts');
             this.props.productreset();
+        }
+        if ( this.props.newproduct.error ) {
+            toast.error(" Size Error ! Images size must be under 2mb ");
+            this.props.clearErrors();
+            this.props.history.push('/pages/myproducts');
         }
     }
     setStateFromInput = (event) => {
@@ -215,7 +220,7 @@ class Addproduct extends Component {
                                     </div>
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div className="field-label">Product Images *</div>
-                                        <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "512 x 512"</small></span> <h6>*A maximum of 3 Images are allowed for 1 product</h6></div>
+                                        <div className="field-label" style={{border: '1px solid #ccc',display: 'inline-block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small> "1920 x 1080"</small></span> <h6>*A maximum of 3 Images under 2mb are allowed for 1 product</h6></div>
                                         <input type="file" id="img" name="ProductImages" accept="image/*" onChange={this.handleimages} multiple />
                                                     {this.validator.message('ProductImages', this.state.ProductImages, 'required')}
                                     </div>
@@ -230,7 +235,7 @@ class Addproduct extends Component {
             </div>
             </div>
             </div>
-            <div style={{textAlign:'center' , top:'50%'}}><Link to={`${process.env.PUBLIC_URL}/pages/myProducts`} ><button type="submit" className="btn btn-solid" >Finish Adding Products</button></Link></div>
+            
             </section>
         }
             </div>
@@ -249,7 +254,8 @@ const mapStateToProps=state=>{
 const mapDispatchToProps = dispatch => {
     return {
         newProduct: (productData) => dispatch(newProduct(productData)),
-        productreset:()=>dispatch({type:NEW_PRODUCT_RESET})
+        productreset:()=> dispatch({type:NEW_PRODUCT_RESET}),
+        clearErrors: () => dispatch(clearErrors())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Addproduct)

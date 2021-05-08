@@ -447,7 +447,7 @@ return (
 
                         
                     </form>
-                    <div style={{textAlign:'center' , top:'50%'}}><Link  to={`${process.env.PUBLIC_URL}/pages/mystore`}><button type="submit" className="btn-solid btn"  >Finish Updating Store</button></Link></div>
+                    
                 </div>
             </div>
         </div>

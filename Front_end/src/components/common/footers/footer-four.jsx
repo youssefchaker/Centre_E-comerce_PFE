@@ -113,7 +113,7 @@ function FooterFour ( {  logoName }) {
                                     <div className="footer-logo">
                                         <LogoImage logo={logoName} />
                                     </div>
-                                    <p>Welcome to our E-commerce website where you can browse the different products and events from different stores.Along with the possiblity of becoming a seller yourself by buying our subscription on the website and with that begin able to add your own products and events as a store. </p>
+                                    <p>Welcome to our Marketplace where you can browse the different products and events from different stores.Along with the possiblity of becoming a seller yourself by buying our subscription on the website and with that begin able to add your own products and events as a store. </p>
                                     <div className="footer-social">
                                         <ul>
                                             <li>

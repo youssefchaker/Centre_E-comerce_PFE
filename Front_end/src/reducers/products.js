@@ -88,6 +88,7 @@ export const newProductReducer = (state = { newproduct: {} }, action) => {
         case NEW_PRODUCT_FAIL:
             return {
                 ...state,
+                loading: false,
                 error: action.payload
                 }
         case CLEAR_ERRORS:
@@ -334,6 +335,7 @@ export const updateProductReducer = (state = { updateproduct: {} }, action) => {
         case UPDATE_PRODUCT_RESET:
             return {
                 ...state,
+                loading: false,
                 isUpdated: false
                 }
         case CLEAR_ERRORS:
@@ -368,6 +370,7 @@ export const updateProductDetailsReducer = (state = { updateproductdetail: {} },
         case UPDATE_PRODUCT_DETAIL_RESET:
             return {
                 ...state,
+                loading: false,
                 isUpdated: false
                 }
         case CLEAR_ERRORS:

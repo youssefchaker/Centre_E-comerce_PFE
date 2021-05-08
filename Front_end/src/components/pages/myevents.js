@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { toast } from 'react-toastify';
 import {Link} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
-import { deleteEvent, updateEvent,getStoreEvents  } from '../../actions/eventActions';
+import { deleteEvent, updateEvent,getStoreEvents,clearErrors  } from '../../actions/eventActions';
 import Loader from "react-loader-spinner";
 import { MDBDataTable } from 'mdbreact'
 import { DELETE_EVENT_RESET, UPDATE_EVENT_RESET } from '../../constants/eventConstants';
@@ -29,7 +29,8 @@ class MyEvents extends Component {
       }
       componentWillMount=()=>{
         this.props.getStoreEvents(this.props.userStore.store._id);
-        
+        this.props.updatereset();
+        this.props.deleteeventreset();
       }
       componentDidUpdate(){
         if(this.props.updateevent.isUpdated){
@@ -43,6 +44,15 @@ class MyEvents extends Component {
             this.props.history.push('/pages/mystore');
             this.props.deleteeventreset();
         }
+
+        if(this.props.updateevent.error) {
+            toast.error(" Update failed ! please try again ");
+            this.props.clearErrors();
+            this.props.history.push('/pages/mystore');
+
+        }
+
+
     }
       openSearch=(field,id,date="")=> {
         document.getElementById("update-overlay").style.display = "block";
@@ -239,8 +249,9 @@ class MyEvents extends Component {
                                                     <div className="form-group">
                                                     {this.state.inputtype=="text"?<input type="text" name="updatevaluetext" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevaluetext} />
                                                      :this.state.inputtype=="date"?<input type="date" name="updatevaluedate" className="form-control" placeholder="Enter new value" onChange={this.setStateFromInput} value={this.state.updatevaluedate} />
-                                                     :<input id="img" onChange={this.handleimages} type="file" name="updatevalueimage" accept="image/*" />}                                                    
-                                                    {this.state.inputtype=="text"?this.validator.message('new event name', this.state.updatevaluetext, 'required'):this.state.inputtype=="date"?this.validator.message('new event date', this.state.updatevaluedate, 'required'):this.validator.message('new event image', this.state.updatevalueimage, 'required')}
+                                                     :<div><input id="img" onChange={this.handleimages} type="file" name="updatevalueimage" accept="image/*" />
+                                                     <div className="field-label" style={{border: '1px solid #ccc',display: 'block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small>"1920 X 1080"</small></span></div></div>}                                                    
+                                                    {this.state.inputtype=="text"? this.validator.message('new event name', this.state.updatevaluetext, 'required'):this.state.inputtype=="date"?this.validator.message('new event date', this.state.updatevaluedate, 'required'):this.validator.message('new event image', this.state.updatevalueimage, 'required')}
                                                     </div>
                                                 <button type="submit" onClick={this.handlesubmit} style={{marginRight:"-35px"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
                                                 </form>}
@@ -279,7 +290,8 @@ const mapDispatchToProps = dispatch => {
         updateEvent:(id,productdata)=>dispatch(updateEvent(id,productdata)),
         deleteEvent:(id)=>dispatch(deleteEvent(id)),
         updatereset:()=>dispatch({type:UPDATE_EVENT_RESET}),
-        deleteeventreset:()=>dispatch({type:DELETE_EVENT_RESET})
+        deleteeventreset:()=>dispatch({type:DELETE_EVENT_RESET}),
+        clearErrors: () => dispatch(clearErrors())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(MyEvents)

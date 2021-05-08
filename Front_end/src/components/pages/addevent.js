@@ -4,7 +4,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import { toast } from 'react-toastify';
 import {connect} from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
-import { newEvent } from '../../actions/eventActions';
+import { newEvent, clearErrors } from '../../actions/eventActions';
 import { NEW_EVENT_RESET } from '../../constants/eventConstants'
 import { withRouter } from 'react-router-dom';
 import Loader from "react-loader-spinner";
@@ -23,6 +23,11 @@ class Addevent extends Component {
     this.validator = new SimpleReactValidator();
     }
 
+    componentWillMount(){
+        this.props.eventReset();
+
+    }
+
     componentDidUpdate() {
 
       if(this.props.newevent.success) {
@@ -31,6 +36,12 @@ class Addevent extends Component {
         this.props.history.push("/pages/myevents");
         this.props.eventReset();
       }
+
+      if ( this.props.newevent.error ) {
+        toast.error(" Size Error ! Image size must be under 1mb ");
+        this.props.clearErrors();
+        this.props.history.push('/pages/myevents');
+    }
 
     }
 
@@ -132,7 +143,7 @@ class Addevent extends Component {
                                     </div>
                                     <div className="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div className="field-label">Event Image *</div>
-                                        <div className="field-label" style={{border: '1px solid #ccc',display: 'block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small>"1000 X 1000"</small></span></div>
+                                        <div className="field-label" style={{border: '1px solid #ccc',display: 'block', padding: '15px 20px', cursor: 'pointer', borderRadius: '3px', margin: '0.4em auto'}}>Maximum Image Dimensions :   <span><small>"1920 X 1080"</small></span></div>
                                                     <input id="img" type="file" name="EventImage" accept="image/*"  onChange={this.handleimages}  />
                                                     {this.validator.message('EventImage', this.state.EventImg, 'required')}
                                     </div>
@@ -163,7 +174,8 @@ const mapStateToProps=state=>{
 const mapDispatchToProps = dispatch => {
     return {
         newEvent: (eventData) => dispatch(newEvent(eventData)),
-        eventReset: () => dispatch({ type: NEW_EVENT_RESET })
+        eventReset: () => dispatch({ type: NEW_EVENT_RESET }),
+        clearErrors: () => dispatch(clearErrors())
         
     }
 }
