@@ -12,10 +12,8 @@ import CartContainer from "./../../../containers/CartContainer";
 import TopBar from "./common/topbar";
 import LogoImage from "./common/logo";
 import {connect} from "react-redux";
-import TopBarDark from './common/topbar-dark';
 import SimpleReactValidator from 'simple-react-validator';
 import {changeCurrency, getSearchedProducts} from '../../../actions/productActions'
-import Searchresult from '../../pages/searchresult';
 import { toast } from 'react-toastify';
 import './index.css'
 class HeaderTwo extends Component {

@@ -3,10 +3,17 @@ import {Link} from 'react-router-dom'
 import {getBuisnessDomaines} from '../../../../services';
 import {connect} from 'react-redux';
 import * as FaIcons from 'react-icons/fa';
+import {getStores} from '../../../../actions/index'
 
 class SideBar extends Component {
 
+    
 
+    componentWillMount() {
+
+         this.props.getStores();
+
+    }
     closeNav() {
         var closemyslide = document.getElementById("mySidenav");
         if (closemyslide)
@@ -126,4 +133,11 @@ function mapStateToProps(state) {
         categories:getBuisnessDomaines(state.stores.stores)
     }
 }
-export default connect(mapStateToProps) (SideBar);
+
+function mapDispatchToProps(dispatch) {
+    return {
+
+        getStores:() => dispatch( getStores())
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps) (SideBar);

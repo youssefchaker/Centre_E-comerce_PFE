@@ -11,7 +11,6 @@ import {Link} from "react-router-dom";
 // import Custom Components
 import Breadcrumb from "../../common/breadcrumb";
 import { getFeatureImages} from "../../../services";
-import {photos} from '../../../api/portfolio'
 
 
 
@@ -22,7 +21,6 @@ function  GridCols () {
     const [photoSetting, setPhotoSetting] = useState({
         photoIndex: 0,
         isOpen: false,
-        images: photos,
         columns:'col-lg-4 col-sm-6'
      });
 
@@ -48,7 +46,7 @@ function  GridCols () {
         setPhotoSetting({ 
             photoIndex: index,
             isOpen: true,
-            images: type === 'all'?photos:getFeatureImages(stores, type) 
+            images: getFeatureImages(stores, type) 
         })
         
     }

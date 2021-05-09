@@ -81,7 +81,7 @@ function  Fashion()  {
                                         <div className="col">
                                             <div className="slider-contain">
                                                 <div>
-                                                    <h4>Welcome to Mall</h4>
+                                                    <h4 >Welcome to Mall</h4>
                                                     <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">shop now</Link>
                                                 </div>
                                             </div>

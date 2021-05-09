@@ -277,47 +277,6 @@ export const getCartTotal = cartItems => {
     return total;
 }
 
-// Get Trending Tag wise Collection
-export const getTrendingTagCollection = (products, type, tag) => {
-    const items = products.filter(product => {
-        return product.category === type && product.tags.includes(tag);
-    })
-    return items.slice(0,8)
-}
-
-// Get Trending Collection
-export const getTrendingCollection = (products, type) => {
-    const items = products.filter(product => {
-        return product.category === type;
-    })
-    return items.slice(0,8)
-}
-
-// Get Special 5 Collection
-export const getSpecialCollection = (products, type) => {
-    const items = products.filter(product => {
-        return product.category === type;
-    })
-    return items.slice(0,5)
-}
-
-// Get TOP Collection
-export const getTopCollection = products => {
-    const items = products.filter(product => {
-        return product.rating > 4;
-    })
-    return items.slice(0,8)
-}
-
-// Get New Products
-export const getNewProducts = (products, type) => {
-    const items = products.filter(product => {
-        return product.new === true && product.category === type;
-    })
-
-    return items.slice(0,8)
-}
-
 // Get Related Items
 export const getRelatedItems = (products, target,id) => {
     let storenames=[];
@@ -330,51 +289,6 @@ export const getRelatedItems = (products, target,id) => {
 
     return {products:items.slice(0,5),storenames:storenames.slice(0,5)}
 
-}
-
-// Get Best Seller Furniture
-export const getBestSellerProducts = (products, type) => {
-    const items = products.filter(product => {
-        return product.sale === true && product.category === type;
-    })
-
-    return items.slice(0,8)
-}
-
-// Get Best Seller
-export const getBestSeller = products => {
-    const items = products.filter(product => {
-        return product.sale === true;
-    })
-
-    return items.slice(0,8)
-}
-
-// Get Mens Wear
-export const getMensWear = products => {
-    const items = products.filter(product => {
-        return product.category === 'men';
-    })
-
-    return items.slice(0,8)
-}
-
-// Get Womens Wear
-export const getWomensWear = products => {
-    const items = products.filter(product => {
-        return product.category === 'women';
-    })
-
-    return items.slice(0,8)
-}
-
-// Get Single Product
-export const getSingleItem = (products, id) => {
-
-    const items = products.find((element) => {
-        return element.id === id;
-    })
-    return items;
 }
 
 // Get Feature Products

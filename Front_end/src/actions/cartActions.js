@@ -1,6 +1,11 @@
 import {toast} from 'react-toastify'
 import * as types from '../constants/cartConstants'
-//it seems that I should probably use this as the basis for "Cart"
+
+
+
+
+
+
 export const addToCart = (product,qty) => (dispatch) => {
     toast.success("Item Added to Cart");
         dispatch(addToCartUnsafe(product, qty))

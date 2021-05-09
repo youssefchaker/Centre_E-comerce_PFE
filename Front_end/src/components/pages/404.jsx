@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Slider from 'react-slick';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Breadcrumb from "../common/breadcrumb";
@@ -23,7 +22,7 @@ class PageNotFound extends Component {
                                 <div className="error-section">
                                     <h1>404</h1>
                                     <h2>page not found</h2>
-                                    <Link to="/"><a className="btn btn-solid">back to home</a></Link>
+                                    <Link to="/" className="btn btn-solid">back to home</Link>
                                 </div>
                             </div>
                         </div>

@@ -68,6 +68,7 @@ import {NEW_PRODUCT_REQUEST,
     NEW_REVIEW_RESET,
     UPDATE_REVIEW_RESET,
     DELETE_REVIEW_RESET
+    
 } from "../constants/productConstants";
 
 export const newProductReducer = (state = { newproduct: {} }, action) => {

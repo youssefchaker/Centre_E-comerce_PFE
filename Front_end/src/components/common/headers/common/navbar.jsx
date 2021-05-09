@@ -98,12 +98,6 @@ class NavBar extends Component {
                                 
                             </li>
                             <li >
-                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection `} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
-                                    {translate('products')}
-                                </Link>
-                                
-                            </li>
-                            <li >
                                 <Link to={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} className="nav-link" onClick={(e) => this.handleSubmenu(e)}>
                                     {translate('events')}
                                 </Link>

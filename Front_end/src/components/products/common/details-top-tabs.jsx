@@ -207,7 +207,7 @@ class DetailsTopTabs extends Component {
                                 {reviews.reviews.map((review,index)=>(                                
                                     <tbody key={index}>
                                     <tr>
-                                        <td>{usernames[index].firstname}{' '}{usernames[index].lastname}</td>
+                                        <td>{usernames[index].firstname + ''}  {usernames[index].lastname}</td>
                                         <td>{review.comment}</td>
                                         <td><RatingDisplay rating={review.rating}></RatingDisplay></td>
 

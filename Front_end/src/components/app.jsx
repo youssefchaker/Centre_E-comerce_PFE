@@ -4,15 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 // Custom Components
-import HeaderOne from './common/headers/header-one';
 import HeaderTwo from './common/headers/header-two';
-import HeaderThree from './common/headers/header-three';
-import HeaderFour from './common/headers/header-four';
-import HeaderFive from './common/headers/header-five';
-
-import FooterOne from "./common/footers/footer-one";
-import FooterTwo from "./common/footers/footer-two";
-import FooterThree from "./common/footers/footer-three";
 import FooterFour from "./common/footers/footer-four";
 
 // ThemeSettings

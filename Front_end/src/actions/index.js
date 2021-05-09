@@ -1,5 +1,4 @@
-import shop from '../api/shop'
-import store from "../store";
+
 import * as types from '../constants/ActionTypes'
 import { toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -52,16 +51,12 @@ import {
 
 //Stores
 
-export const getStores = (/*keyword = '', currentPage = 1, price, category*/) => async (dispatch) => {
+export const getStores = () => async (dispatch) => {
     try {
 
         dispatch({ type: types.ALL_STORES_REQUEST })
 
-        //let link = `/api/mall/stores?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`
-
-        //if (category) {
-            //link = `/api/mall/stores?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}`
-        //}
+        
 
         const { data } = await axios.get('/api/mall/stores')
 
@@ -193,17 +188,6 @@ export const getStoresAdmin = () => async (dispatch) => {
         })
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 //User
@@ -584,23 +568,6 @@ export const clearResponse = () => async (dispatch) => {
         type: CLEAR_RESPONSE
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // "Cart"

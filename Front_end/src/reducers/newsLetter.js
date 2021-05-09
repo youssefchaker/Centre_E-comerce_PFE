@@ -3,7 +3,6 @@ import {
     SUBSCRIBE_TO_NEWSLETTER_SUCCESS,
     SUBSCRIBE_TO_NEWSLETTER_FAIL,
     CLEAR_ERRORS
-   
     
    } from "../constants/ActionTypes";
 

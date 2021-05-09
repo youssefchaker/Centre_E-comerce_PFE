@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {toast} from 'react-toastify'
 import {NEW_PRODUCT_REQUEST,
     NEW_PRODUCT_SUCCESS,
     NEW_PRODUCT_FAIL,
