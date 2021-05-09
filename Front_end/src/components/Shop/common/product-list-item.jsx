@@ -143,13 +143,13 @@ class ProductListItem extends Component {
                                                 <h2> {product.name} </h2>
                                                 {storename!=undefined?<Link to={`${process.env.PUBLIC_URL}/store/${product.store}`} onClick={this.forceUpdate}><h4 className="sname">Product By:{storename}</h4></Link>:''}
                                                 {symbol=="€"?(product.discount != 0)?
-                            <h4>{symbol}{product.price-(product.price*product.discount/100)}
-                                 <del><span className="money">{symbol}{product.price}</span></del> 
-                            </h4>:<h4>{symbol}{product.price}</h4>
-                            :(product.discount != 0)?
-                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
-                                 <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
-                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
+                                             <h4>{symbol}{product.price-(product.price*product.discount/100)}
+                                            <del><span className="money">{symbol}{product.price}</span></del> 
+                                            </h4>:<h4>{symbol}{product.price}</h4>
+                                                 :(product.discount != 0)?
+                                            <h4>{symbol}{Math.round((currencydiff*(product.price-(product.price*product.discount/100)) + Number.EPSILON) * 100) / 100}
+                                            <del><span className="money">{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</span></del> 
+                                            </h4>:<h4>{symbol}{Math.round((currencydiff*(product.price) + Number.EPSILON) * 100) / 100}</h4>}
                                                     <div className="product-description border-product">
                                                         <h6 className="product-title">quantity</h6>
                                                         <div className="qty-box">

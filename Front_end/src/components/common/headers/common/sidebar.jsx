@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import {getBuisnessDomaines} from '../../../../services';
 import {connect} from 'react-redux';
+import * as FaIcons from 'react-icons/fa';
+
 class SideBar extends Component {
 
 
@@ -101,7 +103,7 @@ class SideBar extends Component {
                                     <div className="row m-0">
                                         <div className="col-xl-4">
                                             <div className="Link-section">
-                                                {store.buisnessDomaine===category?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h5><i className="fa fa-shopping-bag" aria-hidden="true" style={{color:'#960000', width:'40px' }}></i>{store.name}</h5></Link>:''}
+                                                {store.buisnessDomaine===category?<Link style={{fontSize:"small",marginBottom:"-5px"}} to={`${process.env.PUBLIC_URL}/store/${store._id}`} ><h6><FaIcons.FaStore style={{dispay:'block', color:'#ce0202'}} />  {store.name.toUpperCase()}</h6></Link>:''}
                                             </div>   
                                         </div>
                                     </div>
