@@ -31,7 +31,7 @@ class Eventsdisplay extends Component {
                                     <div className="col-xl-6">
                                     
                                         <div className="blog-left">
-                                                <img src={event.eventImage.url} className="img-fluid" alt="event banner" style={{width:'210px',height:'200px'}}/>
+                                                <img src={event.eventImage.url && event.eventImage.url} className="img-fluid" alt="event banner" style={{width:'210px',height:'200px'}}/>
                                                 
                                         </div>
                                         <br></br>
@@ -39,9 +39,9 @@ class Eventsdisplay extends Component {
                                     <div className="col-xl-6">
                                         <div className="blog-right">
                                             <div>
-                                                <h4>{event.eventName}</h4>
+                                                <h4>{event.eventName && event.eventName}</h4>
                                                 <h6>Active from {event.eventDateStart.slice(0,10)} To {event.eventDateFinish.slice(0,10)} </h6>
-                                                <h5>Event By {events.storenames[index]} </h5>
+                                                <h5>Event By {events.storenames && events.storenames[index]} </h5>
                                             </div>
                                         </div>
                                         <hr></hr>

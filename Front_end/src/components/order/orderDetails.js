@@ -61,7 +61,7 @@ const OrderDetails = ({ match }) => {
                                         <div className="box-head">
                                         <h2 className="mb-4">Shipping Info</h2>
                                         </div><hr></hr>
-                                        <p><b>Name: </b> {user && user.firstname + user.lastname}</p>
+                                        <p><b>Name: </b> {user && user.firstname + ' ' + user.lastname}</p>
                                         <p><b>Phone: </b> {shippingInfo && shippingInfo.phoneNumber}</p>
                                         <p className="mb-4"><b>Address: </b>{shippingDetails}</p>
                                         

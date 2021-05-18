@@ -116,7 +116,7 @@ function Root() {
 
                                 {/*Routes For Layouts*/}
                                 
-								{/*Routes For Features (Product Collection) */}
+								{/*Routes For Products Collection */}
 								<Route path={`${process.env.PUBLIC_URL}/store/:id`} component={Shop}/>
 								
 								<Route path={`${process.env.PUBLIC_URL}/left-sidebar/collection`} component={BrowseProducts}/>
@@ -187,7 +187,6 @@ function Root() {
                                  <Route exact component={PageNotFound} />
                                 </Switch>
                                 
-
                                 </Layout>
                                 
                          </Switch>
