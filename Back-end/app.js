@@ -10,7 +10,7 @@ const fileUpload = require('express-fileupload')
 const errorMiddleware = require('./middlewares/errors')
 
 //setting up .env
-dotenv.config({path:"Back-end/config.env"});
+if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'Back-end/config.env' })
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,7 +36,13 @@ app.use('/api/mall', events)
 app.use('/api/mall', payment)
 app.use('/api/mall', newsletter)
 
+if (process.env.NODE_ENV === 'PRODUCTION') {
+    app.use(express.static(path.join(__dirname, '../Front_end/build')))
 
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../Front_end/build/index.html'))
+    })
+}
 
 
 // Middleware to handle errors
