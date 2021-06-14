@@ -17,7 +17,7 @@ process.on('uncaughtException', err => {
 
 
 // setting up .env
-if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'Back-end/config/config.env' })
+if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'Back-end/config.env' })
 //connect to mongoDB
 connectdb();
 
