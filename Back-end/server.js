@@ -1,6 +1,6 @@
 const app=require('./app');
 const express=require('express');
-const dotenv =require('dotenv');
+//const dotenv =require('dotenv');
 const connectdb = require('./config/databaseconnection');
 const cloudinary = require('cloudinary')
 
@@ -17,8 +17,7 @@ process.on('uncaughtException', err => {
 
 
 // setting up .env
-dotenv.config({path:"Back-end/config.env"});
-
+if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'Back-end/config/config.env' })
 //connect to mongoDB
 connectdb();
 
