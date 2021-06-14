@@ -5,10 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "SET node Back-end/server.js",
+    "start": "node Back-end/server.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon Back-end/server",
-    "prod": "SET NODE_ENV=PRODUCTION& nodemon Back-end/server",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix Front_end && npm run build --prefix Front_end "
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon Back-end/server"
   },
   "keywords": [],
   "author": "",
