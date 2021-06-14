@@ -158,7 +158,7 @@ function Root() {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/eventsdisplay`} component={Eventsdisplay}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/searchresult`} component={Searchresult}/>
 
-								{/*Stores*/}
+							                  {/*Stores*/}
                                 <Route path={`${process.env.PUBLIC_URL}/stores`} component={GridCols}/>
 
 
