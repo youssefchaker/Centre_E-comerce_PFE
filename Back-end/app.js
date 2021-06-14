@@ -11,6 +11,7 @@ const errorMiddleware = require('./middlewares/errors')
 
 //setting up .env
 dotenv.config({path:"Back-end/config.env"});
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())

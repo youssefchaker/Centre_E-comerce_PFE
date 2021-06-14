@@ -34,7 +34,7 @@ const Dashboard = () => {
 
     let outOfStock = 0;
 
-    if (adminProducts) {
+    if (adminProducts.products) {
     adminProducts.products.forEach(product => {
         if (product.stock === 0) {
             outOfStock += 1;

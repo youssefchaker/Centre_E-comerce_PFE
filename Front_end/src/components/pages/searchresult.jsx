@@ -44,7 +44,7 @@ class Searchresult extends Component {
                              color="#cc2121"
                              height={200}
                              width={300}
-                /></div> :products.length!=0?
+                /></div> :products && products.length!=0?
                             products.map((product, index) => {
                                 return (
                                     <div className="col-xl-3 col-sm-6" key={index}>

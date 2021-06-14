@@ -35,6 +35,7 @@ function Shop ({ match }) {
             layoutColumns:colums
         })
     }
+
         return (
             <div>
                 {/*SEO Support*/}
@@ -79,15 +80,17 @@ function Shop ({ match }) {
                                             <div className="row">
                                                 <div className="col-sm-12">
                                                     <div className="top-banner-wrapper">
-                                                        <img src={store.avatar.url && store.avatar.url} className="img-fluid" alt="" style={{width:'910px',height:'310px'}}/>
+                                                        {store.avatar && (
+                                                        <img src={store.avatar.url} className="img-fluid" alt="" style={{width:'910px',height:'310px'}}/>)}
                                                         <div className="top-banner-content small-section">
-                                                            <h4>{store.name}</h4>
-                                                            <h5>{store.description }</h5>
-                                                            <ul className="contact-list">
+                                                        {store.name && (<h4>{store.name}</h4>)}
+                                                        {store.description && ( <h5>{store.description }</h5>)}
+                                                        {store && (<ul className="contact-list">
                                                           <li><i className="fa fa-phone"></i>  Call Us :    {store.phoneNumber && store.phoneNumber}</li><br></br>
                                                           <li><i className="fa fa-envelope-o"></i>  Email Us : {store.email && store.email}</li>
-                                                        </ul>
+                                                        </ul>)}
                                                         </div>
+                                                        
                                                     </div>
                                                     <div className="collection-product-wrapper">
                                                         <div className="product-top-filter">

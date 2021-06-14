@@ -17,12 +17,12 @@ function  myStore () {
     const {  error, store } = useSelector(state => state.userStore)
 
 
-
-    let date  = store.createdAt.slice(0,10);
+    let date;
+    store.createdAt? date= store.createdAt.slice(0,10): date="";
     let year = parseInt(date.substring(3,4));
     let secondYear = (year + 1).toString();
     date = date.replace(year,secondYear)  
-
+  
 
     useEffect(() => {
 
@@ -79,15 +79,18 @@ function  myStore () {
                                     </div>
                                         <div className="col-lg-6 col-sm-12 col-xs-12">
                                         <div className="top-banner-wrapper">
-                                                        <img src={store && store.avatar.url} className="img-fluid" alt="" style={{width:'800px',height:'310px'}}/>
+                                            {store.avatar && ( 
+                                                        <img src={ store.avatar.url} className="img-fluid" alt="" style={{width:'800px',height:'310px'}}/>)}
                                                         <div className="top-banner-content small-section">
-                                                            <h4>{store && store.name}</h4>
-                                                            <h5>{store.description}</h5>
-                                                            <p style={{color:'red'}}>Your Subscription will end in {date} </p><br></br>
+                                                        {store.name && ( <h4>{store && store.name}</h4>)}
+                                                        {store.description && (  <h5>{store.description}</h5>)}
+                                                            {store.createdAt && (
+                                                            <p style={{color:'red'}}>Your Subscription will end in {date} </p>)}<br></br>
+                                                            
                                                             <ul className="contact-list">
-                                                            <li>🏠 Address :    {store.address} {store.postalCode}, {store.city} </li><br></br>
-                                                            <li>📞 Phone :    {store.phoneNumber}</li><br></br>
-                                                            <li>📧 Email  :   {store.email}</li>
+                                                            {store.address && ( <li>🏠 Address :    {store.address} {store.postalCode}, {store.city} </li>)}<br></br>
+                                                            {store.phoneNumber && ( <li>📞 Phone :    {store.phoneNumber}</li>)}<br></br>
+                                                            {store.email && ( <li>📧 Email  :   {store.email}</li>)}
                                                           
                                                         </ul>
                                                         </div>
