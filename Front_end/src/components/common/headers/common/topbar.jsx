@@ -13,7 +13,7 @@ const TopBar = (props) =>  {
     const logoutHandler = () => {
         dispatch(clearResponse());
         dispatch(logout());
-        toast.success('Logged out successfully!!', {
+        toast.success('Logged out successfully !', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -33,7 +33,7 @@ const TopBar = (props) =>  {
                             <div className="header-contact">
                                 <ul>
                                     <li>{translate('topbar_title', { theme_name: ' Marketplace' })}</li>
-                                    <li><i className="fa fa-phone" aria-hidden="true"></i>{translate('call_us')}:  +216 11 111 111</li>
+                                    <li><i className="fa fa-phone" aria-hidden="true"></i>{translate('call_us')}:  +216 26 582 160</li>
                                 </ul>
                             </div>
                         </div>
